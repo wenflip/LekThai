@@ -1,6 +1,10 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "LekThai — Learn Thai Numbers",
+  "short_name": "LekThai",
+  "description": "Drill Thai numbers until they stick — see it, hear it, type it.",
+  "lang": "en",
+  "start_url": "/learn",
+  "scope": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +19,8 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "theme_color": "#0f1117",
+  "background_color": "#0f1117",
+  "display": "standalone",
+  "categories": ["education"]
 }
