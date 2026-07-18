@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<title>Thai Number Drills — Instant Thai Number Recognition</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@144,400..700,30&family=DM+Sans:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Description (search) -->
+<meta name="description" content="Train yourself to read and hear Thai numbers instantly. A fast, free drill built on spaced repetition — works offline, no signup.">
+
+<!-- Mobile browser chrome colour -->
+<meta name="theme-color" content="#0f1117">
+
+<!-- Icons & PWA manifest -->
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<!-- Open Graph (link previews) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Thai Number Drills">
+<meta property="og:description" content="Train yourself to read and hear Thai numbers instantly. A fast, free drill built on spaced repetition — works offline, no signup.">
+<meta property="og:url" content="https://thai-numbers.netlify.app/">
+<meta property="og:image" content="https://thai-numbers.netlify.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A Thai numeral transforming into the Arabic digit 7, captioned Instant Thai Number Recognition">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Thai Number Drills">
+<meta name="twitter:description" content="Train yourself to read and hear Thai numbers instantly. A fast, free drill built on spaced repetition — works offline, no signup.">
+<meta name="twitter:image" content="https://thai-numbers.netlify.app/og-image.png">
+
+<style>
+  /* ============ THEME TOKENS ============ */
+  :root, [data-theme="dark"]{
+    --bg-0:#0f1117; --bg-1:#171a24;
+    --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
+    --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
+    --ok:#5dba8c; --bad:#e27d89;
+    --card-bg:rgba(255,255,255,.055); --card-bg2:rgba(255,255,255,.016);
+    --card-border:rgba(255,255,255,.10);
+    --card-shadow:0 28px 64px -28px rgba(0,0,0,.75), 0 8px 26px -14px rgba(0,0,0,.55);
+    --seg-bg:rgba(255,255,255,.05);
+    --soft:rgba(255,255,255,.06);
+    --pop-bg:#1b1f2a;
+    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
+    --ring:rgba(213,114,127,.65);
+    --num-grad:linear-gradient(176deg, #f5f2eb 0%, #cdd2df 118%);
+    --num-glow:rgba(170,140,160,.20);
+    --on-accent:#fff;
+  }
+  [data-theme="light"]{
+    --bg-0:#e6e9f1; --bg-1:#f5f7fb;
+    --ink:#1b2233; --ink-2:#3c4458; --muted:#6c7387;
+    --accent:#b5495a; --accent-2:#95384a; --blue:#43589a;
+    --ok:#2c8c5e; --bad:#bd4259;
+    --card-bg:rgba(255,255,255,.74); --card-bg2:rgba(255,255,255,.48);
+    --card-border:rgba(20,30,60,.10);
+    --card-shadow:0 28px 56px -30px rgba(30,40,80,.42), 0 6px 18px -10px rgba(30,40,80,.18);
+    --seg-bg:rgba(20,30,60,.055);
+    --soft:rgba(20,30,60,.045);
+    --pop-bg:#ffffff;
+    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --glow-red:rgba(181,73,90,.10); --glow-blue:rgba(67,89,154,.12);
+    --ring:rgba(181,73,90,.5);
+    --num-grad:linear-gradient(176deg, #1f273b 0%, #4b5980 128%);
+    --num-glow:rgba(67,89,154,.10);
+    --on-accent:#fff;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0; overflow:hidden;
+    background:var(--bg-0); color:var(--ink);
+    font-family:"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    -webkit-tap-highlight-color:transparent;
+    display:flex; justify-content:center; align-items:stretch;
+    transition:background .4s ease, color .4s ease;
+  }
+  .ambient{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(58% 48% at 16% 6%, var(--glow-red), transparent 72%),
+      radial-gradient(54% 50% at 90% 98%, var(--glow-blue), transparent 72%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-0));
+    transition:background .4s ease;
+  }
+
+  /* ============ APP SHELL ============ */
+  .app{
+    position:relative; width:100%; max-width:440px;
+    height:100vh; height:100svh;
+    display:flex; flex-direction:column; gap:11px;
+    padding:14px 16px calc(14px + env(safe-area-inset-bottom));
+  }
+  @media (min-width:480px){
+    body{ align-items:center; padding:24px; }
+    .app{
+      height:min(100svh, 900px);
+      border-radius:36px; padding:20px 20px;
+      border:1px solid var(--card-border);
+      background:linear-gradient(180deg, rgba(255,255,255,.025), transparent 40%);
+      box-shadow:0 48px 110px -44px rgba(0,0,0,.7);
+      overflow:hidden;
+    }
+  }
+
+  /* ============ HEADER ============ */
+  .bar{ flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .pill-wrap{ position:relative; }
+  .pill{
+    display:inline-flex; align-items:center; gap:8px; height:38px; padding:0 14px;
+    border-radius:999px; background:var(--soft); border:1px solid var(--card-border);
+    color:var(--ink); font:600 13px/1 "DM Sans"; cursor:pointer; user-select:none;
+    transition:background .2s, border-color .2s;
+  }
+  .pill:hover{ border-color:var(--accent); }
+  .pill-k{ color:var(--muted); font-weight:500; }
+  .chev{ color:var(--muted); font-size:10px; transition:transform .22s ease; }
+  .pill[aria-expanded="true"] .chev{ transform:rotate(180deg); }
+
+  .bar-right{ display:flex; align-items:center; gap:8px; }
+  .streak{
+    display:inline-flex; align-items:center; gap:5px; height:34px; padding:0 12px;
+    border-radius:999px; background:var(--soft); border:1px solid var(--card-border);
+    font:700 14px/1 "DM Sans"; color:var(--ink); user-select:none;
+    transition:background .2s, border-color .2s, color .2s;
+  }
+  .streak.live{ border-color:color-mix(in srgb, var(--accent) 55%, transparent); }
+  .streak-ico{ font-size:13px; filter:saturate(.85); }
+  .streak.live .streak-ico{ filter:drop-shadow(0 0 7px var(--accent)); }
+  .icon-btn{
+    width:38px; height:38px; border-radius:999px; cursor:pointer;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    font-size:16px; display:grid; place-items:center; transition:background .2s, border-color .2s;
+  }
+  .icon-btn:hover{ border-color:var(--accent); }
+
+  /* ============ RANGE POPOVER ============ */
+  .scrim{ position:fixed; inset:0; z-index:40; background:rgba(8,10,16,.28); }
+  .pop{
+    position:absolute; z-index:50; top:calc(100% + 10px); left:0;
+    min-width:236px; max-width:min(82vw,300px); padding:15px;
+    border-radius:20px; background:var(--pop-bg); border:1px solid var(--card-border);
+    box-shadow:var(--card-shadow); transform-origin:top left;
+    opacity:0; transform:translateY(-6px) scale(.97);
+    transition:opacity .16s ease, transform .16s ease;
+  }
+  .pop.show{ opacity:1; transform:none; }
+  .pop-title{
+    font:600 11px/1 "DM Sans"; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--muted); margin:1px 2px 13px;
+  }
+  .ranges{ display:flex; flex-wrap:wrap; gap:8px; }
+  .range{
+    padding:9px 14px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--card-border); background:var(--soft); color:var(--ink-2);
+    font:600 13px/1 "DM Sans"; transition:transform .12s, background .2s, color .2s;
+  }
+  .range:hover{ color:var(--ink); }
+  .range:active{ transform:scale(.96); }
+  .range.active{ background:var(--ind-grad); color:#fff; border-color:transparent; }
+
+  /* ============ SEGMENTED TABS ============ */
+  .seg{
+    flex:0 0 auto; position:relative; display:flex; padding:5px; gap:0;
+    background:var(--seg-bg); border:1px solid var(--card-border); border-radius:15px;
+  }
+  .tab{
+    flex:1; position:relative; z-index:2; border:none; background:transparent; cursor:pointer;
+    color:var(--muted); font:600 14px/1 "DM Sans"; padding:12px 6px; border-radius:11px;
+    transition:color .2s ease; white-space:nowrap;
+  }
+  .tab:hover{ color:var(--ink); }
+  .tab.active{ color:#fff; }
+  .seg-ind{
+    position:absolute; z-index:1; top:5px; bottom:5px; left:5px; width:calc(50% - 5px);
+    border-radius:11px; background:var(--ind-grad);
+    box-shadow:0 8px 18px -10px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+    transition:transform .3s cubic-bezier(.3,.85,.25,1);
+  }
+  .seg:has(#tabHear.active) .seg-ind{ transform:translateX(100%); }
+
+  /* ============ MAIN CARD ============ */
+  .card{
+    flex:1 1 auto; min-height:0; position:relative; overflow:hidden;
+    border-radius:26px; padding:6px;
+    background:linear-gradient(180deg, var(--card-bg), var(--card-bg2));
+    border:1px solid var(--card-border); box-shadow:var(--card-shadow);
+    backdrop-filter:blur(22px) saturate(125%); -webkit-backdrop-filter:blur(22px) saturate(125%);
+  }
+  .card.pulse{ animation:okPulse .72s ease; }
+
+  .panel{ height:100%; }              /* display toggled by original JS */
+  .panel-inner{ height:100%; display:flex; flex-direction:column; padding:20px 18px 18px; }
+
+  .stage{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column;
+          align-items:center; justify-content:center; text-align:center; gap:9px; }
+  .stage-hear{ justify-content:flex-start; gap:11px; padding-top:2px; }
+
+  .eyebrow{ font:600 11px/1 "DM Sans"; letter-spacing:.17em; text-transform:uppercase; color:var(--muted); }
+
+  .bignum{
+    font-family:"Fraunces", Georgia, "Times New Roman", serif;
+    font-weight:600; font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
+    font-variant-numeric:lining-nums proportional-nums;
+    font-size:clamp(66px, 21vw, 104px); line-height:.94; letter-spacing:-.012em;
+    color:var(--ink); margin:0;
+  }
+  @supports ((-webkit-background-clip:text) or (background-clip:text)){
+    .bignum{ background:var(--num-grad); -webkit-background-clip:text; background-clip:text;
+             -webkit-text-fill-color:transparent; color:transparent; }
+  }
+  [data-theme="dark"] .bignum{ filter:drop-shadow(0 12px 34px var(--num-glow)); }
+  .bignum.in{ animation:numIn .44s cubic-bezier(.2,.72,.2,1); }
+
+  .reveal{ display:flex; flex-direction:column; gap:4px; align-items:center; justify-content:center; min-height:78px; }
+  .stage-hear .reveal{ min-height:50px; }
+  .reveal.show{ animation:fadeUp .36s ease; }
+
+  .thai{ font-family:"Sarabun","Noto Sans Thai",sans-serif; font-weight:500;
+         font-size:clamp(26px, 7.5vw, 34px); line-height:1.22; color:var(--blue); }
+  .rom{ font:500 clamp(17px,5vw,21px)/1.3 "DM Sans"; color:var(--ink-2); letter-spacing:.01em; }
+  .hint{ font:500 13px/1.3 "DM Sans"; color:var(--muted); min-height:18px; }
+
+  .verdict{ font:700 18px/1.2 "DM Sans"; min-height:24px; }
+  .verdict.ok{ color:var(--ok); }
+  .verdict.bad{ color:var(--bad); }
+  .verdict.ok, .verdict.bad{ animation:pop .32s ease; }
+
+  /* ============ INPUT ============ */
+  .answer{
+    width:100%; height:62px; text-align:center;
+    font-family:"Fraunces", Georgia, serif; font-variation-settings:"opsz" 144,"wght" 500;
+    font-weight:500; font-size:40px; font-variant-numeric:lining-nums;
+    color:var(--ink); background:var(--soft);
+    border:1.5px solid var(--card-border); border-radius:16px; outline:none;
+    -webkit-appearance:none; appearance:none; transition:border-color .18s, box-shadow .18s;
+  }
+  .answer::placeholder{ color:var(--muted); -webkit-text-fill-color:var(--muted); opacity:.55; }
+  .answer:focus{ border-color:var(--accent); box-shadow:0 0 0 4px var(--ring); }
+
+  /* ============ BUTTONS ============ */
+  .actions{ flex:0 0 auto; display:flex; flex-direction:column; gap:10px; padding-top:14px; }
+  .btn{
+    width:100%; -webkit-appearance:none; appearance:none; border:none; cursor:pointer;
+    font-family:"DM Sans"; font-weight:600; border-radius:16px;
+    display:inline-flex; align-items:center; justify-content:center; gap:8px; user-select:none;
+    transition:transform .12s ease, box-shadow .2s ease, background .2s, border-color .2s;
+  }
+  .btn:active{ transform:translateY(1px) scale(.992); }
+  .btn.primary{
+    height:58px; font-size:18px; letter-spacing:.01em; color:var(--on-accent);
+    background:linear-gradient(180deg, var(--accent), var(--accent-2));
+    box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+  }
+  .btn.primary .arr{ transition:transform .2s; }
+  .btn.primary:hover .arr{ transform:translateX(3px); }
+  .btn.ghost{ height:50px; font-size:16px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
+  .btn.ghost:hover{ border-color:var(--accent); }
+  .btn.play{ height:54px; font-size:17px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
+  .btn.play:hover{ border-color:var(--blue); }
+  .btn.play .ico{ filter:drop-shadow(0 0 8px color-mix(in srgb, var(--blue) 60%, transparent)); }
+  .btn.text{ height:44px; font-size:14px; color:var(--muted); background:transparent; }
+  .btn.text:hover{ color:var(--ink); }
+
+  /* ============ WARNING TOAST ============ */
+  .warn{
+    position:fixed; left:50%; bottom:calc(16px + env(safe-area-inset-bottom));
+    transform:translateX(-50%); width:min(92%,420px); z-index:60;
+    background:var(--pop-bg); border:1px solid var(--card-border); color:var(--ink-2);
+    font:500 12.5px/1.45 "DM Sans"; padding:12px 14px; border-radius:14px;
+    box-shadow:var(--card-shadow); display:none;
+  }
+
+  /* ============ FOCUS / MOTION ============ */
+  :focus-visible{ outline:2px solid var(--ring); outline-offset:2px; }
+  @media (prefers-reduced-motion:reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important;
+       transition-duration:.001ms !important; }
+  }
+
+  /* ============ KEYFRAMES ============ */
+  @keyframes numIn{ from{opacity:0; transform:translateY(16px) scale(.94); filter:blur(4px);}
+                    to{opacity:1; transform:none; filter:none;} }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(7px);} to{opacity:1; transform:none;} }
+  @keyframes pop{ 0%{opacity:0; transform:scale(.78);} 62%{transform:scale(1.07);} 100%{opacity:1; transform:scale(1);} }
+  @keyframes okPulse{
+    0%{ box-shadow:var(--card-shadow), 0 0 0 0 rgba(93,186,140,0); }
+    30%{ box-shadow:var(--card-shadow), 0 0 0 5px color-mix(in srgb, var(--ok) 28%, transparent), 0 0 44px color-mix(in srgb, var(--ok) 30%, transparent); }
+    100%{ box-shadow:var(--card-shadow), 0 0 0 0 rgba(93,186,140,0); }
+  }
+  @keyframes streakPop{ 0%{transform:scale(1);} 38%{transform:scale(1.2);} 100%{transform:scale(1);} }
+  .streak.hot{ animation:streakPop .5s ease; }
+
+  /* ============ ADDITIVE: title, mastery, ratings, settings ============ */
+  .title{
+    flex:1 1 auto; min-width:0; margin:0; padding:0 4px;
+    font:600 15px/1 "DM Sans"; letter-spacing:.005em; color:var(--ink);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:left;
+  }
+
+  /* mastery: tiny inline checkmark on a mastered number */
+  .mbadge{
+    display:inline-flex; align-items:center; margin-left:7px; padding:2px 8px; border-radius:999px;
+    font:700 10px/1 "DM Sans"; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ok); background:color-mix(in srgb, var(--ok) 16%, transparent);
+    border:1px solid color-mix(in srgb, var(--ok) 34%, transparent); vertical-align:middle;
+  }
+  .mbadge[hidden]{ display:none; }
+
+  /* mastery readout — sits quietly at the foot of See & Say */
+  .mastery-cap{
+    flex:0 0 auto; text-align:center; margin-top:10px;
+    font:600 11px/1.3 "DM Sans"; letter-spacing:.03em; color:var(--muted);
+  }
+  .mastery-cap .m-ico{ color:var(--accent); margin-right:4px; }
+
+  /* See & Say self-rating */
+  .rate-row{ display:flex; gap:10px; }
+  .rate-row[hidden]{ display:none; }
+  .btn.rate{ height:50px; font-size:15px; border:1px solid var(--card-border); background:var(--soft); }
+  .btn.rate.got{ color:var(--ok); }
+  .btn.rate.got:hover{ border-color:var(--ok); }
+  .btn.rate.miss{ color:var(--bad); }
+  .btn.rate.miss:hover{ border-color:var(--bad); }
+  .btn.rate.chosen.got{ background:color-mix(in srgb, var(--ok) 18%, transparent); border-color:var(--ok); }
+  .btn.rate.chosen.miss{ background:color-mix(in srgb, var(--bad) 18%, transparent); border-color:var(--bad); }
+
+  /* ============ SETTINGS SHEET ============ */
+  .sheet-wrap{ position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center; padding:18px; }
+  .sheet-wrap[hidden]{ display:none; }
+  .sheet-scrim{ position:absolute; inset:0; background:rgba(8,10,16,.5); backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px); animation:fadeIn .18s ease; }
+  .sheet{
+    position:relative; width:100%; max-width:380px; max-height:84svh; overflow:auto;
+    background:var(--pop-bg); border:1px solid var(--card-border); border-radius:24px;
+    box-shadow:var(--card-shadow); padding:20px; animation:sheetIn .24s cubic-bezier(.2,.8,.2,1);
+  }
+  .sheet-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .sheet-title{ font:700 18px/1 "DM Sans"; color:var(--ink); }
+  .sheet-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 0; border-bottom:1px solid var(--card-border); }
+  .row-label{ font:600 14px/1 "DM Sans"; color:var(--ink); }
+  .row-val{ font:600 13px/1 "DM Sans"; color:var(--muted); }
+  .sheet-block{ padding:15px 0 4px; }
+  .mini-btn{
+    -webkit-appearance:none; appearance:none; cursor:pointer; border-radius:11px;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    font:600 14px/1 "DM Sans"; padding:10px 14px; min-height:40px; transition:background .2s, border-color .2s, transform .12s;
+  }
+  .mini-btn:active{ transform:scale(.97); }
+  .mini-btn:hover{ border-color:var(--accent); }
+  .mini-btn.danger{ color:var(--bad); }
+  .mini-btn.danger:hover{ border-color:var(--bad); }
+  .mini-btn.danger.solid{ background:var(--bad); color:#fff; border-color:transparent; }
+  .reset-confirm{ margin-top:12px; display:flex; flex-direction:column; gap:10px; }
+  .reset-confirm[hidden]{ display:none; }
+  .rc-q{ font:500 13px/1.4 "DM Sans"; color:var(--ink-2); }
+  .rc-btns{ display:flex; gap:10px; }
+  .rc-btns .mini-btn{ flex:1; }
+  .about{ margin-top:18px; padding-top:16px; border-top:1px solid var(--card-border); }
+  .about-title{ font:700 13px/1 "DM Sans"; letter-spacing:.04em; color:var(--accent); margin-bottom:9px; }
+  .about p{ margin:0 0 10px; font:400 13px/1.55 "DM Sans"; color:var(--ink-2); }
+  .about p:last-child{ margin-bottom:0; }
+
+  @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+  @keyframes sheetIn{ from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;} }
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+
+<main class="app">
+
+  <!-- Header: range control · streak · theme -->
+  <header class="bar">
+    <div class="pill-wrap">
+      <button class="pill" id="rangePill" aria-haspopup="true" aria-expanded="false">
+        <span class="pill-k">Range</span><span id="rangeLabel">1–100</span><span class="chev">▾</span>
+      </button>
+      <div class="pop" id="rangePop" hidden>
+        <div class="pop-title">Practice range</div>
+        <div class="ranges" id="ranges"></div>
+      </div>
+    </div>
+    <h1 class="title">Thai Number Drills</h1>
+    <div class="bar-right">
+      <div class="streak" id="streakChip" title="Correct in a row (Hear &amp; Type)">
+        <span class="streak-ico">⚡</span><span id="streakVal">0</span>
+      </div>
+      <button class="icon-btn" id="gearBtn" aria-label="Settings" aria-haspopup="dialog">⚙</button>
+    </div>
+  </header>
+
+  <!-- Mode tabs -->
+  <nav class="seg" role="tablist" aria-label="Drill mode">
+    <button class="tab active" id="tabSay" role="tab" onclick="setMode('say')">① See &amp; Say</button>
+    <button class="tab" id="tabHear" role="tab" onclick="setMode('hear')">② Hear &amp; Type</button>
+    <span class="seg-ind" aria-hidden="true"></span>
+  </nav>
+
+  <!-- Main panel -->
+  <section class="card">
+
+    <!-- MODE A: SEE & SAY -->
+    <div class="panel" id="panelSay">
+      <div class="panel-inner">
+        <div class="stage">
+          <div class="eyebrow">Read it aloud <span class="mbadge" id="masteryBadge" hidden>✓ mastered</span></div>
+          <div class="bignum" id="sayNum">—</div>
+          <div class="reveal">
+            <div class="thai" id="sayThai"></div>
+            <div class="rom" id="sayRom"></div>
+          </div>
+          <div class="hint" id="sayHint"></div>
+        </div>
+        <div class="actions">
+          <button class="btn ghost" id="sayRevealBtn" onclick="revealSay()">🔊 Hear &amp; reveal</button>
+          <div class="rate-row" id="sayRateRow" hidden>
+            <button class="btn rate miss" id="rateMiss">✗ Missed</button>
+            <button class="btn rate got" id="rateGot">✓ Got it</button>
+          </div>
+        </div>
+        <div class="mastery-cap mastery-out">—</div>
+      </div>
+    </div>
+
+    <!-- MODE B: HEAR & TYPE -->
+    <div class="panel" id="panelHear" style="display:none;">
+      <div class="panel-inner">
+        <div class="stage stage-hear">
+          <div class="eyebrow">Listen &amp; type the digits</div>
+          <button class="btn play" onclick="playHear()"><span class="ico">🔊</span> Play number</button>
+          <input class="answer" id="hearInput" inputmode="numeric" placeholder="?" autocomplete="off" enterkeyhint="done">
+          <button class="btn primary" onclick="checkHear()">Check</button>
+          <div class="verdict" id="hearVerdict"></div>
+          <div class="reveal">
+            <div class="thai" id="hearThai"></div>
+            <div class="rom" id="hearRom"></div>
+          </div>
+          <button class="btn text" onclick="newHear()">New number →</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<div class="warn" id="warn">⚠️ No Thai voice found in this browser. Try Chrome, or install a Thai text-to-speech voice in your OS settings. (Everything else still works.)</div>
+
+<!-- Settings sheet (gear menu) -->
+<div class="sheet-wrap" id="settings" hidden>
+  <div class="sheet-scrim" id="settingsScrim"></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">
+    <div class="sheet-head">
+      <span class="sheet-title">Settings</span>
+      <button class="icon-btn" id="settingsClose" aria-label="Close settings">✕</button>
+    </div>
+
+    <div class="sheet-row">
+      <span class="row-label">Appearance</span>
+      <button class="mini-btn" id="themeBtn" aria-label="Switch to light theme">◑</button>
+    </div>
+
+    <div class="sheet-row">
+      <span class="row-label">Progress</span>
+      <span class="row-val mastery-out">—</span>
+    </div>
+
+    <div class="sheet-block">
+      <button class="mini-btn danger" id="resetBtn">Reset progress</button>
+      <div class="reset-confirm" id="resetConfirm" hidden>
+        <span class="rc-q">Erase all tracked progress on this device?</span>
+        <div class="rc-btns">
+          <button class="mini-btn" id="resetCancel">Cancel</button>
+          <button class="mini-btn danger solid" id="resetYes">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="about">
+      <div class="about-title">Why this works</div>
+      <p>This trainer is built on the two most strongly evidenced ideas in learning science: retrieval practice and spaced repetition.</p>
+      <p>Every prompt makes you recall the answer before you see it — say it aloud, or type it — instead of just reading along. Decades of research show the effort of pulling an answer from memory is what builds the memory; passive review barely moves the needle. The largest reviews of learning techniques rank this “testing effect” at the very top.</p>
+      <p>The trainer also remembers how you do. Numbers you miss come back sooner and more often; numbers you’ve mastered fade into occasional check-ins. This is the spacing effect — the same practice time produces far better long-term recall when it’s spread out and aimed at your weak spots. It’s the same principle behind tools like Anki.</p>
+      <p>Because Thai numbers follow a regular pattern, you’re not memorizing thousands of separate facts — you’re drilling a small system until it’s automatic. A few focused minutes a day beats one long cram, and the recall sticks.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ORIGINAL ENGINE — unchanged. Number builder, TTS, ranges,
+     and both drill modes are exactly as supplied.
+============================================================ -->
+<script>
+// ---------- Thai number builder ----------
+const ones  = ['ศูนย์','หนึ่ง','สอง','สาม','สี่','ห้า','หก','เจ็ด','แปด','เก้า'];
+const onesR = ['sǔun','nèung','sǎawng','sǎam','sìi','hâa','hòk','jèt','pàet','kâao'];
+const places  = ['','สิบ','ร้อย','พัน','หมื่น','แสน'];
+const placesR = ['','sìp','róoi','phan','mèun','sǎen'];
+
+function numToThai(n){
+  if(n===0) return {thai:'ศูนย์', rom:'sǔun'};
+  const s = String(n).split('').map(Number);
+  const len = s.length;
+  let thai='', rom=[];
+  for(let i=0;i<len;i++){
+    const d = s[i];
+    const pos = len-1-i;
+    if(d===0) continue;
+    if(pos===1){ // tens
+      if(d===1){ thai+='สิบ'; rom.push('sìp'); }
+      else if(d===2){ thai+='ยี่สิบ'; rom.push('yîi-sìp'); }
+      else { thai+=ones[d]+'สิบ'; rom.push(onesR[d]+'-sìp'); }
+    } else if(pos===0){ // units
+      if(d===1 && len>1){ thai+='เอ็ด'; rom.push('èt'); }
+      else { thai+=ones[d]; rom.push(onesR[d]); }
+    } else { // hundreds and up
+      thai+=ones[d]+places[pos]; rom.push(onesR[d]+'-'+placesR[pos]);
+    }
+  }
+  return {thai, rom: rom.join(' ')};
+}
+
+// ---------- Text-to-speech ----------
+let thaiVoice=null;
+function loadVoices(){
+  const v = speechSynthesis.getVoices();
+  thaiVoice = v.find(x=>x.lang && x.lang.toLowerCase().startsWith('th')) || null;
+  if(!thaiVoice && v.length) document.getElementById('warn').style.display='block';
+}
+if('speechSynthesis' in window){
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
+} else {
+  document.getElementById('warn').style.display='block';
+}
+function speakThai(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang='th-TH'; u.rate=0.85;
+  if(thaiVoice) u.voice=thaiVoice;
+  speechSynthesis.speak(u);
+}
+
+// ---------- Range control ----------
+const RANGES = [
+  {label:'1–20',   min:1, max:20},
+  {label:'1–100',  min:1, max:100},
+  {label:'1–1,000',min:1, max:1000},
+  {label:'1–10k',  min:1, max:10000},
+  {label:'1–100k', min:1, max:100000},
+  {label:'💵 Prices', custom:[20,30,40,50,60,70,80,90,100,120,150,180,200,250,300,350,400,500,600,750,1000,1200,1500,2000]},
+];
+let activeRange = RANGES[1];
+function buildRanges(){
+  const c = document.getElementById('ranges'); c.innerHTML='';
+  RANGES.forEach((r,i)=>{
+    const b=document.createElement('button');
+    b.className='range'+(r===activeRange?' active':''); b.textContent=r.label;
+    b.onclick=()=>{activeRange=r; buildRanges(); newSay(); newHear();};
+    c.appendChild(b);
+  });
+}
+function randNum(){
+  if(activeRange.custom){ return activeRange.custom[Math.floor(Math.random()*activeRange.custom.length)]; }
+  return Math.floor(Math.random()*(activeRange.max-activeRange.min+1))+activeRange.min;
+}
+
+// ---------- Mode A: See & Say ----------
+let sayCurrent=0;
+function newSay(){
+  sayCurrent=randNum();
+  document.getElementById('sayNum').textContent=sayCurrent.toLocaleString();
+  document.getElementById('sayThai').textContent='';
+  document.getElementById('sayRom').textContent='';
+  document.getElementById('sayHint').textContent='Say it out loud first…';
+}
+function revealSay(){
+  const r=numToThai(sayCurrent);
+  document.getElementById('sayThai').textContent=r.thai;
+  document.getElementById('sayRom').textContent=r.rom;
+  document.getElementById('sayHint').textContent='Did you get it?';
+  speakThai(r.thai);
+}
+
+// ---------- Mode B: Hear & Type ----------
+let hearCurrent=0;
+function newHear(){
+  hearCurrent=randNum();
+  document.getElementById('hearInput').value='';
+  document.getElementById('hearVerdict').textContent='';
+  document.getElementById('hearVerdict').className='verdict';
+  document.getElementById('hearThai').textContent='';
+  document.getElementById('hearRom').textContent='';
+  document.getElementById('hearInput').focus();
+  setTimeout(()=>playHear(),150);
+}
+function playHear(){ speakThai(numToThai(hearCurrent).thai); }
+function checkHear(){
+  const val=parseInt(document.getElementById('hearInput').value,10);
+  const v=document.getElementById('hearVerdict');
+  const r=numToThai(hearCurrent);
+  if(val===hearCurrent){
+    v.textContent='✓ Correct!'; v.className='verdict ok';
+    document.getElementById('hearThai').textContent=r.thai;
+    document.getElementById('hearRom').textContent=r.rom;
+    setTimeout(newHear,1100);
+  } else {
+    v.textContent='✗ It was '+hearCurrent.toLocaleString(); v.className='verdict bad';
+    document.getElementById('hearThai').textContent=r.thai;
+    document.getElementById('hearRom').textContent=r.rom;
+  }
+}
+
+// ---------- Mode switching ----------
+function setMode(m){
+  const say=m==='say';
+  document.getElementById('panelSay').style.display=say?'block':'none';
+  document.getElementById('panelHear').style.display=say?'none':'block';
+  document.getElementById('tabSay').classList.toggle('active',say);
+  document.getElementById('tabHear').classList.toggle('active',!say);
+  if(say) newSay(); else newHear();
+}
+
+buildRanges();
+newSay();
+</script>
+
+<!-- ============================================================
+     PRESENTATION LAYER — additive only. Observes the existing
+     DOM for theme, range popover, streak, and micro-animations.
+     Does not modify any engine function above.
+============================================================ -->
+<script>
+(function(){
+  const html = document.documentElement;
+
+  /* ---- Theme toggle (persists on a real server; silent no-op in sandboxes) ---- */
+  const themeBtn = document.getElementById('themeBtn');
+  function setTheme(t){
+    html.setAttribute('data-theme', t);
+    themeBtn.textContent = t==='dark' ? '◑' : '◐';
+    themeBtn.setAttribute('aria-label', t==='dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    try{ localStorage.setItem('tnt-theme', t); }catch(e){}
+  }
+  let saved='dark'; try{ saved = localStorage.getItem('tnt-theme') || 'dark'; }catch(e){}
+  setTheme(saved);
+  themeBtn.addEventListener('click', ()=> setTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
+
+  /* ---- Range popover (the range chips are still built by the original buildRanges) ---- */
+  const pill  = document.getElementById('rangePill');
+  const pop   = document.getElementById('rangePop');
+  const label = document.getElementById('rangeLabel');
+  let scrim;
+  function syncLabel(){ try{ label.textContent = activeRange.label; }catch(e){} }
+  function openPop(){
+    pop.hidden=false; pill.setAttribute('aria-expanded','true');
+    scrim = document.createElement('div'); scrim.className='scrim';
+    scrim.addEventListener('click', closePop); document.body.appendChild(scrim);
+    requestAnimationFrame(()=> pop.classList.add('show'));
+  }
+  function closePop(){
+    pop.classList.remove('show'); pill.setAttribute('aria-expanded','false');
+    if(scrim){ scrim.remove(); scrim=null; }
+    setTimeout(()=>{ pop.hidden=true; }, 160);
+  }
+  pill.addEventListener('click', ()=> pop.hidden ? openPop() : closePop());
+  // Runs after the chip's own onclick (which already set activeRange + restarted both drills)
+  document.getElementById('ranges').addEventListener('click', (e)=>{
+    if(e.target.closest('.range')){ syncLabel(); closePop(); }
+  });
+  syncLabel();
+
+  /* ---- Streak + correct-pulse, derived from the verdict element's class ---- */
+  const streakVal  = document.getElementById('streakVal');
+  const streakChip = document.getElementById('streakChip');
+  const card       = document.querySelector('.card');
+  const verdict    = document.getElementById('hearVerdict');
+  let streak=0, lastState='';
+  function render(){ streakVal.textContent=streak; streakChip.classList.toggle('live', streak>0); }
+  new MutationObserver(()=>{
+    const c = verdict.className;
+    const state = c.indexOf('ok')>-1 ? 'ok' : (c.indexOf('bad')>-1 ? 'bad' : '');
+    if(state===lastState) return;
+    lastState=state;
+    if(state==='ok'){
+      streak++; render();
+      streakChip.classList.remove('hot'); void streakChip.offsetWidth; streakChip.classList.add('hot');
+      card.classList.remove('pulse'); void card.offsetWidth; card.classList.add('pulse');
+    } else if(state==='bad'){
+      streak=0; render();
+    }
+  }).observe(verdict, {attributes:true, attributeFilter:['class']});
+  render();
+
+  /* ---- Big-number slide-in on every new number ---- */
+  const sayNum = document.getElementById('sayNum');
+  function animNum(){ sayNum.classList.remove('in'); void sayNum.offsetWidth; sayNum.classList.add('in'); }
+  new MutationObserver(animNum).observe(sayNum, {childList:true, characterData:true, subtree:true});
+  animNum(); // first number on load
+
+  /* ---- Gentle fade when the Thai/romanization reveals ---- */
+  ['sayThai','hearThai'].forEach(id=>{
+    const el = document.getElementById(id);
+    new MutationObserver(()=>{
+      if(el.textContent){
+        const box = el.parentElement;
+        box.classList.remove('show'); void box.offsetWidth; box.classList.add('show');
+      }
+    }).observe(el, {childList:true, characterData:true, subtree:true});
+  });
+})();
+</script>
+
+<!-- ============================================================
+     ADDITIVE LAYER 2 — performance tracking, spaced-repetition
+     weighting, self-rating, mastery, and the settings menu.
+     All new. Overrides only the number PICKER (randNum); every
+     engine function above is untouched. If localStorage is
+     unavailable, this silently reverts to the original uniform draw.
+============================================================ -->
+<script>
+(function(){
+  /* ---------- localStorage (safe) ---------- */
+  var KEY = 'tnt-stats-v1';
+  var storageOK = false;
+  try { var t='__tnt'+Math.random(); localStorage.setItem(t,'1'); localStorage.getItem(t); localStorage.removeItem(t); storageOK=true; }
+  catch(e){ storageOK=false; }
+
+  var STATS = {};
+  if (storageOK){ try { var raw=localStorage.getItem(KEY); STATS = raw ? (JSON.parse(raw)||{}) : {}; } catch(e){ STATS={}; } }
+
+  var saveTimer=null;
+  function save(){
+    if(!storageOK) return;
+    if(saveTimer) clearTimeout(saveTimer);
+    saveTimer=setTimeout(function(){ try{ localStorage.setItem(KEY, JSON.stringify(STATS)); }catch(e){} }, 120);
+  }
+  function entry(n){ var k=''+n; if(!STATS[k]) STATS[k]={s:0,c:0,m:0}; return STATS[k]; }
+  function markSeen(n){ if(!storageOK) return; entry(n).s++; save(); }
+  function markCorrect(n){ if(!storageOK) return; entry(n).c++; save(); updateMastery(); }
+  function markMiss(n){ if(!storageOK) return; entry(n).m++; save(); updateMastery(); }
+  function isMastered(n){ var e=STATS[''+n]; if(!e) return false; var a=e.c+e.m; return a>=3 && (e.c/a)>=0.8; }
+
+  /* ---------- Spaced-repetition weighted draw ---------- */
+  var uniform = randNum;          // original picker, preserved as fallback
+  var RECENT = [];                // cooldown queue: a number can't recur for a few draws
+  var COOLDOWN = 3;
+
+  function inRange(n){
+    if(activeRange.custom) return activeRange.custom.indexOf(n) > -1;
+    return n >= activeRange.min && n <= activeRange.max;
+  }
+  function rangeSize(){
+    if(activeRange.custom) return activeRange.custom.length;
+    return activeRange.max - activeRange.min + 1;
+  }
+  function weightFor(e){
+    var a = e.c + e.m;
+    if(a === 0) return 0;                                  // untested → goes through "explore"
+    var ratio = e.c / a;
+    if(a >= 3 && ratio >= 0.8) return 0.3;                 // mastered → occasional check-in
+    if(e.m > 0 && ratio < 0.7)  return 5 * (e.m + 1) / (e.c + 1); // struggling → soon & often
+    return 2;                                              // still learning
+  }
+  function exploreCandidate(){                             // a never-tested number in range, off cooldown
+    for(var i=0;i<24;i++){
+      var n = uniform();
+      var e = STATS[''+n];
+      if((!e || (e.c + e.m) === 0) && RECENT.indexOf(n) < 0) return n;
+    }
+    return null;                                           // range saturated with tested numbers
+  }
+  var PER_NEW = 1.5, NEW_CAP = 40;
+  function weightedPick(){
+    if(!storageOK) return uniform();                       // exact original behaviour
+
+    var pool=[], total=0, testedAll=0;
+    for(var k in STATS){
+      if(!STATS.hasOwnProperty(k)) continue;
+      var n = +k; if(isNaN(n) || !inRange(n)) continue;
+      var st = STATS[k];
+      if(st.c + st.m >= 1) testedAll++;                    // counted whether or not on cooldown
+      if(RECENT.indexOf(n) > -1) continue;                 // spacing: skip recently shown
+      var w = weightFor(st); if(w <= 0) continue;
+      pool.push([n,w]); total += w;
+    }
+    // exploration weight scales with how many unseen numbers remain, so each
+    // new number outranks a single mastered one (new is favored over mastered)
+    var exp = exploreCandidate();
+    var untested = Math.max(0, rangeSize() - testedAll);
+    var expW = (exp != null && untested > 0) ? PER_NEW * Math.min(untested, NEW_CAP) : 0;
+    total += expW;
+
+    var pick = null;
+    if(total <= 0){ pick = uniform(); }
+    else {
+      var r = Math.random() * total;
+      if(r < expW){ pick = exp; }
+      else {
+        r -= expW; pick = pool.length ? pool[pool.length-1][0] : uniform();
+        for(var i=0;i<pool.length;i++){ r -= pool[i][1]; if(r <= 0){ pick = pool[i][0]; break; } }
+      }
+    }
+    if(pick == null) pick = uniform();
+
+    markSeen(pick);
+    RECENT.push(pick); if(RECENT.length > COOLDOWN) RECENT.shift();
+    return pick;
+  }
+  randNum = weightedPick;          // newSay()/newHear() pick this up via global lookup
+
+  /* ---------- Hear & Type outcomes (read off the verdict, like the streak) ---------- */
+  var hv = document.getElementById('hearVerdict'), lastV='';
+  new MutationObserver(function(){
+    var c = hv.className;
+    var state = c.indexOf('ok')>-1 ? 'ok' : (c.indexOf('bad')>-1 ? 'bad' : '');
+    if(state === lastV) return; lastV = state;
+    if(state==='ok') markCorrect(hearCurrent);
+    else if(state==='bad') markMiss(hearCurrent);
+  }).observe(hv, {attributes:true, attributeFilter:['class']});
+
+  /* ---------- Hear & Type — pure-keyboard loop ----------
+     Re-points only the interaction/advance behaviour. The verdict text and
+     classes are set exactly as the original, so the stats + streak observers
+     above keep firing unchanged. */
+  var hearInput = document.getElementById('hearInput');
+  var hearAnswered = false;        // has the current number been submitted?
+  var hearTimer = null;            // pending correct-answer auto-advance
+
+  checkHear = function(){          // overrides the engine picker call site via global lookup
+    var val = parseInt(hearInput.value, 10);
+    var v   = document.getElementById('hearVerdict');
+    var r   = numToThai(hearCurrent);
+    document.getElementById('hearThai').textContent = r.thai;
+    document.getElementById('hearRom').textContent  = r.rom;
+    if(val === hearCurrent){
+      v.textContent = '✓ Correct!'; v.className = 'verdict ok';
+      hearAnswered = true;
+      hearTimer = setTimeout(function(){ hearTimer = null; newHear(); }, 600); // snappier
+    } else {
+      v.textContent = '✗ It was ' + hearCurrent.toLocaleString(); v.className = 'verdict bad';
+      hearAnswered = true;         // wrong answers wait for the user's Enter (study the reveal)
+    }
+  };
+  function hearAdvance(){
+    if(hearTimer){ clearTimeout(hearTimer); hearTimer = null; }
+    newHear();
+  }
+  hearInput.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter') return;
+    e.preventDefault();
+    if(hearAnswered) hearAdvance();   // result showing → next Enter advances
+    else checkHear();                 // not yet answered → Enter checks
+  });
+  // reset the answered flag whenever a fresh number clears the verdict (newHear)
+  new MutationObserver(function(){
+    var c = hv.className;
+    if(c.indexOf('ok') < 0 && c.indexOf('bad') < 0) hearAnswered = false;
+  }).observe(hv, {attributes:true, attributeFilter:['class']});
+
+  /* ---------- See & Say self-rating ---------- */
+  var revealBtn = document.getElementById('sayRevealBtn');
+  var rateRow   = document.getElementById('sayRateRow');
+  var rateGot   = document.getElementById('rateGot');
+  var rateMiss  = document.getElementById('rateMiss');
+  var rated = false;
+  var sayRevealed = false;
+  function showRate(){ rated=false; rateGot.classList.remove('chosen'); rateMiss.classList.remove('chosen'); rateRow.hidden=false; revealBtn.hidden=true; }
+  function hideRate(){ rateRow.hidden=true; revealBtn.hidden=false; }
+  // record the result, let the chosen button's highlight register, then advance
+  function rate(kind){
+    if(rated) return; rated=true;
+    if(kind==='got'){ rateGot.classList.add('chosen'); markCorrect(sayCurrent); }
+    else            { rateMiss.classList.add('chosen'); markMiss(sayCurrent); }
+    setTimeout(newSay, 200);
+  }
+  rateGot.addEventListener('click', function(){ rate('got'); });
+  rateMiss.addEventListener('click', function(){ rate('miss'); });
+
+  var sayThai = document.getElementById('sayThai');
+  new MutationObserver(function(){
+    sayRevealed = !!sayThai.textContent;
+    if(sayRevealed) showRate(); else hideRate();
+  }).observe(sayThai, {childList:true, characterData:true, subtree:true});
+
+  /* desktop keyboard: Space/Enter reveal → ArrowRight/Enter = Got, ArrowLeft = Missed.
+     Only while See & Say is the active panel; never hijacks typing or the settings sheet. */
+  document.addEventListener('keydown', function(e){
+    if(document.getElementById('panelSay').style.display === 'none') return; // Say not active
+    if(!settings.hidden) return;                                             // settings open
+    var t = e.target;
+    if(t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    if(!sayRevealed){
+      if(e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); revealSay(); }
+    } else {
+      if(e.key === 'Enter' || e.key === 'ArrowRight'){ e.preventDefault(); rate('got'); }
+      else if(e.key === 'ArrowLeft'){ e.preventDefault(); rate('miss'); }
+    }
+  });
+
+  /* ---------- Mastery indicators ---------- */
+  var badge = document.getElementById('masteryBadge');
+  function rangeCounts(){
+    var tested=0, mastered=0;
+    for(var k in STATS){
+      if(!STATS.hasOwnProperty(k)) continue;
+      var n=+k; if(isNaN(n) || !inRange(n)) continue;
+      var e=STATS[k]; if((e.c+e.m) >= 1){ tested++; if(isMastered(n)) mastered++; }
+    }
+    return {tested:tested, mastered:mastered};
+  }
+  function updateMastery(){
+    var outs = document.querySelectorAll('.mastery-out');
+    if(!storageOK){
+      outs.forEach(function(el){ el.textContent='Saving is off in this browser'; });
+      if(badge) badge.hidden = true;
+      return;
+    }
+    var c = rangeCounts();
+    var html = c.tested === 0
+      ? '<span class="m-ico">✦</span>Drill to start tracking your weak spots'
+      : '<span class="m-ico">✦</span>' + c.mastered + '/' + c.tested + ' mastered in this range';
+    outs.forEach(function(el){ el.innerHTML = html; });
+    if(badge) badge.hidden = !isMastered(sayCurrent);
+  }
+  // refresh the badge/line whenever a new number appears or the range changes
+  var sayNum = document.getElementById('sayNum');
+  new MutationObserver(updateMastery).observe(sayNum, {childList:true, characterData:true, subtree:true});
+  document.getElementById('ranges').addEventListener('click', function(e){ if(e.target.closest('.range')) updateMastery(); });
+
+  /* ---------- Settings sheet (gear menu) ---------- */
+  var settings = document.getElementById('settings');
+  document.getElementById('gearBtn').addEventListener('click', function(){ updateMastery(); settings.hidden=false; });
+  function closeSettings(){ settings.hidden=true; resetConfirm.hidden=true; }
+  document.getElementById('settingsClose').addEventListener('click', closeSettings);
+  document.getElementById('settingsScrim').addEventListener('click', closeSettings);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !settings.hidden) closeSettings(); });
+
+  /* ---------- Reset progress (with confirm) ---------- */
+  var resetBtn=document.getElementById('resetBtn');
+  var resetConfirm=document.getElementById('resetConfirm');
+  resetBtn.addEventListener('click', function(){ resetConfirm.hidden=false; });
+  document.getElementById('resetCancel').addEventListener('click', function(){ resetConfirm.hidden=true; });
+  document.getElementById('resetYes').addEventListener('click', function(){
+    STATS = {}; RECENT = [];
+    if(storageOK){ try{ localStorage.removeItem(KEY); }catch(e){} }
+    resetConfirm.hidden=true;
+    updateMastery();
+  });
+
+  updateMastery();   // initial paint
+})();
+</script>
+</body>
+</html>
