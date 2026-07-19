@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>How to Count in Thai (1 to 100 and Beyond) | LekThai</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@144,400..700,30&family=DM+Sans:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+
+<meta name="description" content="Learn to count in Thai — the simple regular system, plus the classifiers you need to count actual objects. Free drill with audio.">
+<meta name="theme-color" content="#0f1117">
+<link rel="canonical" href="https://lekthai.app/how-to-count-in-thai">
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="LekThai">
+<meta property="og:title" content="How to Count in Thai">
+<meta property="og:description" content="The simple regular system, plus the classifiers you need to count actual objects.">
+<meta property="og:url" content="https://lekthai.app/how-to-count-in-thai">
+<meta property="og:image" content="https://lekthai.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Count in Thai">
+<meta name="twitter:description" content="The simple regular system, plus the classifiers you need to count actual objects.">
+<meta name="twitter:image" content="https://lekthai.app/og.png">
+
+<style>
+  :root, [data-theme="dark"]{
+    --bg-0:#0f1117; --bg-1:#171a24;
+    --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
+    --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
+    --card-bg:rgba(255,255,255,.055); --card-bg2:rgba(255,255,255,.016);
+    --card-border:rgba(255,255,255,.10);
+    --card-shadow:0 28px 64px -28px rgba(0,0,0,.75), 0 8px 26px -14px rgba(0,0,0,.55);
+    --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
+    --num-grad:linear-gradient(176deg, #f5f2eb 0%, #cdd2df 118%);
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; min-height:100%; }
+  body{
+    background:var(--bg-0); color:var(--ink);
+    font-family:"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.65;
+  }
+  .ambient{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(58% 48% at 16% 6%, var(--glow-red), transparent 72%),
+      radial-gradient(54% 50% at 90% 98%, var(--glow-blue), transparent 72%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  }
+  .wrap{ max-width:720px; margin:0 auto; padding:0 22px; }
+  .top{ padding:44px 0 0; }
+  .back{ color:var(--muted); text-decoration:none; font:600 14px/1 "DM Sans"; }
+  .back:hover{ color:var(--ink); }
+
+  h1{
+    font-family:"Fraunces", Georgia, serif; font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
+    font-weight:600; font-size:clamp(32px,8vw,48px); line-height:1.05; margin:22px 0 14px;
+    background:var(--num-grad); -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; color:transparent;
+  }
+  .lede{ font-size:clamp(16px,4.3vw,18.5px); color:var(--ink-2); margin:0 0 30px; }
+  h2{ font-family:"Fraunces",Georgia,serif; font-variation-settings:"opsz" 144,"wght" 600;
+      font-weight:600; font-size:clamp(22px,5.5vw,28px); line-height:1.2; margin:46px 0 10px; color:var(--ink); }
+  h3{ font:600 16.5px/1.3 "DM Sans"; margin:28px 0 8px; }
+  p, li{ color:var(--ink-2); font-size:16px; }
+  ul,ol{ padding-left:20px; } li{ margin-bottom:7px; }
+  a{ color:var(--blue); }
+  strong{ color:var(--ink); }
+  .th{ font-family:"Sarabun","Noto Sans Thai",sans-serif; }
+
+  /* tables */
+  .tbl-wrap{ overflow-x:auto; border-radius:16px; border:1px solid var(--card-border);
+             background:linear-gradient(180deg,var(--card-bg),var(--card-bg2)); margin:18px 0 8px; }
+  table{ width:100%; border-collapse:collapse; font-size:15.5px; }
+  th{ text-align:left; font:600 11px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--muted); padding:14px 14px 10px; border-bottom:1px solid var(--card-border); white-space:nowrap; }
+  td{ padding:9px 14px; border-bottom:1px solid rgba(255,255,255,.05); }
+  tr:last-child td{ border-bottom:none; }
+  td.ar{ font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; white-space:nowrap; }
+  td.tn{ font-family:"Sarabun","Noto Sans Thai",sans-serif; color:var(--blue); font-size:18px; white-space:nowrap; }
+  td.th{ font-family:"Sarabun","Noto Sans Thai",sans-serif; font-size:18px; color:var(--ink); white-space:nowrap; }
+  td.ro{ color:var(--muted); font-size:14.5px; white-space:nowrap; }
+
+  .callout{
+    border:1px solid var(--card-border); border-left:3px solid var(--accent);
+    border-radius:0 14px 14px 0; padding:16px 18px; margin:24px 0;
+    background:rgba(213,114,127,.06);
+  }
+  .callout p{ margin:0; }
+  .callout .lbl{ display:block; font:600 11px/1 "DM Sans"; letter-spacing:.14em;
+                 text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+
+  .cta-box{ text-align:center; margin:40px 0; padding:28px 22px; border-radius:20px;
+            border:1px solid var(--card-border); background:linear-gradient(180deg,var(--card-bg),var(--card-bg2));
+            box-shadow:var(--card-shadow); }
+  .cta-box p{ margin:0 0 18px; color:var(--ink-2); font-size:15.5px; }
+  .cta{ display:inline-flex; align-items:center; gap:9px; height:56px; padding:0 30px;
+        border-radius:15px; text-decoration:none; font:600 17px/1 "DM Sans"; color:#fff;
+        background:linear-gradient(180deg,var(--accent),var(--accent-2));
+        box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+        transition:transform .12s ease; }
+  .cta:active{ transform:translateY(1px) scale(.992); }
+  .cta .arr{ transition:transform .2s; }
+  .cta:hover .arr{ transform:translateX(3px); }
+
+  details{ border-bottom:1px solid var(--card-border); padding:14px 0; }
+  summary{ cursor:pointer; font:600 16px/1.4 "DM Sans"; color:var(--ink); list-style:none; }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{ content:"+"; float:right; color:var(--muted); font-weight:400; }
+  details[open] summary::after{ content:"\2212"; }
+  details p{ margin:10px 0 0; }
+
+  footer{ border-top:1px solid var(--card-border); margin-top:50px; padding:26px 0 60px; text-align:center; }
+  footer nav a{ color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; margin:0 12px; }
+  footer nav a:hover{ color:var(--ink); }
+  footer .copy{ margin-top:16px; font-size:13px; color:var(--muted); }
+  :focus-visible{ outline:2px solid rgba(213,114,127,.65); outline-offset:3px; }
+
+  .related{ list-style:none; padding:0; }
+  .related li{ padding:12px 0; border-bottom:1px solid var(--card-border); font-size:15.5px; color:var(--muted); }
+  .related li:last-child{ border-bottom:none; }
+  .related a{ font-weight:600; text-decoration:none; }
+  .related a:hover{ text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+<main class="wrap">
+  <div class="top"><a class="back" href="/">&larr; LekThai</a></div>
+
+  <h1>How to Count in Thai</h1>
+  <p class="lede">Counting in Thai splits into two things. Reciting numbers is easy &mdash; eleven words and two exceptions. Counting <em>things</em> is where it gets interesting, because Thai requires a classifier: a small word that says what kind of object you are counting. This page covers both.</p>
+
+  <h2>Counting 1 to 10</h2>
+  <p>Start here. Say them aloud; these ten words carry everything else.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">1</td><td class="th">หนึ่ง</td><td class="ro">nèung</td></tr>
+<tr><td class="ar">2</td><td class="th">สอง</td><td class="ro">sǎawng</td></tr>
+<tr><td class="ar">3</td><td class="th">สาม</td><td class="ro">sǎam</td></tr>
+<tr><td class="ar">4</td><td class="th">สี่</td><td class="ro">sìi</td></tr>
+<tr><td class="ar">5</td><td class="th">ห้า</td><td class="ro">hâa</td></tr>
+<tr><td class="ar">6</td><td class="th">หก</td><td class="ro">hòk</td></tr>
+<tr><td class="ar">7</td><td class="th">เจ็ด</td><td class="ro">jèt</td></tr>
+<tr><td class="ar">8</td><td class="th">แปด</td><td class="ro">pàet</td></tr>
+<tr><td class="ar">9</td><td class="th">เก้า</td><td class="ro">kâao</td></tr>
+<tr><td class="ar">10</td><td class="th">สิบ</td><td class="ro">sìp</td></tr>
+</tbody></table></div>
+  <h2>Counting past ten</h2>
+  <p>Thai builds numbers the same way English does &mdash; largest place value first &mdash; but with no irregular words like "eleven" or "twelve". You just say the tens, then the units.</p>
+  <ul>
+    <li><span class="th">สิบ</span> (<em>sìp</em>) is ten. 12 is <span class="th">สิบสอง</span>, "ten two".</li>
+    <li>Every ten is its digit plus <span class="th">สิบ</span>: 30 is <span class="th">สามสิบ</span>, "three ten".</li>
+  </ul>
+  <p>Two exceptions, and that is the entire irregularity of the system:</p>
+<div class="tbl-wrap"><table><thead><tr><th>Rule</th><th>What changes</th><th>Example</th></tr></thead><tbody>
+<tr><td>Trailing 1</td><td class="ro"><span class="th">หนึ่ง</span> becomes <span class="th">เอ็ด</span> in the units place above ten</td><td class="th">11 = สิบเอ็ด</td></tr>
+<tr><td>Tens 2</td><td class="ro"><span class="th">สอง</span> becomes <span class="th">ยี่</span> in the tens place</td><td class="th">20 = ยี่สิบ</td></tr>
+</tbody></table></div>
+  <p>Above a hundred, each place value gets its own word. English speakers should pay attention to the last two &mdash; there is no English equivalent, and this is where counting large amounts breaks down:</p>
+<div class="tbl-wrap"><table><thead><tr><th>Value</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">100</td><td class="th">ร้อย</td><td class="ro">róoi</td></tr>
+<tr><td class="ar">1,000</td><td class="th">พัน</td><td class="ro">phan</td></tr>
+<tr><td class="ar">10,000</td><td class="th">หมื่น</td><td class="ro">mèun</td></tr>
+<tr><td class="ar">100,000</td><td class="th">แสน</td><td class="ro">sǎen</td></tr>
+<tr><td class="ar">1,000,000</td><td class="th">ล้าน</td><td class="ro">láan</td></tr>
+</tbody></table></div>
+  <p>So 25,000 is not "twenty-five thousand" &mdash; it is <span class="th">สองหมื่นห้าพัน</span>, "two <span class="th">หมื่น</span> five <span class="th">พัน</span>". You have to regroup the number as you hear it, which is why prices and rents feel disproportionately hard.</p>
+
+  <div class="cta-box">
+    <p>Reciting is the easy half. Recognising a number spoken at speed is the half that needs drilling.</p>
+    <a class="cta" href="/learn">Start drilling <span class="arr">&rarr;</span></a>
+  </div>
+
+  <h2>Counting objects: the classifier</h2>
+  <p>Here is the part that surprises learners. In English you say "three dogs". In Thai you cannot just attach a number to a noun &mdash; you need a <strong>classifier</strong>, a word describing the category of thing being counted. The pattern is:</p>
+  <div class="callout">
+    <span class="lbl">The pattern</span>
+    <p><strong>noun + number + classifier</strong><br>
+    <span class="th">หมาสามตัว</span> &mdash; <em>mǎa sǎam tua</em> &mdash; "dog three <span class="th">ตัว</span>" = three dogs.</p>
+  </div>
+  <p>English does this occasionally &mdash; "three <em>sheets</em> of paper", "two <em>head</em> of cattle" &mdash; but in Thai it is compulsory for every countable noun.</p>
+
+  <h3>The classifiers worth knowing first</h3>
+<div class="tbl-wrap"><table><thead><tr><th>Classifier</th><th>Pronunciation</th><th>Used for</th></tr></thead><tbody>
+<tr><td class="th">คน</td><td class="ro">khon</td><td class="ro">People (except monks and royalty)</td></tr>
+<tr><td class="th">ตัว</td><td class="ro">tua</td><td class="ro">Animals, and items with legs or a body — tables, chairs, shirts</td></tr>
+<tr><td class="th">อัน</td><td class="ro">an</td><td class="ro">Small generic objects. The safe fallback when you do not know the right one</td></tr>
+<tr><td class="th">ใบ</td><td class="ro">bai</td><td class="ro">Containers and flat leaf-like things — bags, plates, tickets, eggs</td></tr>
+<tr><td class="th">เล่ม</td><td class="ro">lêm</td><td class="ro">Books, knives, candles</td></tr>
+<tr><td class="th">คัน</td><td class="ro">khan</td><td class="ro">Vehicles — cars, motorbikes, bicycles</td></tr>
+<tr><td class="th">ขวด</td><td class="ro">khùat</td><td class="ro">Bottles</td></tr>
+<tr><td class="th">แก้ว</td><td class="ro">kâew</td><td class="ro">Glasses of drink</td></tr>
+<tr><td class="th">ลูก</td><td class="ro">lûuk</td><td class="ro">Round things — fruit, balls</td></tr>
+</tbody></table></div>
+  <p>There are dozens more, but these nine cover an enormous amount of daily use. If you are stuck, <span class="th">อัน</span> is understood and mildly wrong rather than incomprehensible &mdash; use it and move on.</p>
+
+  <h3>The "one" exception, again</h3>
+  <p>When counting exactly one of something, the order flips: <strong>noun + classifier + <span class="th">หนึ่ง</span></strong>. In casual speech <span class="th">หนึ่ง</span> is often shortened to <span class="th">นึง</span>.</p>
+  <p><span class="th">เบียร์ขวดนึง</span> &mdash; <em>bia khùat nèung</em> &mdash; "one bottle of beer". This is a genuinely useful sentence.</p>
+
+  <h2>Ordering and asking for things</h2>
+  <ul>
+    <li><strong>How much?</strong> <span class="th">เท่าไหร่</span> (<em>thâo-rài</em>). The answer will be a number, at speed.</li>
+    <li><strong>How many?</strong> <span class="th">กี่</span> (<em>gìi</em>) + classifier &mdash; <span class="th">กี่คน</span> is "how many people?"</li>
+    <li><strong>Baht</strong> is <span class="th">บาท</span> (<em>bàat</em>), placed after the number: <span class="th">ห้าสิบบาท</span>, 50 baht.</li>
+  </ul>
+
+  <h2>Ordinal numbers</h2>
+  <p>First, second, third are easy: put <span class="th">ที่</span> (<em>thîi</em>) in front of the number.</p>
+<div class="tbl-wrap"><table><thead><tr><th>English</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td>first</td><td class="th">ที่หนึ่ง</td><td class="ro">thîi nèung</td></tr>
+<tr><td>second</td><td class="th">ที่สอง</td><td class="ro">thîi sǎawng</td></tr>
+<tr><td>third</td><td class="th">ที่สาม</td><td class="ro">thîi sǎam</td></tr>
+<tr><td>tenth</td><td class="th">ที่สิบ</td><td class="ro">thîi sìp</td></tr>
+</tbody></table></div>
+  <p>No irregular forms to memorise. Note that here 1 stays <span class="th">หนึ่ง</span> &mdash; the <span class="th">เอ็ด</span> rule only applies inside larger numbers.</p>
+
+  <h2>How to practise counting</h2>
+  <ol>
+    <li><strong>Get 1&ndash;10 automatic first.</strong> Everything else assembles from them, so hesitation here slows down every larger number.</li>
+    <li><strong>Then randomise.</strong> Counting in order trains a sequence. If you can only reach 57 by running up from 50, you have not learned 57.</li>
+    <li><strong>Add classifiers separately.</strong> Learn the numbers cold first, then layer the classifiers on. Doing both at once is where people stall.</li>
+    <li><strong>Practise listening hardest.</strong> Counting aloud is comfortable. Catching a number someone else says is the skill that actually gets used.</li>
+  </ol>
+
+  <div class="cta-box">
+    <p>Randomised, audio-first, and weighted towards whatever you keep missing.</p>
+    <a class="cta" href="/learn">Start drilling <span class="arr">&rarr;</span></a>
+  </div>
+<h2>Questions</h2>
+<details><summary>How do you count from 1 to 10 in Thai?</summary><p><span class="th">หนึ่ง สอง สาม สี่ ห้า หก เจ็ด แปด เก้า สิบ</span> - nèung, sǎawng, sǎam, sìi, hâa, hòk, jèt, pàet, kâao, sìp. These ten words build every other number in the language.</p></details>
+<details><summary>What is a Thai classifier?</summary><p>A word that indicates the category of the thing being counted. Thai requires it when counting objects: noun, then number, then classifier. <span class="th">หมาสามตัว</span> is literally "dog three tua" and means three dogs.</p></details>
+<details><summary>Which Thai classifier should I use if I do not know?</summary><p><span class="th">อัน</span> (<em>an</em>) is the general-purpose one for small objects and is widely understood. It is better to use it and be slightly wrong than to leave the classifier out.</p></details>
+<details><summary>Why does the word order change when counting one thing?</summary><p>For exactly one, Thai puts the classifier before the number: noun, classifier, then <span class="th">หนึ่ง</span>, often shortened to <span class="th">นึง</span> in speech. So one bottle of beer is <span class="th">เบียร์ขวดนึง</span>.</p></details>
+<details><summary>How do you say ordinal numbers in Thai?</summary><p>Put <span class="th">ที่</span> (<em>thîi</em>) in front of the number. First is <span class="th">ที่หนึ่ง</span>, second is <span class="th">ที่สอง</span>. There are no irregular forms.</p></details>
+<details><summary>Is counting in Thai difficult?</summary><p>The number system itself is one of the easiest parts of Thai, with only two exceptions across the whole range. The harder parts are the classifiers when counting objects, and recognising numbers spoken at natural speed.</p></details>
+
+  <h2>More on Thai numbers</h2>
+<ul class="related"><li><a href="/thai-numbers">Thai numbers &amp; numerals</a> &mdash; The full reference: the Thai digits, the words, and the two rules.</li><li><a href="/thai-numbers-1-100">Thai numbers 1&ndash;100</a> &mdash; Every number from 1 to 100 in one table.</li><li><a href="/thai-number-pronunciation">Pronunciation &amp; tones</a> &mdash; The tone on every number, and the pairs people confuse.</li><li><a href="/learn-thai-numbers">How to learn them</a> &mdash; The method, and a seven-day plan.</li></ul>
+
+  <footer>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/learn">Open the drill</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </nav>
+    <p class="copy">Master Thai numbers, one drill at a time.</p>
+  </footer>
+</main>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do you count from 1 to 10 in Thai?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "หนึ่ง สอง สาม สี่ ห้า หก เจ็ด แปด เก้า สิบ - nèung, sǎawng, sǎam, sìi, hâa, hòk, jèt, pàet, kâao, sìp. These ten words build every other number in the language."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is a Thai classifier?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A word that indicates the category of the thing being counted. Thai requires it when counting objects: noun, then number, then classifier. หมาสามตัว is literally \"dog three tua\" and means three dogs."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Which Thai classifier should I use if I do not know?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "อัน (an) is the general-purpose one for small objects and is widely understood. It is better to use it and be slightly wrong than to leave the classifier out."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does the word order change when counting one thing?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "For exactly one, Thai puts the classifier before the number: noun, classifier, then หนึ่ง, often shortened to นึง in speech. So one bottle of beer is เบียร์ขวดนึง."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do you say ordinal numbers in Thai?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Put ที่ (thîi) in front of the number. First is ที่หนึ่ง, second is ที่สอง. There are no irregular forms."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is counting in Thai difficult?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The number system itself is one of the easiest parts of Thai, with only two exceptions across the whole range. The harder parts are the classifiers when counting objects, and recognising numbers spoken at natural speed."
+   }
+  }
+ ]
+}
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  });
+}
+</script>
+</body>
+</html>

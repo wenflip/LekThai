@@ -3,43 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>LekThai — Learn Thai Numbers by Drilling</title>
+<title>Thai Numbers 1&ndash;100: Read &amp; Hear Them | LekThai</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@144,400..700,30&family=DM+Sans:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
 
-<!-- Description (search) -->
-<meta name="description" content="Learn Thai numbers the fast way. LekThai drills you — see it, hear it, type it — until every number sticks. Free, no accounts, works in your browser.">
-
-<!-- Mobile browser chrome colour -->
+<meta name="description" content="The complete guide to Thai numbers with the Thai numerals, pronunciation and the two rules that trip everyone up. Then drill them free until they stick.">
 <meta name="theme-color" content="#0f1117">
+<link rel="canonical" href="https://lekthai.app/thai-numbers">
 
-<!-- Canonical -->
-<link rel="canonical" href="https://lekthai.app/">
-
-<!-- Icons & PWA manifest -->
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="shortcut icon" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 
-<!-- Open Graph (link previews) -->
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:site_name" content="LekThai">
-<meta property="og:title" content="LekThai — Learn Thai Numbers by Drilling">
-<meta property="og:description" content="Drill Thai numbers until they stick — see it, hear it, type it. Free, no accounts.">
-<meta property="og:url" content="https://lekthai.app/">
+<meta property="og:title" content="Thai Numbers 1&ndash;100: Read &amp; Hear Them">
+<meta property="og:description" content="The complete guide to Thai numbers &mdash; numerals, pronunciation, and the two rules that trip everyone up.">
+<meta property="og:url" content="https://lekthai.app/thai-numbers">
 <meta property="og:image" content="https://lekthai.app/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="LekThai — Thai numbers, drilled.">
-
-<!-- Twitter / X card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="LekThai — Learn Thai Numbers by Drilling">
-<meta name="twitter:description" content="Drill Thai numbers until they stick — see it, hear it, type it. Free, no accounts.">
+<meta name="twitter:title" content="Thai Numbers 1&ndash;100: Read &amp; Hear Them">
+<meta name="twitter:description" content="Numerals, pronunciation, and the two rules that trip everyone up.">
 <meta name="twitter:image" content="https://lekthai.app/og.png">
 
 <style>
@@ -50,18 +38,15 @@
     --card-bg:rgba(255,255,255,.055); --card-bg2:rgba(255,255,255,.016);
     --card-border:rgba(255,255,255,.10);
     --card-shadow:0 28px 64px -28px rgba(0,0,0,.75), 0 8px 26px -14px rgba(0,0,0,.55);
-    --soft:rgba(255,255,255,.06);
     --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
     --num-grad:linear-gradient(176deg, #f5f2eb 0%, #cdd2df 118%);
-    --num-glow:rgba(170,140,160,.20);
   }
   *{ box-sizing:border-box; }
   html,body{ margin:0; min-height:100%; }
   body{
     background:var(--bg-0); color:var(--ink);
     font-family:"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-    line-height:1.6;
+    -webkit-font-smoothing:antialiased; line-height:1.65;
   }
   .ambient{
     position:fixed; inset:0; z-index:-1; pointer-events:none;
@@ -70,140 +55,284 @@
       radial-gradient(54% 50% at 90% 98%, var(--glow-blue), transparent 72%),
       linear-gradient(180deg, var(--bg-1), var(--bg-0));
   }
-  .wrap{ max-width:760px; margin:0 auto; padding:0 22px; }
+  .wrap{ max-width:720px; margin:0 auto; padding:0 22px; }
+  .top{ padding:44px 0 0; }
+  .back{ color:var(--muted); text-decoration:none; font:600 14px/1 "DM Sans"; }
+  .back:hover{ color:var(--ink); }
 
-  /* ---------- HERO ---------- */
-  .hero{ text-align:center; padding:72px 0 44px; }
-  .wordmark{ font:700 clamp(30px,7vw,44px)/1 "DM Sans"; letter-spacing:.01em; margin:0 0 14px; }
-  .tagline{
+  h1{
     font-family:"Fraunces", Georgia, serif; font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
-    font-weight:600; font-size:clamp(28px,7.5vw,46px); line-height:1.06; letter-spacing:-.01em; margin:0 0 16px;
+    font-weight:600; font-size:clamp(32px,8vw,48px); line-height:1.05; margin:22px 0 14px;
+    background:var(--num-grad); -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; color:transparent;
   }
-  @supports ((-webkit-background-clip:text) or (background-clip:text)){
-    .tagline{ background:var(--num-grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
-  }
-  .subhead{ font-size:clamp(16px,4.4vw,19px); color:var(--ink-2); max-width:30ch; margin:0 auto 30px; }
+  .lede{ font-size:clamp(16px,4.3vw,18.5px); color:var(--ink-2); margin:0 0 30px; }
+  h2{ font-family:"Fraunces",Georgia,serif; font-variation-settings:"opsz" 144,"wght" 600;
+      font-weight:600; font-size:clamp(22px,5.5vw,28px); line-height:1.2; margin:46px 0 10px; color:var(--ink); }
+  h3{ font:600 16.5px/1.3 "DM Sans"; margin:28px 0 8px; }
+  p, li{ color:var(--ink-2); font-size:16px; }
+  ul,ol{ padding-left:20px; } li{ margin-bottom:7px; }
+  a{ color:var(--blue); }
+  strong{ color:var(--ink); }
+  .th{ font-family:"Sarabun","Noto Sans Thai",sans-serif; }
 
-  /* Thai numeral / Arabic pairing */
-  .pair{
-    display:inline-flex; align-items:center; gap:18px; margin:6px 0 34px;
-    padding:20px 30px; border-radius:22px;
-    background:linear-gradient(180deg, var(--card-bg), var(--card-bg2));
-    border:1px solid var(--card-border); box-shadow:var(--card-shadow);
-    backdrop-filter:blur(22px) saturate(125%); -webkit-backdrop-filter:blur(22px) saturate(125%);
-  }
-  .pair .thai{ font-family:"Sarabun","Noto Sans Thai",sans-serif; font-weight:600; font-size:clamp(46px,14vw,68px); color:var(--blue); line-height:1; }
-  .pair .slash{ font-family:"Fraunces",serif; font-weight:400; font-size:clamp(34px,10vw,52px); color:var(--muted); line-height:1; }
-  .pair .arabic{
-    font-family:"Fraunces",Georgia,serif; font-variation-settings:"opsz" 144,"wght" 600; font-weight:600;
-    font-size:clamp(46px,14vw,68px); line-height:1;
-    background:var(--num-grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
-    filter:drop-shadow(0 12px 34px var(--num-glow));
-  }
+  /* tables */
+  .tbl-wrap{ overflow-x:auto; border-radius:16px; border:1px solid var(--card-border);
+             background:linear-gradient(180deg,var(--card-bg),var(--card-bg2)); margin:18px 0 8px; }
+  table{ width:100%; border-collapse:collapse; font-size:15.5px; }
+  th{ text-align:left; font:600 11px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--muted); padding:14px 14px 10px; border-bottom:1px solid var(--card-border); white-space:nowrap; }
+  td{ padding:9px 14px; border-bottom:1px solid rgba(255,255,255,.05); }
+  tr:last-child td{ border-bottom:none; }
+  td.ar{ font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; white-space:nowrap; }
+  td.tn{ font-family:"Sarabun","Noto Sans Thai",sans-serif; color:var(--blue); font-size:18px; white-space:nowrap; }
+  td.th{ font-family:"Sarabun","Noto Sans Thai",sans-serif; font-size:18px; color:var(--ink); white-space:nowrap; }
+  td.ro{ color:var(--muted); font-size:14.5px; white-space:nowrap; }
 
-  .cta{
-    display:inline-flex; align-items:center; justify-content:center; gap:9px;
-    height:60px; padding:0 34px; border-radius:16px; text-decoration:none;
-    font:600 18px/1 "DM Sans"; color:#fff;
-    background:linear-gradient(180deg, var(--accent), var(--accent-2));
-    box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
-    transition:transform .12s ease;
+  .callout{
+    border:1px solid var(--card-border); border-left:3px solid var(--accent);
+    border-radius:0 14px 14px 0; padding:16px 18px; margin:24px 0;
+    background:rgba(213,114,127,.06);
   }
+  .callout p{ margin:0; }
+  .callout .lbl{ display:block; font:600 11px/1 "DM Sans"; letter-spacing:.14em;
+                 text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+
+  .cta-box{ text-align:center; margin:40px 0; padding:28px 22px; border-radius:20px;
+            border:1px solid var(--card-border); background:linear-gradient(180deg,var(--card-bg),var(--card-bg2));
+            box-shadow:var(--card-shadow); }
+  .cta-box p{ margin:0 0 18px; color:var(--ink-2); font-size:15.5px; }
+  .cta{ display:inline-flex; align-items:center; gap:9px; height:56px; padding:0 30px;
+        border-radius:15px; text-decoration:none; font:600 17px/1 "DM Sans"; color:#fff;
+        background:linear-gradient(180deg,var(--accent),var(--accent-2));
+        box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+        transition:transform .12s ease; }
   .cta:active{ transform:translateY(1px) scale(.992); }
   .cta .arr{ transition:transform .2s; }
   .cta:hover .arr{ transform:translateX(3px); }
-  .trust{ margin:16px 0 0; font:500 13.5px/1 "DM Sans"; color:var(--muted); }
 
-  /* ---------- SECTIONS ---------- */
-  .section{ padding:8px 0 44px; }
-  .eyebrow{ font:600 11px/1 "DM Sans"; letter-spacing:.17em; text-transform:uppercase; color:var(--muted); text-align:center; margin-bottom:22px; }
-  .cards{ display:grid; gap:14px; grid-template-columns:1fr; }
-  @media (min-width:620px){ .cards{ grid-template-columns:repeat(3,1fr); } }
-  .card{
-    border-radius:18px; padding:20px 20px 22px;
-    background:linear-gradient(180deg, var(--card-bg), var(--card-bg2));
-    border:1px solid var(--card-border); box-shadow:var(--card-shadow);
-  }
-  .card h3{ margin:0 0 7px; font:600 16px/1.2 "DM Sans"; color:var(--ink); }
-  .card p{ margin:0; font-size:14.5px; color:var(--ink-2); }
-  .card .k{ font-size:20px; margin-bottom:10px; }
+  details{ border-bottom:1px solid var(--card-border); padding:14px 0; }
+  summary{ cursor:pointer; font:600 16px/1.4 "DM Sans"; color:var(--ink); list-style:none; }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{ content:"+"; float:right; color:var(--muted); font-weight:400; }
+  details[open] summary::after{ content:"\2212"; }
+  details p{ margin:10px 0 0; }
 
-  .why{ text-align:center; max-width:52ch; margin:0 auto; color:var(--ink-2); font-size:15.5px; }
-  .why a{ color:var(--blue); text-decoration:none; }
-  .why a:hover{ text-decoration:underline; }
-
-  .center-cta{ text-align:center; padding:8px 0 8px; }
-
-  /* ---------- FOOTER ---------- */
-  footer{ border-top:1px solid var(--card-border); margin-top:26px; padding:26px 0 46px; text-align:center; }
+  footer{ border-top:1px solid var(--card-border); margin-top:50px; padding:26px 0 60px; text-align:center; }
   footer nav a{ color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; margin:0 12px; }
   footer nav a:hover{ color:var(--ink); }
   footer .copy{ margin-top:16px; font-size:13px; color:var(--muted); }
-
+  .related{ list-style:none; padding:0; }
+  .related li{ padding:12px 0; border-bottom:1px solid var(--card-border); font-size:15.5px; color:var(--muted); }
+  .related li:last-child{ border-bottom:none; }
+  .related a{ font-weight:600; text-decoration:none; }
+  .related a:hover{ text-decoration:underline; }
   :focus-visible{ outline:2px solid rgba(213,114,127,.65); outline-offset:3px; }
 </style>
 </head>
 <body>
 <div class="ambient"></div>
-
 <main class="wrap">
+  <div class="top"><a class="back" href="/">&larr; LekThai</a></div>
 
-  <section class="hero">
-    <p class="wordmark">LekThai</p>
-    <h1 class="tagline">Thai numbers,<br>drilled.</h1>
-    <p class="subhead">Learn them by seeing, hearing, and typing — until they stick.</p>
+  <h1>Thai Numbers</h1>
+  <p class="lede">Thai numbers are one of the easiest parts of the language &mdash; a small, regular system with only two real irregularities. This page covers all of it: the Thai numerals, the words, how to pronounce them, and the two rules that catch every learner. Then you can drill it.</p>
 
-    <div class="pair" aria-label="Thai numeral sixty-four next to the Arabic 64">
-      <span class="thai">๖๔</span>
-      <span class="slash">/</span>
-      <span class="arabic">64</span>
-    </div>
+  <h2>The Thai numerals</h2>
+  <p>Thai has its own set of digits. In daily life Thailand mostly uses the Arabic numerals you already know, but the Thai ones still appear on temple signs, government documents, lottery tickets, and the dual-price boards at some tourist sites &mdash; where the Thai price is written in Thai numerals and the foreigner price in Arabic ones.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">0</td><td class="tn">๐</td><td class="th">ศูนย์</td><td class="ro">sǔun</td></tr>
+<tr><td class="ar">1</td><td class="tn">๑</td><td class="th">หนึ่ง</td><td class="ro">nèung</td></tr>
+<tr><td class="ar">2</td><td class="tn">๒</td><td class="th">สอง</td><td class="ro">sǎawng</td></tr>
+<tr><td class="ar">3</td><td class="tn">๓</td><td class="th">สาม</td><td class="ro">sǎam</td></tr>
+<tr><td class="ar">4</td><td class="tn">๔</td><td class="th">สี่</td><td class="ro">sìi</td></tr>
+<tr><td class="ar">5</td><td class="tn">๕</td><td class="th">ห้า</td><td class="ro">hâa</td></tr>
+<tr><td class="ar">6</td><td class="tn">๖</td><td class="th">หก</td><td class="ro">hòk</td></tr>
+<tr><td class="ar">7</td><td class="tn">๗</td><td class="th">เจ็ด</td><td class="ro">jèt</td></tr>
+<tr><td class="ar">8</td><td class="tn">๘</td><td class="th">แปด</td><td class="ro">pàet</td></tr>
+<tr><td class="ar">9</td><td class="tn">๙</td><td class="th">เก้า</td><td class="ro">kâao</td></tr>
+</tbody></table></div>
+  <p>They stack exactly like Arabic digits, so <span class="th">&#3666;&#3664;</span> is 64 and <span class="th">&#3666;&#3664;&#3664;</span> is 640. If you can read the ten symbols above, you can read any Thai numeral.</p>
 
-    <div>
-      <a class="cta" href="/learn">Start drilling <span class="arr">→</span></a>
-    </div>
-    <p class="trust">Free · no signup · works in your browser</p>
-  </section>
+  <h2>Thai numbers 1&ndash;10</h2>
+  <p>These ten words are the foundation. Every other number in the language is built from them.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">1</td><td class="tn">๑</td><td class="th">หนึ่ง</td><td class="ro">nèung</td></tr>
+<tr><td class="ar">2</td><td class="tn">๒</td><td class="th">สอง</td><td class="ro">sǎawng</td></tr>
+<tr><td class="ar">3</td><td class="tn">๓</td><td class="th">สาม</td><td class="ro">sǎam</td></tr>
+<tr><td class="ar">4</td><td class="tn">๔</td><td class="th">สี่</td><td class="ro">sìi</td></tr>
+<tr><td class="ar">5</td><td class="tn">๕</td><td class="th">ห้า</td><td class="ro">hâa</td></tr>
+<tr><td class="ar">6</td><td class="tn">๖</td><td class="th">หก</td><td class="ro">hòk</td></tr>
+<tr><td class="ar">7</td><td class="tn">๗</td><td class="th">เจ็ด</td><td class="ro">jèt</td></tr>
+<tr><td class="ar">8</td><td class="tn">๘</td><td class="th">แปด</td><td class="ro">pàet</td></tr>
+<tr><td class="ar">9</td><td class="tn">๙</td><td class="th">เก้า</td><td class="ro">kâao</td></tr>
+<tr><td class="ar">10</td><td class="tn">๑๐</td><td class="th">สิบ</td><td class="ro">sìp</td></tr>
+</tbody></table></div>
+  <div class="callout">
+    <span class="lbl">On the pronunciation</span>
+    <p>Thai is tonal, and the marks above the vowels (&agrave;, &aacute;, &acirc;, &#462;) are tones, not stress. Romanisation can only get you close &mdash; two learners reading the same spelling out loud often produce different things. This is exactly why the drill plays audio rather than leaving you with the letters.</p>
+  </div>
 
-  <section class="section">
-    <p class="eyebrow">How it works</p>
-    <div class="cards">
-      <div class="card">
-        <div class="k">👁️</div>
-        <h3>See &amp; Say</h3>
-        <p>A number appears. Say it aloud, then tap to hear the Thai and check yourself.</p>
-      </div>
-      <div class="card">
-        <div class="k">🔊</div>
-        <h3>Hear &amp; Type</h3>
-        <p>Listen to a Thai number and type the digits. Instant feedback, then the next one.</p>
-      </div>
-      <div class="card">
-        <div class="k">🎯</div>
-        <h3>Weak spots, first</h3>
-        <p>Numbers you miss come back sooner and more often. Mastered ones fade to quick check-ins.</p>
-      </div>
-    </div>
-  </section>
+  <h2>11&ndash;20, and the first rule</h2>
+  <p>Tens are simple: <span class="th">&#3626;&#3636;&#3610;</span> (<em>s&igrave;p</em>) means ten, and you just add the unit after it. <span class="th">&#3626;&#3636;&#3610;&#3626;&#3629;&#3591;</span> is 12, literally "ten two".</p>
+  <p>But <strong>one is different</strong>. When 1 lands in the units place of a bigger number, it stops being <span class="th">&#3627;&#3609;&#3638;&#3656;&#3591;</span> (<em>n&egrave;ung</em>) and becomes <span class="th">&#3648;&#3629;&#3655;&#3604;</span> (<em>&egrave;t</em>). So 11 is <span class="th">&#3626;&#3636;&#3610;&#3648;&#3629;&#3655;&#3604;</span>, never <span class="th">&#3626;&#3636;&#3610;&#3627;&#3609;&#3638;&#3656;&#3591;</span>.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">11</td><td class="tn">๑๑</td><td class="th">สิบเอ็ด</td><td class="ro">sìp èt</td></tr>
+<tr><td class="ar">12</td><td class="tn">๑๒</td><td class="th">สิบสอง</td><td class="ro">sìp sǎawng</td></tr>
+<tr><td class="ar">13</td><td class="tn">๑๓</td><td class="th">สิบสาม</td><td class="ro">sìp sǎam</td></tr>
+<tr><td class="ar">14</td><td class="tn">๑๔</td><td class="th">สิบสี่</td><td class="ro">sìp sìi</td></tr>
+<tr><td class="ar">15</td><td class="tn">๑๕</td><td class="th">สิบห้า</td><td class="ro">sìp hâa</td></tr>
+<tr><td class="ar">16</td><td class="tn">๑๖</td><td class="th">สิบหก</td><td class="ro">sìp hòk</td></tr>
+<tr><td class="ar">17</td><td class="tn">๑๗</td><td class="th">สิบเจ็ด</td><td class="ro">sìp jèt</td></tr>
+<tr><td class="ar">18</td><td class="tn">๑๘</td><td class="th">สิบแปด</td><td class="ro">sìp pàet</td></tr>
+<tr><td class="ar">19</td><td class="tn">๑๙</td><td class="th">สิบเก้า</td><td class="ro">sìp kâao</td></tr>
+<tr><td class="ar">20</td><td class="tn">๒๐</td><td class="th">ยี่สิบ</td><td class="ro">yîi-sìp</td></tr>
+</tbody></table></div>
+  <h2>The tens, and the second rule</h2>
+  <p>Every ten is just its digit plus <span class="th">&#3626;&#3636;&#3610;</span>: 30 is <span class="th">&#3626;&#3634;&#3617;&#3626;&#3636;&#3610;</span> ("three ten"), 40 is <span class="th">&#3626;&#3637;&#3656;&#3626;&#3636;&#3610;</span>, and so on.</p>
+  <p><strong>Except twenty.</strong> You would expect <span class="th">&#3626;&#3629;&#3591;&#3626;&#3636;&#3610;</span>, but 2 in the tens place becomes <span class="th">&#3618;&#3637;&#3656;</span> (<em>y&icirc;i</em>), giving <span class="th">&#3618;&#3637;&#3656;&#3626;&#3636;&#3610;</span>. That form only exists here.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">10</td><td class="tn">๑๐</td><td class="th">สิบ</td><td class="ro">sìp</td></tr>
+<tr><td class="ar">20</td><td class="tn">๒๐</td><td class="th">ยี่สิบ</td><td class="ro">yîi-sìp</td></tr>
+<tr><td class="ar">30</td><td class="tn">๓๐</td><td class="th">สามสิบ</td><td class="ro">sǎam-sìp</td></tr>
+<tr><td class="ar">40</td><td class="tn">๔๐</td><td class="th">สี่สิบ</td><td class="ro">sìi-sìp</td></tr>
+<tr><td class="ar">50</td><td class="tn">๕๐</td><td class="th">ห้าสิบ</td><td class="ro">hâa-sìp</td></tr>
+<tr><td class="ar">60</td><td class="tn">๖๐</td><td class="th">หกสิบ</td><td class="ro">hòk-sìp</td></tr>
+<tr><td class="ar">70</td><td class="tn">๗๐</td><td class="th">เจ็ดสิบ</td><td class="ro">jèt-sìp</td></tr>
+<tr><td class="ar">80</td><td class="tn">๘๐</td><td class="th">แปดสิบ</td><td class="ro">pàet-sìp</td></tr>
+<tr><td class="ar">90</td><td class="tn">๙๐</td><td class="th">เก้าสิบ</td><td class="ro">kâao-sìp</td></tr>
+<tr><td class="ar">100</td><td class="tn">๑๐๐</td><td class="th">หนึ่งร้อย</td><td class="ro">nèung-róoi</td></tr>
+</tbody></table></div>
+  <div class="callout">
+    <span class="lbl">The whole system, in two rules</span>
+    <p>1. A trailing <strong>1</strong> above ten is <span class="th">&#3648;&#3629;&#3655;&#3604;</span> (<em>&egrave;t</em>), not <span class="th">&#3627;&#3609;&#3638;&#3656;&#3591;</span>.<br>
+       2. A <strong>2</strong> in the tens place is <span class="th">&#3618;&#3637;&#3656;</span> (<em>y&icirc;i</em>), not <span class="th">&#3626;&#3629;&#3591;</span>.<br>
+       Learn those two and the rest is pure arithmetic.</p>
+  </div>
 
-  <section class="section">
-    <p class="eyebrow">Why it works</p>
-    <p class="why">LekThai is built on retrieval practice and spaced repetition — the same principles behind flashcard tools like Anki. Thai numbers are a small, regular system, not thousands of separate facts, so a few focused minutes a day is enough to make them automatic.</p>
-  </section>
+  <div class="cta-box">
+    <p>Reading a table is not the same as recognising a number when someone says it at speed. That takes drilling.</p>
+    <a class="cta" href="/learn">Start drilling <span class="arr">&rarr;</span></a>
+  </div>
 
-  <section class="center-cta">
-    <a class="cta" href="/learn">Start drilling <span class="arr">→</span></a>
-  </section>
+  <h2>21&ndash;99</h2>
+  <p>Now it is mechanical: tens word, then units word. Both rules can appear in the same number &mdash; 21 is <span class="th">&#3618;&#3637;&#3656;&#3626;&#3636;&#3610;&#3648;&#3629;&#3655;&#3604;</span>, using both.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">21</td><td class="tn">๒๑</td><td class="th">ยี่สิบเอ็ด</td><td class="ro">yîi-sìp èt</td></tr>
+<tr><td class="ar">22</td><td class="tn">๒๒</td><td class="th">ยี่สิบสอง</td><td class="ro">yîi-sìp sǎawng</td></tr>
+<tr><td class="ar">25</td><td class="tn">๒๕</td><td class="th">ยี่สิบห้า</td><td class="ro">yîi-sìp hâa</td></tr>
+<tr><td class="ar">29</td><td class="tn">๒๙</td><td class="th">ยี่สิบเก้า</td><td class="ro">yîi-sìp kâao</td></tr>
+<tr><td class="ar">31</td><td class="tn">๓๑</td><td class="th">สามสิบเอ็ด</td><td class="ro">sǎam-sìp èt</td></tr>
+<tr><td class="ar">42</td><td class="tn">๔๒</td><td class="th">สี่สิบสอง</td><td class="ro">sìi-sìp sǎawng</td></tr>
+<tr><td class="ar">55</td><td class="tn">๕๕</td><td class="th">ห้าสิบห้า</td><td class="ro">hâa-sìp hâa</td></tr>
+<tr><td class="ar">68</td><td class="tn">๖๘</td><td class="th">หกสิบแปด</td><td class="ro">hòk-sìp pàet</td></tr>
+<tr><td class="ar">71</td><td class="tn">๗๑</td><td class="th">เจ็ดสิบเอ็ด</td><td class="ro">jèt-sìp èt</td></tr>
+<tr><td class="ar">89</td><td class="tn">๘๙</td><td class="th">แปดสิบเก้า</td><td class="ro">pàet-sìp kâao</td></tr>
+<tr><td class="ar">99</td><td class="tn">๙๙</td><td class="th">เก้าสิบเก้า</td><td class="ro">kâao-sìp kâao</td></tr>
+</tbody></table></div>
+  <h2>Hundreds and thousands</h2>
+  <p>Thai has a separate word for each place value, and you build numbers by naming each one in turn:</p>
+<div class="tbl-wrap"><table><thead><tr><th>Value</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">100</td><td class="th">ร้อย</td><td class="ro">róoi</td></tr>
+<tr><td class="ar">1,000</td><td class="th">พัน</td><td class="ro">phan</td></tr>
+<tr><td class="ar">10,000</td><td class="th">หมื่น</td><td class="ro">mèun</td></tr>
+<tr><td class="ar">100,000</td><td class="th">แสน</td><td class="ro">sǎen</td></tr>
+<tr><td class="ar">1,000,000</td><td class="th">ล้าน</td><td class="ro">láan</td></tr>
+</tbody></table></div>
+  <p>The one that surprises English speakers is that Thai has dedicated words for <strong>ten thousand</strong> (<span class="th">&#3627;&#3617;&#3639;&#3656;&#3609;</span>) and <strong>a hundred thousand</strong> (<span class="th">&#3649;&#3626;&#3609;</span>). English would say "twenty-five thousand"; Thai says "two <span class="th">&#3627;&#3617;&#3639;&#3656;&#3609;</span> five <span class="th">&#3614;&#3633;&#3609;</span>". You have to regroup the number in your head, and that is the thing that makes prices hard at speed.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">100</td><td class="th">หนึ่งร้อย</td><td class="ro">nèung-róoi</td></tr>
+<tr><td class="ar">101</td><td class="th">หนึ่งร้อยเอ็ด</td><td class="ro">nèung-róoi èt</td></tr>
+<tr><td class="ar">150</td><td class="th">หนึ่งร้อยห้าสิบ</td><td class="ro">nèung-róoi hâa-sìp</td></tr>
+<tr><td class="ar">555</td><td class="th">ห้าร้อยห้าสิบห้า</td><td class="ro">hâa-róoi hâa-sìp hâa</td></tr>
+<tr><td class="ar">1,000</td><td class="th">หนึ่งพัน</td><td class="ro">nèung-phan</td></tr>
+<tr><td class="ar">1,500</td><td class="th">หนึ่งพันห้าร้อย</td><td class="ro">nèung-phan hâa-róoi</td></tr>
+<tr><td class="ar">2,400</td><td class="th">สองพันสี่ร้อย</td><td class="ro">sǎawng-phan sìi-róoi</td></tr>
+<tr><td class="ar">25,000</td><td class="th">สองหมื่นห้าพัน</td><td class="ro">sǎawng-mèun hâa-phan</td></tr>
+<tr><td class="ar">100,000</td><td class="th">หนึ่งแสน</td><td class="ro">nèung-sǎen</td></tr>
+<tr><td class="ar">340,000</td><td class="th">สามแสนสี่หมื่น</td><td class="ro">sǎam-sǎen sìi-mèun</td></tr>
+</tbody></table></div>
+  <h2>Where this actually bites</h2>
+  <p>Recognising a written number is the easy half. The hard half is hearing one at conversational speed, when nothing is written down:</p>
+  <ul>
+    <li><strong>Prices.</strong> A market seller saying <span class="th">&#3626;&#3629;&#3591;&#3619;&#3657;&#3629;&#3618;&#3627;&#3657;&#3634;&#3626;&#3636;&#3610;</span> (250) does not pause between the words.</li>
+    <li><strong>Taxi and tuk-tuk fares.</strong> Usually rounded hundreds, which is a small set worth over-drilling.</li>
+    <li><strong>Phone numbers.</strong> Read digit by digit, fast.</li>
+    <li><strong>Room and gate numbers, addresses, bus routes.</strong></li>
+    <li><strong>Time.</strong> Thai has its own time-of-day system layered on top of the numbers.</li>
+  </ul>
+
+  <h2>Common mistakes</h2>
+  <ol>
+    <li><strong>Saying <span class="th">&#3626;&#3636;&#3610;&#3627;&#3609;&#3638;&#3656;&#3591;</span> for 11.</strong> The single most common error. It is <span class="th">&#3626;&#3636;&#3610;&#3648;&#3629;&#3655;&#3604;</span>.</li>
+    <li><strong>Saying <span class="th">&#3626;&#3629;&#3591;&#3626;&#3636;&#3610;</span> for 20.</strong> It is <span class="th">&#3618;&#3637;&#3656;&#3626;&#3636;&#3610;</span>.</li>
+    <li><strong>Freezing above a thousand</strong> because you are converting through English grouping instead of learning <span class="th">&#3627;&#3617;&#3639;&#3656;&#3609;</span> and <span class="th">&#3649;&#3626;&#3609;</span> directly.</li>
+    <li><strong>Learning to read but not to hear.</strong> You will meet these numbers spoken far more often than written.</li>
+  </ol>
+
+  <h2>How to actually learn them</h2>
+  <p>Thai numbers are a small, closed, regular system &mdash; not thousands of separate facts. That makes them ideal for short bursts of <strong>retrieval practice</strong>: being tested, rather than reviewing. Combine that with <strong>spaced repetition</strong>, where the ones you keep missing come back sooner and the ones you know fade to occasional check-ins, and a few focused minutes a day is genuinely enough.</p>
+  <p>That is exactly what LekThai does. It shows you a number and asks you to say it, or plays one and asks you to type it &mdash; then tracks which ones you keep getting wrong and feeds them back to you more often.</p>
+
+  <div class="cta-box">
+    <p>Reading a table is not the same as recognising a number when someone says it at speed. That takes drilling.</p>
+    <a class="cta" href="/learn">Start drilling <span class="arr">&rarr;</span></a>
+  </div>
+
+  <h2>Questions</h2>
+  <details><summary>Do I need to learn the Thai numerals?</summary>
+  <p>Not urgently. Thailand uses Arabic numerals for most everyday purposes. Learning the ten Thai symbols takes about ten minutes though, and it pays off on temple signage, official documents, and the dual-price boards where the Thai price is written in Thai digits.</p></details>
+
+  <details><summary>Are Thai numbers hard?</summary>
+  <p>They are one of the easier parts of Thai. The system is completely regular apart from two exceptions (<span class="th">&#3648;&#3629;&#3655;&#3604;</span> for a trailing 1, <span class="th">&#3618;&#3637;&#3656;</span> for 2 in the tens). The difficulty is not the rules &mdash; it is recall speed when someone says a number at you.</p></details>
+
+  <details><summary>Why is 11 not "ten one"?</summary>
+  <p>A 1 in the units place of any number above ten becomes <span class="th">&#3648;&#3629;&#3655;&#3604;</span> (<em>&egrave;t</em>). So 11 is <span class="th">&#3626;&#3636;&#3610;&#3648;&#3629;&#3655;&#3604;</span>, 21 is <span class="th">&#3618;&#3637;&#3656;&#3626;&#3636;&#3610;&#3648;&#3629;&#3655;&#3604;</span>, and 101 is <span class="th">&#3627;&#3609;&#3638;&#3656;&#3591;&#3619;&#3657;&#3629;&#3618;&#3648;&#3629;&#3655;&#3604;</span>. Standalone 1 is still <span class="th">&#3627;&#3609;&#3638;&#3656;&#3591;</span>.</p></details>
+
+  <details><summary>What is <span class="th">&#3627;&#3617;&#3639;&#3656;&#3609;</span> and <span class="th">&#3649;&#3626;&#3609;</span>?</summary>
+  <p>Ten thousand and one hundred thousand. Thai gives these their own words rather than building them from "thousand" like English does, so 25,000 is "two <span class="th">&#3627;&#3617;&#3639;&#3656;&#3609;</span> five <span class="th">&#3614;&#3633;&#3609;</span>". Regrouping on the fly is the main hurdle in prices and salaries.</p></details>
+
+  <details><summary>How long does it take?</summary>
+  <p>Most people can read and say 1&ndash;100 reliably within a few days of short daily sessions. Hearing them at natural speed takes longer &mdash; that is a recall speed problem, and the only fix is repetition under time pressure.</p></details>
+
+  <details><summary>Is LekThai free?</summary>
+  <p>Yes. It runs in your browser, needs no account, and stores progress only on your device. You can also add it to your home screen and use it offline.</p></details>
+
+  <h2>More on Thai numbers</h2>
+<ul class="related"><li><a href="/thai-numbers-1-100">Thai numbers 1&ndash;100</a> &mdash; Every number from 1 to 100 in one table.</li><li><a href="/thai-number-pronunciation">Pronunciation &amp; tones</a> &mdash; The tone on every number, and the pairs people confuse.</li><li><a href="/learn-thai-numbers">How to learn them</a> &mdash; The method, and a seven-day plan.</li><li><a href="/how-to-count-in-thai">How to count in Thai</a> &mdash; Counting objects, classifiers, and ordinals.</li></ul>
 
   <footer>
     <nav>
+      <a href="/">Home</a>
       <a href="/learn">Open the drill</a>
       <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
     </nav>
-    <!-- Google Play badge goes here once the app is live -->
     <p class="copy">Master Thai numbers, one drill at a time.</p>
   </footer>
-
 </main>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Do I need to learn the Thai numerals?","acceptedAnswer":{"@type":"Answer","text":"Not urgently. Thailand uses Arabic numerals for most everyday purposes, but the ten Thai symbols take about ten minutes to learn and appear on temple signage, official documents and dual-price boards."}},
+    {"@type":"Question","name":"Are Thai numbers hard?","acceptedAnswer":{"@type":"Answer","text":"Thai numbers are one of the easier parts of the language. The system is regular apart from two exceptions: a trailing 1 becomes et, and 2 in the tens place becomes yii. The real difficulty is recall speed when a number is spoken."}},
+    {"@type":"Question","name":"Why is 11 not ten one in Thai?","acceptedAnswer":{"@type":"Answer","text":"A 1 in the units place of any number above ten becomes et rather than neung. So 11 is sip-et, 21 is yii-sip-et, and 101 is neung-roi-et. A standalone 1 is still neung."}},
+    {"@type":"Question","name":"What do muen and saen mean in Thai numbers?","acceptedAnswer":{"@type":"Answer","text":"Muen is ten thousand and saen is one hundred thousand. Thai gives these their own words instead of building them from thousand, so 25,000 is two muen five phan."}},
+    {"@type":"Question","name":"How long does it take to learn Thai numbers?","acceptedAnswer":{"@type":"Answer","text":"Most learners can read and say 1 to 100 reliably within a few days of short daily practice. Recognising them spoken at natural speed takes longer and requires repeated timed practice."}},
+    {"@type":"Question","name":"Is LekThai free?","acceptedAnswer":{"@type":"Answer","text":"Yes. LekThai runs in the browser, requires no account, stores progress only on your device, and can be added to your home screen and used offline."}}
+  ]
+}
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  });
+}
+</script>
 </body>
 </html>

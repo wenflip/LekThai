@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Thai Numbers 1 to 100 (with Thai Numerals) | LekThai</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@144,400..700,30&family=DM+Sans:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+
+<meta name="description" content="Every Thai number from 1 to 100 in one table — Thai script, Thai numerals and pronunciation. Then a free drill to lock them in.">
+<meta name="theme-color" content="#0f1117">
+<link rel="canonical" href="https://lekthai.app/thai-numbers-1-100">
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="LekThai">
+<meta property="og:title" content="Thai Numbers 1 to 100">
+<meta property="og:description" content="Every number from 1 to 100 in Thai script, Thai numerals and pronunciation.">
+<meta property="og:url" content="https://lekthai.app/thai-numbers-1-100">
+<meta property="og:image" content="https://lekthai.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Thai Numbers 1 to 100">
+<meta name="twitter:description" content="Every number from 1 to 100 in Thai script, Thai numerals and pronunciation.">
+<meta name="twitter:image" content="https://lekthai.app/og.png">
+
+<style>
+  :root, [data-theme="dark"]{
+    --bg-0:#0f1117; --bg-1:#171a24;
+    --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
+    --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
+    --card-bg:rgba(255,255,255,.055); --card-bg2:rgba(255,255,255,.016);
+    --card-border:rgba(255,255,255,.10);
+    --card-shadow:0 28px 64px -28px rgba(0,0,0,.75), 0 8px 26px -14px rgba(0,0,0,.55);
+    --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
+    --num-grad:linear-gradient(176deg, #f5f2eb 0%, #cdd2df 118%);
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; min-height:100%; }
+  body{
+    background:var(--bg-0); color:var(--ink);
+    font-family:"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.65;
+  }
+  .ambient{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(58% 48% at 16% 6%, var(--glow-red), transparent 72%),
+      radial-gradient(54% 50% at 90% 98%, var(--glow-blue), transparent 72%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  }
+  .wrap{ max-width:720px; margin:0 auto; padding:0 22px; }
+  .top{ padding:44px 0 0; }
+  .back{ color:var(--muted); text-decoration:none; font:600 14px/1 "DM Sans"; }
+  .back:hover{ color:var(--ink); }
+
+  h1{
+    font-family:"Fraunces", Georgia, serif; font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
+    font-weight:600; font-size:clamp(32px,8vw,48px); line-height:1.05; margin:22px 0 14px;
+    background:var(--num-grad); -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; color:transparent;
+  }
+  .lede{ font-size:clamp(16px,4.3vw,18.5px); color:var(--ink-2); margin:0 0 30px; }
+  h2{ font-family:"Fraunces",Georgia,serif; font-variation-settings:"opsz" 144,"wght" 600;
+      font-weight:600; font-size:clamp(22px,5.5vw,28px); line-height:1.2; margin:46px 0 10px; color:var(--ink); }
+  h3{ font:600 16.5px/1.3 "DM Sans"; margin:28px 0 8px; }
+  p, li{ color:var(--ink-2); font-size:16px; }
+  ul,ol{ padding-left:20px; } li{ margin-bottom:7px; }
+  a{ color:var(--blue); }
+  strong{ color:var(--ink); }
+  .th{ font-family:"Sarabun","Noto Sans Thai",sans-serif; }
+
+  /* tables */
+  .tbl-wrap{ overflow-x:auto; border-radius:16px; border:1px solid var(--card-border);
+             background:linear-gradient(180deg,var(--card-bg),var(--card-bg2)); margin:18px 0 8px; }
+  table{ width:100%; border-collapse:collapse; font-size:15.5px; }
+  th{ text-align:left; font:600 11px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--muted); padding:14px 14px 10px; border-bottom:1px solid var(--card-border); white-space:nowrap; }
+  td{ padding:9px 14px; border-bottom:1px solid rgba(255,255,255,.05); }
+  tr:last-child td{ border-bottom:none; }
+  td.ar{ font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; white-space:nowrap; }
+  td.tn{ font-family:"Sarabun","Noto Sans Thai",sans-serif; color:var(--blue); font-size:18px; white-space:nowrap; }
+  td.th{ font-family:"Sarabun","Noto Sans Thai",sans-serif; font-size:18px; color:var(--ink); white-space:nowrap; }
+  td.ro{ color:var(--muted); font-size:14.5px; white-space:nowrap; }
+
+  .callout{
+    border:1px solid var(--card-border); border-left:3px solid var(--accent);
+    border-radius:0 14px 14px 0; padding:16px 18px; margin:24px 0;
+    background:rgba(213,114,127,.06);
+  }
+  .callout p{ margin:0; }
+  .callout .lbl{ display:block; font:600 11px/1 "DM Sans"; letter-spacing:.14em;
+                 text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+
+  .cta-box{ text-align:center; margin:40px 0; padding:28px 22px; border-radius:20px;
+            border:1px solid var(--card-border); background:linear-gradient(180deg,var(--card-bg),var(--card-bg2));
+            box-shadow:var(--card-shadow); }
+  .cta-box p{ margin:0 0 18px; color:var(--ink-2); font-size:15.5px; }
+  .cta{ display:inline-flex; align-items:center; gap:9px; height:56px; padding:0 30px;
+        border-radius:15px; text-decoration:none; font:600 17px/1 "DM Sans"; color:#fff;
+        background:linear-gradient(180deg,var(--accent),var(--accent-2));
+        box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+        transition:transform .12s ease; }
+  .cta:active{ transform:translateY(1px) scale(.992); }
+  .cta .arr{ transition:transform .2s; }
+  .cta:hover .arr{ transform:translateX(3px); }
+
+  details{ border-bottom:1px solid var(--card-border); padding:14px 0; }
+  summary{ cursor:pointer; font:600 16px/1.4 "DM Sans"; color:var(--ink); list-style:none; }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{ content:"+"; float:right; color:var(--muted); font-weight:400; }
+  details[open] summary::after{ content:"\2212"; }
+  details p{ margin:10px 0 0; }
+
+  footer{ border-top:1px solid var(--card-border); margin-top:50px; padding:26px 0 60px; text-align:center; }
+  footer nav a{ color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; margin:0 12px; }
+  footer nav a:hover{ color:var(--ink); }
+  footer .copy{ margin-top:16px; font-size:13px; color:var(--muted); }
+  :focus-visible{ outline:2px solid rgba(213,114,127,.65); outline-offset:3px; }
+
+  .related{ list-style:none; padding:0; }
+  .related li{ padding:12px 0; border-bottom:1px solid var(--card-border); font-size:15.5px; color:var(--muted); }
+  .related li:last-child{ border-bottom:none; }
+  .related a{ font-weight:600; text-decoration:none; }
+  .related a:hover{ text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+<main class="wrap">
+  <div class="top"><a class="back" href="/">&larr; LekThai</a></div>
+
+  <h1>Thai Numbers 1&ndash;100</h1>
+  <p class="lede">Every number from 1 to 100, with the Thai script, the Thai numeral, and the pronunciation. Bookmark it as a lookup table &mdash; then use the drill, because a table you can scroll is not the same as a number you can recognise.</p>
+
+  <h2>The pattern, in 30 seconds</h2>
+  <p>You do not have to memorise a hundred separate words. Learn 1&ndash;10, learn that <span class="th">สิบ</span> is ten, and everything else is assembly: tens word first, then the unit. <span class="th">สามสิบสี่</span> is literally "three ten four" &mdash; 34.</p>
+  <p>Two exceptions break the pattern, and both appear constantly:</p>
+  <ul>
+    <li>A trailing <strong>1</strong> above ten becomes <span class="th">เอ็ด</span> (<em>èt</em>). 11 is <span class="th">สิบเอ็ด</span>, not <span class="th">สิบหนึ่ง</span>.</li>
+    <li>A <strong>2</strong> in the tens place becomes <span class="th">ยี่</span> (<em>yîi</em>). 20 is <span class="th">ยี่สิบ</span>, not <span class="th">สองสิบ</span>.</li>
+  </ul>
+  <p>That is the whole system. The rest of this page is just the assembly written out.</p>
+
+  <div class="cta-box">
+    <p>Scrolling a table is recognition with the answer already on screen. The drill takes the answer away.</p>
+    <a class="cta" href="/learn">Start drilling <span class="arr">&rarr;</span></a>
+  </div>
+<h2>1&ndash;10</h2>
+<p>The foundation. Everything below is built from these ten words.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">1</td><td class="tn">๑</td><td class="th">หนึ่ง</td><td class="ro">nèung</td></tr>
+<tr><td class="ar">2</td><td class="tn">๒</td><td class="th">สอง</td><td class="ro">sǎawng</td></tr>
+<tr><td class="ar">3</td><td class="tn">๓</td><td class="th">สาม</td><td class="ro">sǎam</td></tr>
+<tr><td class="ar">4</td><td class="tn">๔</td><td class="th">สี่</td><td class="ro">sìi</td></tr>
+<tr><td class="ar">5</td><td class="tn">๕</td><td class="th">ห้า</td><td class="ro">hâa</td></tr>
+<tr><td class="ar">6</td><td class="tn">๖</td><td class="th">หก</td><td class="ro">hòk</td></tr>
+<tr><td class="ar">7</td><td class="tn">๗</td><td class="th">เจ็ด</td><td class="ro">jèt</td></tr>
+<tr><td class="ar">8</td><td class="tn">๘</td><td class="th">แปด</td><td class="ro">pàet</td></tr>
+<tr><td class="ar">9</td><td class="tn">๙</td><td class="th">เก้า</td><td class="ro">kâao</td></tr>
+<tr><td class="ar">10</td><td class="tn">๑๐</td><td class="th">สิบ</td><td class="ro">sìp</td></tr>
+</tbody></table></div><h2>11&ndash;20</h2>
+<p>Watch 11 and 20 &mdash; both exceptions live in this block.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">11</td><td class="tn">๑๑</td><td class="th">สิบเอ็ด</td><td class="ro">sìp èt</td></tr>
+<tr><td class="ar">12</td><td class="tn">๑๒</td><td class="th">สิบสอง</td><td class="ro">sìp sǎawng</td></tr>
+<tr><td class="ar">13</td><td class="tn">๑๓</td><td class="th">สิบสาม</td><td class="ro">sìp sǎam</td></tr>
+<tr><td class="ar">14</td><td class="tn">๑๔</td><td class="th">สิบสี่</td><td class="ro">sìp sìi</td></tr>
+<tr><td class="ar">15</td><td class="tn">๑๕</td><td class="th">สิบห้า</td><td class="ro">sìp hâa</td></tr>
+<tr><td class="ar">16</td><td class="tn">๑๖</td><td class="th">สิบหก</td><td class="ro">sìp hòk</td></tr>
+<tr><td class="ar">17</td><td class="tn">๑๗</td><td class="th">สิบเจ็ด</td><td class="ro">sìp jèt</td></tr>
+<tr><td class="ar">18</td><td class="tn">๑๘</td><td class="th">สิบแปด</td><td class="ro">sìp pàet</td></tr>
+<tr><td class="ar">19</td><td class="tn">๑๙</td><td class="th">สิบเก้า</td><td class="ro">sìp kâao</td></tr>
+<tr><td class="ar">20</td><td class="tn">๒๐</td><td class="th">ยี่สิบ</td><td class="ro">yîi-sìp</td></tr>
+</tbody></table></div><h2>21&ndash;30</h2>
+<p>From here it is mechanical. Note that every block still ends its "one" with <span class="th">เอ็ด</span>.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">21</td><td class="tn">๒๑</td><td class="th">ยี่สิบเอ็ด</td><td class="ro">yîi-sìp èt</td></tr>
+<tr><td class="ar">22</td><td class="tn">๒๒</td><td class="th">ยี่สิบสอง</td><td class="ro">yîi-sìp sǎawng</td></tr>
+<tr><td class="ar">23</td><td class="tn">๒๓</td><td class="th">ยี่สิบสาม</td><td class="ro">yîi-sìp sǎam</td></tr>
+<tr><td class="ar">24</td><td class="tn">๒๔</td><td class="th">ยี่สิบสี่</td><td class="ro">yîi-sìp sìi</td></tr>
+<tr><td class="ar">25</td><td class="tn">๒๕</td><td class="th">ยี่สิบห้า</td><td class="ro">yîi-sìp hâa</td></tr>
+<tr><td class="ar">26</td><td class="tn">๒๖</td><td class="th">ยี่สิบหก</td><td class="ro">yîi-sìp hòk</td></tr>
+<tr><td class="ar">27</td><td class="tn">๒๗</td><td class="th">ยี่สิบเจ็ด</td><td class="ro">yîi-sìp jèt</td></tr>
+<tr><td class="ar">28</td><td class="tn">๒๘</td><td class="th">ยี่สิบแปด</td><td class="ro">yîi-sìp pàet</td></tr>
+<tr><td class="ar">29</td><td class="tn">๒๙</td><td class="th">ยี่สิบเก้า</td><td class="ro">yîi-sìp kâao</td></tr>
+<tr><td class="ar">30</td><td class="tn">๓๐</td><td class="th">สามสิบ</td><td class="ro">sǎam-sìp</td></tr>
+</tbody></table></div><h2>31&ndash;40</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">31</td><td class="tn">๓๑</td><td class="th">สามสิบเอ็ด</td><td class="ro">sǎam-sìp èt</td></tr>
+<tr><td class="ar">32</td><td class="tn">๓๒</td><td class="th">สามสิบสอง</td><td class="ro">sǎam-sìp sǎawng</td></tr>
+<tr><td class="ar">33</td><td class="tn">๓๓</td><td class="th">สามสิบสาม</td><td class="ro">sǎam-sìp sǎam</td></tr>
+<tr><td class="ar">34</td><td class="tn">๓๔</td><td class="th">สามสิบสี่</td><td class="ro">sǎam-sìp sìi</td></tr>
+<tr><td class="ar">35</td><td class="tn">๓๕</td><td class="th">สามสิบห้า</td><td class="ro">sǎam-sìp hâa</td></tr>
+<tr><td class="ar">36</td><td class="tn">๓๖</td><td class="th">สามสิบหก</td><td class="ro">sǎam-sìp hòk</td></tr>
+<tr><td class="ar">37</td><td class="tn">๓๗</td><td class="th">สามสิบเจ็ด</td><td class="ro">sǎam-sìp jèt</td></tr>
+<tr><td class="ar">38</td><td class="tn">๓๘</td><td class="th">สามสิบแปด</td><td class="ro">sǎam-sìp pàet</td></tr>
+<tr><td class="ar">39</td><td class="tn">๓๙</td><td class="th">สามสิบเก้า</td><td class="ro">sǎam-sìp kâao</td></tr>
+<tr><td class="ar">40</td><td class="tn">๔๐</td><td class="th">สี่สิบ</td><td class="ro">sìi-sìp</td></tr>
+</tbody></table></div><h2>41&ndash;50</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">41</td><td class="tn">๔๑</td><td class="th">สี่สิบเอ็ด</td><td class="ro">sìi-sìp èt</td></tr>
+<tr><td class="ar">42</td><td class="tn">๔๒</td><td class="th">สี่สิบสอง</td><td class="ro">sìi-sìp sǎawng</td></tr>
+<tr><td class="ar">43</td><td class="tn">๔๓</td><td class="th">สี่สิบสาม</td><td class="ro">sìi-sìp sǎam</td></tr>
+<tr><td class="ar">44</td><td class="tn">๔๔</td><td class="th">สี่สิบสี่</td><td class="ro">sìi-sìp sìi</td></tr>
+<tr><td class="ar">45</td><td class="tn">๔๕</td><td class="th">สี่สิบห้า</td><td class="ro">sìi-sìp hâa</td></tr>
+<tr><td class="ar">46</td><td class="tn">๔๖</td><td class="th">สี่สิบหก</td><td class="ro">sìi-sìp hòk</td></tr>
+<tr><td class="ar">47</td><td class="tn">๔๗</td><td class="th">สี่สิบเจ็ด</td><td class="ro">sìi-sìp jèt</td></tr>
+<tr><td class="ar">48</td><td class="tn">๔๘</td><td class="th">สี่สิบแปด</td><td class="ro">sìi-sìp pàet</td></tr>
+<tr><td class="ar">49</td><td class="tn">๔๙</td><td class="th">สี่สิบเก้า</td><td class="ro">sìi-sìp kâao</td></tr>
+<tr><td class="ar">50</td><td class="tn">๕๐</td><td class="th">ห้าสิบ</td><td class="ro">hâa-sìp</td></tr>
+</tbody></table></div><h2>51&ndash;60</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">51</td><td class="tn">๕๑</td><td class="th">ห้าสิบเอ็ด</td><td class="ro">hâa-sìp èt</td></tr>
+<tr><td class="ar">52</td><td class="tn">๕๒</td><td class="th">ห้าสิบสอง</td><td class="ro">hâa-sìp sǎawng</td></tr>
+<tr><td class="ar">53</td><td class="tn">๕๓</td><td class="th">ห้าสิบสาม</td><td class="ro">hâa-sìp sǎam</td></tr>
+<tr><td class="ar">54</td><td class="tn">๕๔</td><td class="th">ห้าสิบสี่</td><td class="ro">hâa-sìp sìi</td></tr>
+<tr><td class="ar">55</td><td class="tn">๕๕</td><td class="th">ห้าสิบห้า</td><td class="ro">hâa-sìp hâa</td></tr>
+<tr><td class="ar">56</td><td class="tn">๕๖</td><td class="th">ห้าสิบหก</td><td class="ro">hâa-sìp hòk</td></tr>
+<tr><td class="ar">57</td><td class="tn">๕๗</td><td class="th">ห้าสิบเจ็ด</td><td class="ro">hâa-sìp jèt</td></tr>
+<tr><td class="ar">58</td><td class="tn">๕๘</td><td class="th">ห้าสิบแปด</td><td class="ro">hâa-sìp pàet</td></tr>
+<tr><td class="ar">59</td><td class="tn">๕๙</td><td class="th">ห้าสิบเก้า</td><td class="ro">hâa-sìp kâao</td></tr>
+<tr><td class="ar">60</td><td class="tn">๖๐</td><td class="th">หกสิบ</td><td class="ro">hòk-sìp</td></tr>
+</tbody></table></div><h2>61&ndash;70</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">61</td><td class="tn">๖๑</td><td class="th">หกสิบเอ็ด</td><td class="ro">hòk-sìp èt</td></tr>
+<tr><td class="ar">62</td><td class="tn">๖๒</td><td class="th">หกสิบสอง</td><td class="ro">hòk-sìp sǎawng</td></tr>
+<tr><td class="ar">63</td><td class="tn">๖๓</td><td class="th">หกสิบสาม</td><td class="ro">hòk-sìp sǎam</td></tr>
+<tr><td class="ar">64</td><td class="tn">๖๔</td><td class="th">หกสิบสี่</td><td class="ro">hòk-sìp sìi</td></tr>
+<tr><td class="ar">65</td><td class="tn">๖๕</td><td class="th">หกสิบห้า</td><td class="ro">hòk-sìp hâa</td></tr>
+<tr><td class="ar">66</td><td class="tn">๖๖</td><td class="th">หกสิบหก</td><td class="ro">hòk-sìp hòk</td></tr>
+<tr><td class="ar">67</td><td class="tn">๖๗</td><td class="th">หกสิบเจ็ด</td><td class="ro">hòk-sìp jèt</td></tr>
+<tr><td class="ar">68</td><td class="tn">๖๘</td><td class="th">หกสิบแปด</td><td class="ro">hòk-sìp pàet</td></tr>
+<tr><td class="ar">69</td><td class="tn">๖๙</td><td class="th">หกสิบเก้า</td><td class="ro">hòk-sìp kâao</td></tr>
+<tr><td class="ar">70</td><td class="tn">๗๐</td><td class="th">เจ็ดสิบ</td><td class="ro">jèt-sìp</td></tr>
+</tbody></table></div><h2>71&ndash;80</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">71</td><td class="tn">๗๑</td><td class="th">เจ็ดสิบเอ็ด</td><td class="ro">jèt-sìp èt</td></tr>
+<tr><td class="ar">72</td><td class="tn">๗๒</td><td class="th">เจ็ดสิบสอง</td><td class="ro">jèt-sìp sǎawng</td></tr>
+<tr><td class="ar">73</td><td class="tn">๗๓</td><td class="th">เจ็ดสิบสาม</td><td class="ro">jèt-sìp sǎam</td></tr>
+<tr><td class="ar">74</td><td class="tn">๗๔</td><td class="th">เจ็ดสิบสี่</td><td class="ro">jèt-sìp sìi</td></tr>
+<tr><td class="ar">75</td><td class="tn">๗๕</td><td class="th">เจ็ดสิบห้า</td><td class="ro">jèt-sìp hâa</td></tr>
+<tr><td class="ar">76</td><td class="tn">๗๖</td><td class="th">เจ็ดสิบหก</td><td class="ro">jèt-sìp hòk</td></tr>
+<tr><td class="ar">77</td><td class="tn">๗๗</td><td class="th">เจ็ดสิบเจ็ด</td><td class="ro">jèt-sìp jèt</td></tr>
+<tr><td class="ar">78</td><td class="tn">๗๘</td><td class="th">เจ็ดสิบแปด</td><td class="ro">jèt-sìp pàet</td></tr>
+<tr><td class="ar">79</td><td class="tn">๗๙</td><td class="th">เจ็ดสิบเก้า</td><td class="ro">jèt-sìp kâao</td></tr>
+<tr><td class="ar">80</td><td class="tn">๘๐</td><td class="th">แปดสิบ</td><td class="ro">pàet-sìp</td></tr>
+</tbody></table></div><h2>81&ndash;90</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">81</td><td class="tn">๘๑</td><td class="th">แปดสิบเอ็ด</td><td class="ro">pàet-sìp èt</td></tr>
+<tr><td class="ar">82</td><td class="tn">๘๒</td><td class="th">แปดสิบสอง</td><td class="ro">pàet-sìp sǎawng</td></tr>
+<tr><td class="ar">83</td><td class="tn">๘๓</td><td class="th">แปดสิบสาม</td><td class="ro">pàet-sìp sǎam</td></tr>
+<tr><td class="ar">84</td><td class="tn">๘๔</td><td class="th">แปดสิบสี่</td><td class="ro">pàet-sìp sìi</td></tr>
+<tr><td class="ar">85</td><td class="tn">๘๕</td><td class="th">แปดสิบห้า</td><td class="ro">pàet-sìp hâa</td></tr>
+<tr><td class="ar">86</td><td class="tn">๘๖</td><td class="th">แปดสิบหก</td><td class="ro">pàet-sìp hòk</td></tr>
+<tr><td class="ar">87</td><td class="tn">๘๗</td><td class="th">แปดสิบเจ็ด</td><td class="ro">pàet-sìp jèt</td></tr>
+<tr><td class="ar">88</td><td class="tn">๘๘</td><td class="th">แปดสิบแปด</td><td class="ro">pàet-sìp pàet</td></tr>
+<tr><td class="ar">89</td><td class="tn">๘๙</td><td class="th">แปดสิบเก้า</td><td class="ro">pàet-sìp kâao</td></tr>
+<tr><td class="ar">90</td><td class="tn">๙๐</td><td class="th">เก้าสิบ</td><td class="ro">kâao-sìp</td></tr>
+</tbody></table></div><h2>91&ndash;100</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">91</td><td class="tn">๙๑</td><td class="th">เก้าสิบเอ็ด</td><td class="ro">kâao-sìp èt</td></tr>
+<tr><td class="ar">92</td><td class="tn">๙๒</td><td class="th">เก้าสิบสอง</td><td class="ro">kâao-sìp sǎawng</td></tr>
+<tr><td class="ar">93</td><td class="tn">๙๓</td><td class="th">เก้าสิบสาม</td><td class="ro">kâao-sìp sǎam</td></tr>
+<tr><td class="ar">94</td><td class="tn">๙๔</td><td class="th">เก้าสิบสี่</td><td class="ro">kâao-sìp sìi</td></tr>
+<tr><td class="ar">95</td><td class="tn">๙๕</td><td class="th">เก้าสิบห้า</td><td class="ro">kâao-sìp hâa</td></tr>
+<tr><td class="ar">96</td><td class="tn">๙๖</td><td class="th">เก้าสิบหก</td><td class="ro">kâao-sìp hòk</td></tr>
+<tr><td class="ar">97</td><td class="tn">๙๗</td><td class="th">เก้าสิบเจ็ด</td><td class="ro">kâao-sìp jèt</td></tr>
+<tr><td class="ar">98</td><td class="tn">๙๘</td><td class="th">เก้าสิบแปด</td><td class="ro">kâao-sìp pàet</td></tr>
+<tr><td class="ar">99</td><td class="tn">๙๙</td><td class="th">เก้าสิบเก้า</td><td class="ro">kâao-sìp kâao</td></tr>
+<tr><td class="ar">100</td><td class="tn">๑๐๐</td><td class="th">หนึ่งร้อย</td><td class="ro">nèung-róoi</td></tr>
+</tbody></table></div><h2>100</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai numeral</th><th>Thai</th><th>Pronunciation</th></tr></thead><tbody>
+<tr><td class="ar">100</td><td class="tn">๑๐๐</td><td class="th">หนึ่งร้อย</td><td class="ro">nèung-róoi</td></tr>
+</tbody></table></div>
+  <p>Above a hundred, Thai keeps going with <span class="th">ร้อย</span> (100), <span class="th">พัน</span> (1,000), then two words English does not have: <span class="th">หมื่น</span> (10,000) and <span class="th">แสน</span> (100,000). Those are covered on the <a href="/thai-numbers">main Thai numbers guide</a>.</p>
+
+  <h2>How to use this page</h2>
+  <ol>
+    <li><strong>Do not read it top to bottom.</strong> Nobody learns a hundred numbers by scrolling. Read 1&ndash;10 and 11&ndash;20 properly, then skim.</li>
+    <li><strong>Cover the right-hand columns.</strong> Look at the number, say the Thai out loud, then check. That act of retrieving is what builds the memory &mdash; recognising the answer when you see it does almost nothing.</li>
+    <li><strong>Practise hearing, not just reading.</strong> Most of the time you will meet these numbers spoken, at speed, with no text to fall back on.</li>
+    <li><strong>Drill the ones you miss.</strong> Everyone has a handful that stay slippery &mdash; often 6/7, the teens, and anything with <span class="th">เอ็ด</span>.</li>
+  </ol>
+
+  <div class="cta-box">
+    <p>The drill tracks which numbers you keep missing and brings those back more often.</p>
+    <a class="cta" href="/learn">Start drilling <span class="arr">&rarr;</span></a>
+  </div>
+<h2>Questions</h2>
+<details><summary>How many Thai numbers do I need to memorise?</summary><p>Around eleven words. Learn 1 to 10 plus <span class="th">สิบ</span> (ten), and every number up to 100 is assembled from them. The only things to memorise separately are the two exceptions, <span class="th">เอ็ด</span> and <span class="th">ยี่</span>.</p></details>
+<details><summary>What is 21 in Thai?</summary><p><span class="th">ยี่สิบเอ็ด</span> (<em>yîi-sìp èt</em>). It uses both exceptions at once: <span class="th">ยี่</span> for the 2 in the tens place and <span class="th">เอ็ด</span> for the trailing 1.</p></details>
+<details><summary>What is 100 in Thai?</summary><p><span class="th">หนึ่งร้อย</span> (<em>nèung-róoi</em>). In casual speech the <span class="th">หนึ่ง</span> is often dropped and people just say <span class="th">ร้อย</span>.</p></details>
+<details><summary>Are the Thai numerals still used?</summary><p>Yes, but not for everything. Thailand uses Arabic numerals for most day-to-day purposes. Thai numerals appear on official documents, temple signage, lottery tickets, and some dual-price boards.</p></details>
+<details><summary>What order do the words go in?</summary><p>Largest place value first, exactly like English. <span class="th">สี่สิบเจ็ด</span> is "four ten seven" - 47. There is no reversal to worry about.</p></details>
+<details><summary>Is this list free to use?</summary><p>Yes. The whole site is free, needs no account, and the drill stores progress only on your own device.</p></details>
+
+  <h2>More on Thai numbers</h2>
+<ul class="related"><li><a href="/thai-numbers">Thai numbers &amp; numerals</a> &mdash; The full reference: the Thai digits, the words, and the two rules.</li><li><a href="/thai-number-pronunciation">Pronunciation &amp; tones</a> &mdash; The tone on every number, and the pairs people confuse.</li><li><a href="/learn-thai-numbers">How to learn them</a> &mdash; The method, and a seven-day plan.</li><li><a href="/how-to-count-in-thai">How to count in Thai</a> &mdash; Counting objects, classifiers, and ordinals.</li></ul>
+
+  <footer>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/learn">Open the drill</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </nav>
+    <p class="copy">Master Thai numbers, one drill at a time.</p>
+  </footer>
+</main>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How many Thai numbers do I need to memorise?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Around eleven words. Learn 1 to 10 plus สิบ (ten), and every number up to 100 is assembled from them. The only things to memorise separately are the two exceptions, เอ็ด and ยี่."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is 21 in Thai?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "ยี่สิบเอ็ด (yîi-sìp èt). It uses both exceptions at once: ยี่ for the 2 in the tens place and เอ็ด for the trailing 1."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is 100 in Thai?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "หนึ่งร้อย (nèung-róoi). In casual speech the หนึ่ง is often dropped and people just say ร้อย."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Are the Thai numerals still used?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, but not for everything. Thailand uses Arabic numerals for most day-to-day purposes. Thai numerals appear on official documents, temple signage, lottery tickets, and some dual-price boards."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What order do the words go in?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Largest place value first, exactly like English. สี่สิบเจ็ด is \"four ten seven\" - 47. There is no reversal to worry about."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is this list free to use?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. The whole site is free, needs no account, and the drill stores progress only on your own device."
+   }
+  }
+ ]
+}
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  });
+}
+</script>
+</body>
+</html>

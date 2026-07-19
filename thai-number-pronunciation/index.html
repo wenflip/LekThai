@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Thai Number Pronunciation Guide (with Tones) | LekThai</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@144,400..700,30&family=DM+Sans:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+
+<meta name="description" content="How to pronounce every Thai number: the tone on each one, the vowel lengths that matter, and the pairs learners confuse. Free audio drill.">
+<meta name="theme-color" content="#0f1117">
+<link rel="canonical" href="https://lekthai.app/thai-number-pronunciation">
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="LekThai">
+<meta property="og:title" content="Thai Number Pronunciation">
+<meta property="og:description" content="The tone on every Thai number, the vowel lengths that matter, and the pairs learners confuse.">
+<meta property="og:url" content="https://lekthai.app/thai-number-pronunciation">
+<meta property="og:image" content="https://lekthai.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Thai Number Pronunciation">
+<meta name="twitter:description" content="The tone on every Thai number, the vowel lengths that matter, and the pairs learners confuse.">
+<meta name="twitter:image" content="https://lekthai.app/og.png">
+
+<style>
+  :root, [data-theme="dark"]{
+    --bg-0:#0f1117; --bg-1:#171a24;
+    --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
+    --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
+    --card-bg:rgba(255,255,255,.055); --card-bg2:rgba(255,255,255,.016);
+    --card-border:rgba(255,255,255,.10);
+    --card-shadow:0 28px 64px -28px rgba(0,0,0,.75), 0 8px 26px -14px rgba(0,0,0,.55);
+    --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
+    --num-grad:linear-gradient(176deg, #f5f2eb 0%, #cdd2df 118%);
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; min-height:100%; }
+  body{
+    background:var(--bg-0); color:var(--ink);
+    font-family:"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.65;
+  }
+  .ambient{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(58% 48% at 16% 6%, var(--glow-red), transparent 72%),
+      radial-gradient(54% 50% at 90% 98%, var(--glow-blue), transparent 72%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  }
+  .wrap{ max-width:720px; margin:0 auto; padding:0 22px; }
+  .top{ padding:44px 0 0; }
+  .back{ color:var(--muted); text-decoration:none; font:600 14px/1 "DM Sans"; }
+  .back:hover{ color:var(--ink); }
+
+  h1{
+    font-family:"Fraunces", Georgia, serif; font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
+    font-weight:600; font-size:clamp(32px,8vw,48px); line-height:1.05; margin:22px 0 14px;
+    background:var(--num-grad); -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; color:transparent;
+  }
+  .lede{ font-size:clamp(16px,4.3vw,18.5px); color:var(--ink-2); margin:0 0 30px; }
+  h2{ font-family:"Fraunces",Georgia,serif; font-variation-settings:"opsz" 144,"wght" 600;
+      font-weight:600; font-size:clamp(22px,5.5vw,28px); line-height:1.2; margin:46px 0 10px; color:var(--ink); }
+  h3{ font:600 16.5px/1.3 "DM Sans"; margin:28px 0 8px; }
+  p, li{ color:var(--ink-2); font-size:16px; }
+  ul,ol{ padding-left:20px; } li{ margin-bottom:7px; }
+  a{ color:var(--blue); }
+  strong{ color:var(--ink); }
+  .th{ font-family:"Sarabun","Noto Sans Thai",sans-serif; }
+
+  /* tables */
+  .tbl-wrap{ overflow-x:auto; border-radius:16px; border:1px solid var(--card-border);
+             background:linear-gradient(180deg,var(--card-bg),var(--card-bg2)); margin:18px 0 8px; }
+  table{ width:100%; border-collapse:collapse; font-size:15.5px; }
+  th{ text-align:left; font:600 11px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--muted); padding:14px 14px 10px; border-bottom:1px solid var(--card-border); white-space:nowrap; }
+  td{ padding:9px 14px; border-bottom:1px solid rgba(255,255,255,.05); }
+  tr:last-child td{ border-bottom:none; }
+  td.ar{ font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; white-space:nowrap; }
+  td.tn{ font-family:"Sarabun","Noto Sans Thai",sans-serif; color:var(--blue); font-size:18px; white-space:nowrap; }
+  td.th{ font-family:"Sarabun","Noto Sans Thai",sans-serif; font-size:18px; color:var(--ink); white-space:nowrap; }
+  td.ro{ color:var(--muted); font-size:14.5px; white-space:nowrap; }
+
+  .callout{
+    border:1px solid var(--card-border); border-left:3px solid var(--accent);
+    border-radius:0 14px 14px 0; padding:16px 18px; margin:24px 0;
+    background:rgba(213,114,127,.06);
+  }
+  .callout p{ margin:0; }
+  .callout .lbl{ display:block; font:600 11px/1 "DM Sans"; letter-spacing:.14em;
+                 text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+
+  .cta-box{ text-align:center; margin:40px 0; padding:28px 22px; border-radius:20px;
+            border:1px solid var(--card-border); background:linear-gradient(180deg,var(--card-bg),var(--card-bg2));
+            box-shadow:var(--card-shadow); }
+  .cta-box p{ margin:0 0 18px; color:var(--ink-2); font-size:15.5px; }
+  .cta{ display:inline-flex; align-items:center; gap:9px; height:56px; padding:0 30px;
+        border-radius:15px; text-decoration:none; font:600 17px/1 "DM Sans"; color:#fff;
+        background:linear-gradient(180deg,var(--accent),var(--accent-2));
+        box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+        transition:transform .12s ease; }
+  .cta:active{ transform:translateY(1px) scale(.992); }
+  .cta .arr{ transition:transform .2s; }
+  .cta:hover .arr{ transform:translateX(3px); }
+
+  details{ border-bottom:1px solid var(--card-border); padding:14px 0; }
+  summary{ cursor:pointer; font:600 16px/1.4 "DM Sans"; color:var(--ink); list-style:none; }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{ content:"+"; float:right; color:var(--muted); font-weight:400; }
+  details[open] summary::after{ content:"\2212"; }
+  details p{ margin:10px 0 0; }
+
+  footer{ border-top:1px solid var(--card-border); margin-top:50px; padding:26px 0 60px; text-align:center; }
+  footer nav a{ color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; margin:0 12px; }
+  footer nav a:hover{ color:var(--ink); }
+  footer .copy{ margin-top:16px; font-size:13px; color:var(--muted); }
+  :focus-visible{ outline:2px solid rgba(213,114,127,.65); outline-offset:3px; }
+
+  .related{ list-style:none; padding:0; }
+  .related li{ padding:12px 0; border-bottom:1px solid var(--card-border); font-size:15.5px; color:var(--muted); }
+  .related li:last-child{ border-bottom:none; }
+  .related a{ font-weight:600; text-decoration:none; }
+  .related a:hover{ text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+<main class="wrap">
+  <div class="top"><a class="back" href="/">&larr; LekThai</a></div>
+
+  <h1>Thai Number Pronunciation</h1>
+  <p class="lede">Thai is tonal, so a number is not just a sequence of sounds &mdash; it is a sequence of sounds at a specific pitch shape. Get the tone wrong and you have often said a different word entirely. This page gives you the tone on every number, the vowel lengths that matter, and the specific mistakes learners make.</p>
+
+  <h2>First: what the accent marks mean</h2>
+  <p>Romanisation on this site marks tone above the vowel. There are five tones in Thai:</p>
+<div class="tbl-wrap"><table><thead><tr><th>Mark</th><th>Tone</th><th>What it does</th><th>Example</th></tr></thead><tbody>
+<tr><td class="ar">a</td><td>mid</td><td class="ro">Flat, at your normal speaking pitch</td><td class="th">พัน <span class="ro">phan</span></td></tr>
+<tr><td class="ar">à</td><td>low</td><td class="ro">Flat, but pitched below normal</td><td class="th">สิบ <span class="ro">sìp</span></td></tr>
+<tr><td class="ar">â</td><td>falling</td><td class="ro">Starts high, drops away</td><td class="th">ห้า <span class="ro">hâa</span></td></tr>
+<tr><td class="ar">á</td><td>high</td><td class="ro">Pitched high, pushed slightly up</td><td class="th">ร้อย <span class="ro">róoi</span></td></tr>
+<tr><td class="ar">ǎ</td><td>rising</td><td class="ro">Dips then rises, like a question</td><td class="th">สาม <span class="ro">sǎam</span></td></tr>
+</tbody></table></div>
+  <div class="callout">
+    <span class="lbl">The honest limitation</span>
+    <p>Romanisation gets you close and no closer. Two people reading <em>sǎam</em> aloud will produce two different things, and neither may be right. Tones in particular cannot be learned from letters &mdash; they have to be heard and imitated. Treat the tables below as a map, and the audio as the territory.</p>
+  </div>
+
+  <h2>The tone on every number 0&ndash;10</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Number</th><th>Thai</th><th>Pronunciation</th><th>Tone</th><th>Notes</th></tr></thead><tbody>
+<tr><td class="ar">0</td><td class="th">ศูนย์</td><td class="ro">sǔun</td><td>rising</td><td class="ro">Long vowel. Rises like a question.</td></tr>
+<tr><td class="ar">1</td><td class="th">หนึ่ง</td><td class="ro">nèung</td><td>low</td><td class="ro">The vowel has no English equivalent — unrounded, tongue high and back.</td></tr>
+<tr><td class="ar">2</td><td class="th">สอง</td><td class="ro">sǎawng</td><td>rising</td><td class="ro">Long vowel, rising.</td></tr>
+<tr><td class="ar">3</td><td class="th">สาม</td><td class="ro">sǎam</td><td>rising</td><td class="ro">Long vowel, rising. Contrast with 4.</td></tr>
+<tr><td class="ar">4</td><td class="th">สี่</td><td class="ro">sìi</td><td>low</td><td class="ro">Long vowel but <em>low</em> tone — the flat one.</td></tr>
+<tr><td class="ar">5</td><td class="th">ห้า</td><td class="ro">hâa</td><td>falling</td><td class="ro">Starts high, drops. The single most-mangled number.</td></tr>
+<tr><td class="ar">6</td><td class="th">หก</td><td class="ro">hòk</td><td>low</td><td class="ro">Short, clipped, ends in an unreleased k.</td></tr>
+<tr><td class="ar">7</td><td class="th">เจ็ด</td><td class="ro">jèt</td><td>low</td><td class="ro">Short and clipped, unreleased t.</td></tr>
+<tr><td class="ar">8</td><td class="th">แปด</td><td class="ro">pàet</td><td>low</td><td class="ro">The p is unaspirated — closer to an English b than a p.</td></tr>
+<tr><td class="ar">9</td><td class="th">เก้า</td><td class="ro">kâao</td><td>falling</td><td class="ro">Falling, like 5. The k is unaspirated.</td></tr>
+<tr><td class="ar">10</td><td class="th">สิบ</td><td class="ro">sìp</td><td>low</td><td class="ro">Short, clipped, unreleased p.</td></tr>
+</tbody></table></div>
+  <p>Notice the shape of it: most numbers are <strong>low</strong> tone, two are <strong>rising</strong> (2, 3), and two are <strong>falling</strong> (5, 9). If you default everything to a flat mid tone &mdash; which is what happens when you read romanisation as English &mdash; then 5 and 9 will be the first to go wrong.</p>
+
+  <div class="cta-box">
+    <p>Tones do not survive being read off a page. The drill plays each number so you hear the pitch shape.</p>
+    <a class="cta" href="/learn">Start drilling <span class="arr">&rarr;</span></a>
+  </div>
+
+  <h2>The place-value words</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Value</th><th>Thai</th><th>Pronunciation</th><th>Tone</th></tr></thead><tbody>
+<tr><td class="ar">10</td><td class="th">สิบ</td><td class="ro">sìp</td><td>low</td></tr>
+<tr><td class="ar">100</td><td class="th">ร้อย</td><td class="ro">róoi</td><td>high</td></tr>
+<tr><td class="ar">1,000</td><td class="th">พัน</td><td class="ro">phan</td><td>mid</td></tr>
+<tr><td class="ar">10,000</td><td class="th">หมื่น</td><td class="ro">mèun</td><td>low</td></tr>
+<tr><td class="ar">100,000</td><td class="th">แสน</td><td class="ro">sǎen</td><td>rising</td></tr>
+<tr><td class="ar">1,000,000</td><td class="th">ล้าน</td><td class="ro">láan</td><td>high</td></tr>
+</tbody></table></div>
+  <h2>The pairs people confuse</h2>
+
+  <h3>4 and 3 &mdash; <span class="th">สี่</span> vs <span class="th">สาม</span></h3>
+  <p>Both have long vowels, but 3 <em>rises</em> and 4 stays <em>low and flat</em>. Learners who rise on both end up saying 3 when they mean 4. Practise them back to back until the difference is automatic.</p>
+
+  <h3>5 &mdash; <span class="th">ห้า</span></h3>
+  <p>Falling tone, long vowel. Said flat, it stops sounding like five. This one matters more than most because it turns up in every price, every time, every phone number.</p>
+
+  <h3>The clipped endings &mdash; 6, 7, 8, 10</h3>
+  <p><span class="th">หก</span>, <span class="th">เจ็ด</span>, <span class="th">แปด</span> and <span class="th">สิบ</span> all end in a stop consonant that is <strong>not released</strong>. Your mouth closes to make the sound and simply stops. English speakers instinctively add a small puff of air at the end, which sounds distinctly foreign. Cut it off.</p>
+
+  <h3>8 and 9 &mdash; the unaspirated consonants</h3>
+  <p>The p in <span class="th">แปด</span> and the k in <span class="th">เก้า</span> have no puff of air. Hold your hand in front of your mouth: English "pot" and "cat" push air, Thai <em>pàet</em> and <em>kâao</em> should not. To an English ear the result sounds closer to "bàet" and "gâao", and that is a better starting point than the spelling.</p>
+
+  <h3><span class="th">เอ็ด</span> &mdash; the one in 11, 21, 31&hellip;</h3>
+  <p>Short vowel, low tone, clipped ending. It is fast &mdash; much shorter than learners expect, and it blurs into the <span class="th">สิบ</span> before it. In natural speech <span class="th">สิบเอ็ด</span> comes out almost as one word.</p>
+
+  <h2>What happens in real speech</h2>
+  <p>Isolated numbers said slowly are the easy case. In conversation:</p>
+  <ul>
+    <li><strong>The words run together.</strong> <span class="th">สองร้อยห้าสิบ</span> (250) is delivered as one continuous burst, not four separate words.</li>
+    <li><strong>Unstressed syllables reduce.</strong> Tones flatten slightly and vowels shorten inside longer numbers.</li>
+    <li><strong>Casual speech drops the leading "one".</strong> <span class="th">หนึ่งร้อย</span> becomes just <span class="th">ร้อย</span>; <span class="th">หนึ่งพัน</span> becomes <span class="th">พัน</span>.</li>
+    <li><strong>Regional accents vary.</strong> What you hear in Chiang Mai will not be identical to Bangkok.</li>
+  </ul>
+  <p>This is the real reason pronunciation practice has to include listening. You can produce a perfect isolated <span class="th">ห้า</span> and still miss it completely inside a spoken price.</p>
+
+  <h2>How to actually fix your pronunciation</h2>
+  <ol>
+    <li><strong>Listen before you speak.</strong> Hear the number, then imitate. Reading romanisation first bakes in an English accent you then have to undo.</li>
+    <li><strong>Exaggerate the tones at the start.</strong> Overdo the rise and the fall. It feels ridiculous and it works &mdash; you can dial it back later.</li>
+    <li><strong>Record yourself.</strong> The gap between what you think you said and what you said is where the learning is.</li>
+    <li><strong>Drill in both directions.</strong> Producing a number from a digit and recognising a spoken number are different skills, and the second one is the one that fails you at a market stall.</li>
+  </ol>
+
+  <div class="cta-box">
+    <p>Hear the number, say it back, check yourself. That loop, a few minutes a day.</p>
+    <a class="cta" href="/learn">Start drilling <span class="arr">&rarr;</span></a>
+  </div>
+<h2>Questions</h2>
+<details><summary>Does tone really matter for numbers?</summary><p>Yes. Thai distinguishes words by pitch, so a number said on the wrong tone can be misheard as a different word or simply not understood. Numbers are usually said in a context that helps, but relying on context is why people get charged the wrong price.</p></details>
+<details><summary>What is the hardest Thai number to pronounce?</summary><p>For most English speakers it is 5, <span class="th">ห้า</span>, because the falling tone feels unnatural, and 1, <span class="th">หนึ่ง</span>, because its vowel does not exist in English. The clipped endings on 6, 7, 8 and 10 are the other common giveaway.</p></details>
+<details><summary>How do I type the tone marks?</summary><p>You do not need to. The marks in romanisation are a learning aid only. Thai itself is written in Thai script, which encodes tone through the consonant class, vowel length and tone marks rather than through accents on Latin letters.</p></details>
+<details><summary>Can I learn Thai tones from written romanisation?</summary><p>Not reliably. Romanisation tells you which tone to aim for but not what it sounds like. Tones have to be heard and imitated, which is why any serious number practice needs audio.</p></details>
+<details><summary>Why do Thai speakers drop the word for one?</summary><p>In casual speech the leading <span class="th">หนึ่ง</span> in round numbers is usually left out, so a hundred is just <span class="th">ร้อย</span> and a thousand is just <span class="th">พัน</span>. It is not incorrect to include it, it just sounds more formal.</p></details>
+<details><summary>Is there audio on the drill?</summary><p>Yes. The drill plays each number in Thai, both for checking yourself after saying it aloud and for listen-and-type practice.</p></details>
+
+  <h2>More on Thai numbers</h2>
+<ul class="related"><li><a href="/thai-numbers">Thai numbers &amp; numerals</a> &mdash; The full reference: the Thai digits, the words, and the two rules.</li><li><a href="/thai-numbers-1-100">Thai numbers 1&ndash;100</a> &mdash; Every number from 1 to 100 in one table.</li><li><a href="/learn-thai-numbers">How to learn them</a> &mdash; The method, and a seven-day plan.</li><li><a href="/how-to-count-in-thai">How to count in Thai</a> &mdash; Counting objects, classifiers, and ordinals.</li></ul>
+
+  <footer>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/learn">Open the drill</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </nav>
+    <p class="copy">Master Thai numbers, one drill at a time.</p>
+  </footer>
+</main>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Does tone really matter for numbers?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Thai distinguishes words by pitch, so a number said on the wrong tone can be misheard as a different word or simply not understood. Numbers are usually said in a context that helps, but relying on context is why people get charged the wrong price."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is the hardest Thai number to pronounce?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "For most English speakers it is 5, ห้า, because the falling tone feels unnatural, and 1, หนึ่ง, because its vowel does not exist in English. The clipped endings on 6, 7, 8 and 10 are the other common giveaway."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I type the tone marks?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "You do not need to. The marks in romanisation are a learning aid only. Thai itself is written in Thai script, which encodes tone through the consonant class, vowel length and tone marks rather than through accents on Latin letters."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I learn Thai tones from written romanisation?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Not reliably. Romanisation tells you which tone to aim for but not what it sounds like. Tones have to be heard and imitated, which is why any serious number practice needs audio."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why do Thai speakers drop the word for one?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "In casual speech the leading หนึ่ง in round numbers is usually left out, so a hundred is just ร้อย and a thousand is just พัน. It is not incorrect to include it, it just sounds more formal."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is there audio on the drill?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. The drill plays each number in Thai, both for checking yourself after saying it aloud and for listen-and-type practice."
+   }
+  }
+ ]
+}
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  });
+}
+</script>
+</body>
+</html>
