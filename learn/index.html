@@ -312,6 +312,12 @@
   @keyframes streakPop{ 0%{transform:scale(1);} 38%{transform:scale(1.2);} 100%{transform:scale(1);} }
   .streak.hot{ animation:streakPop .5s ease; }
 
+  /* Footer: quiet, below the drill. Present for crawlers and the curious,
+     invisible to anyone mid-answer. */
+  .app-foot{ margin-top:34px; padding:18px 0 30px; text-align:center; border-top:1px solid var(--card-border); }
+  .app-foot nav a{ color:var(--muted); text-decoration:none; font:500 13px/1 "DM Sans"; margin:0 10px; }
+  .app-foot nav a:hover{ color:var(--ink); }
+
   /* ============ ADDITIVE: title, mastery, ratings, settings ============ */
   .title{
     flex:1 1 auto; min-width:0; margin:0; padding:0 4px;
@@ -462,6 +468,15 @@
     </div>
 
   </section>
+
+  <footer class="app-foot">
+    <nav>
+      <a href="/">Home</a>
+      <a href="/thai-numbers">Guides</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </nav>
+  </footer>
 </main>
 
 <div class="warn" id="warn">⚠️ No Thai voice found in this browser. Try Chrome, or install a Thai text-to-speech voice in your OS settings. (Everything else still works.)</div>
@@ -577,7 +592,13 @@ function buildRanges(){
   RANGES.forEach((r,i)=>{
     const b=document.createElement('button');
     b.className='range'+(r===activeRange?' active':''); b.textContent=r.label;
-    b.onclick=()=>{activeRange=r; buildRanges(); newSay(); newHear();};
+    b.onclick=()=>{
+      activeRange=r; buildRanges();
+      // Only restart the panel the user is actually looking at. Restarting the
+      // Hear panel while See & Say is open used to fire audio unprompted.
+      const hearOpen = document.getElementById('panelHear').style.display === 'block';
+      if(hearOpen) newHear(); else newSay();
+    };
     c.appendChild(b);
   });
 }
@@ -661,9 +682,9 @@ newSay();
     html.setAttribute('data-theme', t);
     themeBtn.textContent = t==='dark' ? '◑' : '◐';
     themeBtn.setAttribute('aria-label', t==='dark' ? 'Switch to light theme' : 'Switch to dark theme');
-    try{ localStorage.setItem('tnt-theme', t); }catch(e){}
+    try{ localStorage.setItem('lekthai-theme', t); }catch(e){}
   }
-  let saved='dark'; try{ saved = localStorage.getItem('tnt-theme') || 'dark'; }catch(e){}
+  let saved='dark'; try{ saved = localStorage.getItem('lekthai-theme') || 'dark'; }catch(e){}
   setTheme(saved);
   themeBtn.addEventListener('click', ()=> setTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
 
@@ -696,21 +717,32 @@ newSay();
   const streakChip = document.getElementById('streakChip');
   const card       = document.querySelector('.card');
   const verdict    = document.getElementById('hearVerdict');
-  let streak=0, lastState='';
-  function render(){ streakVal.textContent=streak; streakChip.classList.toggle('live', streak>0); }
+  const STREAK_KEY='lekthai-streak-v1';
+  let streak=0, best=0, lastState='';
+  try{
+    const raw=localStorage.getItem(STREAK_KEY);
+    if(raw){ const d=JSON.parse(raw)||{}; streak=d.s|0; best=d.b|0; }
+  }catch(e){}
+  function saveStreak(){ try{ localStorage.setItem(STREAK_KEY, JSON.stringify({s:streak,b:best})); }catch(e){} }
+  function render(){
+    streakVal.textContent=streak;
+    streakChip.classList.toggle('live', streak>0);
+    streakChip.title = best ? ('Best streak: '+best) : '';
+  }
   new MutationObserver(()=>{
     const c = verdict.className;
     const state = c.indexOf('ok')>-1 ? 'ok' : (c.indexOf('bad')>-1 ? 'bad' : '');
     if(state===lastState) return;
     lastState=state;
     if(state==='ok'){
-      streak++; render();
+      streak++; if(streak>best) best=streak; saveStreak(); render();
       streakChip.classList.remove('hot'); void streakChip.offsetWidth; streakChip.classList.add('hot');
       card.classList.remove('pulse'); void card.offsetWidth; card.classList.add('pulse');
     } else if(state==='bad'){
-      streak=0; render();
+      streak=0; saveStreak(); render();
     }
   }).observe(verdict, {attributes:true, attributeFilter:['class']});
+  window.addEventListener('lekthai-reset', function(){ streak=0; best=0; render(); });
   render();
 
   /* ---- Big-number slide-in on every new number ---- */
@@ -742,23 +774,47 @@ newSay();
 <script>
 (function(){
   /* ---------- localStorage (safe) ---------- */
-  var KEY = 'tnt-stats-v1';
+  var KEY = 'lekthai-stats-v1';
   var storageOK = false;
-  try { var t='__tnt'+Math.random(); localStorage.setItem(t,'1'); localStorage.getItem(t); localStorage.removeItem(t); storageOK=true; }
+  try { var t='__lekthai'+Math.random(); localStorage.setItem(t,'1'); localStorage.getItem(t); localStorage.removeItem(t); storageOK=true; }
   catch(e){ storageOK=false; }
 
   var STATS = {};
   if (storageOK){ try { var raw=localStorage.getItem(KEY); STATS = raw ? (JSON.parse(raw)||{}) : {}; } catch(e){ STATS={}; } }
 
   var saveTimer=null;
+  var MAX_ENTRIES = 2500;   // ~60KB of JSON; well under the ~5MB localStorage cap
+
+  // At the 10k/100k ranges a user can touch thousands of distinct numbers.
+  // When we exceed the cap, drop mastered entries first (they've served their
+  // purpose), then the lowest-information ones. Struggling numbers are kept.
+  function prune(){
+    var keys = Object.keys(STATS);
+    if(keys.length <= MAX_ENTRIES) return;
+    keys.sort(function(a,b){
+      var ea=STATS[a], eb=STATS[b];
+      var ma=isMastered(+a)?1:0, mb=isMastered(+b)?1:0;
+      if(ma!==mb) return mb-ma;                       // mastered goes first
+      return (ea.c+ea.m) - (eb.c+eb.m);               // then fewest attempts
+    });
+    var drop = keys.length - MAX_ENTRIES;
+    for(var i=0;i<drop;i++) delete STATS[keys[i]];
+  }
+
   function save(){
     if(!storageOK) return;
     if(saveTimer) clearTimeout(saveTimer);
-    saveTimer=setTimeout(function(){ try{ localStorage.setItem(KEY, JSON.stringify(STATS)); }catch(e){} }, 120);
+    saveTimer=setTimeout(function(){
+      try{ localStorage.setItem(KEY, JSON.stringify(STATS)); }
+      catch(e){
+        // Almost certainly a quota error — prune hard and retry once.
+        prune();
+        try{ localStorage.setItem(KEY, JSON.stringify(STATS)); }catch(e2){}
+      }
+    }, 120);
   }
-  function entry(n){ var k=''+n; if(!STATS[k]) STATS[k]={s:0,c:0,m:0}; return STATS[k]; }
-  function markSeen(n){ if(!storageOK) return; entry(n).s++; save(); }
-  function markCorrect(n){ if(!storageOK) return; entry(n).c++; save(); updateMastery(); }
+  function entry(n){ var k=''+n; if(!STATS[k]){ prune(); STATS[k]={c:0,m:0}; } return STATS[k]; }
+    function markCorrect(n){ if(!storageOK) return; entry(n).c++; save(); updateMastery(); }
   function markMiss(n){ if(!storageOK) return; entry(n).m++; save(); updateMastery(); }
   function isMastered(n){ var e=STATS[''+n]; if(!e) return false; var a=e.c+e.m; return a>=3 && (e.c/a)>=0.8; }
 
@@ -824,7 +880,6 @@ newSay();
     }
     if(pick == null) pick = uniform();
 
-    markSeen(pick);
     RECENT.push(pick); if(RECENT.length > COOLDOWN) RECENT.shift();
     return pick;
   }
@@ -964,13 +1019,25 @@ newSay();
   document.getElementById('resetCancel').addEventListener('click', function(){ resetConfirm.hidden=true; });
   document.getElementById('resetYes').addEventListener('click', function(){
     STATS = {}; RECENT = [];
-    if(storageOK){ try{ localStorage.removeItem(KEY); }catch(e){} }
+    if(storageOK){
+      try{ localStorage.removeItem(KEY); }catch(e){}
+      try{ localStorage.removeItem('lekthai-streak-v1'); }catch(e){}
+    }
+    window.dispatchEvent(new Event('lekthai-reset'));
     resetConfirm.hidden=true;
     updateMastery();
   });
 
   updateMastery();   // initial paint
 })();
+</script>
+<script>
+/* PWA: register the service worker (offline + installability). Root scope. */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  });
+}
 </script>
 </body>
 </html>
