@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Page not found — LekThai</title>
+<!-- Never index a 404. All paths below are absolute (/...) because this page
+     is served at whatever broken address was requested, at any folder depth. -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0f1117">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@144,400..700,30&family=DM+Sans:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<style>
+  /* Theme tokens: identical to /learn */
+  :root, [data-theme="dark"]{
+    --bg-0:#0f1117; --bg-1:#171a24;
+    --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
+    --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
+    --card-bg:rgba(255,255,255,.055); --card-bg2:rgba(255,255,255,.016);
+    --card-border:rgba(255,255,255,.10);
+    --card-shadow:0 28px 64px -28px rgba(0,0,0,.75), 0 8px 26px -14px rgba(0,0,0,.55);
+    --soft:rgba(255,255,255,.06);
+    --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
+    --ring:rgba(213,114,127,.65);
+    --num-grad:linear-gradient(176deg, #f5f2eb 0%, #cdd2df 118%);
+    --num-glow:rgba(170,140,160,.20);
+  }
+  [data-theme="light"]{
+    --bg-0:#e6e9f1; --bg-1:#f5f7fb;
+    --ink:#1b2233; --ink-2:#3c4458; --muted:#6c7387;
+    --accent:#b5495a; --accent-2:#95384a; --blue:#43589a;
+    --card-bg:rgba(255,255,255,.74); --card-bg2:rgba(255,255,255,.48);
+    --card-border:rgba(20,30,60,.10);
+    --card-shadow:0 28px 56px -30px rgba(30,40,80,.42), 0 6px 18px -10px rgba(30,40,80,.18);
+    --soft:rgba(20,30,60,.045);
+    --glow-red:rgba(181,73,90,.10); --glow-blue:rgba(67,89,154,.12);
+    --ring:rgba(181,73,90,.5);
+    --num-grad:linear-gradient(176deg, #1f273b 0%, #4b5980 128%);
+    --num-glow:rgba(67,89,154,.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{min-height:100%;}
+  body{
+    margin:0; min-height:100vh; min-height:100svh;
+    background:var(--bg-0); color:var(--ink);
+    font-family:"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased; -webkit-tap-highlight-color:transparent;
+    display:flex; align-items:center; justify-content:center;
+    padding:24px 16px calc(24px + env(safe-area-inset-bottom));
+  }
+  .ambient{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(58% 48% at 16% 6%, var(--glow-red), transparent 72%),
+      radial-gradient(54% 50% at 90% 98%, var(--glow-blue), transparent 72%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  }
+  .card{
+    width:100%; max-width:420px; text-align:center;
+    border-radius:26px; padding:34px 22px 24px;
+    background:linear-gradient(180deg, var(--card-bg), var(--card-bg2));
+    border:1px solid var(--card-border); box-shadow:var(--card-shadow);
+    backdrop-filter:blur(22px) saturate(125%); -webkit-backdrop-filter:blur(22px) saturate(125%);
+  }
+  .logo{ font:700 19px/1 "DM Sans"; color:var(--ink); text-decoration:none; letter-spacing:.01em; }
+  .eyebrow{ margin-top:26px; font:600 11px/1 "DM Sans"; letter-spacing:.17em; text-transform:uppercase; color:var(--muted); }
+  .bignum{
+    margin:10px 0 0;
+    font-family:"Fraunces", Georgia, "Times New Roman", serif;
+    font-weight:600; font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
+    font-variant-numeric:lining-nums proportional-nums;
+    font-size:clamp(84px, 28vw, 120px); line-height:.94; letter-spacing:-.012em; color:var(--ink);
+  }
+  @supports ((-webkit-background-clip:text) or (background-clip:text)){
+    .bignum{ background:var(--num-grad); -webkit-background-clip:text; background-clip:text;
+             -webkit-text-fill-color:transparent; color:transparent; }
+  }
+  [data-theme="dark"] .bignum{ filter:drop-shadow(0 12px 34px var(--num-glow)); }
+  .thai{ margin-top:12px; font-family:"Sarabun","Noto Sans Thai",sans-serif; font-weight:500;
+         font-size:clamp(28px, 8vw, 34px); line-height:1.25; color:var(--blue); }
+  .rom{ margin-top:2px; font:500 19px/1.3 "DM Sans"; color:var(--ink-2); }
+  .hear{
+    margin-top:12px; -webkit-appearance:none; appearance:none; cursor:pointer;
+    height:40px; padding:0 16px; border-radius:999px;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    font:600 14px/1 "DM Sans"; display:inline-flex; align-items:center; gap:7px;
+  }
+  .hear:hover{ border-color:var(--blue); }
+  .hear[hidden]{ display:none; }
+  h1{ margin:24px 0 6px; font:700 21px/1.25 "DM Sans"; color:var(--ink); }
+  p{ margin:0 auto; max-width:310px; font:400 15px/1.5 "DM Sans"; color:var(--ink-2); }
+  .actions{ display:flex; flex-direction:column; gap:10px; margin-top:24px; }
+  .btn{
+    display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
+    border-radius:16px; text-decoration:none; font-family:"DM Sans"; font-weight:600;
+    transition:transform .12s ease, border-color .2s;
+  }
+  .btn:active{ transform:translateY(1px) scale(.992); }
+  .btn.primary{
+    height:56px; font-size:17px; color:#fff;
+    background:linear-gradient(180deg, var(--accent), var(--accent-2));
+    box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+  }
+  .btn.ghost{ height:50px; font-size:16px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
+  .btn.ghost:hover{ border-color:var(--accent); }
+  nav{ margin-top:22px; padding-top:16px; border-top:1px solid var(--card-border); }
+  nav a{ color:var(--muted); text-decoration:none; font:500 13px/1 "DM Sans"; margin:0 8px; white-space:nowrap; }
+  nav a:hover{ color:var(--ink); }
+  :focus-visible{ outline:2px solid var(--ring); outline-offset:2px; }
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+
+<main class="card">
+  <a class="logo" href="/">LekThai</a>
+
+  <div class="eyebrow">Page not found</div>
+  <div class="bignum" aria-hidden="true">404</div>
+  <div class="thai" lang="th">สี่ร้อยสี่</div>
+  <div class="rom">sìi-róoi sìi</div>
+  <button class="hear" id="hear" hidden>🔊 Hear it</button>
+
+  <h1>This page doesn’t exist</h1>
+  <p>The link may be old or mistyped. You did learn a number, though: <b>404</b> is <i>sìi-róoi sìi</i>, “four hundred four”.</p>
+
+  <div class="actions">
+    <a class="btn primary" href="/learn">Drill Thai numbers →</a>
+    <a class="btn ghost" href="/">Go to the home page</a>
+  </div>
+
+  <nav>
+    <a href="/thai-numbers">Guides</a>
+    <a href="/thai-numbers-1-100">Numbers 1–100</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+  </nav>
+</main>
+
+<script>
+  // Match the visitor's dark/light choice from /learn (same storage key).
+  try{ var t=localStorage.getItem('lekthai-theme'); if(t==='light'||t==='dark') document.documentElement.setAttribute('data-theme',t); }catch(e){}
+  // Play the Thai for 404, same voice settings as /learn. The button only shows if the browser can speak.
+  if('speechSynthesis' in window){
+    var b=document.getElementById('hear'); b.hidden=false;
+    b.addEventListener('click',function(){
+      try{
+        speechSynthesis.cancel();
+        var u=new SpeechSynthesisUtterance('สี่ร้อยสี่'); u.lang='th-TH'; u.rate=0.85;
+        var v=(speechSynthesis.getVoices()||[]).filter(function(x){ return x.lang && /^th/i.test(x.lang); })[0];
+        if(v) u.voice=v;
+        speechSynthesis.speak(u);
+      }catch(e){}
+    });
+  }
+</script>
+</body>
+</html>
