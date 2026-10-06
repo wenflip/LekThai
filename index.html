@@ -151,6 +151,27 @@
 
   .install-hint{ margin:14px 0 0; font:500 13px/1.5 "DM Sans"; color:var(--muted); }
 
+  /* ---------- WORDS CTA ---------- */
+  .words-cta{ padding:34px 0 30px; }
+  .words-box{
+    max-width:560px; margin:0 auto; text-align:center;
+    border-radius:22px; padding:26px 22px 28px;
+    background:linear-gradient(180deg, var(--card-bg), var(--card-bg2));
+    border:1px solid rgba(147,168,206,.28); box-shadow:var(--card-shadow);
+    backdrop-filter:blur(22px) saturate(125%); -webkit-backdrop-filter:blur(22px) saturate(125%);
+  }
+  .words-box .eyebrow{ color:var(--blue); margin-bottom:14px; }
+  .words-title{
+    font-family:"Fraunces", Georgia, serif; font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
+    font-weight:600; font-size:clamp(24px,6vw,32px); line-height:1.15; color:var(--ink); margin:0 0 8px;
+  }
+  .words-sub{ font-size:15px; color:var(--ink-2); margin:0 0 22px; }
+  .cta-blue{
+    color:#0f1117;
+    background:linear-gradient(180deg, #a9bbdc, #7f96c0);
+    box-shadow:0 14px 28px -14px #7f96c0, inset 0 1px 0 rgba(255,255,255,.30);
+  }
+  
   :focus-visible{ outline:2px solid rgba(213,114,127,.65); outline-offset:3px; }
 </style>
 </head>
@@ -204,6 +225,15 @@
 
   <section class="center-cta">
     <a class="cta" href="/learn">Start drilling <span class="arr">→</span></a>
+  </section>
+
+    <section class="words-cta">
+    <div class="words-box">
+      <p class="eyebrow">Next up</p>
+      <h2 class="words-title">Numbers down? Try words.</h2>
+      <p class="words-sub">Everyday Thai words, drilled the same way &mdash; see, hear, type.</p>
+      <a class="cta cta-blue" href="/words/">Learn Thai words <span class="arr">&rarr;</span></a>
+    </div>
   </section>
 
   <section class="section guides">
