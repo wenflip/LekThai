@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<title>LekThai — Thai Words</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@144,400..700,30&family=DM+Sans:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+
+<meta name="description" content="Your first Thai words, drilled until they stick — see the meaning and say it, or hear it and know it. Free, no accounts, works in your browser.">
+<meta name="theme-color" content="#0f1117">
+<link rel="canonical" href="https://lekthai.app/words">
+
+<!-- App shell, same as /learn: noindex so it never competes with the landing/guide pages in search.
+     This is permanent, not just for the beta. Ranking comes from separate guide pages. -->
+<meta name="robots" content="noindex">
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LekThai">
+<meta property="og:title" content="LekThai — Your First Thai Words">
+<meta property="og:description" content="Drill everyday Thai words until they stick — say it, hear it, know it. Free, no accounts.">
+<meta property="og:url" content="https://lekthai.app/words">
+<meta property="og:image" content="https://lekthai.app/og.png">
+
+<style>
+  /* ============ THEME TOKENS (identical to /learn) ============ */
+  :root, [data-theme="dark"]{
+    --bg-0:#0f1117; --bg-1:#171a24;
+    --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
+    --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
+    --ok:#5dba8c; --bad:#e27d89;
+    --card-bg:rgba(255,255,255,.055); --card-bg2:rgba(255,255,255,.016);
+    --card-border:rgba(255,255,255,.10);
+    --card-shadow:0 28px 64px -28px rgba(0,0,0,.75), 0 8px 26px -14px rgba(0,0,0,.55);
+    --seg-bg:rgba(255,255,255,.05);
+    --soft:rgba(255,255,255,.06);
+    --pop-bg:#1b1f2a;
+    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
+    --ring:rgba(213,114,127,.65);
+    --num-grad:linear-gradient(176deg, #f5f2eb 0%, #cdd2df 118%);
+    --num-glow:rgba(170,140,160,.20);
+    --on-accent:#fff;
+  }
+  [data-theme="light"]{
+    --bg-0:#e6e9f1; --bg-1:#f5f7fb;
+    --ink:#1b2233; --ink-2:#3c4458; --muted:#6c7387;
+    --accent:#b5495a; --accent-2:#95384a; --blue:#43589a;
+    --ok:#2c8c5e; --bad:#bd4259;
+    --card-bg:rgba(255,255,255,.74); --card-bg2:rgba(255,255,255,.48);
+    --card-border:rgba(20,30,60,.10);
+    --card-shadow:0 28px 56px -30px rgba(30,40,80,.42), 0 6px 18px -10px rgba(30,40,80,.18);
+    --seg-bg:rgba(20,30,60,.055);
+    --soft:rgba(20,30,60,.045);
+    --pop-bg:#ffffff;
+    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --glow-red:rgba(181,73,90,.10); --glow-blue:rgba(67,89,154,.12);
+    --ring:rgba(181,73,90,.5);
+    --num-grad:linear-gradient(176deg, #1f273b 0%, #4b5980 128%);
+    --num-glow:rgba(67,89,154,.10);
+    --on-accent:#fff;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0; overflow:hidden;
+    background:var(--bg-0); color:var(--ink);
+    font-family:"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    -webkit-tap-highlight-color:transparent;
+    display:flex; justify-content:center; align-items:stretch;
+    transition:background .4s ease, color .4s ease;
+  }
+  .ambient{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(58% 48% at 16% 6%, var(--glow-red), transparent 72%),
+      radial-gradient(54% 50% at 90% 98%, var(--glow-blue), transparent 72%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  }
+
+  /* ============ APP SHELL ============ */
+  .app{
+    position:relative; width:100%; max-width:440px;
+    height:100vh; height:100svh;
+    display:flex; flex-direction:column; gap:11px;
+    padding:14px 16px calc(14px + env(safe-area-inset-bottom));
+  }
+  @media (min-width:480px){
+    body{ align-items:center; padding:24px; }
+    .app{
+      height:min(100svh, 900px);
+      border-radius:36px; padding:20px 20px;
+      border:1px solid var(--card-border);
+      background:linear-gradient(180deg, rgba(255,255,255,.025), transparent 40%);
+      box-shadow:0 48px 110px -44px rgba(0,0,0,.7);
+      overflow:hidden;
+    }
+  }
+
+  /* ============ HEADER ============ */
+  .bar{ flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .pill-wrap{ position:relative; min-width:0; }
+  .pill{
+    display:inline-flex; align-items:center; gap:7px; height:38px; padding:0 13px; max-width:150px;
+    border-radius:999px; background:var(--soft); border:1px solid var(--card-border);
+    color:var(--ink); font:600 13px/1 "DM Sans"; cursor:pointer; user-select:none;
+    transition:background .2s, border-color .2s;
+  }
+  .pill:hover{ border-color:var(--accent); }
+  .pill-label{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .chev{ color:var(--muted); font-size:10px; transition:transform .22s ease; flex:0 0 auto; }
+  .pill[aria-expanded="true"] .chev{ transform:rotate(180deg); }
+  .title{
+    flex:1 1 auto; min-width:0; margin:0; padding:0 2px;
+    font:700 19px/1 "DM Sans"; letter-spacing:.01em; color:var(--ink);
+    white-space:nowrap; text-align:center;
+  }
+  .beta-tag{
+    display:inline-block; vertical-align:middle; margin-left:5px; padding:3px 6px 2px; border-radius:999px;
+    font:700 9px/1 "DM Sans"; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    background:none; cursor:pointer;
+  }
+  .bar-right{ display:flex; align-items:center; gap:8px; }
+  .streak{
+    display:inline-flex; align-items:center; gap:5px; height:34px; padding:0 12px;
+    border-radius:999px; background:var(--soft); border:1px solid var(--card-border);
+    font:700 14px/1 "DM Sans"; color:var(--ink); user-select:none;
+  }
+  .streak.live{ border-color:color-mix(in srgb, var(--accent) 55%, transparent); }
+  .streak-ico{ font-size:13px; filter:saturate(.85); }
+  .streak.live .streak-ico{ filter:drop-shadow(0 0 7px var(--accent)); }
+  .streak.hot{ animation:streakPop .5s ease; }
+  .icon-btn{
+    width:38px; height:38px; border-radius:999px; cursor:pointer;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    font-size:16px; display:grid; place-items:center; transition:background .2s, border-color .2s;
+  }
+  .icon-btn:hover{ border-color:var(--accent); }
+
+  /* ============ SET POPOVER ============ */
+  .scrim{ position:fixed; inset:0; z-index:40; background:rgba(8,10,16,.28); }
+  .pop{
+    position:absolute; z-index:50; top:calc(100% + 10px); left:0;
+    width:min(86vw,330px); max-height:min(72svh,560px); overflow:auto; padding:15px;
+    border-radius:20px; background:var(--pop-bg); border:1px solid var(--card-border);
+    box-shadow:var(--card-shadow); transform-origin:top left;
+    opacity:0; transform:translateY(-6px) scale(.97);
+    transition:opacity .16s ease, transform .16s ease;
+  }
+  .pop.show{ opacity:1; transform:none; }
+  .pop-title{
+    font:600 11px/1 "DM Sans"; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--muted); margin:3px 2px 11px;
+  }
+  .pop-title + .chips{ margin-bottom:16px; }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    padding:9px 13px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--card-border); background:var(--soft); color:var(--ink-2);
+    font:600 13px/1.1 "DM Sans"; transition:transform .12s, background .2s, color .2s; text-align:left;
+  }
+  .chip small{ font-weight:500; color:var(--muted); margin-left:4px; }
+  .chip:hover{ color:var(--ink); }
+  .chip:active{ transform:scale(.96); }
+  .chip.active{ background:var(--ind-grad); color:#fff; border-color:transparent; }
+  .chip.active small{ color:rgba(255,255,255,.85); }
+
+  /* ============ SEGMENTED TABS ============ */
+  .seg{
+    flex:0 0 auto; position:relative; display:flex; padding:5px; gap:0;
+    background:var(--seg-bg); border:1px solid var(--card-border); border-radius:15px;
+  }
+  .tab{
+    flex:1; position:relative; z-index:2; border:none; background:transparent; cursor:pointer;
+    color:var(--muted); font:600 14px/1 "DM Sans"; padding:12px 6px; border-radius:11px;
+    transition:color .2s ease; white-space:nowrap;
+  }
+  .tab:hover{ color:var(--ink); }
+  .tab.active{ color:#fff; }
+  .seg-ind{
+    position:absolute; z-index:1; top:5px; bottom:5px; left:5px; width:calc(50% - 5px);
+    border-radius:11px; background:var(--ind-grad);
+    box-shadow:0 8px 18px -10px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+    transition:transform .3s cubic-bezier(.3,.85,.25,1);
+  }
+  .seg:has(#tabHear.active) .seg-ind{ transform:translateX(100%); }
+
+  /* ============ MAIN CARD ============ */
+  .card{
+    flex:1 1 auto; min-height:0; position:relative; overflow:hidden;
+    border-radius:26px; padding:6px;
+    background:linear-gradient(180deg, var(--card-bg), var(--card-bg2));
+    border:1px solid var(--card-border); box-shadow:var(--card-shadow);
+    backdrop-filter:blur(22px) saturate(125%); -webkit-backdrop-filter:blur(22px) saturate(125%);
+  }
+  .card.pulse{ animation:okPulse .72s ease; }
+  .panel{ height:100%; }
+  .panel[hidden]{ display:none; }
+  .panel-inner{ height:100%; display:flex; flex-direction:column; padding:20px 18px 18px; overflow:auto; }
+  .stage{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column;
+          align-items:center; justify-content:center; text-align:center; gap:9px; }
+  .stage-hear{ justify-content:flex-start; gap:11px; padding-top:2px; }
+  /* never let content overlap: if a long phrase + note ever exceeds the card, the stage scrolls */
+  .stage{ overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+  .stage::-webkit-scrollbar{ display:none; }
+  .stage > *{ flex-shrink:0; }
+  /* answered Hear & Choose: drop the prompt hint, tighten the reveal */
+  .stage-hear.done .hint{ display:none; }
+  .stage-hear.done .thai{ font-size:clamp(26px, 7.5vw, 34px); }
+
+  /* short phones (iPhone SE and smaller): compact everything so it fits one screen */
+  @media (max-height:700px){
+    .app{ gap:9px; padding-top:10px; }
+    .seg .tab{ padding:10px 6px; }
+    .panel-inner{ padding:14px 14px 12px; }
+    .stage-hear{ gap:8px; }
+    .btn.play{ height:46px; font-size:16px; }
+    .btn.primary{ height:52px; }
+    .tile{ min-height:56px; font-size:14.5px; padding:8px; }
+    .tiles{ gap:8px; }
+    .verdict{ font-size:16px; min-height:20px; }
+    .btn.text{ height:38px; }
+    .reveal{ min-height:64px; }
+    .stage-hear.done .thai{ font-size:26px; }
+    .stage-hear.done .rom{ font-size:16px; }
+    .mastery-cap{ margin-top:6px; }
+  }
+
+  .eyebrow{ font:600 11px/1 "DM Sans"; letter-spacing:.17em; text-transform:uppercase; color:var(--muted); }
+  .mbadge{
+    display:inline-flex; align-items:center; margin-left:7px; padding:2px 8px; border-radius:999px;
+    font:700 10px/1 "DM Sans"; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ok); background:color-mix(in srgb, var(--ok) 16%, transparent);
+    border:1px solid color-mix(in srgb, var(--ok) 34%, transparent); vertical-align:middle;
+  }
+  .mbadge[hidden]{ display:none; }
+
+  /* the English prompt: same type treatment as /learn's big number */
+  .bigword{
+    font-family:"Fraunces", Georgia, "Times New Roman", serif;
+    font-weight:600; font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
+    font-size:clamp(34px, 10.5vw, 54px); line-height:1.04; letter-spacing:-.012em;
+    color:var(--ink); margin:2px 0 0; max-width:100%; overflow-wrap:break-word;
+  }
+  .bigword.long{ font-size:clamp(28px, 8.2vw, 40px); }
+  @supports ((-webkit-background-clip:text) or (background-clip:text)){
+    .bigword{ background:var(--num-grad); -webkit-background-clip:text; background-clip:text;
+              -webkit-text-fill-color:transparent; color:transparent; }
+  }
+  [data-theme="dark"] .bigword{ filter:drop-shadow(0 12px 34px var(--num-glow)); }
+  .bigword.in{ animation:numIn .44s cubic-bezier(.2,.72,.2,1); }
+
+  .reveal{ display:flex; flex-direction:column; gap:4px; align-items:center; justify-content:center; min-height:78px; }
+  .stage-hear .reveal{ min-height:0; }
+  .reveal.show{ animation:fadeUp .36s ease; }
+  .thai{ font-family:"Sarabun","Noto Sans Thai",sans-serif; font-weight:500;
+         font-size:clamp(30px, 9vw, 40px); line-height:1.3; color:var(--blue); }
+  .rom{ font:500 clamp(17px,5vw,21px)/1.3 "DM Sans"; color:var(--ink-2); letter-spacing:.01em; }
+  .meaning{ font:500 14px/1.3 "DM Sans"; color:var(--muted); }
+  .note{ font:500 12.5px/1.4 "DM Sans"; color:var(--muted); max-width:300px; margin-top:4px;
+         padding:6px 10px; border-radius:10px; background:var(--soft); }
+  .note:empty{ display:none; }
+  .hint{ font:500 13px/1.3 "DM Sans"; color:var(--muted); min-height:18px; }
+
+  .verdict{ font:700 18px/1.2 "DM Sans"; min-height:24px; }
+  .verdict.ok{ color:var(--ok); }
+  .verdict.bad{ color:var(--bad); }
+  .verdict.ok, .verdict.bad{ animation:pop .32s ease; }
+
+  /* ============ BUTTONS ============ */
+  .actions{ flex:0 0 auto; display:flex; flex-direction:column; gap:10px; padding-top:14px; }
+  .btn{
+    width:100%; -webkit-appearance:none; appearance:none; border:none; cursor:pointer;
+    font-family:"DM Sans"; font-weight:600; border-radius:16px;
+    display:inline-flex; align-items:center; justify-content:center; gap:8px; user-select:none;
+    transition:transform .12s ease, box-shadow .2s ease, background .2s, border-color .2s;
+  }
+  .btn:active{ transform:translateY(1px) scale(.992); }
+  .btn[hidden]{ display:none; }
+  .btn.primary{
+    height:58px; font-size:17px; letter-spacing:.01em; color:var(--on-accent);
+    background:linear-gradient(180deg, var(--accent), var(--accent-2));
+    box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+  }
+  .btn.ghost{ height:50px; font-size:16px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
+  .btn.ghost:hover{ border-color:var(--accent); }
+  .btn.play{ height:54px; font-size:17px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); flex:0 0 auto; }
+  .btn.play:hover{ border-color:var(--blue); }
+  .btn.play .ico{ filter:drop-shadow(0 0 8px color-mix(in srgb, var(--blue) 60%, transparent)); }
+  .btn.text{ height:44px; font-size:14px; color:var(--muted); background:transparent; flex:0 0 auto; }
+  .btn.text:hover{ color:var(--ink); }
+
+  .rate-row{ display:flex; gap:10px; }
+  .rate-row[hidden]{ display:none; }
+  .btn.rate{ height:50px; font-size:15px; border:1px solid var(--card-border); background:var(--soft); }
+  .btn.rate.got{ color:var(--ok); }
+  .btn.rate.got:hover{ border-color:var(--ok); }
+  .btn.rate.miss{ color:var(--bad); }
+  .btn.rate.miss:hover{ border-color:var(--bad); }
+  .btn.rate.chosen.got{ background:color-mix(in srgb, var(--ok) 18%, transparent); border-color:var(--ok); }
+  .btn.rate.chosen.miss{ background:color-mix(in srgb, var(--bad) 18%, transparent); border-color:var(--bad); }
+
+  /* ============ HEAR & CHOOSE TILES ============ */
+  .tiles{ display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; }
+  .tiles[hidden]{ display:none; }
+  .tile{
+    -webkit-appearance:none; appearance:none; cursor:pointer; min-height:74px; padding:10px 10px;
+    border-radius:16px; border:1.5px solid var(--card-border); background:var(--soft); color:var(--ink);
+    font:600 15.5px/1.25 "DM Sans"; transition:transform .12s, border-color .18s, background .18s;
+    position:relative;
+  }
+  .tile:hover{ border-color:var(--accent); }
+  .tile:active{ transform:scale(.98); }
+  .tile .k{ position:absolute; top:6px; left:9px; font:600 10px/1 "DM Sans"; color:var(--muted); opacity:.7; }
+  .tile.right{ border-color:var(--ok); background:color-mix(in srgb, var(--ok) 16%, transparent); }
+  .tile.wrong{ border-color:var(--bad); background:color-mix(in srgb, var(--bad) 16%, transparent); }
+  .tile[disabled]{ cursor:default; }
+  .tile[disabled]:not(.right):not(.wrong){ opacity:.55; }
+
+  .mastery-cap{
+    flex:0 0 auto; text-align:center; margin-top:10px;
+    font:600 11px/1.3 "DM Sans"; letter-spacing:.03em; color:var(--muted);
+  }
+  .mastery-cap .m-ico{ color:var(--accent); margin-right:4px; }
+  .empty{ font:500 14px/1.5 "DM Sans"; color:var(--ink-2); max-width:290px; }
+
+  /* ============ TOAST ============ */
+  .warn{
+    position:fixed; left:50%; bottom:calc(16px + env(safe-area-inset-bottom));
+    transform:translateX(-50%); width:min(92%,420px); z-index:60;
+    background:var(--pop-bg); border:1px solid var(--card-border); color:var(--ink-2);
+    font:500 12.5px/1.45 "DM Sans"; padding:12px 38px 12px 14px; border-radius:14px;
+    box-shadow:var(--card-shadow);
+  }
+  .warn[hidden]{ display:none; }
+  .warn b{ color:var(--ink); }
+  .warn-x{ position:absolute; top:6px; right:6px; width:28px; height:28px; border:0; background:none;
+           color:var(--muted); font-size:14px; cursor:pointer; border-radius:8px; }
+
+  /* ============ FOOTER (below the fold, like /learn) ============ */
+  .app-foot{ position:absolute; left:16px; right:16px; top:100%; padding:18px 0 30px; text-align:center; border-top:1px solid var(--card-border); }
+  .app-foot nav a{ color:var(--muted); text-decoration:none; font:500 13px/1 "DM Sans"; margin:0 8px; }
+  .app-foot nav a:hover{ color:var(--ink); }
+
+  /* ============ SETTINGS SHEET (same as /learn) ============ */
+  .sheet-wrap{ position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center; padding:18px; }
+  .sheet-wrap[hidden]{ display:none; }
+  .sheet-scrim{ position:absolute; inset:0; background:rgba(8,10,16,.5); backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px); animation:fadeIn .18s ease; }
+  .sheet{
+    position:relative; width:100%; max-width:380px; max-height:84svh; overflow:auto;
+    background:var(--pop-bg); border:1px solid var(--card-border); border-radius:24px;
+    box-shadow:var(--card-shadow); padding:20px; animation:sheetIn .24s cubic-bezier(.2,.8,.2,1);
+  }
+  .sheet-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .sheet-title{ font:700 18px/1 "DM Sans"; color:var(--ink); }
+  .sheet-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 0; border-bottom:1px solid var(--card-border); }
+  .row-label{ font:600 14px/1.2 "DM Sans"; color:var(--ink); }
+  .row-label small{ display:block; font:500 12px/1.3 "DM Sans"; color:var(--muted); margin-top:3px; }
+  .row-val{ font:600 13px/1.3 "DM Sans"; color:var(--muted); text-align:right; }
+  .sheet-block{ padding:15px 0 4px; }
+  .mini-btn{
+    -webkit-appearance:none; appearance:none; cursor:pointer; border-radius:11px;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    font:600 14px/1 "DM Sans"; padding:10px 14px; min-height:40px; min-width:58px; transition:background .2s, border-color .2s, transform .12s;
+  }
+  .mini-btn:active{ transform:scale(.97); }
+  .mini-btn:hover{ border-color:var(--accent); }
+  .mini-btn.on{ background:var(--ind-grad); color:#fff; border-color:transparent; }
+  .mini-btn.danger{ color:var(--bad); }
+  .mini-btn.danger:hover{ border-color:var(--bad); }
+  .mini-btn.danger.solid{ background:var(--bad); color:#fff; border-color:transparent; }
+  .reset-confirm{ margin-top:12px; display:flex; flex-direction:column; gap:10px; }
+  .reset-confirm[hidden]{ display:none; }
+  .rc-q{ font:500 13px/1.4 "DM Sans"; color:var(--ink-2); }
+  .rc-btns{ display:flex; gap:10px; }
+  .rc-btns .mini-btn{ flex:1; }
+  .about{ margin-top:18px; padding-top:16px; border-top:1px solid var(--card-border); }
+  .about-title{ font:700 13px/1 "DM Sans"; letter-spacing:.04em; color:var(--accent); margin-bottom:9px; }
+  .about p{ margin:0 0 10px; font:400 13px/1.55 "DM Sans"; color:var(--ink-2); }
+  .about p:last-child{ margin-bottom:0; }
+
+  :focus-visible{ outline:2px solid var(--ring); outline-offset:2px; }
+  @media (prefers-reduced-motion:reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  }
+  @keyframes numIn{ from{opacity:0; transform:translateY(16px) scale(.94); filter:blur(4px);} to{opacity:1; transform:none; filter:none;} }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(7px);} to{opacity:1; transform:none;} }
+  @keyframes pop{ 0%{opacity:0; transform:scale(.78);} 62%{transform:scale(1.07);} 100%{opacity:1; transform:scale(1);} }
+  @keyframes okPulse{
+    0%{ box-shadow:var(--card-shadow), 0 0 0 0 rgba(93,186,140,0); }
+    30%{ box-shadow:var(--card-shadow), 0 0 0 5px color-mix(in srgb, var(--ok) 28%, transparent), 0 0 44px color-mix(in srgb, var(--ok) 30%, transparent); }
+    100%{ box-shadow:var(--card-shadow), 0 0 0 0 rgba(93,186,140,0); }
+  }
+  @keyframes streakPop{ 0%{transform:scale(1);} 38%{transform:scale(1.2);} 100%{transform:scale(1);} }
+  @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+  @keyframes sheetIn{ from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;} }
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+
+<main class="app">
+
+  <!-- Header: set picker · title · streak · settings (same layout as /learn) -->
+  <header class="bar">
+    <div class="pill-wrap">
+      <button class="pill" id="setPill" aria-haspopup="true" aria-expanded="false" aria-label="Choose what to practise">
+        <span class="pill-label" id="setLabel">Greetings</span><span class="chev">▾</span>
+      </button>
+      <div class="pop" id="setPop" hidden>
+        <div class="pop-title">Quick start</div>
+        <div class="chips" id="quickChips"></div>
+        <div class="pop-title">Groups</div>
+        <div class="chips" id="groupChips"></div>
+        <div class="pop-title">Level</div>
+        <div class="chips" id="levelChips"></div>
+      </div>
+    </div>
+    <h1 class="title">LekThai<button class="beta-tag" id="betaTag" title="About the beta">beta</button></h1>
+    <div class="bar-right">
+      <div class="streak" id="streakChip" title="Correct in a row (Hear &amp; Choose)">
+        <span class="streak-ico">⚡</span><span id="streakVal">0</span>
+      </div>
+      <button class="icon-btn" id="gearBtn" aria-label="Settings" aria-haspopup="dialog">⚙</button>
+    </div>
+  </header>
+
+  <!-- Mode tabs -->
+  <nav class="seg" role="tablist" aria-label="Drill mode">
+    <button class="tab active" id="tabSay" role="tab">① See &amp; Say</button>
+    <button class="tab" id="tabHear" role="tab">② Hear &amp; Choose</button>
+    <span class="seg-ind" aria-hidden="true"></span>
+  </nav>
+
+  <section class="card" id="card">
+
+    <!-- MODE A: SEE & SAY — English shown, you recall and say the Thai -->
+    <div class="panel" id="panelSay">
+      <div class="panel-inner">
+        <div class="stage" id="sayStage">
+          <div class="eyebrow">Say it in Thai <span class="mbadge" id="sayBadge" hidden>✓ known</span></div>
+          <div class="bigword" id="sayWord">—</div>
+          <div class="reveal" id="sayReveal">
+            <div class="thai" id="sayThai" lang="th"></div>
+            <div class="rom" id="sayRom"></div>
+            <div class="note" id="sayNote"></div>
+          </div>
+          <div class="hint" id="sayHint"></div>
+        </div>
+        <div class="actions">
+          <button class="btn ghost" id="sayRevealBtn">🔊 Hear &amp; reveal</button>
+          <button class="btn text" id="sayAgainBtn" hidden>🔊 Hear again</button>
+          <div class="rate-row" id="sayRateRow" hidden>
+            <button class="btn rate miss" id="rateMiss">✗ Missed</button>
+            <button class="btn rate got" id="rateGot">✓ Got it</button>
+          </div>
+        </div>
+        <div class="mastery-cap mastery-out">—</div>
+      </div>
+    </div>
+
+    <!-- MODE B: HEAR & CHOOSE — Thai heard, you think of the meaning, then pick -->
+    <div class="panel" id="panelHear" hidden>
+      <div class="panel-inner">
+        <div class="stage stage-hear" id="hearStage">
+          <div class="eyebrow">Listen · what does it mean? <span class="mbadge" id="hearBadge" hidden>✓ known</span></div>
+          <button class="btn play" id="playBtn"><span class="ico">🔊</span> Play word</button>
+          <div class="hint" id="hearHint">Think of the meaning first.</div>
+          <button class="btn primary" id="readyBtn">I’ve got it — show choices</button>
+          <div class="tiles" id="tiles" hidden></div>
+          <div class="verdict" id="hearVerdict"></div>
+          <div class="reveal" id="hearReveal">
+            <div class="thai" id="hearThai" lang="th"></div>
+            <div class="rom" id="hearRom"></div>
+            <div class="meaning" id="hearMeaning"></div>
+            <div class="note" id="hearNote"></div>
+          </div>
+          <button class="btn text" id="nextBtn" hidden>Next word →</button>
+        </div>
+        <div class="mastery-cap mastery-out">—</div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="app-foot">
+    <nav>
+      <a href="/">Home</a>
+      <a href="/learn">Numbers</a>
+      <a href="/thai-numbers">Guides</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </nav>
+  </footer>
+</main>
+
+<div class="warn" id="warn" hidden role="status"><span id="warnText"></span><button class="warn-x" id="warnX" aria-label="Dismiss">✕</button></div>
+
+<!-- Settings sheet -->
+<div class="sheet-wrap" id="settings" hidden>
+  <div class="sheet-scrim" id="settingsScrim"></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">
+    <div class="sheet-head">
+      <span class="sheet-title">Settings</span>
+      <button class="icon-btn" id="settingsClose" aria-label="Close settings">✕</button>
+    </div>
+    <div class="sheet-row">
+      <span class="row-label">Appearance</span>
+      <button class="mini-btn" id="themeBtn" aria-label="Switch to light theme">◑</button>
+    </div>
+    <div class="sheet-row">
+      <span class="row-label">English-letter spelling<small>e.g. phèt under เผ็ด</small></span>
+      <button class="mini-btn" id="romBtn"></button>
+    </div>
+    <div class="sheet-row">
+      <span class="row-label">Slow voice<small>speak the Thai more slowly</small></span>
+      <button class="mini-btn" id="slowBtn"></button>
+    </div>
+    <div class="sheet-row">
+      <span class="row-label">Voice</span>
+      <span class="row-val" id="voiceVal">—</span>
+    </div>
+    <div class="sheet-row">
+      <span class="row-label">Progress</span>
+      <span class="row-val" id="progressVal">—</span>
+    </div>
+    <div class="sheet-block">
+      <button class="mini-btn danger" id="resetBtn">Reset progress</button>
+      <div class="reset-confirm" id="resetConfirm" hidden>
+        <span class="rc-q">Erase all word progress on this device? (Your numbers progress is kept.)</span>
+        <div class="rc-btns">
+          <button class="mini-btn" id="resetCancel">Cancel</button>
+          <button class="mini-btn danger solid" id="resetYes">Reset</button>
+        </div>
+      </div>
+    </div>
+    <div class="about">
+      <div class="about-title">Beta</div>
+      <p>The tones and spellings haven’t been checked by a native Thai speaker yet. Trust the audio over the letters, and expect fixes.</p>
+    </div>
+    <div class="about">
+      <div class="about-title">How to use it</div>
+      <p><b>① See &amp; Say</b> shows the English. Say the Thai out loud from memory, then tap reveal to hear it and check yourself — including the tone. Be honest: a wrong tone is a different word.</p>
+      <p><b>② Hear &amp; Choose</b> plays a Thai word. Work out what it means in your head first, then show the choices and tap the one that matches.</p>
+      <p>The first time you meet a word you won’t know it — that’s fine, the reveal is the lesson. It only counts as a miss from the second time on.</p>
+    </div>
+    <div class="about">
+      <div class="about-title">Why this works</div>
+      <p>LekThai is built on the two most strongly evidenced ideas in learning science: retrieval practice and spaced repetition.</p>
+      <p>Every prompt makes you recall the answer before you see it — say it aloud, or work out the meaning — instead of just reading along. The effort of pulling an answer from memory is what builds the memory; passive review barely moves the needle.</p>
+      <p>It also remembers how you do. Words you miss come back sooner and more often; words you know fade into occasional check-ins, and come back more the longer it’s been. A few focused minutes a day beats one long cram.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   DATA — the word list (from thai_core_words_v1.2). Each word:
+   id (fixed forever) · thai · say · tone · english · group · level · note
+   Progress is keyed by id, so fixing a spelling never wipes anyone's progress.
+   ===================================================================== */
+var DATA = {"groups":[{"id":"greet","name":"Greetings & politeness","icon":"👋","short":"Greetings"},{"id":"people","name":"People & pronouns","icon":"🧑","short":"People"},{"id":"num","name":"Numbers & counting","icon":"🔢","short":"Numbers"},{"id":"food","name":"Food & drink","icon":"🍜","short":"Food"},{"id":"money","name":"Money & shopping","icon":"💵","short":"Money"},{"id":"travel","name":"Transport & directions","icon":"🛺","short":"Transport"},{"id":"time","name":"Time & days","icon":"🕐","short":"Time"},{"id":"place","name":"Places","icon":"🏨","short":"Places"},{"id":"health","name":"Health & body","icon":"🩺","short":"Health"},{"id":"feel","name":"Feelings & states","icon":"🙂","short":"Feelings"},{"id":"verb","name":"Common verbs","icon":"🏃","short":"Verbs"},{"id":"desc","name":"Describing words","icon":"🎨","short":"Describing"},{"id":"ask","name":"Question words","icon":"❓","short":"Questions"},{"id":"talk","name":"Small talk","icon":"💬","short":"Small talk"}],"words":[{"id":"greet-01","thai":"สวัสดี","say":"sa-wat-dii","tone":"L-L-M","english":"hello / goodbye","group":"greet","level":1,"note":""},{"id":"greet-02","thai":"ครับ","say":"khrap","tone":"H","english":"polite ending (men)","group":"greet","level":1,"note":"Men end sentences with this."},{"id":"greet-03","thai":"ค่ะ","say":"kha","tone":"F","english":"polite ending (women)","group":"greet","level":1,"note":"Women end statements with this."},{"id":"greet-04","thai":"คะ","say":"kha","tone":"H","english":"polite ending, questions (women)","group":"greet","level":1,"note":"Women end questions with this."},{"id":"greet-05","thai":"ขอบคุณ","say":"khaawp-khun","tone":"L-M","english":"thank you","group":"greet","level":1,"note":""},{"id":"greet-06","thai":"ขอบคุณมาก","say":"khaawp-khun maak","tone":"L-M-F","english":"thank you very much","group":"greet","level":2,"note":""},{"id":"greet-07","thai":"ขอโทษ","say":"khaaw-thoot","tone":"R-F","english":"sorry / excuse me","group":"greet","level":1,"note":""},{"id":"greet-08","thai":"ไม่เป็นไร","say":"mai pen rai","tone":"F-M-M","english":"no worries / it's fine","group":"greet","level":1,"note":""},{"id":"greet-09","thai":"ใช่","say":"chai","tone":"F","english":"yes / that's right","group":"greet","level":1,"note":""},{"id":"greet-10","thai":"ไม่ใช่","say":"mai chai","tone":"F-F","english":"no / that's not right","group":"greet","level":2,"note":""},{"id":"greet-11","thai":"ไม่","say":"mai","tone":"F","english":"no / not","group":"greet","level":1,"note":""},{"id":"greet-12","thai":"ได้","say":"dai","tone":"F","english":"can / OK","group":"greet","level":1,"note":""},{"id":"greet-13","thai":"ไม่ได้","say":"mai dai","tone":"F-F","english":"can't","group":"greet","level":1,"note":""},{"id":"greet-14","thai":"โอเค","say":"oo-khee","tone":"M-M","english":"OK","group":"greet","level":2,"note":""},{"id":"greet-15","thai":"สบายดีไหม","say":"sa-baai-dii mai","tone":"L-M-M-H","english":"how are you?","group":"greet","level":1,"note":""},{"id":"greet-16","thai":"สบายดี","say":"sa-baai-dii","tone":"L-M-M","english":"I'm fine","group":"greet","level":1,"note":""},{"id":"greet-17","thai":"ยินดีที่ได้รู้จัก","say":"yin-dii thii dai ruu-jak","tone":"M-M-F-F-H-L","english":"nice to meet you","group":"greet","level":2,"note":""},{"id":"greet-18","thai":"ลาก่อน","say":"laa-kaawn","tone":"M-L","english":"goodbye (longer parting)","group":"greet","level":2,"note":""},{"id":"greet-19","thai":"แล้วเจอกัน","say":"laew joe kan","tone":"H-M-M","english":"see you later","group":"greet","level":2,"note":""},{"id":"greet-20","thai":"ขอ...","say":"khaaw","tone":"R","english":"may I have...","group":"greet","level":1,"note":""},{"id":"greet-21","thai":"ช่วย...","say":"chuai","tone":"F","english":"please (do something) / help","group":"greet","level":1,"note":""},{"id":"greet-22","thai":"ช่วยด้วย","say":"chuai duai","tone":"F-F","english":"help!","group":"greet","level":1,"note":""},{"id":"greet-23","thai":"เชิญ","say":"choen","tone":"M","english":"please, go ahead","group":"greet","level":2,"note":""},{"id":"greet-24","thai":"นะ","say":"na","tone":"H","english":"softener (\"OK?\", friendly)","group":"greet","level":2,"note":""},{"id":"greet-25","thai":"โชคดี","say":"chook-dii","tone":"F-M","english":"good luck","group":"greet","level":2,"note":""},{"id":"people-01","thai":"ผม","say":"phom","tone":"R","english":"I (men)","group":"people","level":1,"note":""},{"id":"people-02","thai":"ฉัน","say":"chan","tone":"R","english":"I (women)","group":"people","level":1,"note":"Dictionary tone is rising; usually said with a high tone."},{"id":"people-03","thai":"คุณ","say":"khun","tone":"M","english":"you","group":"people","level":1,"note":""},{"id":"people-04","thai":"เขา","say":"khao","tone":"R","english":"he / she","group":"people","level":1,"note":"Dictionary tone is rising; usually said with a high tone."},{"id":"people-05","thai":"เรา","say":"rao","tone":"M","english":"we / us","group":"people","level":2,"note":""},{"id":"people-06","thai":"พวกเขา","say":"phuak-khao","tone":"F-R","english":"they","group":"people","level":2,"note":""},{"id":"people-07","thai":"มัน","say":"man","tone":"M","english":"it","group":"people","level":2,"note":""},{"id":"people-08","thai":"คน","say":"khon","tone":"M","english":"person","group":"people","level":1,"note":""},{"id":"people-09","thai":"ชื่อ","say":"cheu","tone":"F","english":"name","group":"people","level":1,"note":""},{"id":"people-10","thai":"ผู้ชาย","say":"phuu-chaai","tone":"F-M","english":"man","group":"people","level":1,"note":""},{"id":"people-11","thai":"ผู้หญิง","say":"phuu-ying","tone":"F-R","english":"woman","group":"people","level":1,"note":""},{"id":"people-12","thai":"เด็ก","say":"dek","tone":"L","english":"child (kid)","group":"people","level":2,"note":""},{"id":"people-13","thai":"ลูก","say":"luuk","tone":"F","english":"son / daughter","group":"people","level":2,"note":""},{"id":"people-14","thai":"พ่อ","say":"phaaw","tone":"F","english":"father","group":"people","level":1,"note":""},{"id":"people-15","thai":"แม่","say":"mae","tone":"F","english":"mother","group":"people","level":1,"note":""},{"id":"people-16","thai":"พี่","say":"phii","tone":"F","english":"older sibling / you (to someone older)","group":"people","level":1,"note":""},{"id":"people-17","thai":"น้อง","say":"naawng","tone":"H","english":"younger sibling / you (to someone younger)","group":"people","level":1,"note":""},{"id":"people-18","thai":"สามี","say":"saa-mii","tone":"R-M","english":"husband","group":"people","level":2,"note":""},{"id":"people-19","thai":"ภรรยา","say":"phan-ra-yaa","tone":"M-H-M","english":"wife (polite)","group":"people","level":2,"note":"Polite word. Casual speech often uses เมีย."},{"id":"people-20","thai":"แฟน","say":"faen","tone":"M","english":"boyfriend / girlfriend / partner","group":"people","level":1,"note":""},{"id":"people-21","thai":"เพื่อน","say":"pheuan","tone":"F","english":"friend","group":"people","level":1,"note":""},{"id":"people-22","thai":"ครอบครัว","say":"khraawp-khrua","tone":"F-M","english":"family","group":"people","level":2,"note":""},{"id":"people-23","thai":"ลุง","say":"lung","tone":"M","english":"uncle / older man","group":"people","level":2,"note":""},{"id":"people-24","thai":"ป้า","say":"paa","tone":"F","english":"aunt / older woman","group":"people","level":2,"note":""},{"id":"people-25","thai":"ยาย","say":"yaai","tone":"M","english":"grandma / old woman","group":"people","level":2,"note":""},{"id":"people-26","thai":"ตา","say":"taa","tone":"M","english":"grandpa / old man","group":"people","level":2,"note":""},{"id":"people-27","thai":"ทุกคน","say":"thuk khon","tone":"H-M","english":"everyone","group":"people","level":2,"note":""},{"id":"people-28","thai":"คนไทย","say":"khon thai","tone":"M-M","english":"Thai person","group":"people","level":2,"note":""},{"id":"people-29","thai":"ฝรั่ง","say":"fa-rang","tone":"L-L","english":"Westerner","group":"people","level":2,"note":""},{"id":"people-30","thai":"ลูกค้า","say":"luuk-khaa","tone":"F-H","english":"customer","group":"people","level":2,"note":""},{"id":"people-31","thai":"เจ้าของ","say":"jao-khaawng","tone":"F-R","english":"owner","group":"people","level":2,"note":""},{"id":"people-32","thai":"พนักงาน","say":"pha-nak-ngaan","tone":"H-H-M","english":"staff / employee","group":"people","level":2,"note":""},{"id":"people-33","thai":"หมอ","say":"maaw","tone":"R","english":"doctor","group":"people","level":1,"note":""},{"id":"people-34","thai":"ตำรวจ","say":"tam-ruat","tone":"M-L","english":"police","group":"people","level":2,"note":""},{"id":"people-35","thai":"ครู","say":"khruu","tone":"M","english":"teacher","group":"people","level":2,"note":""},{"id":"people-36","thai":"นักเรียน","say":"nak-rian","tone":"H-M","english":"student","group":"people","level":2,"note":""},{"id":"people-37","thai":"ตัวเอง","say":"tua-eeng","tone":"M-M","english":"myself / yourself","group":"people","level":2,"note":""},{"id":"num-01","thai":"ศูนย์","say":"suun","tone":"R","english":"0","group":"num","level":1,"note":""},{"id":"num-02","thai":"หนึ่ง","say":"neung","tone":"L","english":"1","group":"num","level":1,"note":""},{"id":"num-03","thai":"สอง","say":"saawng","tone":"R","english":"2","group":"num","level":1,"note":""},{"id":"num-04","thai":"สาม","say":"saam","tone":"R","english":"3","group":"num","level":1,"note":""},{"id":"num-05","thai":"สี่","say":"sii","tone":"L","english":"4","group":"num","level":1,"note":""},{"id":"num-06","thai":"ห้า","say":"haa","tone":"F","english":"5","group":"num","level":1,"note":""},{"id":"num-07","thai":"หก","say":"hok","tone":"L","english":"6","group":"num","level":1,"note":""},{"id":"num-08","thai":"เจ็ด","say":"jet","tone":"L","english":"7","group":"num","level":1,"note":""},{"id":"num-09","thai":"แปด","say":"paet","tone":"L","english":"8","group":"num","level":1,"note":""},{"id":"num-10","thai":"เก้า","say":"kaao","tone":"F","english":"9","group":"num","level":1,"note":""},{"id":"num-11","thai":"สิบ","say":"sip","tone":"L","english":"10","group":"num","level":1,"note":""},{"id":"num-12","thai":"สิบเอ็ด","say":"sip-et","tone":"L-L","english":"11","group":"num","level":1,"note":""},{"id":"num-13","thai":"ยี่สิบ","say":"yii-sip","tone":"F-L","english":"20","group":"num","level":1,"note":""},{"id":"num-14","thai":"ร้อย","say":"rooi","tone":"H","english":"100","group":"num","level":1,"note":""},{"id":"num-15","thai":"พัน","say":"phan","tone":"M","english":"1,000","group":"num","level":1,"note":""},{"id":"num-16","thai":"หมื่น","say":"meun","tone":"L","english":"10,000","group":"num","level":2,"note":""},{"id":"num-17","thai":"แสน","say":"saen","tone":"R","english":"100,000","group":"num","level":2,"note":""},{"id":"num-18","thai":"ล้าน","say":"laan","tone":"H","english":"1,000,000","group":"num","level":1,"note":""},{"id":"num-19","thai":"ครึ่ง","say":"khreung","tone":"F","english":"half","group":"num","level":2,"note":""},{"id":"num-20","thai":"เยอะ","say":"yoe","tone":"H","english":"a lot","group":"num","level":1,"note":""},{"id":"num-21","thai":"น้อย","say":"nooi","tone":"H","english":"few / little","group":"num","level":1,"note":""},{"id":"num-22","thai":"นิดหน่อย","say":"nit-nooi","tone":"H-L","english":"a little bit","group":"num","level":1,"note":""},{"id":"num-23","thai":"ทั้งหมด","say":"thang-mot","tone":"H-L","english":"all / total","group":"num","level":2,"note":""},{"id":"num-24","thai":"เพิ่ม","say":"phoem","tone":"F","english":"add / more","group":"num","level":2,"note":""},{"id":"num-25","thai":"อีก","say":"iik","tone":"L","english":"again / another","group":"num","level":1,"note":""},{"id":"num-26","thai":"กิโล","say":"ki-loo","tone":"L-M","english":"kilo (kg or km)","group":"num","level":2,"note":""},{"id":"num-27","thai":"คน","say":"khon","tone":"M","english":"counting word: people","group":"num","level":1,"note":"Same word as 'person' (คน)."},{"id":"num-28","thai":"อัน","say":"an","tone":"M","english":"counting word: things (general — safe default)","group":"num","level":1,"note":""},{"id":"num-29","thai":"ตัว","say":"tua","tone":"M","english":"counting word: animals, clothes, chairs","group":"num","level":2,"note":""},{"id":"num-30","thai":"ชิ้น","say":"chin","tone":"H","english":"counting word: pieces","group":"num","level":2,"note":""},{"id":"num-31","thai":"ขวด","say":"khuat","tone":"L","english":"counting word: bottles","group":"num","level":1,"note":""},{"id":"num-32","thai":"แก้ว","say":"kaew","tone":"F","english":"counting word: glasses","group":"num","level":1,"note":""},{"id":"num-33","thai":"จาน","say":"jaan","tone":"M","english":"counting word: plates (of food)","group":"num","level":1,"note":""},{"id":"num-34","thai":"ชาม","say":"chaam","tone":"M","english":"counting word: bowls","group":"num","level":2,"note":""},{"id":"num-35","thai":"ถ้วย","say":"thuai","tone":"F","english":"counting word: cups","group":"num","level":2,"note":""},{"id":"num-36","thai":"ที่","say":"thii","tone":"F","english":"counting word: servings / seats","group":"num","level":1,"note":""},{"id":"num-37","thai":"ห่อ","say":"haaw","tone":"L","english":"counting word: packets","group":"num","level":2,"note":""},{"id":"num-38","thai":"ใบ","say":"bai","tone":"M","english":"counting word: bags, tickets, flat things","group":"num","level":2,"note":""},{"id":"num-39","thai":"คัน","say":"khan","tone":"M","english":"counting word: vehicles","group":"num","level":2,"note":""},{"id":"num-40","thai":"ห้อง","say":"haawng","tone":"F","english":"counting word: rooms","group":"num","level":2,"note":""},{"id":"num-41","thai":"เล่ม","say":"lem","tone":"F","english":"counting word: books","group":"num","level":2,"note":""},{"id":"num-42","thai":"คู่","say":"khuu","tone":"F","english":"counting word: pairs","group":"num","level":2,"note":""},{"id":"num-43","thai":"ครั้ง","say":"khrang","tone":"H","english":"counting word: times (how many times)","group":"num","level":2,"note":""},{"id":"num-44","thai":"ลูก","say":"luuk","tone":"F","english":"counting word: fruit, balls (round things)","group":"num","level":2,"note":""},{"id":"food-01","thai":"อาหาร","say":"aa-haan","tone":"M-R","english":"food","group":"food","level":1,"note":""},{"id":"food-02","thai":"ข้าว","say":"khaao","tone":"F","english":"rice / a meal","group":"food","level":1,"note":""},{"id":"food-03","thai":"น้ำ","say":"naam","tone":"H","english":"water / liquid","group":"food","level":1,"note":""},{"id":"food-04","thai":"น้ำเปล่า","say":"naam plao","tone":"H-L","english":"plain water","group":"food","level":1,"note":""},{"id":"food-05","thai":"น้ำแข็ง","say":"naam-khaeng","tone":"H-R","english":"ice","group":"food","level":1,"note":""},{"id":"food-06","thai":"กาแฟ","say":"kaa-fae","tone":"M-M","english":"coffee","group":"food","level":1,"note":""},{"id":"food-07","thai":"ชา","say":"chaa","tone":"M","english":"tea","group":"food","level":1,"note":""},{"id":"food-08","thai":"เบียร์","say":"bia","tone":"M","english":"beer","group":"food","level":1,"note":""},{"id":"food-09","thai":"นม","say":"nom","tone":"M","english":"milk","group":"food","level":2,"note":""},{"id":"food-10","thai":"ไก่","say":"kai","tone":"L","english":"chicken","group":"food","level":1,"note":""},{"id":"food-11","thai":"หมู","say":"muu","tone":"R","english":"pork","group":"food","level":1,"note":""},{"id":"food-12","thai":"เนื้อ","say":"neua","tone":"H","english":"beef / meat","group":"food","level":1,"note":""},{"id":"food-13","thai":"ปลา","say":"plaa","tone":"M","english":"fish","group":"food","level":1,"note":""},{"id":"food-14","thai":"กุ้ง","say":"kung","tone":"F","english":"shrimp","group":"food","level":1,"note":""},{"id":"food-15","thai":"ไข่","say":"khai","tone":"L","english":"egg","group":"food","level":1,"note":"Low tone. Same letters as ไข้ (fever, falling tone)."},{"id":"food-16","thai":"ผัก","say":"phak","tone":"L","english":"vegetables","group":"food","level":2,"note":""},{"id":"food-17","thai":"ผลไม้","say":"phon-la-mai","tone":"R-H-H","english":"fruit","group":"food","level":2,"note":""},{"id":"food-18","thai":"ข้าวผัด","say":"khaao phat","tone":"F-L","english":"fried rice","group":"food","level":1,"note":""},{"id":"food-19","thai":"ข้าวเหนียว","say":"khaao niao","tone":"F-R","english":"sticky rice","group":"food","level":2,"note":""},{"id":"food-20","thai":"ก๋วยเตี๋ยว","say":"kuai-tiao","tone":"R-R","english":"noodle soup","group":"food","level":2,"note":""},{"id":"food-21","thai":"ส้มตำ","say":"som-tam","tone":"F-M","english":"papaya salad","group":"food","level":2,"note":""},{"id":"food-22","thai":"ต้มยำ","say":"tom-yam","tone":"F-M","english":"tom yum (spicy-sour soup)","group":"food","level":2,"note":""},{"id":"food-23","thai":"แกง","say":"kaeng","tone":"M","english":"curry","group":"food","level":2,"note":""},{"id":"food-24","thai":"เผ็ด","say":"phet","tone":"L","english":"spicy","group":"food","level":1,"note":""},{"id":"food-25","thai":"ไม่เผ็ด","say":"mai phet","tone":"F-L","english":"not spicy","group":"food","level":1,"note":""},{"id":"food-26","thai":"พริก","say":"phrik","tone":"H","english":"chili","group":"food","level":2,"note":""},{"id":"food-27","thai":"อร่อย","say":"a-rooi","tone":"L-L","english":"delicious","group":"food","level":1,"note":""},{"id":"food-28","thai":"หวาน","say":"waan","tone":"R","english":"sweet","group":"food","level":2,"note":""},{"id":"food-29","thai":"เค็ม","say":"khem","tone":"M","english":"salty","group":"food","level":2,"note":""},{"id":"food-30","thai":"เปรี้ยว","say":"priao","tone":"F","english":"sour","group":"food","level":2,"note":""},{"id":"food-31","thai":"น้ำตาล","say":"naam-taan","tone":"H-M","english":"sugar","group":"food","level":2,"note":""},{"id":"food-32","thai":"ผงชูรส","say":"phong-chuu-rot","tone":"R-M-H","english":"MSG","group":"food","level":2,"note":""},{"id":"food-33","thai":"ใส่","say":"sai","tone":"L","english":"put in / add","group":"food","level":1,"note":""},{"id":"food-34","thai":"ไม่ใส่...","say":"mai sai","tone":"F-L","english":"without...","group":"food","level":1,"note":""},{"id":"food-35","thai":"อิ่ม","say":"im","tone":"L","english":"full (after eating)","group":"food","level":2,"note":""},{"id":"food-36","thai":"เมนู","say":"mee-nuu","tone":"M-M","english":"menu","group":"food","level":2,"note":""},{"id":"food-37","thai":"เช็คบิล","say":"chek bin","tone":"H-M","english":"the bill, please","group":"food","level":1,"note":"Borrowed from English 'check bill'."},{"id":"food-38","thai":"กินที่นี่","say":"kin thii-nii","tone":"M-F-F","english":"eat here","group":"food","level":1,"note":""},{"id":"food-39","thai":"ห่อกลับบ้าน","say":"haaw klap baan","tone":"L-L-F","english":"take away","group":"food","level":1,"note":""},{"id":"food-40","thai":"ช้อน","say":"chaawn","tone":"H","english":"spoon","group":"food","level":1,"note":""},{"id":"food-41","thai":"ส้อม","say":"saawm","tone":"F","english":"fork","group":"food","level":2,"note":""},{"id":"food-42","thai":"ตะเกียบ","say":"ta-kiap","tone":"L-L","english":"chopsticks","group":"food","level":2,"note":""},{"id":"money-01","thai":"เงิน","say":"ngoen","tone":"M","english":"money","group":"money","level":1,"note":""},{"id":"money-02","thai":"บาท","say":"baat","tone":"L","english":"baht","group":"money","level":1,"note":""},{"id":"money-03","thai":"เท่าไหร่","say":"thao-rai","tone":"F-L","english":"how much?","group":"money","level":1,"note":""},{"id":"money-04","thai":"ราคา","say":"raa-khaa","tone":"M-M","english":"price","group":"money","level":1,"note":""},{"id":"money-05","thai":"แพง","say":"phaeng","tone":"M","english":"expensive","group":"money","level":1,"note":""},{"id":"money-06","thai":"ถูก","say":"thuuk","tone":"L","english":"cheap","group":"money","level":1,"note":""},{"id":"money-07","thai":"ลดได้ไหม","say":"lot dai mai","tone":"H-F-H","english":"can you discount?","group":"money","level":1,"note":""},{"id":"money-08","thai":"ซื้อ","say":"seu","tone":"H","english":"buy","group":"money","level":1,"note":""},{"id":"money-09","thai":"ขาย","say":"khaai","tone":"R","english":"sell","group":"money","level":2,"note":""},{"id":"money-10","thai":"จ่าย","say":"jaai","tone":"L","english":"pay","group":"money","level":1,"note":""},{"id":"money-11","thai":"เงินสด","say":"ngoen-sot","tone":"M-L","english":"cash","group":"money","level":1,"note":""},{"id":"money-12","thai":"บัตรเครดิต","say":"bat khree-dit","tone":"L-M-L","english":"credit card","group":"money","level":2,"note":""},{"id":"money-13","thai":"โอน","say":"oon","tone":"M","english":"bank transfer","group":"money","level":2,"note":""},{"id":"money-14","thai":"สแกน","say":"sa-kaen","tone":"L-M","english":"scan (QR pay)","group":"money","level":1,"note":""},{"id":"money-15","thai":"เงินทอน","say":"ngoen-thaawn","tone":"M-M","english":"change (coins back)","group":"money","level":2,"note":""},{"id":"money-16","thai":"ใบเสร็จ","say":"bai-set","tone":"M-L","english":"receipt","group":"money","level":2,"note":""},{"id":"money-17","thai":"ตู้เอทีเอ็ม","say":"tuu ee-thii-em","tone":"F-M-M-M","english":"ATM","group":"money","level":2,"note":""},{"id":"money-18","thai":"ร้าน","say":"raan","tone":"H","english":"shop","group":"money","level":1,"note":""},{"id":"money-19","thai":"หมด","say":"mot","tone":"L","english":"sold out / finished","group":"money","level":1,"note":""},{"id":"money-20","thai":"ขนาด","say":"kha-naat","tone":"L-L","english":"size","group":"money","level":2,"note":""},{"id":"money-21","thai":"สี","say":"sii","tone":"R","english":"colour","group":"money","level":2,"note":""},{"id":"money-22","thai":"ลอง","say":"laawng","tone":"M","english":"try (on)","group":"money","level":2,"note":""},{"id":"money-23","thai":"ถุง","say":"thung","tone":"R","english":"bag","group":"money","level":2,"note":""},{"id":"money-24","thai":"ไม่เอาถุง","say":"mai ao thung","tone":"F-M-R","english":"no bag, thanks","group":"money","level":1,"note":""},{"id":"money-25","thai":"แค่ดู","say":"khae duu","tone":"F-M","english":"just looking","group":"money","level":1,"note":""},{"id":"money-26","thai":"ทั้งหมดเท่าไหร่","say":"thang-mot thao-rai","tone":"H-L-F-L","english":"how much altogether?","group":"money","level":2,"note":""},{"id":"money-27","thai":"อันนี้","say":"an-nii","tone":"M-H","english":"this one","group":"money","level":1,"note":""},{"id":"money-28","thai":"อันนั้น","say":"an-nan","tone":"M-H","english":"that one","group":"money","level":1,"note":""},{"id":"travel-01","thai":"รถ","say":"rot","tone":"H","english":"car / vehicle","group":"travel","level":2,"note":""},{"id":"travel-02","thai":"แท็กซี่","say":"thaek-sii","tone":"H-F","english":"taxi","group":"travel","level":1,"note":""},{"id":"travel-03","thai":"รถเมล์","say":"rot mee","tone":"H-M","english":"bus","group":"travel","level":2,"note":""},{"id":"travel-04","thai":"รถไฟ","say":"rot fai","tone":"H-M","english":"train","group":"travel","level":2,"note":""},{"id":"travel-05","thai":"รถไฟฟ้า","say":"rot fai faa","tone":"H-M-H","english":"skytrain (BTS)","group":"travel","level":2,"note":""},{"id":"travel-06","thai":"มอเตอร์ไซค์","say":"maaw-toe-sai","tone":"M-M-M","english":"motorbike","group":"travel","level":2,"note":""},{"id":"travel-07","thai":"วินมอเตอร์ไซค์","say":"win maaw-toe-sai","tone":"M-M-M-M","english":"motorbike taxi","group":"travel","level":2,"note":""},{"id":"travel-08","thai":"เครื่องบิน","say":"khreuang-bin","tone":"F-M","english":"plane","group":"travel","level":2,"note":""},{"id":"travel-09","thai":"เรือ","say":"reua","tone":"M","english":"boat","group":"travel","level":2,"note":""},{"id":"travel-10","thai":"ตั๋ว","say":"tua","tone":"R","english":"ticket","group":"travel","level":2,"note":""},{"id":"travel-11","thai":"ซ้าย","say":"saai","tone":"H","english":"left","group":"travel","level":1,"note":""},{"id":"travel-12","thai":"ขวา","say":"khwaa","tone":"R","english":"right","group":"travel","level":1,"note":""},{"id":"travel-13","thai":"ตรงไป","say":"trong pai","tone":"M-M","english":"go straight","group":"travel","level":1,"note":""},{"id":"travel-14","thai":"เลี้ยว","say":"liao","tone":"H","english":"turn","group":"travel","level":1,"note":""},{"id":"travel-15","thai":"จอด","say":"jaawt","tone":"L","english":"stop / pull over","group":"travel","level":1,"note":""},{"id":"travel-16","thai":"หยุด","say":"yut","tone":"L","english":"stop","group":"travel","level":1,"note":""},{"id":"travel-17","thai":"ตรงนี้","say":"trong-nii","tone":"M-H","english":"right here","group":"travel","level":1,"note":""},{"id":"travel-18","thai":"ที่นี่","say":"thii-nii","tone":"F-F","english":"here","group":"travel","level":1,"note":""},{"id":"travel-19","thai":"ที่นั่น","say":"thii-nan","tone":"F-F","english":"there","group":"travel","level":2,"note":""},{"id":"travel-20","thai":"ใกล้","say":"klai","tone":"F","english":"near","group":"travel","level":1,"note":"Falling tone. Rising/mid mix-up turns 'near' into 'far' (ไกล)."},{"id":"travel-21","thai":"ไกล","say":"klai","tone":"M","english":"far","group":"travel","level":1,"note":"Mid tone. Compare ใกล้ (near, falling tone)."},{"id":"travel-22","thai":"ข้างหน้า","say":"khaang-naa","tone":"F-F","english":"ahead / in front","group":"travel","level":2,"note":""},{"id":"travel-23","thai":"ข้างหลัง","say":"khaang-lang","tone":"F-R","english":"behind","group":"travel","level":2,"note":""},{"id":"travel-24","thai":"ข้างๆ","say":"khaang-khaang","tone":"F-F","english":"next to","group":"travel","level":2,"note":""},{"id":"travel-25","thai":"ตรงข้าม","say":"trong-khaam","tone":"M-F","english":"opposite","group":"travel","level":2,"note":""},{"id":"travel-26","thai":"ถนน","say":"tha-non","tone":"L-R","english":"road","group":"travel","level":2,"note":""},{"id":"travel-27","thai":"ซอย","say":"sooi","tone":"M","english":"side street / lane","group":"travel","level":2,"note":""},{"id":"travel-28","thai":"แยก","say":"yaek","tone":"F","english":"intersection","group":"travel","level":2,"note":""},{"id":"travel-29","thai":"สะพาน","say":"sa-phaan","tone":"L-M","english":"bridge","group":"travel","level":2,"note":""},{"id":"travel-30","thai":"ขึ้น","say":"kheun","tone":"F","english":"get on / go up","group":"travel","level":2,"note":""},{"id":"travel-31","thai":"ลง","say":"long","tone":"M","english":"get off / go down","group":"travel","level":2,"note":""},{"id":"travel-32","thai":"ช้าๆ","say":"chaa-chaa","tone":"H-H","english":"slowly","group":"travel","level":1,"note":""},{"id":"travel-33","thai":"เร็ว","say":"reo","tone":"M","english":"fast","group":"travel","level":2,"note":""},{"id":"travel-34","thai":"ระวัง","say":"ra-wang","tone":"H-M","english":"be careful","group":"travel","level":2,"note":""},{"id":"travel-35","thai":"เปิดมิเตอร์","say":"poet mi-toe","tone":"L-H-M","english":"turn on the meter","group":"travel","level":1,"note":""},{"id":"travel-36","thai":"แผนที่","say":"phaen-thii","tone":"R-F","english":"map","group":"travel","level":2,"note":""},{"id":"travel-37","thai":"หลง","say":"long","tone":"R","english":"lost","group":"travel","level":2,"note":""},{"id":"time-01","thai":"เวลา","say":"wee-laa","tone":"M-M","english":"time","group":"time","level":2,"note":""},{"id":"time-02","thai":"วันนี้","say":"wan-nii","tone":"M-H","english":"today","group":"time","level":1,"note":""},{"id":"time-03","thai":"พรุ่งนี้","say":"phrung-nii","tone":"F-H","english":"tomorrow","group":"time","level":1,"note":""},{"id":"time-04","thai":"เมื่อวาน","say":"meua-waan","tone":"F-M","english":"yesterday","group":"time","level":1,"note":""},{"id":"time-05","thai":"ตอนนี้","say":"taawn-nii","tone":"M-H","english":"now","group":"time","level":1,"note":""},{"id":"time-06","thai":"เดี๋ยว","say":"diao","tone":"R","english":"in a moment / wait","group":"time","level":1,"note":""},{"id":"time-07","thai":"เดี๋ยวนี้","say":"diao-nii","tone":"R-H","english":"right now","group":"time","level":2,"note":""},{"id":"time-08","thai":"เช้า","say":"chao","tone":"H","english":"morning","group":"time","level":1,"note":""},{"id":"time-09","thai":"เที่ยง","say":"thiang","tone":"F","english":"noon","group":"time","level":2,"note":""},{"id":"time-10","thai":"บ่าย","say":"baai","tone":"L","english":"afternoon","group":"time","level":1,"note":""},{"id":"time-11","thai":"เย็น","say":"yen","tone":"M","english":"evening","group":"time","level":1,"note":""},{"id":"time-12","thai":"กลางคืน","say":"klaang-kheun","tone":"M-M","english":"night","group":"time","level":1,"note":""},{"id":"time-13","thai":"เที่ยงคืน","say":"thiang-kheun","tone":"F-M","english":"midnight","group":"time","level":2,"note":""},{"id":"time-14","thai":"วัน","say":"wan","tone":"M","english":"day","group":"time","level":1,"note":""},{"id":"time-15","thai":"อาทิตย์","say":"aa-thit","tone":"M-H","english":"week (everyday word)","group":"time","level":2,"note":""},{"id":"time-16","thai":"เดือน","say":"deuan","tone":"M","english":"month","group":"time","level":2,"note":""},{"id":"time-17","thai":"ปี","say":"pii","tone":"M","english":"year","group":"time","level":2,"note":""},{"id":"time-18","thai":"ชั่วโมง","say":"chua-moong","tone":"F-M","english":"hour","group":"time","level":1,"note":""},{"id":"time-19","thai":"นาที","say":"naa-thii","tone":"M-M","english":"minute","group":"time","level":1,"note":""},{"id":"time-20","thai":"กี่โมง","say":"kii moong","tone":"L-M","english":"what time?","group":"time","level":1,"note":""},{"id":"time-21","thai":"โมง","say":"moong","tone":"M","english":"o'clock (daytime)","group":"time","level":2,"note":""},{"id":"time-22","thai":"ทุ่ม","say":"thum","tone":"F","english":"o'clock (7–11 pm)","group":"time","level":2,"note":""},{"id":"time-23","thai":"ตี","say":"tii","tone":"M","english":"o'clock (1–5 am)","group":"time","level":2,"note":""},{"id":"time-24","thai":"ก่อน","say":"kaawn","tone":"L","english":"before","group":"time","level":1,"note":""},{"id":"time-25","thai":"หลัง","say":"lang","tone":"R","english":"after","group":"time","level":1,"note":""},{"id":"time-26","thai":"แล้ว","say":"laew","tone":"H","english":"already","group":"time","level":1,"note":""},{"id":"time-27","thai":"ยัง","say":"yang","tone":"M","english":"still / not yet","group":"time","level":1,"note":""},{"id":"time-28","thai":"เสมอ","say":"sa-moe","tone":"L-R","english":"always","group":"time","level":2,"note":""},{"id":"time-29","thai":"บางครั้ง","say":"baang khrang","tone":"M-H","english":"sometimes","group":"time","level":2,"note":""},{"id":"time-30","thai":"เร็วๆ นี้","say":"reo-reo nii","tone":"M-M-H","english":"soon","group":"time","level":2,"note":""},{"id":"time-31","thai":"สาย","say":"saai","tone":"R","english":"late (in the morning)","group":"time","level":2,"note":""},{"id":"time-32","thai":"ช้า","say":"chaa","tone":"H","english":"late / slow","group":"time","level":2,"note":""},{"id":"time-33","thai":"ทัน","say":"than","tone":"M","english":"in time","group":"time","level":2,"note":""},{"id":"time-34","thai":"วันจันทร์","say":"wan jan","tone":"M-M","english":"Monday","group":"time","level":2,"note":""},{"id":"time-35","thai":"วันอังคาร","say":"wan ang-khaan","tone":"M-M-M","english":"Tuesday","group":"time","level":2,"note":""},{"id":"time-36","thai":"วันพุธ","say":"wan phut","tone":"M-H","english":"Wednesday","group":"time","level":2,"note":""},{"id":"time-37","thai":"วันพฤหัส","say":"wan pha-reu-hat","tone":"M-H-H-L","english":"Thursday","group":"time","level":2,"note":""},{"id":"time-38","thai":"วันศุกร์","say":"wan suk","tone":"M-L","english":"Friday","group":"time","level":2,"note":""},{"id":"time-39","thai":"วันเสาร์","say":"wan sao","tone":"M-R","english":"Saturday","group":"time","level":2,"note":""},{"id":"time-40","thai":"วันอาทิตย์","say":"wan aa-thit","tone":"M-M-H","english":"Sunday","group":"time","level":2,"note":""},{"id":"time-41","thai":"วันหยุด","say":"wan-yut","tone":"M-L","english":"day off / holiday","group":"time","level":2,"note":""},{"id":"time-42","thai":"สุดสัปดาห์","say":"sut sap-daa","tone":"L-L-M","english":"weekend","group":"time","level":2,"note":""},{"id":"time-43","thai":"ทุกวัน","say":"thuk wan","tone":"H-M","english":"every day","group":"time","level":2,"note":""},{"id":"time-44","thai":"ปีหน้า","say":"pii naa","tone":"M-F","english":"next year","group":"time","level":2,"note":""},{"id":"time-45","thai":"ปีที่แล้ว","say":"pii thii laew","tone":"M-F-H","english":"last year","group":"time","level":2,"note":""},{"id":"place-01","thai":"บ้าน","say":"baan","tone":"F","english":"home / house","group":"place","level":1,"note":""},{"id":"place-02","thai":"โรงแรม","say":"roong-raem","tone":"M-M","english":"hotel","group":"place","level":1,"note":""},{"id":"place-03","thai":"ห้องน้ำ","say":"haawng-naam","tone":"F-H","english":"toilet / bathroom","group":"place","level":1,"note":""},{"id":"place-04","thai":"ตลาด","say":"ta-laat","tone":"L-L","english":"market","group":"place","level":1,"note":""},{"id":"place-05","thai":"ร้านอาหาร","say":"raan aa-haan","tone":"H-M-R","english":"restaurant","group":"place","level":1,"note":""},{"id":"place-06","thai":"ร้านกาแฟ","say":"raan kaa-fae","tone":"H-M-M","english":"café","group":"place","level":2,"note":""},{"id":"place-07","thai":"เซเว่น","say":"see-wen","tone":"M-F","english":"7-Eleven","group":"place","level":1,"note":""},{"id":"place-08","thai":"ห้าง","say":"haang","tone":"F","english":"shopping mall","group":"place","level":2,"note":""},{"id":"place-09","thai":"โรงพยาบาล","say":"roong pha-yaa-baan","tone":"M-H-M-M","english":"hospital","group":"place","level":1,"note":""},{"id":"place-10","thai":"ร้านขายยา","say":"raan khaai yaa","tone":"H-R-M","english":"pharmacy","group":"place","level":1,"note":""},{"id":"place-11","thai":"ธนาคาร","say":"tha-naa-khaan","tone":"H-M-M","english":"bank","group":"place","level":2,"note":""},{"id":"place-12","thai":"ไปรษณีย์","say":"prai-sa-nii","tone":"M-L-M","english":"post office","group":"place","level":2,"note":""},{"id":"place-13","thai":"สนามบิน","say":"sa-naam-bin","tone":"L-R-M","english":"airport","group":"place","level":1,"note":""},{"id":"place-14","thai":"สถานี","say":"sa-thaa-nii","tone":"L-R-M","english":"station","group":"place","level":2,"note":""},{"id":"place-15","thai":"สถานีตำรวจ","say":"sa-thaa-nii tam-ruat","tone":"L-R-M-M-L","english":"police station","group":"place","level":2,"note":""},{"id":"place-16","thai":"ปั๊มน้ำมัน","say":"pam naam-man","tone":"H-H-M","english":"petrol station","group":"place","level":2,"note":""},{"id":"place-17","thai":"วัด","say":"wat","tone":"H","english":"temple","group":"place","level":1,"note":""},{"id":"place-18","thai":"ทะเล","say":"tha-lee","tone":"H-M","english":"sea","group":"place","level":2,"note":""},{"id":"place-19","thai":"ชายหาด","say":"chaai-haat","tone":"M-L","english":"beach","group":"place","level":2,"note":""},{"id":"place-20","thai":"เกาะ","say":"kaw","tone":"L","english":"island","group":"place","level":2,"note":""},{"id":"place-21","thai":"ภูเขา","say":"phuu-khao","tone":"M-R","english":"mountain","group":"place","level":2,"note":""},{"id":"place-22","thai":"สวน","say":"suan","tone":"R","english":"park / garden","group":"place","level":2,"note":""},{"id":"place-23","thai":"โรงเรียน","say":"roong-rian","tone":"M-M","english":"school","group":"place","level":2,"note":""},{"id":"place-24","thai":"ที่ทำงาน","say":"thii tham-ngaan","tone":"F-M-M","english":"workplace","group":"place","level":2,"note":""},{"id":"place-25","thai":"ร้านนวด","say":"raan nuat","tone":"H-F","english":"massage shop","group":"place","level":2,"note":""},{"id":"place-26","thai":"เมือง","say":"meuang","tone":"M","english":"city / town","group":"place","level":2,"note":""},{"id":"place-27","thai":"กรุงเทพฯ","say":"krung-theep","tone":"M-F","english":"Bangkok","group":"place","level":1,"note":""},{"id":"place-28","thai":"ประเทศ","say":"pra-theet","tone":"L-F","english":"country","group":"place","level":2,"note":""},{"id":"place-29","thai":"ทางเข้า","say":"thaang khao","tone":"M-F","english":"entrance","group":"place","level":2,"note":""},{"id":"place-30","thai":"ทางออก","say":"thaang aawk","tone":"M-L","english":"exit","group":"place","level":2,"note":""},{"id":"place-31","thai":"ชั้น","say":"chan","tone":"H","english":"floor / level","group":"place","level":2,"note":""},{"id":"health-01","thai":"ไม่สบาย","say":"mai sa-baai","tone":"F-L-M","english":"unwell","group":"health","level":1,"note":""},{"id":"health-02","thai":"ป่วย","say":"puai","tone":"L","english":"sick","group":"health","level":2,"note":""},{"id":"health-03","thai":"เจ็บ","say":"jep","tone":"L","english":"hurts (sharp pain / injury)","group":"health","level":1,"note":""},{"id":"health-04","thai":"ปวด","say":"puat","tone":"L","english":"aches","group":"health","level":1,"note":""},{"id":"health-05","thai":"ปวดหัว","say":"puat hua","tone":"L-R","english":"headache","group":"health","level":1,"note":""},{"id":"health-06","thai":"ปวดท้อง","say":"puat thaawng","tone":"L-H","english":"stomachache","group":"health","level":1,"note":""},{"id":"health-07","thai":"ท้องเสีย","say":"thaawng sia","tone":"H-R","english":"diarrhoea","group":"health","level":1,"note":""},{"id":"health-08","thai":"ไข้","say":"khai","tone":"F","english":"fever","group":"health","level":1,"note":"Falling tone. Same letters as ไข่ (egg, low tone)."},{"id":"health-09","thai":"ไอ","say":"ai","tone":"M","english":"cough","group":"health","level":2,"note":""},{"id":"health-10","thai":"เป็นหวัด","say":"pen wat","tone":"M-L","english":"have a cold","group":"health","level":2,"note":""},{"id":"health-11","thai":"เวียนหัว","say":"wian hua","tone":"M-R","english":"dizzy","group":"health","level":2,"note":""},{"id":"health-12","thai":"คลื่นไส้","say":"khleun-sai","tone":"F-F","english":"nauseous","group":"health","level":2,"note":""},{"id":"health-13","thai":"แพ้","say":"phae","tone":"H","english":"allergic to","group":"health","level":1,"note":""},{"id":"health-14","thai":"ยา","say":"yaa","tone":"M","english":"medicine","group":"health","level":1,"note":""},{"id":"health-15","thai":"ฉุกเฉิน","say":"chuk-choen","tone":"L-R","english":"emergency","group":"health","level":1,"note":""},{"id":"health-16","thai":"เลือด","say":"leuat","tone":"F","english":"blood","group":"health","level":2,"note":""},{"id":"health-17","thai":"ยุง","say":"yung","tone":"M","english":"mosquito","group":"health","level":2,"note":""},{"id":"health-18","thai":"พัก","say":"phak","tone":"H","english":"rest","group":"health","level":2,"note":""},{"id":"health-19","thai":"ดีขึ้น","say":"dii kheun","tone":"M-F","english":"getting better","group":"health","level":2,"note":""},{"id":"health-20","thai":"หายแล้ว","say":"haai laew","tone":"R-H","english":"recovered","group":"health","level":2,"note":""},{"id":"health-21","thai":"หัว","say":"hua","tone":"R","english":"head","group":"health","level":2,"note":""},{"id":"health-22","thai":"ตา","say":"taa","tone":"M","english":"eye","group":"health","level":2,"note":""},{"id":"health-23","thai":"หู","say":"huu","tone":"R","english":"ear","group":"health","level":2,"note":""},{"id":"health-24","thai":"จมูก","say":"ja-muuk","tone":"L-L","english":"nose","group":"health","level":2,"note":""},{"id":"health-25","thai":"ปาก","say":"paak","tone":"L","english":"mouth","group":"health","level":2,"note":""},{"id":"health-26","thai":"ฟัน","say":"fan","tone":"M","english":"teeth","group":"health","level":2,"note":""},{"id":"health-27","thai":"คอ","say":"khaaw","tone":"M","english":"neck / throat","group":"health","level":2,"note":""},{"id":"health-28","thai":"ท้อง","say":"thaawng","tone":"H","english":"stomach / belly","group":"health","level":2,"note":""},{"id":"health-29","thai":"หลัง","say":"lang","tone":"R","english":"back","group":"health","level":2,"note":""},{"id":"health-30","thai":"มือ","say":"meu","tone":"M","english":"hand","group":"health","level":2,"note":""},{"id":"health-31","thai":"แขน","say":"khaen","tone":"R","english":"arm","group":"health","level":2,"note":""},{"id":"health-32","thai":"ขา","say":"khaa","tone":"R","english":"leg","group":"health","level":2,"note":""},{"id":"health-33","thai":"เท้า","say":"thao","tone":"H","english":"foot","group":"health","level":2,"note":""},{"id":"health-34","thai":"ผิว","say":"phiu","tone":"R","english":"skin","group":"health","level":2,"note":""},{"id":"health-35","thai":"หัวใจ","say":"hua-jai","tone":"R-M","english":"heart","group":"health","level":2,"note":""},{"id":"feel-01","thai":"หิว","say":"hiu","tone":"R","english":"hungry","group":"feel","level":1,"note":""},{"id":"feel-02","thai":"หิวน้ำ","say":"hiu naam","tone":"R-H","english":"thirsty","group":"feel","level":1,"note":""},{"id":"feel-03","thai":"เหนื่อย","say":"neuai","tone":"L","english":"tired","group":"feel","level":1,"note":""},{"id":"feel-04","thai":"ง่วง","say":"nguang","tone":"F","english":"sleepy","group":"feel","level":1,"note":""},{"id":"feel-05","thai":"หนาว","say":"naao","tone":"R","english":"cold (feeling)","group":"feel","level":2,"note":""},{"id":"feel-06","thai":"สบาย","say":"sa-baai","tone":"L-M","english":"comfortable / relaxed","group":"feel","level":1,"note":""},{"id":"feel-07","thai":"ดีใจ","say":"dii-jai","tone":"M-M","english":"glad","group":"feel","level":1,"note":""},{"id":"feel-08","thai":"มีความสุข","say":"mii khwaam-suk","tone":"M-M-L","english":"happy","group":"feel","level":2,"note":""},{"id":"feel-09","thai":"เสียใจ","say":"sia-jai","tone":"R-M","english":"sad / sorry (regret)","group":"feel","level":2,"note":""},{"id":"feel-10","thai":"เศร้า","say":"sao","tone":"F","english":"sad","group":"feel","level":2,"note":""},{"id":"feel-11","thai":"โกรธ","say":"kroot","tone":"L","english":"angry","group":"feel","level":2,"note":""},{"id":"feel-12","thai":"กลัว","say":"klua","tone":"M","english":"afraid","group":"feel","level":2,"note":""},{"id":"feel-13","thai":"เบื่อ","say":"beua","tone":"L","english":"bored / fed up","group":"feel","level":2,"note":""},{"id":"feel-14","thai":"สนุก","say":"sa-nuk","tone":"L-L","english":"fun","group":"feel","level":2,"note":""},{"id":"feel-15","thai":"ชอบ","say":"chaawp","tone":"F","english":"like","group":"feel","level":1,"note":""},{"id":"feel-16","thai":"รัก","say":"rak","tone":"H","english":"love","group":"feel","level":1,"note":""},{"id":"feel-17","thai":"เกลียด","say":"kliat","tone":"L","english":"hate","group":"feel","level":2,"note":""},{"id":"feel-18","thai":"คิดถึง","say":"khit-theung","tone":"H-R","english":"miss (someone)","group":"feel","level":2,"note":""},{"id":"feel-19","thai":"ตื่นเต้น","say":"teun-teen","tone":"L-F","english":"excited","group":"feel","level":2,"note":""},{"id":"feel-20","thai":"เครียด","say":"khriat","tone":"F","english":"stressed","group":"feel","level":2,"note":""},{"id":"feel-21","thai":"กังวล","say":"kang-won","tone":"M-M","english":"worried","group":"feel","level":2,"note":""},{"id":"feel-22","thai":"แน่ใจ","say":"nae-jai","tone":"F-M","english":"sure","group":"feel","level":2,"note":""},{"id":"feel-23","thai":"ไม่แน่ใจ","say":"mai nae-jai","tone":"F-F-M","english":"not sure","group":"feel","level":2,"note":""},{"id":"feel-24","thai":"แน่นอน","say":"nae-naawn","tone":"F-M","english":"of course","group":"feel","level":2,"note":""},{"id":"feel-25","thai":"ใจเย็น","say":"jai-yen","tone":"M-M","english":"calm / patient (\"calm down\")","group":"feel","level":1,"note":""},{"id":"feel-26","thai":"เมา","say":"mao","tone":"M","english":"drunk","group":"feel","level":2,"note":""},{"id":"feel-27","thai":"อาย","say":"aai","tone":"M","english":"shy / embarrassed","group":"feel","level":2,"note":""},{"id":"feel-28","thai":"งง","say":"ngong","tone":"M","english":"confused","group":"feel","level":1,"note":""},{"id":"feel-29","thai":"ว่าง","say":"waang","tone":"F","english":"free (not busy)","group":"feel","level":2,"note":""},{"id":"feel-30","thai":"ยุ่ง","say":"yung","tone":"F","english":"busy","group":"feel","level":2,"note":""},{"id":"feel-31","thai":"พร้อม","say":"phraawm","tone":"H","english":"ready","group":"feel","level":2,"note":""},{"id":"feel-32","thai":"ร้อน","say":"raawn","tone":"H","english":"hot (feeling / weather)","group":"feel","level":1,"note":""},{"id":"feel-33","thai":"โชคร้าย","say":"chook-raai","tone":"F-H","english":"unlucky","group":"feel","level":2,"note":""},{"id":"verb-01","thai":"ไป","say":"pai","tone":"M","english":"go","group":"verb","level":1,"note":""},{"id":"verb-02","thai":"มา","say":"maa","tone":"M","english":"come","group":"verb","level":1,"note":""},{"id":"verb-03","thai":"กิน","say":"kin","tone":"M","english":"eat","group":"verb","level":1,"note":""},{"id":"verb-04","thai":"ดื่ม","say":"deum","tone":"L","english":"drink","group":"verb","level":1,"note":""},{"id":"verb-05","thai":"เอา","say":"ao","tone":"M","english":"want / take (a thing)","group":"verb","level":1,"note":""},{"id":"verb-06","thai":"อยาก","say":"yaak","tone":"L","english":"want to (do)","group":"verb","level":1,"note":""},{"id":"verb-07","thai":"มี","say":"mii","tone":"M","english":"have / there is","group":"verb","level":1,"note":""},{"id":"verb-08","thai":"เป็น","say":"pen","tone":"M","english":"be (is a...)","group":"verb","level":1,"note":""},{"id":"verb-09","thai":"คือ","say":"kheu","tone":"M","english":"is (equals / that is)","group":"verb","level":2,"note":""},{"id":"verb-10","thai":"อยู่","say":"yuu","tone":"L","english":"be at / live","group":"verb","level":1,"note":""},{"id":"verb-11","thai":"ทำ","say":"tham","tone":"M","english":"do / make","group":"verb","level":1,"note":""},{"id":"verb-12","thai":"ทำงาน","say":"tham-ngaan","tone":"M-M","english":"work","group":"verb","level":1,"note":""},{"id":"verb-13","thai":"พูด","say":"phuut","tone":"F","english":"speak","group":"verb","level":1,"note":""},{"id":"verb-14","thai":"บอก","say":"baawk","tone":"L","english":"tell","group":"verb","level":2,"note":""},{"id":"verb-15","thai":"ถาม","say":"thaam","tone":"R","english":"ask","group":"verb","level":1,"note":""},{"id":"verb-16","thai":"ตอบ","say":"taawp","tone":"L","english":"answer","group":"verb","level":2,"note":""},{"id":"verb-17","thai":"รู้","say":"ruu","tone":"H","english":"know (a fact)","group":"verb","level":1,"note":""},{"id":"verb-18","thai":"รู้จัก","say":"ruu-jak","tone":"H-L","english":"know (a person / place)","group":"verb","level":2,"note":""},{"id":"verb-19","thai":"เข้าใจ","say":"khao-jai","tone":"F-M","english":"understand","group":"verb","level":1,"note":""},{"id":"verb-20","thai":"คิด","say":"khit","tone":"H","english":"think","group":"verb","level":2,"note":""},{"id":"verb-21","thai":"ดู","say":"duu","tone":"M","english":"look / watch","group":"verb","level":1,"note":""},{"id":"verb-22","thai":"เห็น","say":"hen","tone":"R","english":"see","group":"verb","level":2,"note":""},{"id":"verb-23","thai":"ฟัง","say":"fang","tone":"M","english":"listen","group":"verb","level":2,"note":""},{"id":"verb-24","thai":"ได้ยิน","say":"dai-yin","tone":"F-M","english":"hear","group":"verb","level":2,"note":""},{"id":"verb-25","thai":"อ่าน","say":"aan","tone":"L","english":"read","group":"verb","level":2,"note":""},{"id":"verb-26","thai":"เขียน","say":"khian","tone":"R","english":"write","group":"verb","level":2,"note":""},{"id":"verb-27","thai":"เรียน","say":"rian","tone":"M","english":"study","group":"verb","level":2,"note":""},{"id":"verb-28","thai":"สอน","say":"saawn","tone":"R","english":"teach","group":"verb","level":2,"note":""},{"id":"verb-29","thai":"นอน","say":"naawn","tone":"M","english":"sleep / lie down","group":"verb","level":1,"note":""},{"id":"verb-30","thai":"ตื่น","say":"teun","tone":"L","english":"wake up","group":"verb","level":2,"note":""},{"id":"verb-31","thai":"นั่ง","say":"nang","tone":"F","english":"sit","group":"verb","level":2,"note":""},{"id":"verb-32","thai":"ยืน","say":"yeun","tone":"M","english":"stand","group":"verb","level":2,"note":""},{"id":"verb-33","thai":"เดิน","say":"doen","tone":"M","english":"walk","group":"verb","level":2,"note":""},{"id":"verb-34","thai":"วิ่ง","say":"wing","tone":"F","english":"run","group":"verb","level":2,"note":""},{"id":"verb-35","thai":"ขับ","say":"khap","tone":"L","english":"drive","group":"verb","level":2,"note":""},{"id":"verb-36","thai":"รอ","say":"raaw","tone":"M","english":"wait","group":"verb","level":1,"note":""},{"id":"verb-37","thai":"หา","say":"haa","tone":"R","english":"look for","group":"verb","level":1,"note":""},{"id":"verb-38","thai":"เจอ","say":"joe","tone":"M","english":"find / meet","group":"verb","level":2,"note":""},{"id":"verb-39","thai":"ให้","say":"hai","tone":"F","english":"give / let","group":"verb","level":1,"note":""},{"id":"verb-40","thai":"ใช้","say":"chai","tone":"H","english":"use","group":"verb","level":1,"note":""},{"id":"verb-41","thai":"เปิด","say":"poet","tone":"L","english":"open / turn on","group":"verb","level":2,"note":""},{"id":"verb-42","thai":"ปิด","say":"pit","tone":"L","english":"close / turn off","group":"verb","level":2,"note":""},{"id":"verb-43","thai":"เล่น","say":"leen","tone":"F","english":"play","group":"verb","level":2,"note":""},{"id":"verb-44","thai":"กลับ","say":"klap","tone":"L","english":"go back / return","group":"verb","level":1,"note":""},{"id":"verb-45","thai":"เข้า","say":"khao","tone":"F","english":"enter","group":"verb","level":2,"note":""},{"id":"verb-46","thai":"ออก","say":"aawk","tone":"L","english":"go out / leave","group":"verb","level":2,"note":""},{"id":"verb-47","thai":"ถือ","say":"theu","tone":"R","english":"hold / carry","group":"verb","level":2,"note":""},{"id":"verb-48","thai":"ส่ง","say":"song","tone":"L","english":"send","group":"verb","level":2,"note":""},{"id":"verb-49","thai":"จำ","say":"jam","tone":"M","english":"remember","group":"verb","level":2,"note":""},{"id":"verb-50","thai":"ลืม","say":"leum","tone":"M","english":"forget","group":"verb","level":2,"note":""},{"id":"verb-51","thai":"เริ่ม","say":"roem","tone":"F","english":"start","group":"verb","level":2,"note":""},{"id":"verb-52","thai":"เสร็จ","say":"set","tone":"L","english":"finish / done","group":"verb","level":2,"note":""},{"id":"verb-53","thai":"ล้าง","say":"laang","tone":"H","english":"wash","group":"verb","level":2,"note":""},{"id":"verb-54","thai":"อาบน้ำ","say":"aap-naam","tone":"L-H","english":"shower / bathe","group":"verb","level":2,"note":""},{"id":"verb-55","thai":"โทร","say":"thoo","tone":"M","english":"phone (call)","group":"verb","level":2,"note":""},{"id":"verb-56","thai":"เรียก","say":"riak","tone":"F","english":"call (someone over / a taxi)","group":"verb","level":2,"note":""},{"id":"verb-57","thai":"จอง","say":"jaawng","tone":"M","english":"book / reserve","group":"verb","level":2,"note":""},{"id":"verb-58","thai":"เปลี่ยน","say":"plian","tone":"L","english":"change","group":"verb","level":2,"note":""},{"id":"verb-59","thai":"เลือก","say":"leuak","tone":"F","english":"choose","group":"verb","level":2,"note":""},{"id":"verb-60","thai":"ต้อง","say":"taawng","tone":"F","english":"must / have to","group":"verb","level":1,"note":""},{"id":"verb-61","thai":"ควร","say":"khuan","tone":"M","english":"should","group":"verb","level":2,"note":""},{"id":"verb-62","thai":"เคย","say":"khoei","tone":"M","english":"have ever (done)","group":"verb","level":2,"note":""},{"id":"verb-63","thai":"กำลัง","say":"kam-lang","tone":"M-M","english":"am ...-ing (in progress)","group":"verb","level":2,"note":""},{"id":"verb-64","thai":"จะ","say":"ja","tone":"L","english":"will (future)","group":"verb","level":1,"note":""},{"id":"desc-01","thai":"ดี","say":"dii","tone":"M","english":"good","group":"desc","level":1,"note":""},{"id":"desc-02","thai":"ไม่ดี","say":"mai dii","tone":"F-M","english":"bad / not good","group":"desc","level":1,"note":""},{"id":"desc-03","thai":"มาก","say":"maak","tone":"F","english":"very / a lot","group":"desc","level":1,"note":""},{"id":"desc-04","thai":"สวย","say":"suai","tone":"R","english":"beautiful","group":"desc","level":1,"note":""},{"id":"desc-05","thai":"หล่อ","say":"laaw","tone":"L","english":"handsome","group":"desc","level":2,"note":""},{"id":"desc-06","thai":"น่ารัก","say":"naa-rak","tone":"F-H","english":"cute / lovely","group":"desc","level":2,"note":""},{"id":"desc-07","thai":"ใหญ่","say":"yai","tone":"L","english":"big","group":"desc","level":1,"note":""},{"id":"desc-08","thai":"เล็ก","say":"lek","tone":"H","english":"small","group":"desc","level":1,"note":""},{"id":"desc-09","thai":"ร้อน","say":"raawn","tone":"H","english":"hot","group":"desc","level":1,"note":""},{"id":"desc-10","thai":"เย็น","say":"yen","tone":"M","english":"cool / cold (drinks, air)","group":"desc","level":1,"note":""},{"id":"desc-11","thai":"ใหม่","say":"mai","tone":"L","english":"new","group":"desc","level":1,"note":""},{"id":"desc-12","thai":"เก่า","say":"kao","tone":"L","english":"old (things)","group":"desc","level":2,"note":""},{"id":"desc-13","thai":"แก่","say":"kae","tone":"L","english":"old (people)","group":"desc","level":2,"note":""},{"id":"desc-14","thai":"ยาว","say":"yaao","tone":"M","english":"long","group":"desc","level":2,"note":""},{"id":"desc-15","thai":"สั้น","say":"san","tone":"F","english":"short (length)","group":"desc","level":2,"note":""},{"id":"desc-16","thai":"สูง","say":"suung","tone":"R","english":"tall / high","group":"desc","level":2,"note":""},{"id":"desc-17","thai":"เตี้ย","say":"tia","tone":"F","english":"short (height)","group":"desc","level":2,"note":""},{"id":"desc-18","thai":"ต่ำ","say":"tam","tone":"L","english":"low","group":"desc","level":2,"note":""},{"id":"desc-19","thai":"อ้วน","say":"uan","tone":"F","english":"fat","group":"desc","level":2,"note":""},{"id":"desc-20","thai":"ผอม","say":"phaawm","tone":"R","english":"thin","group":"desc","level":2,"note":""},{"id":"desc-21","thai":"หนัก","say":"nak","tone":"L","english":"heavy","group":"desc","level":2,"note":""},{"id":"desc-22","thai":"เบา","say":"bao","tone":"M","english":"light","group":"desc","level":2,"note":""},{"id":"desc-23","thai":"ง่าย","say":"ngaai","tone":"F","english":"easy","group":"desc","level":1,"note":""},{"id":"desc-24","thai":"ยาก","say":"yaak","tone":"F","english":"difficult","group":"desc","level":1,"note":""},{"id":"desc-25","thai":"สะอาด","say":"sa-aat","tone":"L-L","english":"clean","group":"desc","level":1,"note":""},{"id":"desc-26","thai":"สกปรก","say":"sok-ka-prok","tone":"L-L-L","english":"dirty","group":"desc","level":2,"note":""},{"id":"desc-27","thai":"เงียบ","say":"ngiap","tone":"F","english":"quiet","group":"desc","level":2,"note":""},{"id":"desc-28","thai":"ดัง","say":"dang","tone":"M","english":"loud","group":"desc","level":2,"note":""},{"id":"desc-29","thai":"สำคัญ","say":"sam-khan","tone":"R-M","english":"important","group":"desc","level":2,"note":""},{"id":"desc-30","thai":"ถูกต้อง","say":"thuuk-taawng","tone":"L-F","english":"correct","group":"desc","level":2,"note":""},{"id":"desc-31","thai":"ผิด","say":"phit","tone":"L","english":"wrong","group":"desc","level":2,"note":""},{"id":"desc-32","thai":"จริง","say":"jing","tone":"M","english":"true / real","group":"desc","level":1,"note":""},{"id":"desc-33","thai":"เหมือน","say":"meuan","tone":"R","english":"same / like","group":"desc","level":2,"note":""},{"id":"desc-34","thai":"ต่าง","say":"taang","tone":"L","english":"different","group":"desc","level":2,"note":""},{"id":"desc-35","thai":"เปียก","say":"piak","tone":"L","english":"wet","group":"desc","level":2,"note":""},{"id":"desc-36","thai":"แห้ง","say":"haeng","tone":"F","english":"dry","group":"desc","level":2,"note":""},{"id":"desc-37","thai":"เต็ม","say":"tem","tone":"M","english":"full","group":"desc","level":2,"note":""},{"id":"desc-38","thai":"สด","say":"sot","tone":"L","english":"fresh","group":"desc","level":2,"note":""},{"id":"desc-39","thai":"พอ","say":"phaaw","tone":"M","english":"enough","group":"desc","level":2,"note":""},{"id":"desc-40","thai":"กว่า","say":"kwaa","tone":"L","english":"more than (-er)","group":"desc","level":2,"note":""},{"id":"desc-41","thai":"ที่สุด","say":"thii-sut","tone":"F-L","english":"the most (-est)","group":"desc","level":2,"note":""},{"id":"desc-42","thai":"เก่ง","say":"keng","tone":"L","english":"skilled / good at","group":"desc","level":2,"note":""},{"id":"desc-43","thai":"ปลอดภัย","say":"plaawt-phai","tone":"L-M","english":"safe","group":"desc","level":2,"note":""},{"id":"desc-44","thai":"อันตราย","say":"an-ta-raai","tone":"M-L-M","english":"dangerous","group":"desc","level":2,"note":""},{"id":"ask-01","thai":"อะไร","say":"a-rai","tone":"L-M","english":"what?","group":"ask","level":1,"note":""},{"id":"ask-02","thai":"ที่ไหน","say":"thii-nai","tone":"F-R","english":"where?","group":"ask","level":1,"note":""},{"id":"ask-03","thai":"เมื่อไหร่","say":"meua-rai","tone":"F-L","english":"when?","group":"ask","level":1,"note":""},{"id":"ask-04","thai":"ใคร","say":"khrai","tone":"M","english":"who?","group":"ask","level":1,"note":""},{"id":"ask-05","thai":"ทำไม","say":"tham-mai","tone":"M-M","english":"why?","group":"ask","level":1,"note":""},{"id":"ask-06","thai":"ยังไง","say":"yang-ngai","tone":"M-M","english":"how?","group":"ask","level":1,"note":""},{"id":"ask-07","thai":"กี่","say":"kii","tone":"L","english":"how many?","group":"ask","level":1,"note":""},{"id":"ask-08","thai":"อันไหน","say":"an-nai","tone":"M-R","english":"which one?","group":"ask","level":1,"note":""},{"id":"ask-09","thai":"ไหม","say":"mai","tone":"H","english":"yes/no question marker","group":"ask","level":1,"note":"Dictionary tone is rising; usually said with a high tone."},{"id":"ask-10","thai":"หรือเปล่า","say":"reu-plao","tone":"R-L","english":"...or not?","group":"ask","level":2,"note":""},{"id":"ask-11","thai":"หรือยัง","say":"reu-yang","tone":"R-M","english":"...yet?","group":"ask","level":2,"note":""},{"id":"ask-12","thai":"ได้ไหม","say":"dai mai","tone":"F-H","english":"can you / may I?","group":"ask","level":1,"note":""},{"id":"ask-13","thai":"ใช่ไหม","say":"chai mai","tone":"F-H","english":"right? / isn't it?","group":"ask","level":1,"note":""},{"id":"ask-14","thai":"ไปไหน","say":"pai nai","tone":"M-R","english":"where are you going?","group":"ask","level":2,"note":""},{"id":"ask-15","thai":"เป็นอะไร","say":"pen a-rai","tone":"M-L-M","english":"what's wrong?","group":"ask","level":2,"note":""},{"id":"ask-16","thai":"หมายความว่าอะไร","say":"maai-khwaam waa a-rai","tone":"R-M-F-L-M","english":"what does it mean?","group":"ask","level":2,"note":""},{"id":"talk-01","thai":"คุณชื่ออะไร","say":"khun cheu a-rai","tone":"M-F-L-M","english":"what's your name?","group":"talk","level":1,"note":""},{"id":"talk-02","thai":"ผมชื่อ...","say":"phom cheu...","tone":"R-F","english":"my name is... (men)","group":"talk","level":1,"note":""},{"id":"talk-03","thai":"ฉันชื่อ...","say":"chan cheu...","tone":"R-F","english":"my name is... (women)","group":"talk","level":1,"note":""},{"id":"talk-04","thai":"มาจากไหน","say":"maa jaak nai","tone":"M-L-R","english":"where are you from?","group":"talk","level":1,"note":""},{"id":"talk-05","thai":"มาจาก...","say":"maa jaak...","tone":"M-L","english":"I'm from...","group":"talk","level":1,"note":""},{"id":"talk-06","thai":"กินข้าวหรือยัง","say":"kin khaao reu-yang","tone":"M-F-R-M","english":"have you eaten? (= how are you)","group":"talk","level":1,"note":""},{"id":"talk-07","thai":"กินแล้ว","say":"kin laew","tone":"M-H","english":"I've eaten","group":"talk","level":1,"note":""},{"id":"talk-08","thai":"ไปไหนมา","say":"pai nai maa","tone":"M-R-M","english":"where have you been?","group":"talk","level":2,"note":""},{"id":"talk-09","thai":"อายุเท่าไหร่","say":"aa-yu thao-rai","tone":"M-H-F-L","english":"how old are you?","group":"talk","level":2,"note":""},{"id":"talk-10","thai":"ทำงานอะไร","say":"tham-ngaan a-rai","tone":"M-M-L-M","english":"what do you do (for work)?","group":"talk","level":2,"note":""},{"id":"talk-11","thai":"ชอบเมืองไทยไหม","say":"chaawp meuang thai mai","tone":"F-M-M-H","english":"do you like Thailand?","group":"talk","level":2,"note":""},{"id":"talk-12","thai":"ชอบมาก","say":"chaawp maak","tone":"F-F","english":"I like it a lot","group":"talk","level":2,"note":""},{"id":"talk-13","thai":"แล้วคุณล่ะ","say":"laew khun la","tone":"H-M-F","english":"and you?","group":"talk","level":2,"note":""},{"id":"talk-14","thai":"เหมือนกัน","say":"meuan-kan","tone":"R-M","english":"same here","group":"talk","level":2,"note":""},{"id":"talk-15","thai":"พูดภาษาไทยได้นิดหน่อย","say":"phuut phaa-saa thai dai nit-nooi","tone":"F-M-R-M-F-H-L","english":"I speak a little Thai","group":"talk","level":2,"note":""},{"id":"talk-16","thai":"ไม่เข้าใจ","say":"mai khao-jai","tone":"F-F-M","english":"I don't understand","group":"talk","level":1,"note":""},{"id":"talk-17","thai":"ไม่รู้","say":"mai ruu","tone":"F-H","english":"I don't know","group":"talk","level":1,"note":""},{"id":"talk-18","thai":"พูดช้าๆ หน่อย","say":"phuut chaa-chaa nooi","tone":"F-H-H-L","english":"please speak slowly","group":"talk","level":1,"note":""},{"id":"talk-19","thai":"พูดอีกครั้ง","say":"phuut iik khrang","tone":"F-L-H","english":"say it again","group":"talk","level":1,"note":""},{"id":"talk-20","thai":"ภาษาไทยเรียกว่าอะไร","say":"phaa-saa thai riak waa a-rai","tone":"M-R-M-F-F-L-M","english":"what's this called in Thai?","group":"talk","level":2,"note":""},{"id":"talk-21","thai":"พูดภาษาอังกฤษได้ไหม","say":"phuut phaa-saa ang-krit dai mai","tone":"F-M-R-M-L-F-H","english":"can you speak English?","group":"talk","level":1,"note":""},{"id":"talk-22","thai":"ภาษา","say":"phaa-saa","tone":"M-R","english":"language","group":"talk","level":2,"note":""},{"id":"talk-23","thai":"จริงเหรอ","say":"jing roe","tone":"M-R","english":"really?","group":"talk","level":2,"note":""},{"id":"talk-24","thai":"เก่งมาก","say":"keng maak","tone":"L-F","english":"very good! / well done","group":"talk","level":2,"note":""},{"id":"talk-25","thai":"สู้ๆ","say":"suu-suu","tone":"F-F","english":"you got this!","group":"talk","level":2,"note":""},{"id":"talk-26","thai":"ตามสบาย","say":"taam sa-baai","tone":"M-L-M","english":"make yourself comfortable","group":"talk","level":2,"note":""},{"id":"talk-27","thai":"ไปก่อนนะ","say":"pai kaawn na","tone":"M-L-H","english":"I'm heading off","group":"talk","level":2,"note":""},{"id":"talk-28","thai":"ฝันดี","say":"fan dii","tone":"R-M","english":"sweet dreams / good night","group":"talk","level":2,"note":""},{"id":"talk-29","thai":"เดินทางปลอดภัย","say":"doen-thaang plaawt-phai","tone":"M-M-L-M","english":"safe travels","group":"talk","level":2,"note":""},{"id":"talk-30","thai":"ยินดีด้วย","say":"yin-dii duai","tone":"M-M-F","english":"congratulations","group":"talk","level":2,"note":""},{"id":"talk-31","thai":"สนุกมาก","say":"sa-nuk maak","tone":"L-L-F","english":"so much fun","group":"talk","level":2,"note":""}]};
+
+var CONFIG = {
+  firstTen: ['สวัสดี','ครับ','ค่ะ','ขอบคุณ','ขอโทษ','ไม่เป็นไร','ใช่','ไม่','เท่าไหร่','ห้องน้ำ'],
+  knownMinAttempts: 3,     // same rule as /learn
+  knownMinAccuracy: 0.8,   // same rule as /learn
+  cooldown: 4,             // a word can't repeat within this many picks
+  reviewDays: 7,           // known words return more often the longer since last seen
+  rate: 0.85,              // same as /learn
+  rateSlow: 0.6,
+  autoNextMs: 1400         // Hear & Choose: pause on a correct answer so you can read the Thai
+};
+
+/* ---------- storage (probe first, fall back to memory — same approach as /learn) ---------- */
+var KEY_STATS='lekthai-words-stats-v1', KEY_PREFS='lekthai-words-prefs-v1',
+    KEY_STREAK='lekthai-words-streak-v1', KEY_THEME='lekthai-theme', KEY_BETA='lekthai-words-beta-seen';
+var storageOK = false, store = (function(){
+  try{ var k='__lekthai'+Math.random(); localStorage.setItem(k,'1'); if(localStorage.getItem(k)!=='1') throw 0; localStorage.removeItem(k); storageOK=true; return localStorage; }
+  catch(e){ var m={}; return {getItem:function(k){return k in m?m[k]:null},setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]}}; }
+})();
+function load(k,f){ try{ var v=store.getItem(k); return v?JSON.parse(v):f; }catch(e){ return f; } }
+function save(k,v){ try{ store.setItem(k,JSON.stringify(v)); }catch(e){} }
+
+var STATS = load(KEY_STATS,{});   // { id: {c:correct, m:missed, r:lastResult 1|0, t:lastSeenMs} }
+var PREFS = Object.assign({mode:'say', set:'greet', level:1, roman:true, slow:false}, load(KEY_PREFS,{}));
+function savePrefs(){ save(KEY_PREFS,PREFS); }
+
+var WORDS = DATA.words, GROUP = {};
+DATA.groups.forEach(function(g){ GROUP[g.id]=g; });
+if(PREFS.set!=='first10' && PREFS.set!=='mix' && PREFS.set!=='weak' && !GROUP[PREFS.set]) PREFS.set='greet';
+
+function $(id){ return document.getElementById(id); }
+
+/* ---------- tone marks, generated from the tone code (never typed by hand) ----------
+   M none · L à · F â · H á · R ǎ — mark goes on the first vowel letter, like /learn (sǎawng) */
+var MARK={M:'',L:'̀',F:'̂',H:'́',R:'̌'};
+function accented(w){
+  var codes=w.tone.split('-'), i=0;
+  var out=w.say.replace(/[a-z]+/g,function(s){ var c=codes[i++], v=s.search(/[aeiou]/);
+    return (!c||v<0||!MARK[c]) ? s : s.slice(0,v+1)+MARK[c]+s.slice(v+1); });
+  return out.normalize ? out.normalize('NFC') : out;
+}
+
+/* ---------- mastery ---------- */
+function attempts(s){ return s ? s.c+s.m : 0; }
+function isKnown(id){ var s=STATS[id]; if(!s) return false; var n=attempts(s);
+  return n>=CONFIG.knownMinAttempts && s.c/n>=CONFIG.knownMinAccuracy && s.r===1; }  // a miss un-knows it
+function record(id, pass){
+  var first=!STATS[id], s=STATS[id]||(STATS[id]={c:0,m:0,r:0,t:0});
+  if(pass) s.c++; else if(!first) s.m++;          // first-ever sight: a miss is "seen", not a failure
+  s.r=pass?1:0; s.t=Date.now(); save(KEY_STATS,STATS);
+}
+
+/* ---------- weighted picker ---------- */
+function weight(w){
+  var s=STATS[w.id];
+  if(!s) return 3;                                         // never seen
+  if(!attempts(s)) return 4;                               // seen once, not learned yet: soon
+  if(isKnown(w.id)){ var days=(Date.now()-(s.t||0))/864e5; return 0.1+Math.min(1,days/CONFIG.reviewDays)*0.6; }
+  var acc=s.c/attempts(s); return 1+2*(1-acc)+(s.r===0?1:0);   // weak: favoured
+}
+var RECENT=[];
+function pick(pool){
+  var cd=Math.min(CONFIG.cooldown,pool.length-1);
+  var avail=pool.filter(function(w){ return RECENT.indexOf(w.id)===-1; }); if(!avail.length) avail=pool;
+  var tot=0, ws=avail.map(function(w){ var x=weight(w); tot+=x; return x; });
+  var r=Math.random()*tot, i=0; for(; i<avail.length-1; i++){ r-=ws[i]; if(r<=0) break; }
+  var w=avail[i]; RECENT.push(w.id); while(RECENT.length>cd) RECENT.shift(); return w;
+}
+function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)),t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+
+/* ---------- sets ---------- */
+function inLevel(w){ return w.level===1 || PREFS.level===2; }
+function poolFor(set){
+  if(set==='first10') return CONFIG.firstTen.map(function(t){ return WORDS.filter(function(w){ return w.thai===t; })[0]; }).filter(Boolean);
+  if(set==='mix') return WORDS.filter(inLevel);
+  if(set==='weak') return WORDS.filter(function(w){ return attempts(STATS[w.id])>0 && !isKnown(w.id); });
+  return WORDS.filter(function(w){ return w.group===set && inLevel(w); });
+}
+function setShort(set){
+  if(set==='first10') return '✦ First 10';
+  if(set==='mix') return '🔀 Mix all';
+  if(set==='weak') return '🎯 Weak words';
+  return GROUP[set].icon+' '+GROUP[set].short;
+}
+
+/* ---------- voice: same approach as /learn — always try Thai, warn (never block) if no Thai voice is listed ---------- */
+var hasTTS='speechSynthesis' in window, thaiVoice=null, voiceChecked=false;
+function loadVoices(){
+  if(!hasTTS) return;
+  var v=speechSynthesis.getVoices()||[];
+  thaiVoice=v.filter(function(x){ return x.lang && /^th/i.test(x.lang); })[0]||null;
+  if(v.length){ voiceChecked=true; if(!thaiVoice) showWarn('voice'); else if(warnKind==='voice') hideWarn(); }
+  syncSheet();
+}
+function speak(text){
+  if(!hasTTS) return;
+  try{
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(String(text).replace(/\.\.\.|…|\//g,' ').trim());
+    u.lang='th-TH'; u.rate=PREFS.slow?CONFIG.rateSlow:CONFIG.rate;
+    if(thaiVoice) u.voice=thaiVoice;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ---------- toast (voice warning / beta notice) ---------- */
+var warnKind='';
+function showWarn(kind){
+  warnKind=kind;
+  $('warnText').innerHTML = kind==='voice'
+    ? '⚠️ <b>No Thai voice found in this browser.</b> The app will still try to speak. If you hear nothing, or the wrong accent, install a Thai text-to-speech voice in your phone’s settings, or try Chrome.'
+    : !hasTTS ? '⚠️ <b>This browser can’t speak.</b> Hear &amp; Choose needs audio. Try Chrome or Safari.'
+    : '<b>Beta.</b> The tones and spellings haven’t been checked by a native Thai speaker yet. Trust the audio over the letters.';
+  $('warn').hidden=false;
+}
+function hideWarn(){ $('warn').hidden=true; if(warnKind==='beta') save(KEY_BETA,1); warnKind=''; }
+
+/* ---------- streak (Hear & Choose correct in a row, like /learn's Hear & Type) ---------- */
+var streak=load(KEY_STREAK,{s:0,b:0});
+function renderStreak(bump){
+  $('streakVal').textContent=streak.s;
+  $('streakChip').classList.toggle('live',streak.s>0);
+  $('streakChip').title='Correct in a row (Hear & Choose)'+(streak.b?' · best '+streak.b:'');
+  if(bump){ var c=$('streakChip'); c.classList.remove('hot'); void c.offsetWidth; c.classList.add('hot'); }
+}
+function hitStreak(ok){ if(ok){ streak.s++; if(streak.s>streak.b) streak.b=streak.s; } else streak.s=0; save(KEY_STREAK,streak); renderStreak(ok); }
+
+/* ---------- set popover ---------- */
+function chip(set,label,count,active){
+  return '<button class="chip'+(active?' active':'')+'" data-set="'+set+'">'+label+(count!=null?'<small>'+count+'</small>':'')+'</button>';
+}
+function knownIn(pool){ return pool.filter(function(w){ return isKnown(w.id); }).length; }
+function buildPop(){
+  var weakN=poolFor('weak').length, mix=poolFor('mix');
+  $('quickChips').innerHTML =
+    chip('first10','✦ First 10','taster',PREFS.set==='first10')+
+    chip('mix','🔀 Mix all',knownIn(mix)+'/'+mix.length,PREFS.set==='mix')+
+    chip('weak','🎯 Weak words',weakN?weakN:'none yet',PREFS.set==='weak');
+  $('groupChips').innerHTML = DATA.groups.map(function(g){
+    var p=poolFor(g.id); return chip(g.id,g.icon+' '+g.name,knownIn(p)+'/'+p.length,PREFS.set===g.id);
+  }).join('');
+  $('levelChips').innerHTML =
+    '<button class="chip'+(PREFS.level===1?' active':'')+'" data-level="1">Level 1<small>learn first</small></button>'+
+    '<button class="chip'+(PREFS.level===2?' active':'')+'" data-level="2">Level 1 + 2<small>everything</small></button>';
+}
+var scrim=null;
+function openPop(){ buildPop(); var p=$('setPop'); p.hidden=false; $('setPill').setAttribute('aria-expanded','true');
+  scrim=document.createElement('div'); scrim.className='scrim'; scrim.addEventListener('click',closePop); document.body.appendChild(scrim);
+  requestAnimationFrame(function(){ p.classList.add('show'); }); }
+function closePop(){ var p=$('setPop'); p.classList.remove('show'); $('setPill').setAttribute('aria-expanded','false');
+  if(scrim){ scrim.remove(); scrim=null; } setTimeout(function(){ p.hidden=true; },160); }
+function popOpen(){ return !$('setPop').hidden; }
+
+/* ---------- drill state ---------- */
+var pool=[], cur=null, say={revealed:false,rated:false}, hear={ready:false,answered:false,choices:[],picked:null}, autoTimer=null;
+
+function startSet(){
+  pool=poolFor(PREFS.set); RECENT=[];
+  $('setLabel').textContent=setShort(PREFS.set);
+  next();
+}
+function next(){
+  clearTimeout(autoTimer); autoTimer=null;
+  cur = pool.length ? pick(pool) : null;
+  if(PREFS.mode==='say') newSay(); else newHear(true);
+  updateMastery();
+}
+function emptyMsg(){
+  return PREFS.set==='weak' ? 'No weak words yet. Practise a group first — any word you miss twice shows up here.' : 'Nothing in this set.';
+}
+
+/* ---------- ① See & Say ---------- */
+function newSay(){
+  say={revealed:false,rated:false};
+  var bw=$('sayWord');
+  ['sayThai','sayRom','sayNote'].forEach(function(id){ $(id).textContent=''; });
+  $('sayReveal').classList.remove('show');
+  $('rateGot').classList.remove('chosen'); $('rateMiss').classList.remove('chosen');
+  $('sayRateRow').hidden=true; $('sayAgainBtn').hidden=true;
+  if(!cur){ bw.textContent=''; $('sayHint').innerHTML='<span class="empty">'+emptyMsg()+'</span>'; $('sayRevealBtn').hidden=true; return; }
+  bw.textContent=cur.english; bw.classList.toggle('long', cur.english.length>16);
+  bw.classList.remove('in'); void bw.offsetWidth; bw.classList.add('in');
+  $('sayHint').textContent='Say it out loud first…';
+  $('sayRevealBtn').hidden=false;
+}
+function revealSay(){
+  if(!cur||say.revealed) return; say.revealed=true;
+  $('sayThai').textContent=cur.thai;
+  $('sayRom').textContent=PREFS.roman?accented(cur):'';
+  $('sayNote').textContent=cur.note||'';
+  var r=$('sayReveal'); r.classList.remove('show'); void r.offsetWidth; r.classList.add('show');
+  $('sayHint').textContent='Did you say it — and the tone — the same way?';
+  $('sayRevealBtn').hidden=true; $('sayAgainBtn').hidden=!hasTTS; $('sayRateRow').hidden=false;
+  speak(cur.thai);
+}
+function rateSay(ok){
+  if(!cur||!say.revealed||say.rated) return; say.rated=true;
+  $(ok?'rateGot':'rateMiss').classList.add('chosen');
+  record(cur.id,ok);
+  if(PREFS.set==='weak') pool=poolFor('weak');
+  setTimeout(next,200);
+}
+
+/* ---------- ② Hear & Choose ---------- */
+function makeChoices(w){
+  var picks=[], seen={}; seen[w.english]=1;          // English-only tiles: every meaning must differ
+  function take(x){ if(picks.length<3 && x.thai!==w.thai && !seen[x.english]){ seen[x.english]=1; picks.push(x); } }
+  shuffle(WORDS.filter(function(x){ return x.group===w.group; })).forEach(take);   // same group = no easy elimination
+  if(picks.length<3) shuffle(WORDS.slice()).forEach(take);
+  return shuffle(picks.concat([w]));
+}
+function newHear(autoplay){
+  hear={ready:false,answered:false,choices:[],picked:null};
+  $('tiles').hidden=true; $('tiles').innerHTML='';
+  $('hearVerdict').textContent=''; $('hearVerdict').className='verdict';
+  ['hearThai','hearRom','hearMeaning','hearNote'].forEach(function(id){ $(id).textContent=''; });
+  $('nextBtn').hidden=true; $('hearStage').classList.remove('done');
+  if(!cur){ $('playBtn').hidden=true; $('readyBtn').hidden=true; $('hearHint').innerHTML='<span class="empty">'+emptyMsg()+'</span>'; return; }
+  $('playBtn').hidden=false; $('readyBtn').hidden=false;
+  $('hearHint').textContent = hasTTS ? 'Think of the meaning first.' : 'This browser can’t play audio, so this mode won’t work here. Try ① See & Say.';
+  hear.choices=makeChoices(cur);
+  if(autoplay!==false) setTimeout(function(){ speak(cur.thai); },150);
+}
+function showChoices(){
+  if(!cur||hear.ready) return; hear.ready=true;
+  $('readyBtn').hidden=true; $('hearHint').textContent='Tap the meaning closest to yours.';
+  renderTiles(); $('tiles').hidden=false;
+}
+function renderTiles(){
+  $('tiles').innerHTML=hear.choices.map(function(c,i){
+    var cls=''; if(hear.answered){ if(c.id===cur.id) cls=' right'; else if(c.id===hear.picked) cls=' wrong'; }
+    return '<button class="tile'+cls+'" data-i="'+i+'"'+(hear.answered?' disabled':'')+'><span class="k">'+(i+1)+'</span>'+escapeHtml(c.english)+'</button>';
+  }).join('');
+}
+function choose(i){
+  if(!cur||!hear.ready||hear.answered) return;
+  var c=hear.choices[i]; if(!c) return;
+  var ok=c.id===cur.id; hear.answered=true; hear.picked=c.id;
+  record(cur.id,ok); hitStreak(ok); renderTiles();
+  var v=$('hearVerdict'); v.textContent=ok?'✓ Correct!':'✗ It was “'+cur.english+'”'; v.className='verdict '+(ok?'ok':'bad');
+  $('hearThai').textContent=cur.thai; $('hearRom').textContent=PREFS.roman?accented(cur):''; $('hearNote').textContent=cur.note||'';
+  var r=$('hearReveal'); r.classList.remove('show'); void r.offsetWidth; r.classList.add('show');
+  $('hearHint').textContent=''; $('nextBtn').hidden=false; $('hearStage').classList.add('done');
+  if(ok){ var card=$('card'); card.classList.remove('pulse'); void card.offsetWidth; card.classList.add('pulse');
+          autoTimer=setTimeout(next,CONFIG.autoNextMs); }      // wrong answers wait: study the reveal
+  if(PREFS.set==='weak') pool=poolFor('weak');
+  updateMastery();
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+/* ---------- mode switching ---------- */
+function setMode(m){
+  PREFS.mode=m; savePrefs();
+  var sayOn=m==='say';
+  $('panelSay').hidden=!sayOn; $('panelHear').hidden=sayOn;
+  $('tabSay').classList.toggle('active',sayOn); $('tabHear').classList.toggle('active',!sayOn);
+  if(hasTTS) speechSynthesis.cancel();
+  next();
+}
+
+/* ---------- mastery readout ---------- */
+function updateMastery(){
+  var k=knownIn(pool), html = !storageOK ? 'Saving is off in this browser'
+    : '<span class="m-ico">✦</span>'+k+'/'+pool.length+' known in '+setShort(PREFS.set).replace(/^\S+\s/,'');
+  document.querySelectorAll('.mastery-out').forEach(function(el){ el.innerHTML=html; });
+  var kn = cur && isKnown(cur.id);
+  $('sayBadge').hidden=!kn; $('hearBadge').hidden=!kn;
+}
+
+/* ---------- settings ---------- */
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  $('themeBtn').textContent = t==='dark' ? '◑' : '◐';
+  $('themeBtn').setAttribute('aria-label', t==='dark' ? 'Switch to light theme' : 'Switch to dark theme');
+  try{ localStorage.setItem(KEY_THEME,t); }catch(e){}
+}
+function syncSheet(){
+  $('romBtn').textContent=PREFS.roman?'On':'Off'; $('romBtn').classList.toggle('on',PREFS.roman);
+  $('slowBtn').textContent=PREFS.slow?'On':'Off'; $('slowBtn').classList.toggle('on',PREFS.slow);
+  $('voiceVal').textContent = !hasTTS ? 'Not supported here' : thaiVoice ? (thaiVoice.name||'Thai') : (voiceChecked ? 'No Thai voice listed' : 'Checking…');
+  var known=WORDS.filter(function(w){ return isKnown(w.id); }).length, seen=Object.keys(STATS).length;
+  $('progressVal').textContent = storageOK ? known+' known · '+seen+' seen' : 'Saving is off';
+}
+function openSettings(){ syncSheet(); $('settings').hidden=false; }
+function closeSettings(){ $('settings').hidden=true; $('resetConfirm').hidden=true; }
+
+/* ---------- events ---------- */
+$('setPill').addEventListener('click',function(){ popOpen()?closePop():openPop(); });
+$('setPop').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b) return;
+  if(b.dataset.set){ PREFS.set=b.dataset.set; savePrefs(); closePop(); startSet(); }
+  else if(b.dataset.level){ PREFS.level=+b.dataset.level; savePrefs(); buildPop(); if(PREFS.set!=='first10'&&PREFS.set!=='weak') startSet(); }
+});
+$('tabSay').addEventListener('click',function(){ if(PREFS.mode!=='say') setMode('say'); });
+$('tabHear').addEventListener('click',function(){ if(PREFS.mode!=='hear') setMode('hear'); });
+$('sayRevealBtn').addEventListener('click',revealSay);
+$('sayAgainBtn').addEventListener('click',function(){ if(cur) speak(cur.thai); });
+$('rateGot').addEventListener('click',function(){ rateSay(true); });
+$('rateMiss').addEventListener('click',function(){ rateSay(false); });
+$('playBtn').addEventListener('click',function(){ if(cur) speak(cur.thai); });
+$('readyBtn').addEventListener('click',showChoices);
+$('tiles').addEventListener('click',function(e){ var t=e.target.closest('.tile'); if(t) choose(+t.dataset.i); });
+$('nextBtn').addEventListener('click',next);
+$('gearBtn').addEventListener('click',openSettings);
+$('settingsClose').addEventListener('click',closeSettings);
+$('settingsScrim').addEventListener('click',closeSettings);
+$('betaTag').addEventListener('click',function(){ showWarn('beta'); });
+$('warnX').addEventListener('click',hideWarn);
+$('themeBtn').addEventListener('click',function(){ setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'); });
+$('romBtn').addEventListener('click',function(){ PREFS.roman=!PREFS.roman; savePrefs(); syncSheet();
+  if(say.revealed&&cur) $('sayRom').textContent=PREFS.roman?accented(cur):'';
+  if(hear.answered&&cur) $('hearRom').textContent=PREFS.roman?accented(cur):''; });
+$('slowBtn').addEventListener('click',function(){ PREFS.slow=!PREFS.slow; savePrefs(); syncSheet(); });
+$('resetBtn').addEventListener('click',function(){ $('resetConfirm').hidden=false; });
+$('resetCancel').addEventListener('click',function(){ $('resetConfirm').hidden=true; });
+$('resetYes').addEventListener('click',function(){
+  STATS={}; streak={s:0,b:0};
+  try{ store.removeItem(KEY_STATS); store.removeItem(KEY_STREAK); }catch(e){}
+  renderStreak(); closeSettings(); startSet();
+});
+
+/* desktop keyboard (like /learn) — never while typing or with a sheet/popover open
+   See & Say: Space/Enter reveal → Enter/→ got it, ← missed
+   Hear & Choose: Space replay · Enter show choices / next · 1–4 choose */
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){ if(!$('settings').hidden) closeSettings(); else if(popOpen()) closePop(); return; }
+  if(!$('settings').hidden||popOpen()) return;
+  var t=e.target; if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+  if(PREFS.mode==='say'){
+    if(!say.revealed){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); revealSay(); } }
+    else if(e.key==='Enter'||e.key==='ArrowRight'){ e.preventDefault(); rateSay(true); }
+    else if(e.key==='ArrowLeft'){ e.preventDefault(); rateSay(false); }
+  } else {
+    if(e.key===' '){ e.preventDefault(); if(cur) speak(cur.thai); }
+    else if(e.key==='Enter'){ e.preventDefault(); if(!hear.ready) showChoices(); else if(hear.answered) next(); }
+    else if(/^[1-4]$/.test(e.key)){ e.preventDefault(); showChoices(); choose(+e.key-1); }
+  }
+});
+
+/* ---------- boot ---------- */
+(function(){
+  var saved='dark'; try{ saved=localStorage.getItem(KEY_THEME)||'dark'; }catch(e){}
+  setTheme(saved);
+  renderStreak();
+  if(hasTTS){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; } else showWarn('notts');
+  if(!$('warn').hidden){} else if(!load(KEY_BETA,0)) showWarn('beta');
+  $('panelSay').hidden=PREFS.mode!=='say'; $('panelHear').hidden=PREFS.mode==='say';
+  $('tabSay').classList.toggle('active',PREFS.mode==='say'); $('tabHear').classList.toggle('active',PREFS.mode!=='say');
+  pool=poolFor(PREFS.set); $('setLabel').textContent=setShort(PREFS.set);
+  cur = pool.length ? pick(pool) : null;
+  if(PREFS.mode==='say') newSay(); else newHear(false);   // no audio on page load (browsers block it anyway)
+  updateMastery();
+})();
+</script>
+<!-- No service worker registration here on purpose: /sw.js doesn't exist in the repo yet. -->
+</body>
+</html>
