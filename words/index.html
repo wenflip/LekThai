@@ -284,7 +284,9 @@
   .verdict{ font:700 18px/1.2 "DM Sans"; min-height:24px; }
   .verdict.ok{ color:var(--ok); }
   .verdict.bad{ color:var(--bad); }
-  .verdict.ok, .verdict.bad{ animation:pop .32s ease; }
+  .verdict.idk{ color:var(--blue); }
+  .verdict.ok, .verdict.bad, .verdict.idk{ animation:pop .32s ease; }
+  .btn.text.idk{ height:40px; font-size:14px; text-decoration:underline; text-decoration-color:color-mix(in srgb, var(--muted) 45%, transparent); text-underline-offset:4px; }
 
   /* ============ BUTTONS ============ */
   .actions{ flex:0 0 auto; display:flex; flex-direction:column; gap:10px; padding-top:14px; }
@@ -486,7 +488,9 @@
           <button class="btn play" id="playBtn"><span class="ico">🔊</span> Play word</button>
           <div class="hint" id="hearHint">Think of the meaning first.</div>
           <button class="btn primary" id="readyBtn">I’ve got it — show choices</button>
+          <button class="btn text idk" id="noIdeaBtn">No idea — show me</button>
           <div class="tiles" id="tiles" hidden></div>
+          <button class="btn text idk" id="idkBtn" hidden>I don’t know</button>
           <div class="verdict" id="hearVerdict"></div>
           <div class="reveal" id="hearReveal">
             <div class="thai" id="hearThai" lang="th"></div>
@@ -561,6 +565,7 @@
       <div class="about-title">How to use it</div>
       <p><b>① See &amp; Say</b> shows the English. Say the Thai out loud from memory, then tap reveal to hear it and check yourself — including the tone. Be honest: a wrong tone is a different word.</p>
       <p><b>② Hear &amp; Choose</b> plays a Thai word. Work out what it means in your head first, then show the choices and tap the one that matches.</p>
+      <p>Don’t guess. If you don’t know it, tap <b>No idea</b> or <b>I don’t know</b>. A lucky guess tells the app you know a word you don’t, so it shows it to you less. An honest “don’t know” keeps it coming back, and it won’t break your ⚡ streak.</p>
       <p>The first time you meet a word you won’t know it — that’s fine, the reveal is the lesson. It only counts as a miss from the second time on.</p>
     </div>
     <div class="about">
@@ -625,9 +630,10 @@ function accented(w){
 function attempts(s){ return s ? s.c+s.m : 0; }
 function isKnown(id){ var s=STATS[id]; if(!s) return false; var n=attempts(s);
   return n>=CONFIG.knownMinAttempts && s.c/n>=CONFIG.knownMinAccuracy && s.r===1; }  // a miss un-knows it
-function record(id, pass){
+function record(id, pass, dontKnow){
   var first=!STATS[id], s=STATS[id]||(STATS[id]={c:0,m:0,r:0,t:0});
   if(pass) s.c++; else if(!first) s.m++;          // first-ever sight: a miss is "seen", not a failure
+  if(dontKnow) s.d=(s.d||0)+1;                    // logged apart from wrong picks: "didn't know" ≠ "mixed it up"
   s.r=pass?1:0; s.t=Date.now(); save(KEY_STATS,STATS);
 }
 
@@ -783,9 +789,38 @@ function rateSay(ok){
 }
 
 /* ---------- ② Hear & Choose ---------- */
+/* Wrong answers must never be a fair answer too. Two meanings "overlap" if they share a key word
+   (hello / goodbye vs goodbye (longer parting)), are listed as synonyms (sick vs unwell),
+   or one Thai word contains the other (เผ็ด in ไม่เผ็ด). Overlapping words are never shown together. */
+var STOP={a:1,an:1,the:1,to:1,of:1,in:1,on:1,at:1,for:1,and:1,or:1,is:1,it:1,be:1,do:1,did:1,does:1,you:1,your:1,i:1,me:1,my:1,m:1,s:1,ve:1,t:1,
+  this:1,that:1,with:1,from:1,as:1,by:1,are:1,am:1,can:1,what:1,how:1,very:1,lot:1,little:1,bit:1,
+  men:1,women:1,thing:1,things:1,someone:1,something:1,word:1,counting:1,general:1,safe:1,default:1};
+var SYN=[['sick','unwell','ill','fever','cold'],['happy','glad','fun'],['sad','sorry','unlucky'],['afraid','scared','worried'],
+  ['hurts','aches','pain','headache','stomachache'],['tired','sleepy'],['near','close'],['know','understand'],
+  ['stop','pull'],['here','there'],['hot','spicy'],['cold','cool'],['big','fat'],['small','little','thin'],
+  ['market','shop','mall'],['food','meal','rice'],['money','cash','baht','price','expensive','cheap'],
+  ['now','moment','soon'],['old','new'],['good','well','correct','right','yes'],['no','not','wrong'],['ok','fine','worries']];
+var SYNOF={}; SYN.forEach(function(g,i){ g.forEach(function(w){ SYNOF[w]=SYNOF[w]||[]; SYNOF[w].push(i); }); });
+var KEYCACHE={};
+function keys(w){
+  if(KEYCACHE[w.id]) return KEYCACHE[w.id];
+  var k={}; w.english.toLowerCase().replace(/[^a-z]+/g,' ').split(' ').forEach(function(x){
+    if(!x||STOP[x]) return; var stem=x.replace(/(ing|es|s)$/,''); k[x]=1; if(stem.length>2) k[stem]=1;
+    (SYNOF[x]||[]).forEach(function(i){ k['#'+i]=1; });
+  });
+  return (KEYCACHE[w.id]=k);
+}
+var PRONOUN_I={'ผม':1,'ฉัน':1};
+function overlaps(a,b){
+  if(a.thai===b.thai || a.english===b.english) return true;
+  if(a.thai.length>1 && b.thai.length>1 && (a.thai.indexOf(b.thai)>-1 || b.thai.indexOf(a.thai)>-1)) return true;
+  if(PRONOUN_I[a.thai] && PRONOUN_I[b.thai]) return true;
+  var ka=keys(a), kb=keys(b); for(var x in ka) if(kb[x]) return true;
+  return false;
+}
 function makeChoices(w){
-  var picks=[], seen={}; seen[w.english]=1;          // English-only tiles: every meaning must differ
-  function take(x){ if(picks.length<3 && x.thai!==w.thai && !seen[x.english]){ seen[x.english]=1; picks.push(x); } }
+  var picks=[];                                     // English-only tiles: every meaning must be clearly different
+  function take(x){ if(picks.length<3 && x!==w && !overlaps(x,w) && !picks.some(function(p){ return overlaps(p,x); })) picks.push(x); }
   shuffle(WORDS.filter(function(x){ return x.group===w.group; })).forEach(take);   // same group = no easy elimination
   if(picks.length<3) shuffle(WORDS.slice()).forEach(take);
   return shuffle(picks.concat([w]));
@@ -796,16 +831,16 @@ function newHear(autoplay){
   $('hearVerdict').textContent=''; $('hearVerdict').className='verdict';
   ['hearThai','hearRom','hearMeaning','hearNote'].forEach(function(id){ $(id).textContent=''; });
   $('nextBtn').hidden=true; $('hearStage').classList.remove('done');
-  if(!cur){ $('playBtn').hidden=true; $('readyBtn').hidden=true; $('hearHint').innerHTML='<span class="empty">'+emptyMsg()+'</span>'; return; }
-  $('playBtn').hidden=false; $('readyBtn').hidden=false;
+  if(!cur){ $('playBtn').hidden=true; $('readyBtn').hidden=true; $('noIdeaBtn').hidden=true; $('idkBtn').hidden=true; $('hearHint').innerHTML='<span class="empty">'+emptyMsg()+'</span>'; return; }
+  $('playBtn').hidden=false; $('readyBtn').hidden=false; $('noIdeaBtn').hidden=false; $('idkBtn').hidden=true;
   $('hearHint').textContent = hasTTS ? 'Think of the meaning first.' : 'This browser can’t play audio, so this mode won’t work here. Try ① See & Say.';
   hear.choices=makeChoices(cur);
   if(autoplay!==false) setTimeout(function(){ speak(cur.thai); },150);
 }
 function showChoices(){
   if(!cur||hear.ready) return; hear.ready=true;
-  $('readyBtn').hidden=true; $('hearHint').textContent='Tap the meaning closest to yours.';
-  renderTiles(); $('tiles').hidden=false;
+  $('readyBtn').hidden=true; $('noIdeaBtn').hidden=true; $('hearHint').textContent='Tap the meaning closest to yours.';
+  renderTiles(); $('tiles').hidden=false; $('idkBtn').hidden=false;
 }
 function renderTiles(){
   $('tiles').innerHTML=hear.choices.map(function(c,i){
@@ -817,15 +852,32 @@ function choose(i){
   if(!cur||!hear.ready||hear.answered) return;
   var c=hear.choices[i]; if(!c) return;
   var ok=c.id===cur.id; hear.answered=true; hear.picked=c.id;
-  record(cur.id,ok); hitStreak(ok); renderTiles();
-  var v=$('hearVerdict'); v.textContent=ok?'✓ Correct!':'✗ It was “'+cur.english+'”'; v.className='verdict '+(ok?'ok':'bad');
-  $('hearThai').textContent=cur.thai; $('hearRom').textContent=PREFS.roman?accented(cur):''; $('hearNote').textContent=cur.note||'';
-  var r=$('hearReveal'); r.classList.remove('show'); void r.offsetWidth; r.classList.add('show');
-  $('hearHint').textContent=''; $('nextBtn').hidden=false; $('hearStage').classList.add('done');
+  record(cur.id,ok); hitStreak(ok);
+  revealHear(ok?'ok':'bad', ok?'✓ Correct!':'✗ It was “'+cur.english+'”');
   if(ok){ var card=$('card'); card.classList.remove('pulse'); void card.offsetWidth; card.classList.add('pulse');
           autoTimer=setTimeout(next,CONFIG.autoNextMs); }      // wrong answers wait: study the reveal
   if(PREFS.set==='weak') pool=poolFor('weak');
   updateMastery();
+}
+/* "No idea" (before choices) and "I don't know" (after): an honest miss.
+   Counts as a miss (a first-ever sight is just "seen"), logged separately, and the ⚡ streak
+   is paused, not reset, so honesty never costs more than a 1-in-4 guess. */
+function dontKnow(){
+  if(!cur||hear.answered) return;
+  if(!hear.ready){ hear.ready=true; $('readyBtn').hidden=true; $('noIdeaBtn').hidden=true; }
+  hear.answered=true; hear.picked=null;
+  record(cur.id,false,true);
+  revealHear('idk','Now you know: “'+cur.english+'”');
+  $('tiles').hidden=false;
+  if(PREFS.set==='weak') pool=poolFor('weak');
+  updateMastery();
+}
+function revealHear(kind,text){
+  renderTiles(); $('idkBtn').hidden=true;
+  var v=$('hearVerdict'); v.textContent=text; v.className='verdict '+kind;
+  $('hearThai').textContent=cur.thai; $('hearRom').textContent=PREFS.roman?accented(cur):''; $('hearNote').textContent=cur.note||'';
+  var r=$('hearReveal'); r.classList.remove('show'); void r.offsetWidth; r.classList.add('show');
+  $('hearHint').textContent=''; $('nextBtn').hidden=false; $('hearStage').classList.add('done');
 }
 function escapeHtml(s){ return String(s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 
@@ -880,6 +932,8 @@ $('rateGot').addEventListener('click',function(){ rateSay(true); });
 $('rateMiss').addEventListener('click',function(){ rateSay(false); });
 $('playBtn').addEventListener('click',function(){ if(cur) speak(cur.thai); });
 $('readyBtn').addEventListener('click',showChoices);
+$('noIdeaBtn').addEventListener('click',dontKnow);
+$('idkBtn').addEventListener('click',dontKnow);
 $('tiles').addEventListener('click',function(e){ var t=e.target.closest('.tile'); if(t) choose(+t.dataset.i); });
 $('nextBtn').addEventListener('click',next);
 $('gearBtn').addEventListener('click',openSettings);
@@ -902,7 +956,7 @@ $('resetYes').addEventListener('click',function(){
 
 /* desktop keyboard (like /learn) — never while typing or with a sheet/popover open
    See & Say: Space/Enter reveal → Enter/→ got it, ← missed
-   Hear & Choose: Space replay · Enter show choices / next · 1–4 choose */
+   Hear & Choose: Space replay · Enter show choices / next · 1–4 choose · 0 = I don't know */
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){ if(!$('settings').hidden) closeSettings(); else if(popOpen()) closePop(); return; }
   if(!$('settings').hidden||popOpen()) return;
@@ -915,6 +969,7 @@ document.addEventListener('keydown',function(e){
     if(e.key===' '){ e.preventDefault(); if(cur) speak(cur.thai); }
     else if(e.key==='Enter'){ e.preventDefault(); if(!hear.ready) showChoices(); else if(hear.answered) next(); }
     else if(/^[1-4]$/.test(e.key)){ e.preventDefault(); showChoices(); choose(+e.key-1); }
+    else if(e.key==='0'||e.key==='?'){ e.preventDefault(); dontKnow(); }
   }
 });
 
