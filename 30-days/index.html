@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
 <title>0 to Survival Thai — LekThai</title>
-<!-- /30-days v1.0 (2026-10-07): built from lekthai_30day_curriculum v1.1. -->
+<!-- /30-days v1.1 (2026-10-07): built from lekthai_30day_curriculum v1.2. Tone drills removed. -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -305,31 +305,6 @@
   .choice-t[disabled]{ cursor:default; }
   .choice-t[disabled]:not(.right):not(.wrong){ opacity:.55; }
 
-  /* tone rows (same as /sounds) */
-  .choices{ display:flex; flex-direction:column; gap:8px; width:100%; }
-  .row{
-    -webkit-appearance:none; appearance:none; cursor:pointer; width:100%;
-    display:grid; grid-template-columns:54px 66px 1fr; align-items:center; gap:9px;
-    min-height:60px; padding:7px 12px 7px 10px; border-radius:16px; text-align:left;
-    border:1.5px solid var(--card-border); background:var(--soft); color:var(--ink);
-  }
-  .choices.many .row{ min-height:50px; padding-top:4px; padding-bottom:4px; }
-  .row[disabled]{ opacity:.5; cursor:default; }
-  .row.right{ border-color:var(--ok); background:color-mix(in srgb, var(--ok) 16%, transparent); }
-  .row.wrong{ border-color:var(--bad); background:color-mix(in srgb, var(--bad) 16%, transparent); }
-  .shape{ width:54px; height:28px; display:block; }
-  .shape path{ fill:none; stroke:var(--blue); stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; }
-  .shape .guide{ stroke:var(--card-border); stroke-width:1; stroke-dasharray:2 3; }
-  .lenbar{ display:block; height:7px; border-radius:99px; background:var(--card-border); position:relative; }
-  .lenbar i{ position:absolute; left:0; top:0; bottom:0; border-radius:99px; background:var(--blue); }
-  .lbl{ font:700 13.5px/1.15 "DM Sans"; }
-  .lbl small{ display:block; font:500 10.5px/1.2 "DM Sans"; color:var(--muted); margin-top:2px; }
-  .word{ min-width:0; display:flex; flex-direction:column; gap:1px; }
-  .word .line{ display:flex; align-items:baseline; gap:7px; flex-wrap:wrap; }
-  .word .th{ font:500 20px/1.25 "Sarabun","Noto Sans Thai",sans-serif; color:var(--blue); }
-  .word .ro{ font:500 14px/1.2 "DM Sans"; color:var(--ink-2); }
-  .word .en{ font:500 12px/1.25 "DM Sans"; color:var(--muted); }
-
   /* ============ END VIEW ============ */
   .endbox{ text-align:center; padding:18px 0 4px; }
   .score{ font-family:"Fraunces", Georgia, serif; font-weight:600; font-size:64px; line-height:1; margin:10px 0 6px; }
@@ -403,7 +378,7 @@
   @media (max-height:700px){
     .stage{ gap:8px; padding:12px 12px 10px; }
     .btn.play{ height:46px; } .btn.primary{ height:50px; }
-    .choice-t{ min-height:56px; } .row{ min-height:52px; } .choices.many .row{ min-height:44px; }
+    .choice-t{ min-height:56px; }
     .bigword.num{ font-size:72px; }
   }
   @media (prefers-reduced-motion:reduce){
@@ -442,7 +417,7 @@
     <div id="weeks"></div>
     <div class="howto">
       <h3>How it works</h3>
-      <p><b>Every day has two 15-minute sessions.</b> ① Listen trains your ear: tones, numbers, words and phrases you hear and pick. ② Speak makes you say them out loud from memory, then check yourself.</p>
+      <p><b>Every day has two 15-minute sessions.</b> ① Listen trains your ear: numbers, words and phrases you hear and pick. ② Speak makes you say them out loud from memory, then check yourself.</p>
       <p><b>Morning and night works best,</b> but any time is fine. Missed a day? Just carry on. Want to skip ahead? Tap any day.</p>
       <p><b>New things come back</b> 1, 3, 7 and 14 days after you first meet them, and anything you miss comes back sooner.</p>
       <p><b>★ Tests</b> on Days 7, 14, 21 and 30 are optional. Pass with 80% overall and enough spoken right. Retake as often as you like.</p>
@@ -550,7 +525,7 @@
     </div>
     <div class="about">
       <div class="about-title">Beta</div>
-      <p>The tones and spellings haven’t been checked by a native Thai speaker yet, and the audio is your phone’s built-in voice. Trust your ears over the letters.</p>
+      <p>The spellings haven’t been checked by a native Thai speaker yet, and the audio is your phone’s built-in voice. If the voice and the letters disagree, trust the voice.</p>
     </div>
     <div class="about">
       <div class="about-title">Pausing</div>
@@ -558,7 +533,7 @@
     </div>
     <div class="about">
       <div class="about-title">Be honest in Speak</div>
-      <p>Speak is self-rated. If you hesitated, or the tone was wrong when you heard it back, tap Missed. It comes back sooner, which is the point.</p>
+      <p>Speak is self-rated. If you hesitated, or it didn’t sound like what you said when you heard it back, tap Missed. It comes back sooner, which is the point.</p>
     </div>
   </div>
 </div>
@@ -589,7 +564,7 @@ var W_RAW = [
  ["greet-15","สบายดีไหม","sa-baai-dii mai","L-M-M-H","how are you?",3],
  ["greet-16","สบายดี","sa-baai-dii","L-M-M","I'm fine",3],
  ["people-01","ผม","phom","R","I (men)",3,"m"],
- ["people-02","ฉัน","chan","R","I (women)",3,"f","Dictionary tone is rising; usually said with a high tone."],
+ ["people-02","ฉัน","chan","R","I (women)",3,"f"],
  ["people-03","คุณ","khun","M","you",4],
  ["talk-16","ไม่เข้าใจ","mai khao-jai","F-F-M","I don't understand",4],
  ["talk-17","ไม่รู้","mai ruu","F-H","I don't know",4],
@@ -601,7 +576,7 @@ var W_RAW = [
  ["ask-02","ที่ไหน","thii-nai","F-R","where?",5],
  ["greet-20","ขอ...","khaaw","R","may I have...",5],
  ["ask-12","ได้ไหม","dai mai","F-H","can you / may I?",6],
- ["ask-09","ไหม","mai","H","yes/no question marker",6,"","Dictionary tone is rising; usually said with a high tone."],
+ ["ask-09","ไหม","mai","H","yes/no question marker",6],
  ["ask-01","อะไร","a-rai","L-M","what?",6],
  ["num-22","นิดหน่อย","nit-nooi","H-L","a little bit",6],
  ["greet-21","ช่วย...","chuai","F","please (do something) / help",6],
@@ -614,7 +589,7 @@ var W_RAW = [
  ["food-11","หมู","muu","R","pork",9],
  ["food-13","ปลา","plaa","M","fish",9],
  ["food-14","กุ้ง","kung","F","shrimp",9],
- ["food-15","ไข่","khai","L","egg",9,"","Low tone. Same letters as ไข้ (fever, falling tone)."],
+ ["food-15","ไข่","khai","L","egg",9,"","Sounds close to ไข้ (fever). Context makes it clear."],
  ["food-24","เผ็ด","phet","L","spicy",10],
  ["food-25","ไม่เผ็ด","mai phet","F-L","not spicy",10],
  ["food-27","อร่อย","a-rooi","L-L","delicious",10],
@@ -652,8 +627,8 @@ var W_RAW = [
  ["place-13","สนามบิน","sa-naam-bin","L-R-M","airport",17],
  ["place-07","เซเว่น","see-wen","M-F","7-Eleven",17],
  ["place-05","ร้านอาหาร","raan aa-haan","H-M-R","restaurant",17],
- ["travel-20","ใกล้","klai","F","near",18,"","Falling tone. Rising/mid mix-up turns 'near' into 'far' (ไกล)."],
- ["travel-21","ไกล","klai","M","far",18,"","Mid tone. Compare ใกล้ (near, falling tone)."],
+ ["travel-20","ใกล้","klai","F","near",18,"","Sounds close to ไกล (far). Point as you say it."],
+ ["travel-21","ไกล","klai","M","far",18,"","Sounds close to ใกล้ (near). Point as you say it."],
  ["verb-01","ไป","pai","M","go",18],
  ["verb-02","มา","maa","M","come",18],
  ["verb-44","กลับ","klap","L","go back / return",18],
@@ -681,7 +656,7 @@ var W_RAW = [
  ["health-05","ปวดหัว","puat hua","L-R","headache",24],
  ["health-06","ปวดท้อง","puat thaawng","L-H","stomachache",24],
  ["health-07","ท้องเสีย","thaawng sia","H-R","diarrhoea",24],
- ["health-08","ไข้","khai","F","fever",24,"","Falling tone. Same letters as ไข่ (egg, low tone)."],
+ ["health-08","ไข้","khai","F","fever",24,"","Sounds close to ไข่ (egg). Context makes it clear."],
  ["health-13","แพ้","phae","H","allergic to",24],
  ["health-15","ฉุกเฉิน","chuk-choen","L-R","emergency",24],
  ["talk-01","คุณชื่ออะไร","khun cheu a-rai","M-F-L-M","what's your name?",25],
@@ -726,13 +701,13 @@ var P_RAW = [
  ["p-shop-11","รับถุงไหม","rap thung mai","H-R-H","Do you need a bag?","At 7-Eleven the cashier asks:","h",13,"Answer ไม่เอาถุง (no bag)."],
  ["p-shop-13","หมดแล้ว","mot laew","L-H","It's sold out.","You ask for something and the seller says:","h",13,""],
  ["p-ride-04","เลี้ยวซ้าย","liao saai","H-H","Turn left.","Tell the driver to turn left.","s",15,""],
- ["p-ride-05","เลี้ยวขวา","liao khwaa","H-R","Turn right.","Tell the driver to turn right.","s",15,"ขวา has a rising tone; ซ้าย a high one."],
+ ["p-ride-05","เลี้ยวขวา","liao khwaa","H-R","Turn right.","Tell the driver to turn right.","s",15,""],
  ["p-ride-07","จอดตรงนี้","jaawt trong-nii","L-M-H","Stop here.","You've arrived. Tell the driver to pull over right here.","s",16,"Say it a little early."],
  ["p-ride-01","ไปสนามบิน","pai sa-naam-bin","M-L-R-M","To the airport, please.","You get into a taxi. Tell the driver where to go.","s",16,"Pattern: ไป + place."],
  ["p-ride-02","ไปโรงแรมนี้ได้ไหม","pai roong-raem nii dai mai","M-M-M-H-F-H","Can you take me to this hotel?","You show the driver your hotel on your phone.","s",17,""],
  ["p-ride-03","ไปตลาดเท่าไหร่","pai ta-laat thao-rai","M-L-L-F-L","How much to the market?","Agree the fare before you get in.","s",17,"Swap ตลาด for any place."],
  ["p-way-03","ไปตลาดยังไง","pai ta-laat yang-ngai","M-L-L-M-M","How do I get to the market?","Ask someone for directions to the market.","s",18,"Pattern: ไป + place + ยังไง."],
- ["p-way-04","ไกลไหม","klai mai","M-H","Is it far?","Ask how far away it is.","s",18,"Mid tone. ใกล้ (near) has a falling tone. Mix them up and you've asked the opposite."],
+ ["p-way-04","ไกลไหม","klai mai","M-H","Is it far?","Ask how far away it is.","s",18,"Sounds close to ใกล้ (near). Add a gesture to be sure."],
  ["p-way-08","หลงทาง","long thaang","R-M","I'm lost.","You don't know where you are.","s",19,""],
  ["p-health-01","รู้สึกไม่สบาย","ruu-seuk mai sa-baai","H-L-F-L-M","I don't feel well.","Tell someone you're not feeling well.","s",19,""],
  ["p-trouble-10","มีใครพูดภาษาอังกฤษได้ไหม","mii khrai phuut phaa-saa ang-krit dai mai","M-M-F-M-R-M-L-F-H","Does anyone here speak English?","You're stuck and need someone who speaks English.","s",20,""],
@@ -758,41 +733,6 @@ var P_RAW = [
 var WORDS = W_RAW.map(function(r){ return {k:'w', id:r[0], thai:r[1], say:r[2], tone:r[3], english:r[4], d:r[5], g:r[6]||'', note:r[7]||''}; });
 var PHRASES = P_RAW.map(function(r){ return {k:'p', id:r[0], thai:r[1], say:r[2], tone:r[3], english:r[4], prompt:r[5], use:r[6], d:r[7], note:r[8]||''}; });
 
-/* Sounds: same sets as /sounds */
-var TONE_SETS = [
-  [['maa-M','มา','maa','M','come'],['maa-H','ม้า','maa','H','horse'],['maa-R','หมา','maa','R','dog']],
-  [['khaa-M','คา','khaa','M','stuck (in)'],['khaa-L','ข่า','khaa','L','galangal'],['khaa-F','ค่า','khaa','F','cost / fee'],['khaa-H','ค้า','khaa','H','trade'],['khaa-R','ขา','khaa','R','leg']],
-  [['khaao-M','คาว','khaao','M','fishy (smell)'],['khaao-L','ข่าว','khaao','L','news'],['khaao-F','ข้าว','khaao','F','rice'],['khaao-R','ขาว','khaao','R','white']],
-  [['mai-M','ไมล์','mai','M','mile'],['mai-L','ใหม่','mai','L','new'],['mai-F','ไม่','mai','F','not'],['mai-H','ไม้','mai','H','wood'],['mai-R','ไหม','mai','R','silk']],
-  [['naa-M','นา','naa','M','rice field'],['naa-F','หน้า','naa','F','face'],['naa-H','น้า','naa','H','aunt / uncle (mum’s younger sibling)'],['naa-R','หนา','naa','R','thick']],
-  [['seua-L','เสื่อ','seua','L','mat'],['seua-F','เสื้อ','seua','F','shirt'],['seua-R','เสือ','seua','R','tiger']],
-  [['paa-M','ปา','paa','M','throw'],['paa-L','ป่า','paa','L','forest'],['paa-F','ป้า','paa','F','aunt']],
-  [['kao-M','เกา','kao','M','scratch'],['kao-L','เก่า','kao','L','old (things)'],['kao-F','เก้า','kao','F','nine']],
-  [['puu-M','ปู','puu','M','crab'],['puu-L','ปู่','puu','L','grandpa (dad’s side)']],
-  [['khai-L','ไข่','khai','L','egg'],['khai-F','ไข้','khai','F','fever']],
-  [['klai-M','ไกล','klai','M','far'],['klai-F','ใกล้','klai','F','near']],
-  [['suai-M','ซวย','suai','M','unlucky (slang)'],['suai-R','สวย','suai','R','beautiful']],
-  [['sii-L','สี่','sii','L','four'],['sii-R','สี','sii','R','colour']],
-  [['haa-F','ห้า','haa','F','five'],['haa-R','หา','haa','R','look for']],
-  [['long-M','ลง','long','M','go down / get off'],['long-R','หลง','long','R','lost']],
-  [['chai-F','ใช่','chai','F','yes / that’s right'],['chai-H','ใช้','chai','H','use']]
-].map(function(set,i){ return {id:'t'+i, words:set.map(function(w){ return {id:w[0],thai:w[1],say:w[2],tone:w[3],english:w[4]}; })}; });
-var LEN_PAIRS = [
-  [['khao-S','เข้า','khao','F','S','enter'],['khao-Lg','ข้าว','khaao','F','L','rice']],
-  [['fan-S','ฟัน','fan','M','S','teeth'],['fan-Lg','ฟาน','faan','M','L','barking deer']],
-  [['khan-S','คัน','khan','M','S','itchy'],['khan-Lg','คาน','khaan','M','L','beam (wood)']],
-  [['hak-S','หัก','hak','L','S','snap / break'],['hak-Lg','หาก','haak','L','L','if (formal)']],
-  [['pak-S','ปัก','pak','L','S','stick in / embroider'],['pak-Lg','ปาก','paak','L','L','mouth']],
-  [['sak-S','สัก','sak','L','S','tattoo'],['sak-Lg','สาก','saak','L','L','pestle']],
-  [['fanR-S','ฝัน','fan','R','S','dream'],['fanR-Lg','ฝาน','faan','R','L','slice thinly']]
-].map(function(set,i){ return {id:'l'+i, words:set.map(function(w){ return {id:w[0],thai:w[1],say:w[2],tone:w[3],len:w[4],english:w[5]}; })}; });
-var TONE_ORDER=['M','L','F','H','R'];
-var TONE_NAME={M:'mid',L:'low',F:'falling',H:'high',R:'rising'};
-var TONE_DESC={M:'flat',L:'low, flat',F:'up, then down',H:'high',R:'dips, then up'};
-var TONE_PATH={M:'M5 15 L55 15',L:'M5 18 Q30 22 55 24',F:'M5 11 Q20 5 55 26',H:'M5 10 Q32 10 55 5',R:'M5 19 Q26 27 55 4'};
-var DRILLS={ t2:{kind:'tone',tones:['M','R'],name:'2 tones'}, t3:{kind:'tone',tones:['M','F','R'],name:'3 tones'},
-             t5:{kind:'tone',tones:['M','L','F','H','R'],name:'all 5 tones'}, len:{kind:'len',name:'short vs long vowels'} };
-
 /* Numbers: same Prices list as /learn */
 var PRICES=[20,30,40,50,60,70,80,90,100,120,150,180,200,250,300,350,400,500,600,750,1000,1200,1500,2000];
 
@@ -817,13 +757,6 @@ var TEST_ON_DAY={7:1,14:2,21:3,30:4};
 var REPEATS=[1,3,7,14];   // an item comes back this many days after it's introduced
 
 function weekOf(day){ for(var i=0;i<WEEKS.length;i++) if(WEEKS[i].days.indexOf(day)>-1) return WEEKS[i]; return WEEKS[0]; }
-function toneFor(day){
-  if(day<=7) return 't2';
-  if(day<=14) return 't3';
-  if(day<=21) return (day===15||day===17||day===19) ? 'len' : 't3';
-  if(day===23||day===25||day===27) return 't5';
-  return 't3';
-}
 function poolFor(day){
   if(day<=2) return '1-10';
   if(day<=4) return '1-20';
@@ -836,10 +769,10 @@ function poolFor(day){
 
 /* ---------- tests (curriculum §4) ---------- */
 var TESTS={
-  1:{day:7,  from:1,to:6,  tones:[['t2',10]],            num:'1-20t', nNum:8,  wH:12, pH:4,  wS:4, pS:2, total:40, pass:32, speakMin:4,  practise:[5,6]},
-  2:{day:14, from:1,to:13, focus:[8,13], tones:[['t3',10]], num:'p100', nNum:10, wH:8, pH:6, wS:3, pS:3, total:40, pass:32, speakMin:4, practise:[12,13], hearMin:2},
-  3:{day:21, from:1,to:20, focus:[15,20], tones:[['t3',5],['len',5]], num:'p100', nNum:10, wH:8, pH:6, wS:3, pS:3, total:40, pass:32, speakMin:4, practise:[19,20]},
-  4:{day:30, from:1,to:27, tones:[['t3',10]], num:'final', nNum:12, wH:14, pH:10, wS:6, pS:8, total:60, pass:48, speakMin:10, practise:[28,29], hearMin:3, weekEach:true}
+  1:{day:7,  from:1,to:6,  num:'1-20t', nNum:8,  wH:12, pH:4,  wS:4, pS:2, total:30, pass:24, speakMin:4,  practise:[5,6]},
+  2:{day:14, from:1,to:13, focus:[8,13], num:'p100', nNum:10, wH:8, pH:6, wS:3, pS:3, total:30, pass:24, speakMin:4, practise:[12,13], hearMin:2},
+  3:{day:21, from:1,to:20, focus:[15,20], num:'p100', nNum:10, wH:8, pH:6, wS:3, pS:3, total:30, pass:24, speakMin:4, practise:[19,20]},
+  4:{day:30, from:1,to:27, num:'final', nNum:12, wH:14, pH:10, wS:6, pS:8, total:50, pass:40, speakMin:10, practise:[28,29], hearMin:3, weekEach:true}
 };
 
 /* =====================================================================
@@ -984,7 +917,7 @@ function showWarn(kind){
     ? '⚠️ <b>No Thai voice found in this browser.</b> The app will still try to speak. If you hear nothing, install a Thai text-to-speech voice in your phone’s settings, or try Chrome.'
     : kind==='notts' ? '⚠️ <b>This browser can’t speak.</b> Listen sessions need audio. Try Chrome or Safari.'
     : kind==='copied' ? '✓ Copied. Paste it anywhere.'
-    : '<b>Beta.</b> Tones and spellings not yet checked by a native Thai speaker, and the audio is your phone’s own voice. Trust your ears.';
+    : '<b>Beta.</b> Spellings not yet checked by a native Thai speaker, and the audio is your phone’s own voice.';
   $('warn').hidden=false;
   if(kind==='copied') setTimeout(function(){ if(warnKind==='copied') hideWarn(); },2200);
 }
@@ -1028,7 +961,7 @@ function buildSession(day, s){
   }
   var we=entries(w), pe=entries(p);
   var mode=speakMode?'say':'hear';
-  var wb={type:'items', mode:mode, min:6, label:'Words', items:we};
+  var wb={type:'items', mode:mode, min:speakMode?6:8, label:'Words', items:we};
   var pb={type:'items', mode:mode, min:speakMode?6:3, label:'Phrases', items:pe};
   // a block with fewer than 4 items merges into the other one (new items first)
   function merge(a,b,label){
@@ -1040,7 +973,6 @@ function buildSession(day, s){
   else if(we.length<4){ merge(pb,wb, we.length?'Phrases & words':'Phrases'); wb=null; }
   var numB={type:'num', mode:mode, min:speakMode?3:4, label:'Numbers', pool:poolFor(day), priceShare:(speakMode&&day>=12)?0.75:0.5};
   if(!speakMode){
-    blocks.push({type:'tones', min:2, label:'Tones', drill:toneFor(day)});
     blocks.push(numB);
     if(wb) blocks.push(wb);
     if(pb) blocks.push(pb);
@@ -1096,22 +1028,6 @@ function makeChoices(it, maxDay){
   if(picks.length<3) shuffle(list).forEach(take);
   return shuffle(picks.concat([it]));
 }
-
-/* tone question (same as /sounds) */
-var toneRecent=[];
-function makeToneQ(drillKey){
-  var d=DRILLS[drillKey], sets, choices;
-  if(d.kind==='len') sets=LEN_PAIRS;
-  else sets=TONE_SETS.filter(function(s){ return s.words.filter(function(w){ return d.tones.indexOf(w.tone)>-1; }).length>=2; });
-  var avail=sets.filter(function(s){ return toneRecent.indexOf(s.id)<0; }); if(!avail.length) avail=sets;
-  var set=rnd(avail);
-  toneRecent.push(set.id); while(toneRecent.length>Math.min(3,sets.length-1)) toneRecent.shift();
-  if(d.kind==='len') choices=set.words.slice();
-  else choices=set.words.filter(function(w){ return d.tones.indexOf(w.tone)>-1; })
-       .sort(function(a,b){ return TONE_ORDER.indexOf(a.tone)-TONE_ORDER.indexOf(b.tone); });
-  return {drill:drillKey, kind:d.kind, choices:choices, target:rnd(choices)};
-}
-function shapeSVG(t){ return '<svg class="shape" viewBox="0 0 60 30" aria-hidden="true"><path class="guide" d="M3 15 L57 15"/><path d="'+TONE_PATH[t]+'"/></svg>'; }
 
 /* =====================================================================
    VIEWS
@@ -1189,7 +1105,6 @@ function startSession(day, s){
   var blocks=buildSession(day,s);
   RUN={mode:'session', day:day, s:s, blocks:blocks, bi:-1, scores:blocks.map(function(){ return {ok:0,n:0}; }),
        misses:[], paused:false, inter:false, left:0, timeUp:false, lastTick:now(), maxDay:day};
-  toneRecent=[];
   show('run'); $('quitBtn').textContent='Leave session'; quitArmed=false;
   renderSegs();
   nextBlock();
@@ -1198,7 +1113,6 @@ function startTest(n){
   reloadStats();
   var qs=buildTest(n);
   RUN={mode:'test', n:n, day:TESTS[n].day, qs:qs, qi:-1, secs:{}, misses:[], maxDay:TESTS[n].day, paused:false, inter:false};
-  toneRecent=[];
   show('run'); $('quitBtn').textContent='Leave test'; quitArmed=false;
   renderSegs();
   nextTestQ();
@@ -1247,8 +1161,7 @@ function nextItem(b){
 }
 function nextEx(){
   var b=RUN.blocks[RUN.bi];
-  if(b.type==='tones') startEx({kind:'tone', q:makeToneQ(b.drill)});
-  else if(b.type==='num') startEx({kind:b.mode==='hear'?'numH':'numS', n:pickNum(b)});
+  if(b.type==='num') startEx({kind:b.mode==='hear'?'numH':'numS', n:pickNum(b)});
   else { var e=nextItem(b); startEx({kind:b.mode==='hear'?'itemH':'itemS', it:e.it, fresh:e.fresh && !isSeen(e.it)}); }
   renderRunMeta();
 }
@@ -1301,46 +1214,6 @@ function showNext(){ var n=$('exNext'); if(n) n.hidden=false; }
 function autoNext(ms){ var tk=exToken; setTimeout(function(){ if(tk===exToken && RUN) finishEx(); }, ms); }
 
 var RENDER={}, ACT={};
-
-/* ---- Tones ---- */
-RENDER.tone=function(x){
-  var q=x.q;
-  stage.innerHTML =
-    '<div class="eyebrow">'+(q.kind==='len'?'Short or long vowel?':'Which tone did you hear?')+'</div>'+
-    '<button class="btn play" data-act="play"><span class="ico">🔊</span> Play again</button>'+
-    '<div class="hint" id="exHint">Pick the one you heard.</div>'+
-    '<div class="choices'+(q.choices.length>3?' many':'')+'" id="choices"></div>'+ nextBtnHTML();
-  renderToneRows(x);
-  setTimeout(function(){ if(EX===x) speak(q.target.thai); },180);
-};
-function renderToneRows(x){
-  var q=x.q;
-  $('choices').innerHTML = q.choices.map(function(w,i){
-    var cls=''; if(x.answered){ if(w===q.target) cls=' right'; else if(w===x.picked) cls=' wrong'; }
-    var left = q.kind==='len' ? '<span class="lenbar"><i style="width:'+(w.len==='S'?'34%':'100%')+'"></i></span>' : shapeSVG(w.tone);
-    var name = q.kind==='len' ? (w.len==='S'?'short':'long')+'<small>vowel</small>' : TONE_NAME[w.tone]+'<small>'+TONE_DESC[w.tone]+'</small>';
-    return '<button class="row'+cls+'" data-act="pick" data-i="'+i+'">'+left+'<span class="lbl">'+name+'</span>'+
-      '<span class="word"><span class="line"><span class="th" lang="th">'+esc(w.thai)+'</span>'+(PREFS.roman?'<span class="ro">'+esc(accented(w))+'</span>':'')+'</span>'+
-      '<span class="en">'+esc(w.english)+'</span></span></button>';
-  }).join('');
-}
-ACT.tone=function(act, el){
-  var x=EX, q=x.q;
-  if(act==='play'){ speak(q.target.thai); return; }
-  if(act==='next'){ if(x.answered) finishEx(); return; }
-  if(act!=='pick') return;
-  var w=q.choices[+el.dataset.i]; if(!w) return;
-  if(x.answered){ speak(w.thai); return; }          // after answering: tap a row to compare
-  x.answered=true; x.picked=w;
-  var ok=w===q.target, nm=function(z){ return q.kind==='len' ? (z.len==='S'?'short':'long') : TONE_NAME[z.tone]; };
-  answered(ok, ok?null:{html:'Heard <b>'+nm(q.target)+'</b> <span class="th">'+esc(q.target.thai)+'</span> ('+esc(q.target.english)+'), picked <b>'+nm(w)+'</b>', say:[q.target.thai, w.thai]});
-  var h=$('exHint'); h.className='verdict '+(ok?'ok':'bad');
-  h.textContent = ok ? '✓ Yes — '+nm(q.target) : '✗ It was '+nm(q.target)+', not '+nm(w);
-  renderToneRows(x);
-  var c=document.createElement('div'); c.className='hint'; c.textContent='Tap each row to compare.'; h.after(c);
-  showNext();
-  if(ok) autoNext(1300);
-};
 
 /* ---- Numbers · Hear & Type ---- */
 RENDER.numH=function(x){
@@ -1477,7 +1350,7 @@ ACT.itemS=function(act, el){
     $('rRom').textContent=PREFS.roman?romOf(it):'';
     $('rMean').textContent = it.k==='p' ? '“'+it.english+'”' : '';
     $('rNote').textContent=it.note||''; $('reveal').classList.add('show');
-    $('sHint').textContent='Did you say it — and the tones — the same way?';
+    $('sHint').textContent='Did you say it the same way?';
     $('sReveal').hidden=true; $('sAgain').hidden=!hasTTS; $('rateRow').hidden=false;
     speak(thaiOf(it)); return;
   }
@@ -1504,10 +1377,7 @@ document.addEventListener('keydown', function(e){
   if(RUN.paused){ resumeRun(); e.preventDefault(); return; }
   var t=e.target; if(t && t.tagName==='INPUT') return;           // numbers input handles its own Enter
   var x=EX, k=e.key, act=function(a,el){ e.preventDefault(); ACT[x.kind](a,el); };
-  if(x.kind==='tone'){
-    if(k===' ') act('play'); else if(k==='Enter'&&x.answered) act('next');
-    else if(/^[1-5]$/.test(k)){ var r=stage.querySelectorAll('.row')[+k-1]; if(r) act('pick',r); }
-  } else if(x.kind==='itemH'){
+  if(x.kind==='itemH'){
     if(k===' ') act('play');
     else if(k==='Enter'){ if(x.answered) act('next'); else if(!$('hReady').hidden) act('ready'); }
     else if(/^[1-4]$/.test(k)){ if(!$('hReady').hidden) ACT.itemH('ready'); var c=stage.querySelectorAll('.choice-t')[+k-1]; if(c) act('choose',c); }
@@ -1552,7 +1422,6 @@ function testNumbers(T){
 }
 function buildTest(n){
   var T=TESTS[n], qs=[], used={};
-  T.tones.forEach(function(tc){ for(var i=0;i<tc[1];i++) qs.push({sec:'Tones', kind:'tone', drill:tc[0]}); });
   testNumbers(T).forEach(function(x){ qs.push({sec:'Numbers', kind:'numH', n:x}); });
   pickTestItems(WORDS, T.wH, T, false, used).forEach(function(it){ qs.push({sec:'Words', kind:'itemH', it:it}); });
   pickTestItems(PHRASES, T.pH, T, false, used, {hearMin:T.hearMin}).forEach(function(it){ qs.push({sec:'Phrases', kind:'itemH', it:it}); });
@@ -1564,8 +1433,7 @@ function nextTestQ(){
   RUN.qi++;
   if(RUN.qi>=RUN.qs.length) return endTest();
   var q=RUN.qs[RUN.qi];
-  if(q.kind==='tone') startEx({kind:'tone', q:makeToneQ(q.drill)});
-  else if(q.kind==='numH') startEx({kind:'numH', n:q.n});
+  if(q.kind==='numH') startEx({kind:'numH', n:q.n});
   else startEx({kind:q.kind, it:q.it, fresh:false});
   renderRunMeta();
 }
@@ -1597,7 +1465,7 @@ function endSession(){
 }
 function endTest(){
   var R=RUN; LAST=R; EX=null; RUN=null; if(hasTTS) speechSynthesis.cancel();
-  var T=TESTS[R.n], secs=['Tones','Numbers','Words','Phrases','Speaking'];
+  var T=TESTS[R.n], secs=['Numbers','Words','Phrases','Speaking'];
   var total=0; secs.forEach(function(s){ total+=(R.secs[s]?R.secs[s].ok:0); });
   var sp=R.secs.Speaking||{ok:0,n:T.wS+T.pS}, spN=T.wS+T.pS;
   var passAll=total>=T.pass, passSp=sp.ok>=T.speakMin, passed=passAll&&passSp;
@@ -1616,7 +1484,7 @@ function endTest(){
     title = total+'/'+T.total+' · not yet.';
     sub = 'Practise Days '+pd[0]+' and '+pd[1]+', then try again. You need '+T.pass+', with at least '+T.speakMin+' of '+spN+' spoken.';
   }
-  var share='🇹🇭 0 to Survival Thai — passed\nDay 30 · '+total+'/'+T.total+'\n127 words · 50 phrases · prices · tones\nlekthai.app/30-days';
+  var share='🇹🇭 0 to Survival Thai — passed\nDay 30 · '+total+'/'+T.total+'\n127 words · 50 phrases · prices\nlekthai.app/30-days';
   var html='<div class="eyebrow">'+(R.n===4?'Final test':'Test '+R.n)+'</div>'+
     '<div class="score">'+total+'<small>/'+T.total+'</small></div>'+
     '<div class="end-title">'+esc(title)+'</div><div class="end-sub">'+esc(sub)+'</div>'+
