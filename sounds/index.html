@@ -11,6 +11,11 @@
 
 <meta name="description" content="Train your ear for Thai tones and vowel length. Hear a word, pick what you heard, compare. Free, no accounts, works in your browser.">
 <meta name="theme-color" content="#0f1117">
+
+<!-- Colour scheme: the page handles dark itself, so browsers should not
+     auto-darken it. Both themes are supported; the active one is declared in
+     CSS on [data-theme="dark"] / [data-theme="light"], which overrides this. -->
+<meta name="color-scheme" content="dark light">
 <link rel="canonical" href="https://lekthai.app/sounds">
 
 <!-- App shell, same as /learn and /words: noindex, never in sitemap.xml. -->
@@ -36,6 +41,7 @@
 <style>
   /* ============ THEME TOKENS (identical to /learn and /words) ============ */
   :root, [data-theme="dark"]{
+    color-scheme:dark;   /* tells forced-dark browsers this theme is already dark */
     --bg-0:#0f1117; --bg-1:#171a24;
     --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
     --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
@@ -52,6 +58,7 @@
     --on-accent:#fff;
   }
   [data-theme="light"]{
+    color-scheme:light;
     --bg-0:#e6e9f1; --bg-1:#f5f7fb;
     --ink:#1b2233; --ink-2:#3c4458; --muted:#6c7387;
     --accent:#b5495a; --accent-2:#95384a; --blue:#43589a;
@@ -124,6 +131,18 @@
     font:700 19px/1 "DM Sans"; letter-spacing:.01em; color:var(--ink);
     white-space:nowrap; text-align:center;
   }
+  /* Home link: the wordmark itself (same as /learn). Only the word+icon is
+     tappable, and it sits in the header, away from the Play button and answer
+     rows, so it can't be hit by accident mid-round. The beta tag stays separate. */
+  .home-link{
+    display:inline-flex; align-items:center; gap:4px; height:38px; padding:0;
+    vertical-align:middle; color:inherit; text-decoration:none; border-radius:10px;
+  }
+  .home-ico{ flex:0 0 auto; color:var(--muted); transition:color .2s; }
+  .home-link:hover .home-ico{ color:var(--accent); }
+  /* Narrow phones: the header has no spare width for the icon, so show the
+     wordmark alone (still the home link). Keeps the header no wider than before. */
+  @media (max-width:389px){ .home-ico{ display:none; } }
   .beta-tag{
     display:inline-block; vertical-align:middle; margin-left:5px; padding:3px 6px 2px; border-radius:999px;
     font:700 9px/1 "DM Sans"; letter-spacing:.1em; text-transform:uppercase;
@@ -385,7 +404,7 @@
         <p class="pop-note">Start with 2 tones. Move up when you’re getting most of them right.</p>
       </div>
     </div>
-    <h1 class="title">LekThai<button class="beta-tag" id="betaTag" title="About the beta">beta</button></h1>
+    <h1 class="title"><a class="home-link" href="/" aria-label="LekThai home"><svg class="home-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>LekThai</a><button class="beta-tag" id="betaTag" title="About the beta">beta</button></h1>
     <div class="bar-right">
       <div class="streak" id="streakChip" title="Correct in a row">
         <span class="streak-ico">⚡</span><span id="streakVal">0</span>
