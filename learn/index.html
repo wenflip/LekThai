@@ -351,6 +351,9 @@
   }
   .home-ico{ flex:0 0 auto; color:var(--muted); transition:color .2s; }
   .home-link:hover .home-ico{ color:var(--accent); }
+  /* Narrow phones: the header has no spare width for the icon, so show the
+     wordmark alone (still the home link). Keeps the header no wider than before. */
+  @media (max-width:389px){ .home-ico{ display:none; } }
 
   /* mastery: tiny inline checkmark on a mastered number */
   .mbadge{
