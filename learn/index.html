@@ -198,7 +198,8 @@
     box-shadow:0 8px 18px -10px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
     transition:transform .3s cubic-bezier(.3,.85,.25,1);
   }
-  .seg:has(#tabHear.active) .seg-ind{ transform:translateX(100%); }
+  /* Hear & Type is the first (left) tab; See & Say is second, so the indicator slides right for Say */
+  .seg:has(#tabSay.active) .seg-ind{ transform:translateX(100%); }
 
   /* ============ MAIN CARD ============ */
   .card{
@@ -416,18 +417,36 @@
     </div>
   </header>
 
-  <!-- Mode tabs -->
+  <!-- Mode tabs — Hear & Type first (default), See & Say second -->
   <nav class="seg" role="tablist" aria-label="Drill mode">
-    <button class="tab active" id="tabSay" role="tab" onclick="setMode('say')">① See &amp; Say</button>
-    <button class="tab" id="tabHear" role="tab" onclick="setMode('hear')">② Hear &amp; Type</button>
+    <button class="tab active" id="tabHear" role="tab" onclick="setMode('hear')">① Hear &amp; Type</button>
+    <button class="tab" id="tabSay" role="tab" onclick="setMode('say')">② See &amp; Say</button>
     <span class="seg-ind" aria-hidden="true"></span>
   </nav>
 
   <!-- Main panel -->
   <section class="card">
 
-    <!-- MODE A: SEE & SAY -->
-    <div class="panel" id="panelSay">
+    <!-- MODE 1: HEAR & TYPE (default) -->
+    <div class="panel" id="panelHear" style="display:block;">
+      <div class="panel-inner">
+        <div class="stage stage-hear">
+          <div class="eyebrow">Listen &amp; type the digits</div>
+          <button class="btn play" onclick="playHear()"><span class="ico">🔊</span> Play number</button>
+          <input class="answer" id="hearInput" inputmode="numeric" placeholder="?" autocomplete="off" enterkeyhint="done">
+          <button class="btn primary" onclick="checkHear()">Check</button>
+          <div class="verdict" id="hearVerdict"></div>
+          <div class="reveal">
+            <div class="thai" id="hearThai"></div>
+            <div class="rom" id="hearRom"></div>
+          </div>
+          <button class="btn text" onclick="newHear()">New number →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODE 2: SEE & SAY -->
+    <div class="panel" id="panelSay" style="display:none;">
       <div class="panel-inner">
         <div class="stage">
           <div class="eyebrow">Read it aloud <span class="mbadge" id="masteryBadge" hidden>✓ mastered</span></div>
@@ -446,24 +465,6 @@
           </div>
         </div>
         <div class="mastery-cap mastery-out">—</div>
-      </div>
-    </div>
-
-    <!-- MODE B: HEAR & TYPE -->
-    <div class="panel" id="panelHear" style="display:none;">
-      <div class="panel-inner">
-        <div class="stage stage-hear">
-          <div class="eyebrow">Listen &amp; type the digits</div>
-          <button class="btn play" onclick="playHear()"><span class="ico">🔊</span> Play number</button>
-          <input class="answer" id="hearInput" inputmode="numeric" placeholder="?" autocomplete="off" enterkeyhint="done">
-          <button class="btn primary" onclick="checkHear()">Check</button>
-          <div class="verdict" id="hearVerdict"></div>
-          <div class="reveal">
-            <div class="thai" id="hearThai"></div>
-            <div class="rom" id="hearRom"></div>
-          </div>
-          <button class="btn text" onclick="newHear()">New number →</button>
-        </div>
       </div>
     </div>
 
@@ -522,8 +523,8 @@
 </div>
 
 <!-- ============================================================
-     ORIGINAL ENGINE — unchanged. Number builder, TTS, ranges,
-     and both drill modes are exactly as supplied.
+     ORIGINAL ENGINE — unchanged except the first-load call at the
+     bottom (moved to the end of Layer 2 so Hear & Type starts first).
 ============================================================ -->
 <script>
 // ---------- Thai number builder ----------
@@ -664,7 +665,7 @@ function setMode(m){
 }
 
 buildRanges();
-newSay();
+// First number is now set at the end of Layer 2 (Hear & Type is the default mode).
 </script>
 
 <!-- ============================================================
@@ -1029,6 +1030,13 @@ newSay();
   });
 
   updateMastery();   // initial paint
+
+  /* ---------- First load: Hear & Type is the default mode ----------
+     Pick the first number here (after the weighted picker is installed) but
+     don't auto-play or auto-focus: browsers block speech before the first tap,
+     and auto-focus would pop the phone keyboard over the page on arrival.
+     The user taps "Play number"; every number after that auto-plays as before. */
+  hearCurrent = randNum();
 })();
 </script>
 <script>
