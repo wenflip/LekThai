@@ -97,6 +97,21 @@
   .subhead{ font-size:clamp(16px,4.4vw,19px); color:var(--ink-2); max-width:30ch; margin:0 auto 14px; }
   .trust{ margin:0; font:500 13.5px/1 "DM Sans"; color:var(--muted); }
 
+  /* ---------- 30-DAY COURSE (primary call to action) ---------- */
+  .course{ margin:30px auto 0; max-width:440px; }
+  .cta{
+    display:flex; align-items:center; justify-content:center; gap:9px;
+    width:100%; min-height:60px; padding:14px 24px; border-radius:16px; text-decoration:none;
+    font:600 18px/1.25 "DM Sans"; color:#fff; text-align:center;
+    background:linear-gradient(180deg, var(--accent), var(--accent-2));
+    box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+    transition:transform .12s ease;
+  }
+  .cta:active{ transform:translateY(1px) scale(.992); }
+  .cta .arr{ transition:transform .2s; }
+  .cta:hover .arr{ transform:translateX(3px); }
+  .course-sub{ margin:12px 0 0; font:500 13.5px/1.45 "DM Sans"; color:var(--ink-2); }
+
   /* ---------- SECTIONS ---------- */
   .section{ padding:8px 0 44px; }
   .eyebrow{ font:600 11px/1 "DM Sans"; letter-spacing:.17em; text-transform:uppercase; color:var(--muted); text-align:center; margin-bottom:22px; }
@@ -130,7 +145,6 @@
     font-size:24px; line-height:1;
   }
   .tool .icon.thai{ font-family:"Sarabun","Noto Sans Thai",sans-serif; font-weight:600; font-size:22px; color:var(--blue); }
-  .tool .step{ display:block; font:600 10.5px/1 "DM Sans"; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
   .tool h2{ margin:0 0 4px; font:600 18px/1.2 "DM Sans"; color:var(--ink); }
   .tool p{ margin:0; font-size:14px; line-height:1.45; color:var(--ink-2); }
   .tool .arr{ position:absolute; right:18px; top:50%; transform:translateY(-50%); color:var(--accent); font-size:18px; transition:transform .2s; }
@@ -169,15 +183,19 @@
     <h1 class="tagline">Thai,<br>drilled.</h1>
     <p class="subhead">Hear it. Say it. Know it.</p>
     <p class="trust">Free · no signup · works in your browser</p>
+
+    <div class="course">
+      <a class="cta" href="/30-days/">0 to Survival Thai in 30 days <span class="arr" aria-hidden="true">→</span></a>
+      <p class="course-sub">Two 15-minute sessions a day · progress saved on this device</p>
+    </div>
   </section>
 
   <section class="section">
-    <p class="eyebrow">Suggested path · jump in anywhere</p>
+    <p class="eyebrow">Or practise one skill</p>
     <div class="tools">
       <a class="tool" href="/sounds/">
         <span class="icon" aria-hidden="true">👂</span>
         <span>
-          <span class="step">Step 1</span>
           <h2>Sounds</h2>
           <p>Train your ear for Thai tones and vowel length.</p>
         </span>
@@ -186,7 +204,6 @@
       <a class="tool" href="/words/">
         <span class="icon" aria-hidden="true">🍜</span>
         <span>
-          <span class="step">Step 2</span>
           <h2>Words</h2>
           <p>Everyday words: see &amp; say, or hear &amp; choose.</p>
         </span>
@@ -195,7 +212,6 @@
       <a class="tool" href="/learn/">
         <span class="icon thai" aria-hidden="true">๖๔</span>
         <span>
-          <span class="step">Step 3</span>
           <h2>Numbers</h2>
           <p>Prices, times, counting: see &amp; say, hear &amp; type.</p>
         </span>
@@ -204,7 +220,6 @@
       <a class="tool" href="/phrases/">
         <span class="icon" aria-hidden="true">💬</span>
         <span>
-          <span class="step">Step 4</span>
           <h2>Phrases</h2>
           <p>Survival phrases for food, taxis and shopping.</p>
         </span>
@@ -258,6 +273,7 @@
   <footer>
     <nav>
       <a href="/">Home</a>
+      <a href="/30-days/">30 days</a>
       <a href="/sounds/">Sounds</a>
       <a href="/words/">Words</a>
       <a href="/learn/">Numbers</a>
