@@ -15,6 +15,11 @@
 <!-- Mobile browser chrome colour -->
 <meta name="theme-color" content="#0f1117">
 
+<!-- Colour scheme: the page handles dark itself, so browsers should not
+     auto-darken it. Both themes are supported; the active one is declared in
+     CSS on [data-theme="dark"] / [data-theme="light"], which overrides this. -->
+<meta name="color-scheme" content="dark light">
+
 <!-- Canonical -->
 <link rel="canonical" href="https://lekthai.app/learn">
 
@@ -49,6 +54,7 @@
 <style>
   /* ============ THEME TOKENS ============ */
   :root, [data-theme="dark"]{
+    color-scheme:dark;   /* tells forced-dark browsers this theme is already dark */
     --bg-0:#0f1117; --bg-1:#171a24;
     --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
     --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
@@ -63,10 +69,13 @@
     --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
     --ring:rgba(213,114,127,.65);
     --num-grad:linear-gradient(176deg, #f5f2eb 0%, #cdd2df 118%);
+    --num-solid:#f5f2eb;
+    --num-mask:linear-gradient(176deg, #000 0%, rgba(0,0,0,.84) 118%);
     --num-glow:rgba(170,140,160,.20);
     --on-accent:#fff;
   }
   [data-theme="light"]{
+    color-scheme:light;
     --bg-0:#e6e9f1; --bg-1:#f5f7fb;
     --ink:#1b2233; --ink-2:#3c4458; --muted:#6c7387;
     --accent:#b5495a; --accent-2:#95384a; --blue:#43589a;
@@ -81,6 +90,8 @@
     --glow-red:rgba(181,73,90,.10); --glow-blue:rgba(67,89,154,.12);
     --ring:rgba(181,73,90,.5);
     --num-grad:linear-gradient(176deg, #1f273b 0%, #4b5980 128%);
+    --num-solid:#1f273b;
+    --num-mask:linear-gradient(176deg, #000 0%, rgba(0,0,0,.79) 128%);
     --num-glow:rgba(67,89,154,.10);
     --on-accent:#fff;
   }
@@ -227,9 +238,14 @@
     font-size:clamp(66px, 21vw, 104px); line-height:.94; letter-spacing:-.012em;
     color:var(--ink); margin:0;
   }
-  @supports ((-webkit-background-clip:text) or (background-clip:text)){
-    .bignum{ background:var(--num-grad); -webkit-background-clip:text; background-clip:text;
-             -webkit-text-fill-color:transparent; color:transparent; }
+  /* Forced-dark fix: the number used to be "gradient text" (transparent glyphs
+     showing a clipped light background). Forced dark modes darken that
+     background, so the digits turned dark. Now the glyphs are a SOLID colour
+     (forced dark keeps solid text readable) and the gradient's top-to-bottom
+     shading is recreated with an alpha mask, which forced dark does not alter. */
+  .bignum{ color:var(--num-solid); -webkit-text-fill-color:var(--num-solid); }
+  @supports ((-webkit-mask-image:linear-gradient(#000,#000)) or (mask-image:linear-gradient(#000,#000))){
+    .bignum{ -webkit-mask-image:var(--num-mask); mask-image:var(--num-mask); }
   }
   [data-theme="dark"] .bignum{ filter:drop-shadow(0 12px 34px var(--num-glow)); }
   .bignum.in{ animation:numIn .44s cubic-bezier(.2,.72,.2,1); }
@@ -325,6 +341,16 @@
     font:700 19px/1 "DM Sans"; letter-spacing:.01em; color:var(--ink);
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:center;
   }
+  /* Home link: the wordmark itself. Only the word+icon is tappable (not the
+     empty space around it), and it sits in the header, away from the answer
+     input and buttons, so it can't be hit by accident mid-drill. */
+  .home-link{
+    display:inline-flex; align-items:center; gap:4px; height:38px; padding:0;
+    margin:0 -4px;   /* sit inside the title's side padding so the header keeps its original widths */
+    color:inherit; text-decoration:none; border-radius:10px;
+  }
+  .home-ico{ flex:0 0 auto; color:var(--muted); transition:color .2s; }
+  .home-link:hover .home-ico{ color:var(--accent); }
 
   /* mastery: tiny inline checkmark on a mastered number */
   .mbadge{
@@ -408,7 +434,7 @@
         <div class="ranges" id="ranges"></div>
       </div>
     </div>
-    <h1 class="title">LekThai</h1>
+    <h1 class="title"><a class="home-link" href="/" aria-label="LekThai home"><svg class="home-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>LekThai</a></h1>
     <div class="bar-right">
       <div class="streak" id="streakChip" title="Correct in a row (Hear &amp; Type)">
         <span class="streak-ico">⚡</span><span id="streakVal">0</span>
