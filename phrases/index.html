@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<title>LekThai — Thai Phrases</title>
+<!-- /phrases v1.0 (2026-10-06): built from /words v1.4. 113 phrases in 10 situations. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@144,400..700,30&family=DM+Sans:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+
+<meta name="description" content="Everyday Thai phrases for food, taxis, shopping and getting by, drilled until they stick: hear it and know it, then say it yourself. Free, no accounts, works in your browser.">
+<meta name="theme-color" content="#0f1117">
+<link rel="canonical" href="https://lekthai.app/phrases">
+
+<!-- App shell, same as /learn: noindex so it never competes with the landing/guide pages in search.
+     This is permanent, not just for the beta. Ranking comes from separate guide pages. -->
+<meta name="robots" content="noindex">
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LekThai">
+<meta property="og:title" content="LekThai — Everyday Thai Phrases">
+<meta property="og:description" content="Survival Thai phrases for food, taxis and shopping, drilled until they stick. Free, no accounts.">
+<meta property="og:url" content="https://lekthai.app/phrases">
+<meta property="og:image" content="https://lekthai.app/og-phrases.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="LekThai — หวานน้อย means not too sweet. Thai phrases, drilled.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LekThai — Everyday Thai Phrases">
+<meta name="twitter:description" content="Survival Thai phrases for food, taxis and shopping, drilled until they stick. Free, no accounts.">
+<meta name="twitter:image" content="https://lekthai.app/og-phrases.png">
+
+<style>
+  /* ============ THEME TOKENS (identical to /learn) ============ */
+  :root, [data-theme="dark"]{
+    --bg-0:#0f1117; --bg-1:#171a24;
+    --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
+    --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
+    --ok:#5dba8c; --bad:#e27d89;
+    --card-bg:rgba(255,255,255,.055); --card-bg2:rgba(255,255,255,.016);
+    --card-border:rgba(255,255,255,.10);
+    --card-shadow:0 28px 64px -28px rgba(0,0,0,.75), 0 8px 26px -14px rgba(0,0,0,.55);
+    --seg-bg:rgba(255,255,255,.05);
+    --soft:rgba(255,255,255,.06);
+    --pop-bg:#1b1f2a;
+    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
+    --ring:rgba(213,114,127,.65);
+    --num-grad:linear-gradient(176deg, #f5f2eb 0%, #cdd2df 118%);
+    --num-glow:rgba(170,140,160,.20);
+    --on-accent:#fff;
+  }
+  [data-theme="light"]{
+    --bg-0:#e6e9f1; --bg-1:#f5f7fb;
+    --ink:#1b2233; --ink-2:#3c4458; --muted:#6c7387;
+    --accent:#b5495a; --accent-2:#95384a; --blue:#43589a;
+    --ok:#2c8c5e; --bad:#bd4259;
+    --card-bg:rgba(255,255,255,.74); --card-bg2:rgba(255,255,255,.48);
+    --card-border:rgba(20,30,60,.10);
+    --card-shadow:0 28px 56px -30px rgba(30,40,80,.42), 0 6px 18px -10px rgba(30,40,80,.18);
+    --seg-bg:rgba(20,30,60,.055);
+    --soft:rgba(20,30,60,.045);
+    --pop-bg:#ffffff;
+    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --glow-red:rgba(181,73,90,.10); --glow-blue:rgba(67,89,154,.12);
+    --ring:rgba(181,73,90,.5);
+    --num-grad:linear-gradient(176deg, #1f273b 0%, #4b5980 128%);
+    --num-glow:rgba(67,89,154,.10);
+    --on-accent:#fff;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0; overflow:hidden;
+    background:var(--bg-0); color:var(--ink);
+    font-family:"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    -webkit-tap-highlight-color:transparent;
+    display:flex; justify-content:center; align-items:stretch;
+    transition:background .4s ease, color .4s ease;
+  }
+  .ambient{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(58% 48% at 16% 6%, var(--glow-red), transparent 72%),
+      radial-gradient(54% 50% at 90% 98%, var(--glow-blue), transparent 72%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  }
+
+  /* ============ APP SHELL ============ */
+  .app{
+    position:relative; width:100%; max-width:440px;
+    height:100vh; height:100svh;
+    display:flex; flex-direction:column; gap:11px;
+    padding:14px 16px calc(14px + env(safe-area-inset-bottom));
+  }
+  @media (min-width:480px){
+    body{ align-items:center; padding:24px; }
+    .app{
+      height:min(100svh, 900px);
+      border-radius:36px; padding:20px 20px;
+      border:1px solid var(--card-border);
+      background:linear-gradient(180deg, rgba(255,255,255,.025), transparent 40%);
+      box-shadow:0 48px 110px -44px rgba(0,0,0,.7);
+      overflow:hidden;
+    }
+  }
+
+  /* ============ HEADER ============ */
+  .bar{ flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .pill-wrap{ position:relative; min-width:0; }
+  .pill{
+    display:inline-flex; align-items:center; gap:7px; height:38px; padding:0 13px; max-width:150px;
+    border-radius:999px; background:var(--soft); border:1px solid var(--card-border);
+    color:var(--ink); font:600 13px/1 "DM Sans"; cursor:pointer; user-select:none;
+    transition:background .2s, border-color .2s;
+  }
+  .pill:hover{ border-color:var(--accent); }
+  .pill-label{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .chev{ color:var(--muted); font-size:10px; transition:transform .22s ease; flex:0 0 auto; }
+  .pill[aria-expanded="true"] .chev{ transform:rotate(180deg); }
+  .title{
+    flex:1 1 auto; min-width:0; margin:0; padding:0 2px;
+    font:700 19px/1 "DM Sans"; letter-spacing:.01em; color:var(--ink);
+    white-space:nowrap; text-align:center;
+  }
+  .beta-tag{
+    display:inline-block; vertical-align:middle; margin-left:5px; padding:3px 6px 2px; border-radius:999px;
+    font:700 9px/1 "DM Sans"; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    background:none; cursor:pointer;
+  }
+  .bar-right{ display:flex; align-items:center; gap:8px; }
+  .streak{
+    display:inline-flex; align-items:center; gap:5px; height:34px; padding:0 12px;
+    border-radius:999px; background:var(--soft); border:1px solid var(--card-border);
+    font:700 14px/1 "DM Sans"; color:var(--ink); user-select:none;
+  }
+  .streak.live{ border-color:color-mix(in srgb, var(--accent) 55%, transparent); }
+  .streak-ico{ font-size:13px; filter:saturate(.85); }
+  .streak.live .streak-ico{ filter:drop-shadow(0 0 7px var(--accent)); }
+  .streak.hot{ animation:streakPop .5s ease; }
+  .icon-btn{
+    width:38px; height:38px; border-radius:999px; cursor:pointer;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    font-size:16px; display:grid; place-items:center; transition:background .2s, border-color .2s;
+  }
+  .icon-btn:hover{ border-color:var(--accent); }
+
+  /* ============ SET POPOVER ============ */
+  .scrim{ position:fixed; inset:0; z-index:40; background:rgba(8,10,16,.28); }
+  .pop{
+    position:absolute; z-index:50; top:calc(100% + 10px); left:0;
+    width:min(86vw,330px); max-height:min(72svh,560px); overflow:auto; padding:15px;
+    border-radius:20px; background:var(--pop-bg); border:1px solid var(--card-border);
+    box-shadow:var(--card-shadow); transform-origin:top left;
+    opacity:0; transform:translateY(-6px) scale(.97);
+    transition:opacity .16s ease, transform .16s ease;
+  }
+  .pop.show{ opacity:1; transform:none; }
+  .pop-title{
+    font:600 11px/1 "DM Sans"; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--muted); margin:3px 2px 11px;
+  }
+  .pop-title + .chips{ margin-bottom:16px; }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    padding:9px 13px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--card-border); background:var(--soft); color:var(--ink-2);
+    font:600 13px/1.1 "DM Sans"; transition:transform .12s, background .2s, color .2s; text-align:left;
+  }
+  .chip small{ font-weight:500; color:var(--muted); margin-left:4px; }
+  .chip:hover{ color:var(--ink); }
+  .chip:active{ transform:scale(.96); }
+  .chip.active{ background:var(--ind-grad); color:#fff; border-color:transparent; }
+  .chip.active small{ color:rgba(255,255,255,.85); }
+
+  /* ============ SEGMENTED TABS ============ */
+  .seg{
+    flex:0 0 auto; position:relative; display:flex; padding:5px; gap:0;
+    background:var(--seg-bg); border:1px solid var(--card-border); border-radius:15px;
+  }
+  .tab{
+    flex:1; position:relative; z-index:2; border:none; background:transparent; cursor:pointer;
+    color:var(--muted); font:600 14px/1 "DM Sans"; padding:12px 6px; border-radius:11px;
+    transition:color .2s ease; white-space:nowrap;
+  }
+  .tab:hover{ color:var(--ink); }
+  .tab.active{ color:#fff; }
+  .seg-ind{
+    position:absolute; z-index:1; top:5px; bottom:5px; left:5px; width:calc(50% - 5px);
+    border-radius:11px; background:var(--ind-grad);
+    box-shadow:0 8px 18px -10px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+    transition:transform .3s cubic-bezier(.3,.85,.25,1);
+  }
+  .seg:has(#tabSay.active) .seg-ind{ transform:translateX(100%); }
+
+  /* ============ MAIN CARD ============ */
+  .card{
+    flex:1 1 auto; min-height:0; position:relative; overflow:hidden;
+    border-radius:26px; padding:6px;
+    background:linear-gradient(180deg, var(--card-bg), var(--card-bg2));
+    border:1px solid var(--card-border); box-shadow:var(--card-shadow);
+    backdrop-filter:blur(22px) saturate(125%); -webkit-backdrop-filter:blur(22px) saturate(125%);
+  }
+  .card.pulse{ animation:okPulse .72s ease; }
+  .panel{ height:100%; }
+  .panel[hidden]{ display:none; }
+  .panel-inner{ height:100%; display:flex; flex-direction:column; padding:20px 18px 18px; overflow:auto; }
+  .stage{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column;
+          align-items:center; justify-content:center; text-align:center; gap:9px; }
+  .stage-hear{ justify-content:flex-start; gap:11px; padding-top:2px; }
+  /* never let content overlap: if a long phrase + note ever exceeds the card, the stage scrolls */
+  .stage{ overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+  .stage::-webkit-scrollbar{ display:none; }
+  .stage > *{ flex-shrink:0; }
+  /* answered Hear & Choose: drop the prompt hint, tighten the reveal */
+  .stage-hear.done .hint{ display:none; }
+  .stage-hear.done .thai{ font-size:clamp(26px, 7.5vw, 34px); }
+
+  /* short phones (iPhone SE and smaller): compact everything so it fits one screen */
+  @media (max-height:700px){
+    .app{ gap:9px; padding-top:10px; }
+    .seg .tab{ padding:10px 6px; }
+    .panel-inner{ padding:14px 14px 12px; }
+    .stage-hear{ gap:8px; }
+    .btn.play{ height:46px; font-size:16px; }
+    .btn.primary{ height:52px; }
+    .tile{ min-height:56px; font-size:14.5px; padding:8px; }
+    .tiles{ gap:8px; }
+    .verdict{ font-size:16px; min-height:20px; }
+    .btn.text{ height:38px; }
+    .reveal{ min-height:64px; }
+    .stage-hear.done .thai{ font-size:26px; }
+    .stage-hear.done .rom{ font-size:16px; }
+    .stage-hear.done .thai.xlong{ font-size:20px; }
+    .tile.long{ font-size:12.5px; }
+    .mastery-cap{ margin-top:6px; }
+  }
+
+  .eyebrow{ font:600 11px/1 "DM Sans"; letter-spacing:.17em; text-transform:uppercase; color:var(--muted); }
+  .mbadge{
+    display:inline-flex; align-items:center; margin-left:7px; padding:2px 8px; border-radius:999px;
+    font:700 10px/1 "DM Sans"; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ok); background:color-mix(in srgb, var(--ok) 16%, transparent);
+    border:1px solid color-mix(in srgb, var(--ok) 34%, transparent); vertical-align:middle;
+  }
+  .mbadge[hidden]{ display:none; }
+
+  /* the English prompt: same type treatment as /learn's big number */
+  .bigword{
+    font-family:"Fraunces", Georgia, "Times New Roman", serif;
+    font-weight:600; font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
+    font-size:clamp(34px, 10.5vw, 54px); line-height:1.04; letter-spacing:-.012em;
+    color:var(--ink); margin:2px 0 0; max-width:100%; overflow-wrap:break-word;
+  }
+  .bigword.long{ font-size:clamp(28px, 8.2vw, 40px); }
+  /* phrases: the See & Say prompt is a situation, a sentence long */
+  .bigword.prompt{ font-size:clamp(23px, 6.6vw, 30px); line-height:1.2; letter-spacing:-.004em; max-width:340px; }
+  @supports ((-webkit-background-clip:text) or (background-clip:text)){
+    .bigword{ background:var(--num-grad); -webkit-background-clip:text; background-clip:text;
+              -webkit-text-fill-color:transparent; color:transparent; }
+  }
+  [data-theme="dark"] .bigword{ filter:drop-shadow(0 12px 34px var(--num-glow)); }
+  .bigword.in{ animation:numIn .44s cubic-bezier(.2,.72,.2,1); }
+
+  .reveal{ display:flex; flex-direction:column; gap:4px; align-items:center; justify-content:center; min-height:78px; }
+  .stage-hear .reveal{ min-height:0; }
+  .reveal.show{ animation:fadeUp .36s ease; }
+  .thai{ font-family:"Sarabun","Noto Sans Thai",sans-serif; font-weight:500;
+         font-size:clamp(30px, 9vw, 40px); line-height:1.3; color:var(--blue); }
+  .rom{ font:500 clamp(17px,5vw,21px)/1.3 "DM Sans"; color:var(--ink-2); letter-spacing:.01em; }
+  .meaning{ font:500 14px/1.3 "DM Sans"; color:var(--muted); }
+  .meaning:empty{ display:none; }
+  /* phrases: long Thai and spelling step down so a whole sentence fits on one phone screen */
+  .thai.long{ font-size:clamp(26px, 7.6vw, 33px); }
+  .thai.xlong{ font-size:clamp(21px, 6.2vw, 27px); }
+  .stage-hear.done .thai.long{ font-size:clamp(23px, 6.6vw, 29px); }
+  .stage-hear.done .thai.xlong{ font-size:clamp(19px, 5.6vw, 24px); }
+  .rom.long{ font-size:clamp(15px, 4.4vw, 18px); }
+  .tile.long{ font-size:13.5px; }
+  .note{ font:500 12.5px/1.4 "DM Sans"; color:var(--muted); max-width:300px; margin-top:4px;
+         padding:6px 10px; border-radius:10px; background:var(--soft); }
+  .note:empty{ display:none; }
+  .hint{ font:500 13px/1.3 "DM Sans"; color:var(--muted); min-height:18px; }
+
+  .verdict{ font:700 18px/1.2 "DM Sans"; min-height:24px; }
+  .verdict.ok{ color:var(--ok); }
+  .verdict.bad{ color:var(--bad); }
+  .verdict.idk{ color:var(--blue); }
+  .verdict.ok, .verdict.bad, .verdict.idk{ animation:pop .32s ease; }
+  .btn.text.idk{ height:40px; font-size:14px; text-decoration:underline; text-decoration-color:color-mix(in srgb, var(--muted) 45%, transparent); text-underline-offset:4px; }
+
+  /* ============ BUTTONS ============ */
+  .actions{ flex:0 0 auto; display:flex; flex-direction:column; gap:10px; padding-top:14px; }
+  .btn{
+    width:100%; -webkit-appearance:none; appearance:none; border:none; cursor:pointer;
+    font-family:"DM Sans"; font-weight:600; border-radius:16px;
+    display:inline-flex; align-items:center; justify-content:center; gap:8px; user-select:none;
+    transition:transform .12s ease, box-shadow .2s ease, background .2s, border-color .2s;
+  }
+  .btn:active{ transform:translateY(1px) scale(.992); }
+  .btn[hidden]{ display:none; }
+  .btn.primary{
+    height:58px; font-size:17px; letter-spacing:.01em; color:var(--on-accent);
+    background:linear-gradient(180deg, var(--accent), var(--accent-2));
+    box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+  }
+  .btn.ghost{ height:50px; font-size:16px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
+  .btn.ghost:hover{ border-color:var(--accent); }
+  .btn.play{ height:54px; font-size:17px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); flex:0 0 auto; }
+  .btn.play:hover{ border-color:var(--blue); }
+  .btn.play .ico{ filter:drop-shadow(0 0 8px color-mix(in srgb, var(--blue) 60%, transparent)); }
+  .btn.text{ height:44px; font-size:14px; color:var(--muted); background:transparent; flex:0 0 auto; }
+  .btn.text:hover{ color:var(--ink); }
+
+  .rate-row{ display:flex; gap:10px; }
+  .rate-row[hidden]{ display:none; }
+  .btn.rate{ height:50px; font-size:15px; border:1px solid var(--card-border); background:var(--soft); }
+  .btn.rate.got{ color:var(--ok); }
+  .btn.rate.got:hover{ border-color:var(--ok); }
+  .btn.rate.miss{ color:var(--bad); }
+  .btn.rate.miss:hover{ border-color:var(--bad); }
+  .btn.rate.chosen.got{ background:color-mix(in srgb, var(--ok) 18%, transparent); border-color:var(--ok); }
+  .btn.rate.chosen.miss{ background:color-mix(in srgb, var(--bad) 18%, transparent); border-color:var(--bad); }
+
+  /* ============ HEAR & CHOOSE TILES ============ */
+  .tiles{ display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; }
+  .tiles[hidden]{ display:none; }
+  .tile{
+    -webkit-appearance:none; appearance:none; cursor:pointer; min-height:74px; padding:10px 10px;
+    border-radius:16px; border:1.5px solid var(--card-border); background:var(--soft); color:var(--ink);
+    font:600 15.5px/1.25 "DM Sans"; transition:transform .12s, border-color .18s, background .18s;
+    position:relative;
+  }
+  .tile:hover{ border-color:var(--accent); }
+  .tile:active{ transform:scale(.98); }
+  .tile .k{ position:absolute; top:6px; left:9px; font:600 10px/1 "DM Sans"; color:var(--muted); opacity:.7; }
+  .tile.right{ border-color:var(--ok); background:color-mix(in srgb, var(--ok) 16%, transparent); }
+  .tile.wrong{ border-color:var(--bad); background:color-mix(in srgb, var(--bad) 16%, transparent); }
+  .tile[disabled]{ cursor:default; }
+  .tile[disabled]:not(.right):not(.wrong){ opacity:.55; }
+
+  .mastery-cap{
+    flex:0 0 auto; text-align:center; margin-top:10px;
+    font:600 11px/1.3 "DM Sans"; letter-spacing:.03em; color:var(--muted);
+  }
+  .mastery-cap .m-ico{ color:var(--accent); margin-right:4px; }
+  .empty{ font:500 14px/1.5 "DM Sans"; color:var(--ink-2); max-width:290px; }
+
+  /* ============ TOAST ============ */
+  .warn{
+    position:fixed; left:50%; bottom:calc(16px + env(safe-area-inset-bottom));
+    transform:translateX(-50%); width:min(92%,420px); z-index:60;
+    background:var(--pop-bg); border:1px solid var(--card-border); color:var(--ink-2);
+    font:500 12.5px/1.45 "DM Sans"; padding:12px 38px 12px 14px; border-radius:14px;
+    box-shadow:var(--card-shadow);
+  }
+  .warn[hidden]{ display:none; }
+  .warn b{ color:var(--ink); }
+  .warn-x{ position:absolute; top:6px; right:6px; width:28px; height:28px; border:0; background:none;
+           color:var(--muted); font-size:14px; cursor:pointer; border-radius:8px; }
+
+  /* ============ FOOTER (below the fold, like /learn) ============ */
+  .app-foot{ position:absolute; left:16px; right:16px; top:100%; padding:18px 0 30px; text-align:center; border-top:1px solid var(--card-border); }
+  .app-foot nav a{ color:var(--muted); text-decoration:none; font:500 13px/1 "DM Sans"; margin:0 8px; }
+  .app-foot nav a:hover{ color:var(--ink); }
+
+  /* ============ SETTINGS SHEET (same as /learn) ============ */
+  .sheet-wrap{ position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center; padding:18px; }
+  .sheet-wrap[hidden]{ display:none; }
+  .sheet-scrim{ position:absolute; inset:0; background:rgba(8,10,16,.5); backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px); animation:fadeIn .18s ease; }
+  .sheet{
+    position:relative; width:100%; max-width:380px; max-height:84svh; overflow:auto;
+    background:var(--pop-bg); border:1px solid var(--card-border); border-radius:24px;
+    box-shadow:var(--card-shadow); padding:20px; animation:sheetIn .24s cubic-bezier(.2,.8,.2,1);
+  }
+  .sheet-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .sheet-title{ font:700 18px/1 "DM Sans"; color:var(--ink); }
+  .sheet-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 0; border-bottom:1px solid var(--card-border); }
+  .row-label{ font:600 14px/1.2 "DM Sans"; color:var(--ink); }
+  .row-label small{ display:block; font:500 12px/1.3 "DM Sans"; color:var(--muted); margin-top:3px; }
+  .row-val{ font:600 13px/1.3 "DM Sans"; color:var(--muted); text-align:right; }
+  .sheet-block{ padding:15px 0 4px; }
+  .mini-btn{
+    -webkit-appearance:none; appearance:none; cursor:pointer; border-radius:11px;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    font:600 14px/1 "DM Sans"; padding:10px 14px; min-height:40px; min-width:58px; transition:background .2s, border-color .2s, transform .12s;
+  }
+  .mini-btn:active{ transform:scale(.97); }
+  .mini-btn:hover{ border-color:var(--accent); }
+  .mini-btn.on{ background:var(--ind-grad); color:#fff; border-color:transparent; }
+  .mini-btn.danger{ color:var(--bad); }
+  .mini-btn.danger:hover{ border-color:var(--bad); }
+  .mini-btn.danger.solid{ background:var(--bad); color:#fff; border-color:transparent; }
+  .reset-confirm{ margin-top:12px; display:flex; flex-direction:column; gap:10px; }
+  .reset-confirm[hidden]{ display:none; }
+  .rc-q{ font:500 13px/1.4 "DM Sans"; color:var(--ink-2); }
+  .rc-btns{ display:flex; gap:10px; }
+  .rc-btns .mini-btn{ flex:1; }
+  .about{ margin-top:18px; padding-top:16px; border-top:1px solid var(--card-border); }
+  .about-title{ font:700 13px/1 "DM Sans"; letter-spacing:.04em; color:var(--accent); margin-bottom:9px; }
+  .about p{ margin:0 0 10px; font:400 13px/1.55 "DM Sans"; color:var(--ink-2); }
+  .about p:last-child{ margin-bottom:0; }
+
+  :focus-visible{ outline:2px solid var(--ring); outline-offset:2px; }
+  @media (prefers-reduced-motion:reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  }
+  @keyframes numIn{ from{opacity:0; transform:translateY(16px) scale(.94); filter:blur(4px);} to{opacity:1; transform:none; filter:none;} }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(7px);} to{opacity:1; transform:none;} }
+  @keyframes pop{ 0%{opacity:0; transform:scale(.78);} 62%{transform:scale(1.07);} 100%{opacity:1; transform:scale(1);} }
+  @keyframes okPulse{
+    0%{ box-shadow:var(--card-shadow), 0 0 0 0 rgba(93,186,140,0); }
+    30%{ box-shadow:var(--card-shadow), 0 0 0 5px color-mix(in srgb, var(--ok) 28%, transparent), 0 0 44px color-mix(in srgb, var(--ok) 30%, transparent); }
+    100%{ box-shadow:var(--card-shadow), 0 0 0 0 rgba(93,186,140,0); }
+  }
+  @keyframes streakPop{ 0%{transform:scale(1);} 38%{transform:scale(1.2);} 100%{transform:scale(1);} }
+  @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+  @keyframes sheetIn{ from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;} }
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+
+<main class="app">
+
+  <!-- Header: set picker · title · streak · settings (same layout as /learn) -->
+  <header class="bar">
+    <div class="pill-wrap">
+      <button class="pill" id="setPill" aria-haspopup="true" aria-expanded="false" aria-label="Choose what to practise">
+        <span class="pill-label" id="setLabel">Eating</span><span class="chev">▾</span>
+      </button>
+      <div class="pop" id="setPop" hidden>
+        <div class="pop-title">Quick start</div>
+        <div class="chips" id="quickChips"></div>
+        <div class="pop-title">Groups</div>
+        <div class="chips" id="groupChips"></div>
+        <div class="pop-title">Level</div>
+        <div class="chips" id="levelChips"></div>
+      </div>
+    </div>
+    <h1 class="title">LekThai<button class="beta-tag" id="betaTag" title="About the beta">beta</button></h1>
+    <div class="bar-right">
+      <div class="streak" id="streakChip" title="Correct in a row (Hear &amp; Choose)">
+        <span class="streak-ico">⚡</span><span id="streakVal">0</span>
+      </div>
+      <button class="icon-btn" id="gearBtn" aria-label="Settings" aria-haspopup="dialog">⚙</button>
+    </div>
+  </header>
+
+  <!-- Mode tabs -->
+  <nav class="seg" role="tablist" aria-label="Drill mode">
+    <button class="tab active" id="tabHear" role="tab">① Hear &amp; Choose</button>
+    <button class="tab" id="tabSay" role="tab">② See &amp; Say</button>
+    <span class="seg-ind" aria-hidden="true"></span>
+  </nav>
+
+  <section class="card" id="card">
+
+    <!-- MODE A: SEE & SAY — English shown, you recall and say the Thai -->
+    <div class="panel" id="panelSay">
+      <div class="panel-inner">
+        <div class="stage" id="sayStage">
+          <div class="eyebrow">What would you say? <span class="mbadge" id="sayBadge" hidden>✓ known</span></div>
+          <div class="bigword" id="sayWord">—</div>
+          <div class="reveal" id="sayReveal">
+            <div class="thai" id="sayThai" lang="th"></div>
+            <div class="rom" id="sayRom"></div>
+            <div class="meaning" id="sayMeaning"></div>
+            <div class="note" id="sayNote"></div>
+          </div>
+          <div class="hint" id="sayHint"></div>
+        </div>
+        <div class="actions">
+          <button class="btn ghost" id="sayRevealBtn">🔊 Hear &amp; reveal</button>
+          <button class="btn text" id="sayAgainBtn" hidden>🔊 Hear again</button>
+          <div class="rate-row" id="sayRateRow" hidden>
+            <button class="btn rate miss" id="rateMiss">✗ Missed</button>
+            <button class="btn rate got" id="rateGot">✓ Got it</button>
+          </div>
+        </div>
+        <div class="mastery-cap mastery-out">—</div>
+      </div>
+    </div>
+
+    <!-- MODE B: HEAR & CHOOSE — Thai heard, you think of the meaning, then pick -->
+    <div class="panel" id="panelHear" hidden>
+      <div class="panel-inner">
+        <div class="stage stage-hear" id="hearStage">
+          <div class="eyebrow">Listen · what does it mean? <span class="mbadge" id="hearBadge" hidden>✓ known</span></div>
+          <button class="btn play" id="playBtn"><span class="ico">🔊</span> Play phrase</button>
+          <div class="hint" id="hearHint">Think of the meaning first.</div>
+          <button class="btn primary" id="readyBtn">I’ve got it — show choices</button>
+          <button class="btn text idk" id="noIdeaBtn">No idea — show me</button>
+          <div class="tiles" id="tiles" hidden></div>
+          <button class="btn text idk" id="idkBtn" hidden>I don’t know</button>
+          <div class="verdict" id="hearVerdict"></div>
+          <div class="reveal" id="hearReveal">
+            <div class="thai" id="hearThai" lang="th"></div>
+            <div class="rom" id="hearRom"></div>
+            <div class="meaning" id="hearMeaning"></div>
+            <div class="note" id="hearNote"></div>
+          </div>
+          <button class="btn text" id="nextBtn" hidden>Next phrase →</button>
+        </div>
+        <div class="mastery-cap mastery-out">—</div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="app-foot">
+    <nav>
+      <a href="/">Home</a>
+      <a href="/learn">Numbers</a>
+      <a href="/thai-numbers">Guides</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </nav>
+  </footer>
+</main>
+
+<div class="warn" id="warn" hidden role="status"><span id="warnText"></span><button class="warn-x" id="warnX" aria-label="Dismiss">✕</button></div>
+
+<!-- Settings sheet -->
+<div class="sheet-wrap" id="settings" hidden>
+  <div class="sheet-scrim" id="settingsScrim"></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">
+    <div class="sheet-head">
+      <span class="sheet-title">Settings</span>
+      <button class="icon-btn" id="settingsClose" aria-label="Close settings">✕</button>
+    </div>
+    <div class="sheet-row">
+      <span class="row-label">Appearance</span>
+      <button class="mini-btn" id="themeBtn" aria-label="Switch to light theme">◑</button>
+    </div>
+    <div class="sheet-row">
+      <span class="row-label">English-letter spelling<small>e.g. wǎan nóoi under หวานน้อย</small></span>
+      <button class="mini-btn" id="romBtn"></button>
+    </div>
+    <div class="sheet-row">
+      <span class="row-label">Polite ending<small>adds ครับ (men) or ค่ะ / คะ (women) to phrases you say</small></span>
+      <button class="mini-btn" id="politeBtn"></button>
+    </div>
+    <div class="sheet-row">
+      <span class="row-label">Slow voice<small>speak the Thai more slowly</small></span>
+      <button class="mini-btn" id="slowBtn"></button>
+    </div>
+    <div class="sheet-row">
+      <span class="row-label">Voice</span>
+      <span class="row-val" id="voiceVal">—</span>
+    </div>
+    <div class="sheet-row">
+      <span class="row-label">Progress</span>
+      <span class="row-val" id="progressVal">—</span>
+    </div>
+    <div class="sheet-block">
+      <button class="mini-btn danger" id="resetBtn">Reset progress</button>
+      <div class="reset-confirm" id="resetConfirm" hidden>
+        <span class="rc-q">Erase all phrase progress on this device? (Your words and numbers progress is kept.)</span>
+        <div class="rc-btns">
+          <button class="mini-btn" id="resetCancel">Cancel</button>
+          <button class="mini-btn danger solid" id="resetYes">Reset</button>
+        </div>
+      </div>
+    </div>
+    <div class="about">
+      <div class="about-title">Beta</div>
+      <p>The tones and spellings haven’t been checked by a native Thai speaker yet. Trust the audio over the letters, and expect fixes.</p>
+    </div>
+    <div class="about">
+      <div class="about-title">How to use it</div>
+      <p><b>① Hear &amp; Choose</b> plays a Thai phrase. Work out what it means in your head first, then show the choices and tap the one that matches. Start here: understanding comes before speaking. Some phrases are ones Thais say <i>to</i> you, like “Do you need a bag?” — this is where you learn those.</p>
+      <p><b>② See &amp; Say</b> describes a situation. Say the Thai out loud from memory, then tap reveal to hear it and check yourself — including the tones. Be honest: a wrong tone can change the meaning.</p>
+      <p><b>Polite ending:</b> Thais end most sentences with ครับ (men) or ค่ะ (women; คะ for questions). Turn it on in settings and the app adds yours to every phrase you say.</p>
+      <p>Don’t guess. If you don’t know it, tap <b>No idea</b> or <b>I don’t know</b>. A lucky guess tells the app you know a phrase you don’t, so it shows it to you less. An honest “don’t know” keeps it coming back, and it won’t break your ⚡ streak.</p>
+      <p>The first time you meet a phrase you won’t know it — that’s fine, the reveal is the lesson. It only counts as a miss from the second time on.</p>
+    </div>
+    <div class="about">
+      <div class="about-title">Why this works</div>
+      <p>LekThai is built on the two most strongly evidenced ideas in learning science: retrieval practice and spaced repetition.</p>
+      <p>Every prompt makes you recall the answer before you see it — say it aloud, or work out the meaning — instead of just reading along. The effort of pulling an answer from memory is what builds the memory; passive review barely moves the needle.</p>
+      <p>It also remembers how you do. Phrases you miss come back sooner and more often; phrases you know fade into occasional check-ins, and come back more the longer it’s been. A few focused minutes a day beats one long cram.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   DATA — the phrase list (from lekthai_phrases_v1.0). Each phrase:
+   id (fixed forever, p-<situation>-NN) · thai · say · tone · english (answer tile) ·
+   prompt (See & Say situation) · group (situation) · level · use ('say' | 'hear') · note
+   'hear' = something Thais say TO you: Hear & Choose only, never See & Say.
+   Progress is keyed by id, so fixing a spelling never wipes anyone's progress.
+   ===================================================================== */
+var DATA = {"groups":[{"id":"eat","name":"Eating & drinking","icon":"🍜","short":"Eating"},{"id":"ride","name":"Taxis & rides","icon":"🚕","short":"Taxis"},{"id":"shop","name":"Shopping & paying","icon":"🛍️","short":"Shopping"},{"id":"way","name":"Finding your way","icon":"🧭","short":"Directions"},{"id":"help","name":"Getting by in Thai","icon":"💬","short":"Getting by"},{"id":"meet","name":"Meeting people","icon":"🤝","short":"Meeting people"},{"id":"plan","name":"Time & plans","icon":"🕒","short":"Time & plans"},{"id":"stay","name":"Hotel & room","icon":"🏨","short":"Hotel"},{"id":"health","name":"Health & pharmacy","icon":"💊","short":"Health"},{"id":"trouble","name":"Problems & emergencies","icon":"🚨","short":"Emergencies"}],"phrases":[{"id":"p-eat-01","thai":"กี่ท่าน","say":"kii thaan","tone":"L-F","english":"How many people?","prompt":"A restaurant host greets you and asks:","group":"eat","level":1,"use":"hear","note":"Polite form. Answer with a number + คน: สองคน (saawng khon) = two people."},{"id":"p-eat-02","thai":"ขอดูเมนูหน่อย","say":"khaaw duu mee-nuu nooi","tone":"R-M-M-M-L","english":"Can I see the menu?","prompt":"You sit down and want to see what they have.","group":"eat","level":2,"use":"say","note":""},{"id":"p-eat-03","thai":"เอาอะไรดี","say":"ao a-rai dii","tone":"M-L-M-M","english":"What would you like?","prompt":"The vendor is ready to take your order and asks:","group":"eat","level":1,"use":"hear","note":""},{"id":"p-eat-04","thai":"มีอะไรแนะนำบ้าง","say":"mii a-rai nae-nam baang","tone":"M-L-M-H-M-F","english":"What do you recommend?","prompt":"You don't know what to order. Ask what's good.","group":"eat","level":2,"use":"say","note":""},{"id":"p-eat-05","thai":"เอาอันนี้","say":"ao an-nii","tone":"M-M-H","english":"I'll have this one.","prompt":"You point at a dish on the menu.","group":"eat","level":1,"use":"say","note":"Pointing + this phrase = you can order anything."},{"id":"p-eat-06","thai":"เผ็ดไหม","say":"phet mai","tone":"L-H","english":"Is it spicy?","prompt":"Before ordering, check the heat.","group":"eat","level":2,"use":"say","note":""},{"id":"p-eat-07","thai":"กินเผ็ดได้ไหม","say":"kin phet dai mai","tone":"M-L-F-H","english":"Can you eat spicy food?","prompt":"The cook looks at you and asks:","group":"eat","level":1,"use":"hear","note":"You'll hear this constantly. Answer ได้ (can) or ไม่ได้ (can't)."},{"id":"p-eat-08","thai":"เผ็ดน้อย","say":"phet nooi","tone":"L-H","english":"Only a little spicy.","prompt":"You like some heat, but not much.","group":"eat","level":1,"use":"say","note":"Thai 'a little spicy' is still spicy. ไม่เผ็ด (not spicy) is in /words."},{"id":"p-eat-09","thai":"ไม่ใส่พริก","say":"mai sai phrik","tone":"F-L-H","english":"No chili, please.","prompt":"You want the dish with no chili in it at all.","group":"eat","level":2,"use":"say","note":"Pattern: ไม่ใส่ + thing = without that thing."},{"id":"p-eat-10","thai":"ไม่กินเนื้อสัตว์","say":"mai kin neua-sat","tone":"F-M-H-L","english":"I don't eat meat.","prompt":"Tell the cook you're vegetarian.","group":"eat","level":2,"use":"say","note":"Fish sauce is in almost everything; strict vegetarians look for เจ (jee) food."},{"id":"p-eat-11","thai":"ทานที่นี่หรือกลับบ้าน","say":"thaan thii-nii reu klap baan","tone":"M-F-F-R-L-F","english":"Eat here or take away?","prompt":"At the counter, the staff ask:","group":"eat","level":1,"use":"hear","note":"ทาน is the polite word for 'eat'. Answer ทานที่นี่ or กลับบ้าน."},{"id":"p-eat-12","thai":"ขอน้ำเปล่า","say":"khaaw naam plao","tone":"R-H-L","english":"Plain water, please.","prompt":"Order a drinking water.","group":"eat","level":1,"use":"say","note":"Pattern: ขอ + thing = may I have."},{"id":"p-eat-13","thai":"กาแฟเย็น","say":"kaa-fae yen","tone":"M-M-M","english":"An iced coffee.","prompt":"Order the classic Thai iced coffee.","group":"eat","level":2,"use":"say","note":""},{"id":"p-eat-14","thai":"หวานน้อย","say":"waan nooi","tone":"R-H","english":"Not too sweet.","prompt":"Thai drinks are very sweet. Ask for less sugar.","group":"eat","level":1,"use":"say","note":"Works for coffee, tea, shakes, anything sweet."},{"id":"p-eat-15","thai":"เอาอะไรอีกไหม","say":"ao a-rai iik mai","tone":"M-L-M-L-H","english":"Anything else?","prompt":"After your order, the staff ask:","group":"eat","level":2,"use":"hear","note":""},{"id":"p-eat-16","thai":"แค่นี้","say":"khae nii","tone":"F-H","english":"That's all.","prompt":"You've ordered everything you want.","group":"eat","level":1,"use":"say","note":"The natural reply to 'anything else?'"},{"id":"p-eat-17","thai":"เก็บเงินด้วย","say":"kep ngoen duai","tone":"L-M-F","english":"The bill, please.","prompt":"You've finished eating and want to pay.","group":"eat","level":1,"use":"say","note":"The everyday Thai way. เช็คบิล (check bill) is in /words."},{"id":"p-ride-01","thai":"ไปสนามบิน","say":"pai sa-naam-bin","tone":"M-L-R-M","english":"To the airport, please.","prompt":"You get into a taxi. Tell the driver where to go.","group":"ride","level":1,"use":"say","note":"Pattern: ไป + place."},{"id":"p-ride-02","thai":"ไปโรงแรมนี้ได้ไหม","say":"pai roong-raem nii dai mai","tone":"M-M-M-H-F-H","english":"Can you take me to this hotel?","prompt":"You show the driver your hotel on your phone.","group":"ride","level":1,"use":"say","note":""},{"id":"p-ride-03","thai":"ไปตลาดเท่าไหร่","say":"pai ta-laat thao-rai","tone":"M-L-L-F-L","english":"How much to the market?","prompt":"Agree the fare before you get in.","group":"ride","level":1,"use":"say","note":"Swap ตลาด for any place."},{"id":"p-ride-04","thai":"เลี้ยวซ้าย","say":"liao saai","tone":"H-H","english":"Turn left.","prompt":"Tell the driver to turn left.","group":"ride","level":1,"use":"say","note":""},{"id":"p-ride-05","thai":"เลี้ยวขวา","say":"liao khwaa","tone":"H-R","english":"Turn right.","prompt":"Tell the driver to turn right.","group":"ride","level":1,"use":"say","note":"ขวา has a rising tone; ซ้าย a high one."},{"id":"p-ride-06","thai":"กลับรถ","say":"klap rot","tone":"L-H","english":"Make a U-turn.","prompt":"You're going the wrong way. Tell the driver to turn around.","group":"ride","level":2,"use":"say","note":""},{"id":"p-ride-07","thai":"จอดตรงนี้","say":"jaawt trong-nii","tone":"L-M-H","english":"Stop here.","prompt":"You've arrived. Tell the driver to pull over right here.","group":"ride","level":1,"use":"say","note":"Say it a little early."},{"id":"p-ride-08","thai":"จอดข้างหน้า","say":"jaawt khaang-naa","tone":"L-F-F","english":"Stop up ahead.","prompt":"Your stop is just ahead. Tell the driver to pull over there.","group":"ride","level":2,"use":"say","note":""},{"id":"p-ride-09","thai":"เลยไปอีกนิด","say":"loei pai iik nit","tone":"M-M-L-H","english":"A little further.","prompt":"The driver stopped too soon. Ask them to go on a bit.","group":"ride","level":2,"use":"say","note":""},{"id":"p-ride-10","thai":"ลงตรงไหน","say":"long trong nai","tone":"M-M-R","english":"Where do you want to get off?","prompt":"As you get close, the driver asks:","group":"ride","level":2,"use":"hear","note":""},{"id":"p-ride-11","thai":"รีบหน่อย","say":"riip nooi","tone":"F-L","english":"Please hurry.","prompt":"You're running late. Ask the driver to hurry.","group":"ride","level":2,"use":"say","note":""},{"id":"p-ride-12","thai":"รอที่นี่ก่อน","say":"raaw thii-nii kaawn","tone":"M-F-F-L","english":"Wait here for me.","prompt":"You'll be back in a minute. Ask the driver to wait.","group":"ride","level":2,"use":"say","note":""},{"id":"p-ride-13","thai":"ขอหมวกกันน็อก","say":"khaaw muak kan-naawk","tone":"R-L-M-H","english":"Can I have a helmet?","prompt":"You're getting on a motorbike taxi.","group":"ride","level":2,"use":"say","note":"หมวกกันน็อก = helmet (lit. 'hat against knocks')."},{"id":"p-shop-01","thai":"แพงไป","say":"phaeng pai","tone":"M-M","english":"Too expensive.","prompt":"The price is too high. Start bargaining.","group":"shop","level":1,"use":"say","note":"Smile. Bargaining is friendly, at markets only, not in shops with fixed prices."},{"id":"p-shop-02","thai":"สองร้อยได้ไหม","say":"saawng rooi dai mai","tone":"R-H-F-H","english":"Can you do 200?","prompt":"Make an offer of 200 baht.","group":"shop","level":2,"use":"say","note":"Pattern: price + ได้ไหม. Practise numbers on /learn."},{"id":"p-shop-03","thai":"มีใหญ่กว่านี้ไหม","say":"mii yai kwaa nii mai","tone":"M-L-L-H-H","english":"Do you have a bigger one?","prompt":"It's too small. Ask for a bigger size.","group":"shop","level":2,"use":"say","note":"Swap ใหญ่ (big) for เล็ก (small)."},{"id":"p-shop-04","thai":"มีสีอื่นไหม","say":"mii sii euen mai","tone":"M-R-L-H","english":"Do you have other colours?","prompt":"You like it, but not the colour.","group":"shop","level":2,"use":"say","note":"Pattern: มี + thing + ไหม = do you have...?"},{"id":"p-shop-05","thai":"ลองได้ไหม","say":"laawng dai mai","tone":"M-F-H","english":"Can I try it on?","prompt":"You want to try on a shirt.","group":"shop","level":2,"use":"say","note":""},{"id":"p-shop-06","thai":"เอาสองอัน","say":"ao saawng an","tone":"M-R-M","english":"I'll take two.","prompt":"You want to buy two of them.","group":"shop","level":2,"use":"say","note":"Number + counting word. อัน is the safe default."},{"id":"p-shop-07","thai":"ขอคิดดูก่อน","say":"khaaw khit duu kaawn","tone":"R-H-M-L","english":"Let me think about it.","prompt":"Leave a stall politely without buying.","group":"shop","level":2,"use":"say","note":""},{"id":"p-shop-08","thai":"สแกนได้ไหม","say":"sa-kaen dai mai","tone":"L-M-F-H","english":"Can I pay by QR scan?","prompt":"You want to pay with a QR code instead of cash.","group":"shop","level":1,"use":"say","note":""},{"id":"p-shop-09","thai":"รับบัตรไหม","say":"rap bat mai","tone":"H-L-H","english":"Do you take card?","prompt":"Check before you buy whether they take card.","group":"shop","level":2,"use":"say","note":""},{"id":"p-shop-10","thai":"เงินสดเท่านั้น","say":"ngoen-sot thao-nan","tone":"M-L-F-H","english":"Cash only.","prompt":"You try to pay by card and the seller says:","group":"shop","level":2,"use":"hear","note":""},{"id":"p-shop-11","thai":"รับถุงไหม","say":"rap thung mai","tone":"H-R-H","english":"Do you need a bag?","prompt":"At 7-Eleven the cashier asks:","group":"shop","level":1,"use":"hear","note":"Answer ไม่เอาถุง (no bag), from /words."},{"id":"p-shop-12","thai":"อุ่นไหม","say":"un mai","tone":"L-H","english":"Do you want it heated up?","prompt":"At 7-Eleven, buying a toastie, the cashier asks:","group":"shop","level":1,"use":"hear","note":"Answer อุ่นด้วย (un duai) = 'heat it, please', or ไม่ต้อง (no need)."},{"id":"p-shop-13","thai":"หมดแล้ว","say":"mot laew","tone":"L-H","english":"It's sold out.","prompt":"You ask for something and the seller says:","group":"shop","level":1,"use":"hear","note":""},{"id":"p-shop-14","thai":"ไม่ต้องทอน","say":"mai taawng thaawn","tone":"F-F-M","english":"Keep the change.","prompt":"You're paying and don't want change back.","group":"shop","level":2,"use":"say","note":""},{"id":"p-way-01","thai":"ห้องน้ำอยู่ที่ไหน","say":"haawng-naam yuu thii-nai","tone":"F-H-L-F-R","english":"Where's the toilet?","prompt":"You need the toilet.","group":"way","level":1,"use":"say","note":"Pattern: place + อยู่ที่ไหน = where is...?"},{"id":"p-way-02","thai":"แถวนี้มีเซเว่นไหม","say":"thaeo nii mii see-wen mai","tone":"R-H-M-M-F-H","english":"Is there a 7-Eleven around here?","prompt":"You need a shop nearby.","group":"way","level":2,"use":"say","note":""},{"id":"p-way-03","thai":"ไปตลาดยังไง","say":"pai ta-laat yang-ngai","tone":"M-L-L-M-M","english":"How do I get to the market?","prompt":"Ask someone for directions to the market.","group":"way","level":1,"use":"say","note":"Pattern: ไป + place + ยังไง."},{"id":"p-way-04","thai":"ไกลไหม","say":"klai mai","tone":"M-H","english":"Is it far?","prompt":"Ask how far away it is.","group":"way","level":1,"use":"say","note":"Mid tone. ใกล้ (near) has a falling tone. Mix them up and you've asked the opposite."},{"id":"p-way-05","thai":"ไม่ไกล","say":"mai klai","tone":"F-M","english":"It's not far.","prompt":"You ask if it's far and they answer:","group":"way","level":2,"use":"hear","note":""},{"id":"p-way-06","thai":"เดินไปได้ไหม","say":"doen pai dai mai","tone":"M-M-F-H","english":"Can I walk there?","prompt":"Ask whether it's within walking distance.","group":"way","level":2,"use":"say","note":""},{"id":"p-way-07","thai":"ช่วยชี้ในแผนที่หน่อย","say":"chuai chii nai phaen-thii nooi","tone":"F-H-M-R-F-L","english":"Can you show me on the map?","prompt":"You hold out your phone map and ask for help.","group":"way","level":2,"use":"say","note":""},{"id":"p-way-08","thai":"หลงทาง","say":"long thaang","tone":"R-M","english":"I'm lost.","prompt":"You don't know where you are.","group":"way","level":1,"use":"say","note":""},{"id":"p-way-09","thai":"ตรงไปแล้วเลี้ยวซ้าย","say":"trong pai laew liao saai","tone":"M-M-H-H-H","english":"Go straight, then turn left.","prompt":"You asked for directions. They tell you:","group":"way","level":2,"use":"hear","note":""},{"id":"p-way-10","thai":"อยู่ทางขวามือ","say":"yuu thaang khwaa meu","tone":"L-M-R-M","english":"It's on the right.","prompt":"You asked where it is. They tell you:","group":"way","level":2,"use":"hear","note":"ขวามือ = right-hand side. ซ้ายมือ = left-hand side."},{"id":"p-help-01","thai":"ช่วยหน่อยได้ไหม","say":"chuai nooi dai mai","tone":"F-L-F-H","english":"Can you help me?","prompt":"You need a hand from a stranger.","group":"help","level":1,"use":"say","note":""},{"id":"p-help-02","thai":"ขอโทษ ไม่ได้ยิน","say":"khaaw-thoot mai dai-yin","tone":"R-F-F-F-M","english":"Sorry, I didn't catch that.","prompt":"It's noisy and you missed what they said.","group":"help","level":1,"use":"say","note":""},{"id":"p-help-03","thai":"อะไรนะ","say":"a-rai na","tone":"L-M-H","english":"Sorry, what?","prompt":"You didn't catch that. Ask gently.","group":"help","level":1,"use":"say","note":"Keep it soft. นะ makes it friendly."},{"id":"p-help-04","thai":"เข้าใจไหม","say":"khao-jai mai","tone":"F-M-H","english":"Do you understand?","prompt":"Someone explains something and checks:","group":"help","level":1,"use":"hear","note":"Answer เข้าใจแล้ว (got it) or ไม่เข้าใจ (I don't understand, in /words)."},{"id":"p-help-05","thai":"เข้าใจแล้ว","say":"khao-jai laew","tone":"F-M-H","english":"Got it, I understand now.","prompt":"After a confusing exchange, it finally makes sense.","group":"help","level":1,"use":"say","note":""},{"id":"p-help-06","thai":"เขียนให้หน่อยได้ไหม","say":"khian hai nooi dai mai","tone":"R-F-L-F-H","english":"Can you write it down for me?","prompt":"You can't follow the spoken words. Ask them to write it.","group":"help","level":2,"use":"say","note":"Then you can show it to a translator app."},{"id":"p-help-07","thai":"ภาษาไทยพูดว่ายังไง","say":"phaa-saa thai phuut waa yang-ngai","tone":"M-R-M-F-F-M-M","english":"How do you say it in Thai?","prompt":"Say an English word, then ask how to say it in Thai.","group":"help","level":2,"use":"say","note":""},{"id":"p-help-08","thai":"รอสักครู่","say":"raaw sak-khruu","tone":"M-L-F","english":"Wait a moment, please.","prompt":"You need a second. Ask them to wait.","group":"help","level":1,"use":"say","note":"Staff say it to you too."},{"id":"p-meet-01","thai":"มาเที่ยว","say":"maa thiao","tone":"M-F","english":"I'm here on holiday.","prompt":"Someone asks why you're in Thailand.","group":"meet","level":1,"use":"say","note":""},{"id":"p-meet-02","thai":"ทำงานที่นี่","say":"tham-ngaan thii-nii","tone":"M-M-F-F","english":"I work here.","prompt":"Someone asks why you're in Thailand.","group":"meet","level":2,"use":"say","note":""},{"id":"p-meet-03","thai":"พักที่ไหน","say":"phak thii-nai","tone":"H-F-R","english":"Where are you staying?","prompt":"Ask a new friend where they're staying.","group":"meet","level":1,"use":"say","note":"You'll be asked this too."},{"id":"p-meet-04","thai":"อยู่กี่วัน","say":"yuu kii wan","tone":"L-L-M","english":"How many days are you staying?","prompt":"A new friend asks:","group":"meet","level":2,"use":"hear","note":""},{"id":"p-meet-05","thai":"เคยมาเมืองไทยไหม","say":"khoei maa meuang thai mai","tone":"M-M-M-M-H","english":"Have you been to Thailand before?","prompt":"A new friend asks:","group":"meet","level":2,"use":"hear","note":""},{"id":"p-meet-06","thai":"พูดไทยเก่งมาก","say":"phuut thai keng maak","tone":"F-M-L-F","english":"Your Thai is very good!","prompt":"You say one Thai sentence and they reply:","group":"meet","level":1,"use":"hear","note":"You will hear this a lot."},{"id":"p-meet-07","thai":"ไม่เก่งหรอก","say":"mai keng raawk","tone":"F-L-L","english":"Not really, only a little.","prompt":"Someone praises your Thai. Reply modestly.","group":"meet","level":1,"use":"say","note":"Being modest is the polite reply."},{"id":"p-meet-08","thai":"กำลังเรียนภาษาไทย","say":"kam-lang rian phaa-saa thai","tone":"M-M-M-M-R-M","english":"I'm learning Thai.","prompt":"Explain why your Thai is basic.","group":"meet","level":1,"use":"say","note":"People will slow down and help you."},{"id":"p-meet-09","thai":"แต่งงานหรือยัง","say":"taeng-ngaan reu-yang","tone":"L-M-R-M","english":"Are you married?","prompt":"A new friend asks (common, not rude here):","group":"meet","level":2,"use":"hear","note":"Literally 'married yet?'. A normal friendly question in Thailand."},{"id":"p-meet-10","thai":"แต่งงานแล้ว","say":"taeng-ngaan laew","tone":"L-M-H","english":"I'm married.","prompt":"Someone asks if you're married. You are.","group":"meet","level":2,"use":"say","note":""},{"id":"p-meet-11","thai":"ยังโสด","say":"yang soot","tone":"M-L","english":"I'm still single.","prompt":"Someone asks if you're married. You're not.","group":"meet","level":2,"use":"say","note":""},{"id":"p-meet-12","thai":"ขอไลน์ได้ไหม","say":"khaaw lai dai mai","tone":"R-M-F-H","english":"Can I have your LINE?","prompt":"You want to keep in touch with a new friend.","group":"meet","level":2,"use":"say","note":"LINE is Thailand's main messaging app."},{"id":"p-plan-01","thai":"กี่โมงแล้ว","say":"kii moong laew","tone":"L-M-H","english":"What time is it?","prompt":"You want to know the time.","group":"plan","level":1,"use":"say","note":""},{"id":"p-plan-02","thai":"เปิดกี่โมง","say":"poet kii moong","tone":"L-L-M","english":"What time do you open?","prompt":"Ask a shop when it opens.","group":"plan","level":1,"use":"say","note":""},{"id":"p-plan-03","thai":"ปิดกี่โมง","say":"pit kii moong","tone":"L-L-M","english":"What time do you close?","prompt":"Ask a shop when it closes.","group":"plan","level":2,"use":"say","note":""},{"id":"p-plan-04","thai":"วันนี้เปิดไหม","say":"wan-nii poet mai","tone":"M-H-L-H","english":"Are you open today?","prompt":"Check whether a place is open today.","group":"plan","level":2,"use":"say","note":""},{"id":"p-plan-05","thai":"พรุ่งนี้ว่างไหม","say":"phrung-nii waang mai","tone":"F-H-F-H","english":"Are you free tomorrow?","prompt":"You want to make plans with a friend.","group":"plan","level":2,"use":"say","note":""},{"id":"p-plan-06","thai":"พรุ่งนี้เจอกัน","say":"phrung-nii joe kan","tone":"F-H-M-M","english":"See you tomorrow.","prompt":"Say goodbye until tomorrow.","group":"plan","level":1,"use":"say","note":""},{"id":"p-plan-07","thai":"ไปกัน","say":"pai kan","tone":"M-M","english":"Let's go!","prompt":"Get your friends moving.","group":"plan","level":1,"use":"say","note":""},{"id":"p-plan-08","thai":"กำลังไป","say":"kam-lang pai","tone":"M-M-M","english":"I'm on my way.","prompt":"Your friend messages: where are you?","group":"plan","level":2,"use":"say","note":""},{"id":"p-plan-09","thai":"อีกสิบนาทีถึง","say":"iik sip naa-thii theung","tone":"L-L-M-M-R","english":"I'll be there in 10 minutes.","prompt":"Tell your friend when you'll arrive.","group":"plan","level":2,"use":"say","note":"อีก + time + ถึง = arriving in..."},{"id":"p-plan-10","thai":"ขอโทษที่มาสาย","say":"khaaw-thoot thii maa saai","tone":"R-F-F-M-R","english":"Sorry I'm late.","prompt":"You arrive late to meet a friend.","group":"plan","level":2,"use":"say","note":""},{"id":"p-plan-11","thai":"ยังไม่ได้","say":"yang mai dai","tone":"M-F-F","english":"Not yet.","prompt":"Someone asks if you've done it. You haven't.","group":"plan","level":1,"use":"say","note":""},{"id":"p-plan-12","thai":"เสร็จแล้ว","say":"set laew","tone":"L-H","english":"It's done.","prompt":"You've finished. Tell them.","group":"plan","level":2,"use":"say","note":""},{"id":"p-stay-01","thai":"จองไว้แล้ว","say":"jaawng wai laew","tone":"M-H-H","english":"I have a booking.","prompt":"You arrive at the hotel desk.","group":"stay","level":1,"use":"say","note":""},{"id":"p-stay-02","thai":"รหัสไวไฟอะไร","say":"ra-hat wai-fai a-rai","tone":"H-L-M-M-L-M","english":"What's the Wi-Fi password?","prompt":"You need the Wi-Fi password.","group":"stay","level":1,"use":"say","note":""},{"id":"p-stay-03","thai":"ฝากกระเป๋าได้ไหม","say":"faak kra-pao dai mai","tone":"L-L-R-F-H","english":"Can I leave my bags here?","prompt":"You've checked out but your flight is later.","group":"stay","level":2,"use":"say","note":""},{"id":"p-stay-04","thai":"อาหารเช้ากี่โมง","say":"aa-haan chao kii moong","tone":"M-R-H-L-M","english":"What time is breakfast?","prompt":"Ask the desk about breakfast.","group":"stay","level":2,"use":"say","note":""},{"id":"p-stay-05","thai":"แอร์เสีย","say":"ae sia","tone":"M-R","english":"The air-con is broken.","prompt":"Your room's air-con isn't working.","group":"stay","level":2,"use":"say","note":"Pattern: thing + เสีย = it's broken."},{"id":"p-stay-06","thai":"ไม่มีน้ำร้อน","say":"mai mii naam raawn","tone":"F-M-H-H","english":"There's no hot water.","prompt":"The shower is only cold.","group":"stay","level":2,"use":"say","note":""},{"id":"p-stay-07","thai":"ขอผ้าเช็ดตัวเพิ่ม","say":"khaaw phaa chet-tua phoem","tone":"R-F-H-M-F","english":"More towels, please.","prompt":"Ask for extra towels.","group":"stay","level":2,"use":"say","note":""},{"id":"p-stay-08","thai":"ขอเช็คเอาท์","say":"khaaw chek-ao","tone":"R-H-L","english":"I'd like to check out.","prompt":"You're leaving the hotel.","group":"stay","level":2,"use":"say","note":""},{"id":"p-health-01","thai":"รู้สึกไม่สบาย","say":"ruu-seuk mai sa-baai","tone":"H-L-F-L-M","english":"I don't feel well.","prompt":"Tell someone you're not feeling well.","group":"health","level":1,"use":"say","note":""},{"id":"p-health-02","thai":"เป็นไข้","say":"pen khai","tone":"M-F","english":"I have a fever.","prompt":"Tell the pharmacist you're running a temperature.","group":"health","level":2,"use":"say","note":"Falling tone on ไข้. With a low tone (ไข่) it means egg."},{"id":"p-health-03","thai":"เจ็บตรงนี้","say":"jep trong-nii","tone":"L-M-H","english":"It hurts here.","prompt":"Point to where it hurts.","group":"health","level":1,"use":"say","note":""},{"id":"p-health-04","thai":"แพ้ถั่ว","say":"phae thua","tone":"H-L","english":"I'm allergic to peanuts.","prompt":"Warn the cook or doctor about your allergy.","group":"health","level":1,"use":"say","note":"Pattern: แพ้ + thing. Learn the word for YOUR allergy."},{"id":"p-health-05","thai":"มียาแก้ปวดหัวไหม","say":"mii yaa kae puat hua mai","tone":"M-M-F-L-R-H","english":"Do you have something for a headache?","prompt":"At the pharmacy, ask for headache medicine.","group":"health","level":2,"use":"say","note":"ยาแก้ + problem = medicine for that problem."},{"id":"p-health-06","thai":"ขอพบหมอ","say":"khaaw phop maaw","tone":"R-H-R","english":"I'd like to see a doctor.","prompt":"At the hospital desk.","group":"health","level":2,"use":"say","note":""},{"id":"p-health-07","thai":"เป็นมากี่วันแล้ว","say":"pen maa kii wan laew","tone":"M-M-L-M-H","english":"How many days have you had it?","prompt":"The doctor or pharmacist asks:","group":"health","level":2,"use":"hear","note":""},{"id":"p-health-08","thai":"กินยาหลังอาหาร","say":"kin yaa lang aa-haan","tone":"M-M-R-M-R","english":"Take the medicine after meals.","prompt":"The pharmacist hands you pills and says:","group":"health","level":2,"use":"hear","note":"ก่อนอาหาร (kaawn aa-haan) = before meals."},{"id":"p-health-09","thai":"กินวันละกี่ครั้ง","say":"kin wan la kii khrang","tone":"M-M-H-L-H","english":"How many times a day?","prompt":"Ask how often to take the medicine.","group":"health","level":2,"use":"say","note":""},{"id":"p-trouble-01","thai":"เรียกรถพยาบาล","say":"riak rot pha-yaa-baan","tone":"F-H-H-M-M","english":"Call an ambulance!","prompt":"Someone is badly hurt.","group":"trouble","level":1,"use":"say","note":"Ambulance: 1669. Police: 191. Tourist Police (English): 1155."},{"id":"p-trouble-02","thai":"เรียกตำรวจ","say":"riak tam-ruat","tone":"F-M-L","english":"Call the police!","prompt":"You need the police.","group":"trouble","level":1,"use":"say","note":"Tourist Police speak English: 1155."},{"id":"p-trouble-03","thai":"ไฟไหม้","say":"fai mai","tone":"M-F","english":"Fire!","prompt":"You see a fire.","group":"trouble","level":2,"use":"say","note":""},{"id":"p-trouble-04","thai":"มีอุบัติเหตุ","say":"mii u-bat-ti-heet","tone":"M-L-L-L-L","english":"There's been an accident.","prompt":"You see a road accident.","group":"trouble","level":2,"use":"say","note":""},{"id":"p-trouble-05","thai":"มีใครเจ็บไหม","say":"mii khrai jep mai","tone":"M-M-L-H","english":"Is anyone hurt?","prompt":"After an accident, check on people.","group":"trouble","level":2,"use":"say","note":""},{"id":"p-trouble-06","thai":"หยุดนะ","say":"yut na","tone":"L-H","english":"Stop it!","prompt":"Someone is grabbing your bag.","group":"trouble","level":2,"use":"say","note":"Say it loudly."},{"id":"p-trouble-07","thai":"โทรศัพท์หาย","say":"thoo-ra-sap haai","tone":"M-H-L-R","english":"I've lost my phone.","prompt":"Your phone is gone.","group":"trouble","level":1,"use":"say","note":"Pattern: thing + หาย = it's lost."},{"id":"p-trouble-08","thai":"กระเป๋าตังค์โดนขโมย","say":"kra-pao-tang doon kha-mooi","tone":"L-R-M-M-L-R","english":"My wallet was stolen.","prompt":"Report a theft to the police.","group":"trouble","level":2,"use":"say","note":""},{"id":"p-trouble-09","thai":"ขอยืมโทรศัพท์หน่อย","say":"khaaw yeum thoo-ra-sap nooi","tone":"R-M-M-H-L-L","english":"Can I borrow your phone?","prompt":"Your phone is dead and you need to call someone.","group":"trouble","level":2,"use":"say","note":""},{"id":"p-trouble-10","thai":"มีใครพูดภาษาอังกฤษได้ไหม","say":"mii khrai phuut phaa-saa ang-krit dai mai","tone":"M-M-F-M-R-M-L-F-H","english":"Does anyone here speak English?","prompt":"You're stuck and need someone who speaks English.","group":"trouble","level":1,"use":"say","note":""}]};
+
+var CONFIG = {
+  firstTen: ['p-way-01','p-eat-05','p-eat-12','p-eat-17','p-ride-07','p-shop-01','p-help-03','p-help-08','p-ride-01','p-shop-11'],   // ids
+  knownMinAttempts: 3,     // same rule as /learn
+  knownMinAccuracy: 0.8,   // same rule as /learn
+  cooldown: 4,             // a word can't repeat within this many picks
+  reviewDays: 7,           // known words return more often the longer since last seen
+  rate: 0.85,              // same as /learn
+  rateSlow: 0.6,
+  autoNextMs: 1400         // Hear & Choose: pause on a correct answer so you can read the Thai
+};
+
+/* ---------- storage (probe first, fall back to memory — same approach as /learn) ---------- */
+var KEY_STATS='lekthai-phrases-stats-v1', KEY_PREFS='lekthai-phrases-prefs-v1',
+    KEY_STREAK='lekthai-phrases-streak-v1', KEY_THEME='lekthai-theme', KEY_BETA='lekthai-phrases-beta-seen';
+var storageOK = false, store = (function(){
+  try{ var k='__lekthai'+Math.random(); localStorage.setItem(k,'1'); if(localStorage.getItem(k)!=='1') throw 0; localStorage.removeItem(k); storageOK=true; return localStorage; }
+  catch(e){ var m={}; return {getItem:function(k){return k in m?m[k]:null},setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]}}; }
+})();
+function load(k,f){ try{ var v=store.getItem(k); return v?JSON.parse(v):f; }catch(e){ return f; } }
+function save(k,v){ try{ store.setItem(k,JSON.stringify(v)); }catch(e){} }
+
+var STATS = load(KEY_STATS,{});   // { id: {c:correct, m:missed, r:lastResult 1|0, t:lastSeenMs} }
+var PREFS = Object.assign({mode:'hear', set:'eat', level:1, roman:true, slow:false, polite:''}, load(KEY_PREFS,{}));   // polite: '' | 'm' | 'f'
+function savePrefs(){ save(KEY_PREFS,PREFS); }
+
+var ITEMS = DATA.phrases, GROUP = {};
+DATA.groups.forEach(function(g){ GROUP[g.id]=g; });
+if(PREFS.set!=='first10' && PREFS.set!=='mix' && PREFS.set!=='weak' && !GROUP[PREFS.set]) PREFS.set='eat';
+
+function $(id){ return document.getElementById(id); }
+
+/* ---------- tone marks, generated from the tone code (never typed by hand) ----------
+   M none · L à · F â · H á · R ǎ — mark goes on the first vowel letter, like /learn (sǎawng) */
+var MARK={M:'',L:'̀',F:'̂',H:'́',R:'̌'};
+function accented(w){
+  var codes=w.tone.split('-'), i=0;
+  var out=w.say.replace(/[a-z]+/g,function(s){ var c=codes[i++], v=s.search(/[aeiou]/);
+    return (!c||v<0||!MARK[c]) ? s : s.slice(0,v+1)+MARK[c]+s.slice(v+1); });
+  return out.normalize ? out.normalize('NFC') : out;
+}
+
+/* ---------- polite ending (setting) — added to 'say' phrases only, never stored in the data ----------
+   men: ครับ khráp · women: ค่ะ khâ for statements, คะ khá for questions (the English ends in "?") */
+function ending(w){
+  if(!w || w.use!=='say' || !PREFS.polite) return null;
+  if(PREFS.polite==='m') return {thai:'ครับ', say:'khrap', tone:'H'};
+  return /\?\s*$/.test(w.english) ? {thai:'คะ', say:'kha', tone:'H'} : {thai:'ค่ะ', say:'kha', tone:'F'};
+}
+function thaiOf(w){ var e=ending(w); return e ? w.thai+e.thai : w.thai; }
+function romOf(w){ var e=ending(w); return accented(e ? {say:w.say+' '+e.say, tone:w.tone+'-'+e.tone} : w); }
+function sizeText(el,text,isThai){              // long sentences step down a size so they fit one screen
+  var n=String(text).replace(/\s/g,'').length;
+  if(isThai){ el.classList.toggle('long', n>11 && n<=18); el.classList.toggle('xlong', n>18); }
+  else el.classList.toggle('long', n>24);
+}
+
+/* ---------- mastery ---------- */
+function attempts(s){ return s ? s.c+s.m : 0; }
+function isKnown(id){ var s=STATS[id]; if(!s) return false; var n=attempts(s);
+  return n>=CONFIG.knownMinAttempts && s.c/n>=CONFIG.knownMinAccuracy && s.r===1; }  // a miss un-knows it
+function record(id, pass, dontKnow){
+  var first=!STATS[id], s=STATS[id]||(STATS[id]={c:0,m:0,r:0,t:0});
+  if(pass) s.c++; else if(!first) s.m++;          // first-ever sight: a miss is "seen", not a failure
+  if(dontKnow) s.d=(s.d||0)+1;                    // logged apart from wrong picks: "didn't know" ≠ "mixed it up"
+  s.r=pass?1:0; s.t=Date.now(); save(KEY_STATS,STATS);
+}
+
+/* ---------- weighted picker ---------- */
+function weight(w){
+  var s=STATS[w.id];
+  if(!s) return 3;                                         // never seen
+  if(!attempts(s)) return 4;                               // seen once, not learned yet: soon
+  if(isKnown(w.id)){ var days=(Date.now()-(s.t||0))/864e5; return 0.1+Math.min(1,days/CONFIG.reviewDays)*0.6; }
+  var acc=s.c/attempts(s); return 1+2*(1-acc)+(s.r===0?1:0);   // weak: favoured
+}
+var RECENT=[];
+function pick(pool){
+  var cd=Math.min(CONFIG.cooldown,pool.length-1);
+  var avail=pool.filter(function(w){ return RECENT.indexOf(w.id)===-1; }); if(!avail.length) avail=pool;
+  var tot=0, ws=avail.map(function(w){ var x=weight(w); tot+=x; return x; });
+  var r=Math.random()*tot, i=0; for(; i<avail.length-1; i++){ r-=ws[i]; if(r<=0) break; }
+  var w=avail[i]; RECENT.push(w.id); while(RECENT.length>cd) RECENT.shift(); return w;
+}
+function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)),t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+
+/* ---------- sets ---------- */
+function inLevel(w){ return w.level===1 || PREFS.level===2; }
+function inMode(w){ return PREFS.mode!=='say' || w.use==='say'; }   // 'hear' phrases never appear in See & Say
+function poolFor(set){
+  var p;
+  if(set==='first10') p=CONFIG.firstTen.map(function(id){ return ITEMS.filter(function(w){ return w.id===id; })[0]; }).filter(Boolean);
+  else if(set==='mix') p=ITEMS.filter(inLevel);
+  else if(set==='weak') p=ITEMS.filter(function(w){ return attempts(STATS[w.id])>0 && !isKnown(w.id); });
+  else p=ITEMS.filter(function(w){ return w.group===set && inLevel(w); });
+  return p.filter(inMode);
+}
+function setShort(set){
+  if(set==='first10') return '✦ First 10';
+  if(set==='mix') return '🔀 Mix all';
+  if(set==='weak') return '🎯 Weak phrases';
+  return GROUP[set].icon+' '+GROUP[set].short;
+}
+
+/* ---------- voice: same approach as /learn — always try Thai, warn (never block) if no Thai voice is listed ---------- */
+var hasTTS='speechSynthesis' in window, thaiVoice=null, voiceChecked=false;
+function loadVoices(){
+  if(!hasTTS) return;
+  var v=speechSynthesis.getVoices()||[];
+  thaiVoice=v.filter(function(x){ return x.lang && /^th/i.test(x.lang); })[0]||null;
+  if(v.length){ voiceChecked=true; if(!thaiVoice) showWarn('voice'); else if(warnKind==='voice') hideWarn(); }
+  syncSheet();
+}
+function speak(text){
+  if(!hasTTS) return;
+  try{
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(String(text).replace(/\.\.\.|…|\//g,' ').trim());
+    u.lang='th-TH'; u.rate=PREFS.slow?CONFIG.rateSlow:CONFIG.rate;
+    if(thaiVoice) u.voice=thaiVoice;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ---------- toast (voice warning / beta notice) ---------- */
+var warnKind='';
+function showWarn(kind){
+  warnKind=kind;
+  $('warnText').innerHTML = kind==='voice'
+    ? '⚠️ <b>No Thai voice found in this browser.</b> The app will still try to speak. If you hear nothing, or the wrong accent, install a Thai text-to-speech voice in your phone’s settings, or try Chrome.'
+    : !hasTTS ? '⚠️ <b>This browser can’t speak.</b> Hear &amp; Choose needs audio. Try Chrome or Safari.'
+    : '<b>Beta.</b> The tones and spellings haven’t been checked by a native Thai speaker yet. Trust the audio over the letters.';
+  $('warn').hidden=false;
+}
+function hideWarn(){ $('warn').hidden=true; if(warnKind==='beta') save(KEY_BETA,1); warnKind=''; }
+
+/* ---------- streak (Hear & Choose correct in a row, like /learn's Hear & Type) ---------- */
+var streak=load(KEY_STREAK,{s:0,b:0});
+function renderStreak(bump){
+  $('streakVal').textContent=streak.s;
+  $('streakChip').classList.toggle('live',streak.s>0);
+  $('streakChip').title='Correct in a row (Hear & Choose)'+(streak.b?' · best '+streak.b:'');
+  if(bump){ var c=$('streakChip'); c.classList.remove('hot'); void c.offsetWidth; c.classList.add('hot'); }
+}
+function hitStreak(ok){ if(ok){ streak.s++; if(streak.s>streak.b) streak.b=streak.s; } else streak.s=0; save(KEY_STREAK,streak); renderStreak(ok); }
+
+/* ---------- set popover ---------- */
+function chip(set,label,count,active){
+  return '<button class="chip'+(active?' active':'')+'" data-set="'+set+'">'+label+(count!=null?'<small>'+count+'</small>':'')+'</button>';
+}
+function knownIn(pool){ return pool.filter(function(w){ return isKnown(w.id); }).length; }
+function buildPop(){
+  var weakN=poolFor('weak').length, mix=poolFor('mix');
+  $('quickChips').innerHTML =
+    chip('first10','✦ First 10','taster',PREFS.set==='first10')+
+    chip('mix','🔀 Mix all',knownIn(mix)+'/'+mix.length,PREFS.set==='mix')+
+    chip('weak','🎯 Weak phrases',weakN?weakN:'none yet',PREFS.set==='weak');
+  $('groupChips').innerHTML = DATA.groups.map(function(g){
+    var p=poolFor(g.id); return chip(g.id,g.icon+' '+g.name,knownIn(p)+'/'+p.length,PREFS.set===g.id);
+  }).join('');
+  $('levelChips').innerHTML =
+    '<button class="chip'+(PREFS.level===1?' active':'')+'" data-level="1">Level 1<small>learn first</small></button>'+
+    '<button class="chip'+(PREFS.level===2?' active':'')+'" data-level="2">Level 1 + 2<small>everything</small></button>';
+}
+var scrim=null;
+function openPop(){ buildPop(); var p=$('setPop'); p.hidden=false; $('setPill').setAttribute('aria-expanded','true');
+  scrim=document.createElement('div'); scrim.className='scrim'; scrim.addEventListener('click',closePop); document.body.appendChild(scrim);
+  requestAnimationFrame(function(){ p.classList.add('show'); }); }
+function closePop(){ var p=$('setPop'); p.classList.remove('show'); $('setPill').setAttribute('aria-expanded','false');
+  if(scrim){ scrim.remove(); scrim=null; } setTimeout(function(){ p.hidden=true; },160); }
+function popOpen(){ return !$('setPop').hidden; }
+
+/* ---------- drill state ---------- */
+var pool=[], cur=null, say={revealed:false,rated:false}, hear={ready:false,answered:false,choices:[],picked:null}, autoTimer=null;
+
+function startSet(){
+  pool=poolFor(PREFS.set); RECENT=[];
+  $('setLabel').textContent=setShort(PREFS.set);
+  next();
+}
+function next(){
+  clearTimeout(autoTimer); autoTimer=null;
+  cur = pool.length ? pick(pool) : null;
+  if(PREFS.mode==='say') newSay(); else newHear(true);
+  updateMastery();
+}
+function emptyMsg(){
+  return PREFS.set==='weak' ? 'No weak phrases yet. Practise a situation first — any phrase you miss twice shows up here.' : 'Nothing in this set.';
+}
+
+/* ---------- ② See & Say ---------- */
+function newSay(){
+  say={revealed:false,rated:false};
+  var bw=$('sayWord');
+  ['sayThai','sayRom','sayMeaning','sayNote'].forEach(function(id){ $(id).textContent=''; });
+  $('sayReveal').classList.remove('show');
+  $('rateGot').classList.remove('chosen'); $('rateMiss').classList.remove('chosen');
+  $('sayRateRow').hidden=true; $('sayAgainBtn').hidden=true;
+  if(!cur){ bw.textContent=''; $('sayHint').innerHTML='<span class="empty">'+emptyMsg()+'</span>'; $('sayRevealBtn').hidden=true; return; }
+  bw.textContent=cur.prompt; bw.classList.add('prompt');
+  bw.classList.remove('in'); void bw.offsetWidth; bw.classList.add('in');
+  $('sayHint').textContent='Say it out loud first. Don’t know it yet? Tap reveal and learn it.';
+  $('sayRevealBtn').hidden=false;
+}
+function revealSay(){
+  if(!cur||say.revealed) return; say.revealed=true;
+  $('sayThai').textContent=thaiOf(cur); sizeText($('sayThai'),thaiOf(cur),true);
+  $('sayRom').textContent=PREFS.roman?romOf(cur):''; sizeText($('sayRom'),romOf(cur));
+  $('sayMeaning').textContent='“'+cur.english+'”';
+  $('sayNote').textContent=cur.note||'';
+  var r=$('sayReveal'); r.classList.remove('show'); void r.offsetWidth; r.classList.add('show');
+  $('sayHint').textContent='Did you say it — and the tones — the same way?';
+  $('sayRevealBtn').hidden=true; $('sayAgainBtn').hidden=!hasTTS; $('sayRateRow').hidden=false;
+  speak(thaiOf(cur));
+}
+function rateSay(ok){
+  if(!cur||!say.revealed||say.rated) return; say.rated=true;
+  $(ok?'rateGot':'rateMiss').classList.add('chosen');
+  record(cur.id,ok);
+  if(PREFS.set==='weak') pool=poolFor('weak');
+  setTimeout(next,200);
+}
+
+/* ---------- ① Hear & Choose ---------- */
+/* Wrong answers must never be a fair answer too. For phrases, two meanings "overlap" only if:
+   the same Thai or the same English, one Thai phrase contains the other, or they are listed in SAME
+   (different words, same meaning). Sharing a key word is fine: "Turn left" next to "Turn right"
+   is exactly the test worth having. */
+var SAME=[['p-help-02','p-help-03']];   // "Sorry, I didn't catch that." = "Sorry, what?"
+function bare(t){ return t.replace(/\s/g,''); }
+function overlaps(a,b){
+  if(a.thai===b.thai || a.english.toLowerCase()===b.english.toLowerCase()) return true;
+  var x=bare(a.thai), y=bare(b.thai); if(x.indexOf(y)>-1 || y.indexOf(x)>-1) return true;
+  return SAME.some(function(p){ return p.indexOf(a.id)>-1 && p.indexOf(b.id)>-1; });
+}
+function makeChoices(w){
+  var picks=[];                                     // English-only tiles: every meaning must be clearly different
+  function take(x){ if(picks.length<3 && x!==w && !overlaps(x,w) && !picks.some(function(p){ return overlaps(p,x); })) picks.push(x); }
+  shuffle(ITEMS.filter(function(x){ return x.group===w.group; })).forEach(take);   // same group = no easy elimination
+  if(picks.length<3) shuffle(ITEMS.slice()).forEach(take);
+  return shuffle(picks.concat([w]));
+}
+function newHear(autoplay){
+  hear={ready:false,answered:false,choices:[],picked:null};
+  $('tiles').hidden=true; $('tiles').innerHTML='';
+  $('hearVerdict').textContent=''; $('hearVerdict').className='verdict';
+  ['hearThai','hearRom','hearMeaning','hearNote'].forEach(function(id){ $(id).textContent=''; });
+  $('nextBtn').hidden=true; $('hearStage').classList.remove('done');
+  if(!cur){ $('playBtn').hidden=true; $('readyBtn').hidden=true; $('noIdeaBtn').hidden=true; $('idkBtn').hidden=true; $('hearHint').innerHTML='<span class="empty">'+emptyMsg()+'</span>'; return; }
+  $('playBtn').hidden=false; $('readyBtn').hidden=false; $('noIdeaBtn').hidden=false; $('idkBtn').hidden=true;
+  $('hearHint').textContent = hasTTS ? 'Think of the meaning first.' : 'This browser can’t play audio, so this mode won’t work here. Try ② See & Say.';
+  hear.choices=makeChoices(cur);
+  if(autoplay!==false) setTimeout(function(){ speak(thaiOf(cur)); },150);
+}
+function showChoices(){
+  if(!cur||hear.ready) return; hear.ready=true;
+  $('readyBtn').hidden=true; $('noIdeaBtn').hidden=true; $('hearHint').textContent='Tap the meaning closest to yours.';
+  renderTiles(); $('tiles').hidden=false; $('idkBtn').hidden=false;
+}
+function renderTiles(){
+  $('tiles').innerHTML=hear.choices.map(function(c,i){
+    var cls=''; if(hear.answered){ if(c.id===cur.id) cls=' right'; else if(c.id===hear.picked) cls=' wrong'; }
+    if(c.english.length>24) cls+=' long';
+    return '<button class="tile'+cls+'" data-i="'+i+'"'+(hear.answered?' disabled':'')+'><span class="k">'+(i+1)+'</span>'+escapeHtml(c.english)+'</button>';
+  }).join('');
+}
+function choose(i){
+  if(!cur||!hear.ready||hear.answered) return;
+  var c=hear.choices[i]; if(!c) return;
+  var ok=c.id===cur.id; hear.answered=true; hear.picked=c.id;
+  record(cur.id,ok); hitStreak(ok);
+  revealHear(ok?'ok':'bad', ok?'✓ Correct!':'✗ It was “'+cur.english+'”');
+  if(ok){ var card=$('card'); card.classList.remove('pulse'); void card.offsetWidth; card.classList.add('pulse');
+          autoTimer=setTimeout(next,CONFIG.autoNextMs); }      // wrong answers wait: study the reveal
+  if(PREFS.set==='weak') pool=poolFor('weak');
+  updateMastery();
+}
+/* "No idea" (before choices) and "I don't know" (after): an honest miss.
+   Counts as a miss (a first-ever sight is just "seen"), logged separately, and the ⚡ streak
+   is paused, not reset, so honesty never costs more than a 1-in-4 guess. */
+function dontKnow(){
+  if(!cur||hear.answered) return;
+  if(!hear.ready){ hear.ready=true; $('readyBtn').hidden=true; $('noIdeaBtn').hidden=true; }
+  hear.answered=true; hear.picked=null;
+  record(cur.id,false,true);
+  revealHear('idk','Now you know: “'+cur.english+'”');
+  $('tiles').hidden=false;
+  if(PREFS.set==='weak') pool=poolFor('weak');
+  updateMastery();
+}
+function revealHear(kind,text){
+  renderTiles(); $('idkBtn').hidden=true;
+  var v=$('hearVerdict'); v.textContent=text; v.className='verdict '+kind;
+  $('hearThai').textContent=thaiOf(cur); sizeText($('hearThai'),thaiOf(cur),true);
+  $('hearRom').textContent=PREFS.roman?romOf(cur):''; sizeText($('hearRom'),romOf(cur));
+  $('hearMeaning').textContent = cur.use==='hear' ? '👂 '+cur.prompt.replace(/:\s*$/,'') : '';   // where you'll hear it
+  $('hearNote').textContent=cur.note||'';
+  var r=$('hearReveal'); r.classList.remove('show'); void r.offsetWidth; r.classList.add('show');
+  $('hearHint').textContent=''; $('nextBtn').hidden=false; $('hearStage').classList.add('done');
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+/* ---------- mode switching ---------- */
+function setMode(m){
+  PREFS.mode=m; savePrefs();
+  var sayOn=m==='say';
+  $('panelSay').hidden=!sayOn; $('panelHear').hidden=sayOn;
+  $('tabSay').classList.toggle('active',sayOn); $('tabHear').classList.toggle('active',!sayOn);
+  if(hasTTS) speechSynthesis.cancel();
+  startSet();                                       // the pool depends on the mode ('hear' phrases skip See & Say)
+}
+
+/* ---------- mastery readout ---------- */
+function updateMastery(){
+  var k=knownIn(pool), html = !storageOK ? 'Saving is off in this browser'
+    : '<span class="m-ico">✦</span>'+k+'/'+pool.length+' known in '+setShort(PREFS.set).replace(/^\S+\s/,'');
+  document.querySelectorAll('.mastery-out').forEach(function(el){ el.innerHTML=html; });
+  var kn = cur && isKnown(cur.id);
+  $('sayBadge').hidden=!kn; $('hearBadge').hidden=!kn;
+}
+
+/* ---------- settings ---------- */
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  $('themeBtn').textContent = t==='dark' ? '◑' : '◐';
+  $('themeBtn').setAttribute('aria-label', t==='dark' ? 'Switch to light theme' : 'Switch to dark theme');
+  try{ localStorage.setItem(KEY_THEME,t); }catch(e){}
+}
+function syncSheet(){
+  $('romBtn').textContent=PREFS.roman?'On':'Off'; $('romBtn').classList.toggle('on',PREFS.roman);
+  $('slowBtn').textContent=PREFS.slow?'On':'Off'; $('slowBtn').classList.toggle('on',PREFS.slow);
+  $('politeBtn').textContent = PREFS.polite==='m' ? 'ครับ' : PREFS.polite==='f' ? 'ค่ะ' : 'Off';
+  $('politeBtn').classList.toggle('on',!!PREFS.polite);
+  $('voiceVal').textContent = !hasTTS ? 'Not supported here' : thaiVoice ? (thaiVoice.name||'Thai') : (voiceChecked ? 'No Thai voice listed' : 'Checking…');
+  var known=ITEMS.filter(function(w){ return isKnown(w.id); }).length, seen=Object.keys(STATS).length;
+  $('progressVal').textContent = storageOK ? known+' known · '+seen+' seen' : 'Saving is off';
+}
+function openSettings(){ syncSheet(); $('settings').hidden=false; }
+function closeSettings(){ $('settings').hidden=true; $('resetConfirm').hidden=true; }
+
+/* ---------- events ---------- */
+$('setPill').addEventListener('click',function(){ popOpen()?closePop():openPop(); });
+$('setPop').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b) return;
+  if(b.dataset.set){ PREFS.set=b.dataset.set; savePrefs(); closePop(); startSet(); }
+  else if(b.dataset.level){ PREFS.level=+b.dataset.level; savePrefs(); buildPop(); if(PREFS.set!=='first10'&&PREFS.set!=='weak') startSet(); }
+});
+$('tabSay').addEventListener('click',function(){ if(PREFS.mode!=='say') setMode('say'); });
+$('tabHear').addEventListener('click',function(){ if(PREFS.mode!=='hear') setMode('hear'); });
+$('sayRevealBtn').addEventListener('click',revealSay);
+$('sayAgainBtn').addEventListener('click',function(){ if(cur) speak(thaiOf(cur)); });
+$('rateGot').addEventListener('click',function(){ rateSay(true); });
+$('rateMiss').addEventListener('click',function(){ rateSay(false); });
+$('playBtn').addEventListener('click',function(){ if(cur) speak(thaiOf(cur)); });
+$('readyBtn').addEventListener('click',showChoices);
+$('noIdeaBtn').addEventListener('click',dontKnow);
+$('idkBtn').addEventListener('click',dontKnow);
+$('tiles').addEventListener('click',function(e){ var t=e.target.closest('.tile'); if(t) choose(+t.dataset.i); });
+$('nextBtn').addEventListener('click',next);
+$('gearBtn').addEventListener('click',openSettings);
+$('settingsClose').addEventListener('click',closeSettings);
+$('settingsScrim').addEventListener('click',closeSettings);
+$('betaTag').addEventListener('click',function(){ showWarn('beta'); });
+$('warnX').addEventListener('click',hideWarn);
+$('themeBtn').addEventListener('click',function(){ setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'); });
+$('romBtn').addEventListener('click',function(){ PREFS.roman=!PREFS.roman; savePrefs(); syncSheet();
+  if(say.revealed&&cur) $('sayRom').textContent=PREFS.roman?romOf(cur):'';
+  if(hear.answered&&cur) $('hearRom').textContent=PREFS.roman?romOf(cur):''; });
+$('slowBtn').addEventListener('click',function(){ PREFS.slow=!PREFS.slow; savePrefs(); syncSheet(); });
+$('politeBtn').addEventListener('click',function(){
+  PREFS.polite = PREFS.polite==='' ? 'm' : PREFS.polite==='m' ? 'f' : ''; savePrefs(); syncSheet();
+  if(say.revealed&&cur){ $('sayThai').textContent=thaiOf(cur); sizeText($('sayThai'),thaiOf(cur),true); $('sayRom').textContent=PREFS.roman?romOf(cur):''; }
+  if(hear.answered&&cur){ $('hearThai').textContent=thaiOf(cur); sizeText($('hearThai'),thaiOf(cur),true); $('hearRom').textContent=PREFS.roman?romOf(cur):''; }
+});
+$('resetBtn').addEventListener('click',function(){ $('resetConfirm').hidden=false; });
+$('resetCancel').addEventListener('click',function(){ $('resetConfirm').hidden=true; });
+$('resetYes').addEventListener('click',function(){
+  STATS={}; streak={s:0,b:0};
+  try{ store.removeItem(KEY_STATS); store.removeItem(KEY_STREAK); }catch(e){}
+  renderStreak(); closeSettings(); startSet();
+});
+
+/* desktop keyboard (like /learn) — never while typing or with a sheet/popover open
+   See & Say: Space/Enter reveal → Enter/→ got it, ← missed
+   Hear & Choose: Space replay · Enter show choices / next · 1–4 choose · 0 = I don't know */
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){ if(!$('settings').hidden) closeSettings(); else if(popOpen()) closePop(); return; }
+  if(!$('settings').hidden||popOpen()) return;
+  var t=e.target; if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+  if(PREFS.mode==='say'){
+    if(!say.revealed){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); revealSay(); } }
+    else if(e.key==='Enter'||e.key==='ArrowRight'){ e.preventDefault(); rateSay(true); }
+    else if(e.key==='ArrowLeft'){ e.preventDefault(); rateSay(false); }
+  } else {
+    if(e.key===' '){ e.preventDefault(); if(cur) speak(thaiOf(cur)); }
+    else if(e.key==='Enter'){ e.preventDefault(); if(!hear.ready) showChoices(); else if(hear.answered) next(); }
+    else if(/^[1-4]$/.test(e.key)){ e.preventDefault(); showChoices(); choose(+e.key-1); }
+    else if(e.key==='0'||e.key==='?'){ e.preventDefault(); dontKnow(); }
+  }
+});
+
+/* ---------- boot ---------- */
+(function(){
+  var saved='dark'; try{ saved=localStorage.getItem(KEY_THEME)||'dark'; }catch(e){}
+  setTheme(saved);
+  renderStreak();
+  if(hasTTS){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; } else showWarn('notts');
+  if(!$('warn').hidden){} else if(!load(KEY_BETA,0)) showWarn('beta');
+  $('panelSay').hidden=PREFS.mode!=='say'; $('panelHear').hidden=PREFS.mode==='say';
+  $('tabSay').classList.toggle('active',PREFS.mode==='say'); $('tabHear').classList.toggle('active',PREFS.mode!=='say');
+  pool=poolFor(PREFS.set); $('setLabel').textContent=setShort(PREFS.set);
+  cur = pool.length ? pick(pool) : null;
+  if(PREFS.mode==='say') newSay(); else newHear(false);   // no audio on page load (browsers block it anyway)
+  updateMastery();
+})();
+</script>
+<!-- No service worker registration here on purpose: /sw.js doesn't exist in the repo yet. -->
+</body>
+</html>
