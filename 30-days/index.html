@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<title>0 to Survival Thai — LekThai</title>
+<!-- /30-days v1.0 (2026-10-07): built from lekthai_30day_curriculum v1.1. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@144,400..700,30&family=DM+Sans:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+
+<meta name="description" content="Order, pay, get around and ask for help in Thai, in 30 days. Two 15-minute sessions a day. Free, no accounts, works in your browser.">
+<meta name="theme-color" content="#0f1117">
+<meta name="color-scheme" content="dark light">
+<link rel="canonical" href="https://lekthai.app/30-days">
+
+<!-- App shell, same as the tool pages. Remove this line if you want the page in search. -->
+<meta name="robots" content="noindex">
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LekThai">
+<meta property="og:title" content="0 to Survival Thai in 30 Days">
+<meta property="og:description" content="Order, pay, get around and ask for help in Thai, in 30 days. Free, no accounts.">
+<meta property="og:url" content="https://lekthai.app/30-days">
+<meta property="og:image" content="https://lekthai.app/og-home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="LekThai — learn Thai step by step.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="0 to Survival Thai in 30 Days">
+<meta name="twitter:description" content="Order, pay, get around and ask for help in Thai, in 30 days. Free, no accounts.">
+<meta name="twitter:image" content="https://lekthai.app/og-home.png">
+
+<style>
+  /* ============ THEME TOKENS (identical to the tool pages) ============ */
+  :root, [data-theme="dark"]{
+    color-scheme:dark;
+    --bg-0:#0f1117; --bg-1:#171a24;
+    --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
+    --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
+    --ok:#5dba8c; --bad:#e27d89; --gold:#d9b46a;
+    --card-bg:rgba(255,255,255,.055); --card-bg2:rgba(255,255,255,.016);
+    --card-border:rgba(255,255,255,.10);
+    --card-shadow:0 28px 64px -28px rgba(0,0,0,.75), 0 8px 26px -14px rgba(0,0,0,.55);
+    --soft:rgba(255,255,255,.06);
+    --pop-bg:#1b1f2a;
+    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
+    --ring:rgba(213,114,127,.65);
+    --num-solid:#f5f2eb;
+    --num-mask:linear-gradient(176deg, #000 0%, rgba(0,0,0,.84) 118%);
+    --num-glow:rgba(170,140,160,.20);
+    --on-accent:#fff;
+  }
+  [data-theme="light"]{
+    color-scheme:light;
+    --bg-0:#e6e9f1; --bg-1:#f5f7fb;
+    --ink:#1b2233; --ink-2:#3c4458; --muted:#6c7387;
+    --accent:#b5495a; --accent-2:#95384a; --blue:#43589a;
+    --ok:#2c8c5e; --bad:#bd4259; --gold:#9a7424;
+    --card-bg:rgba(255,255,255,.74); --card-bg2:rgba(255,255,255,.48);
+    --card-border:rgba(20,30,60,.10);
+    --card-shadow:0 28px 56px -30px rgba(30,40,80,.42), 0 6px 18px -10px rgba(30,40,80,.18);
+    --soft:rgba(20,30,60,.045);
+    --pop-bg:#ffffff;
+    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --glow-red:rgba(181,73,90,.10); --glow-blue:rgba(67,89,154,.12);
+    --ring:rgba(181,73,90,.5);
+    --num-solid:#1f273b;
+    --num-mask:linear-gradient(176deg, #000 0%, rgba(0,0,0,.79) 128%);
+    --num-glow:rgba(67,89,154,.10);
+    --on-accent:#fff;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{min-height:100%;}
+  body{
+    margin:0; background:var(--bg-0); color:var(--ink);
+    font-family:"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    -webkit-tap-highlight-color:transparent; line-height:1.5;
+  }
+  body.running{ overflow:hidden; height:100svh; }
+  .ambient{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(58% 48% at 16% 6%, var(--glow-red), transparent 72%),
+      radial-gradient(54% 50% at 90% 98%, var(--glow-blue), transparent 72%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  }
+  [hidden]{ display:none !important; }
+
+  /* ============ APP SHELL ============ */
+  .app{ width:100%; max-width:460px; margin:0 auto; padding:14px 16px calc(14px + env(safe-area-inset-bottom)); }
+  body.running .app{ height:100svh; display:flex; flex-direction:column; gap:10px; }
+
+  /* ============ HEADER ============ */
+  .bar{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:6px; }
+  .title{ flex:1 1 auto; min-width:0; margin:0; font:700 19px/1 "DM Sans"; letter-spacing:.01em; text-align:center; white-space:nowrap; }
+  .home-link{ color:inherit; text-decoration:none; display:inline-flex; align-items:center; height:38px; }
+  .beta-tag{
+    display:inline-block; vertical-align:middle; margin-left:5px; padding:3px 6px 2px; border-radius:999px;
+    font:700 9px/1 "DM Sans"; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    background:none; cursor:pointer;
+  }
+  .icon-btn{
+    flex:0 0 auto; width:38px; height:38px; border-radius:999px; cursor:pointer;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    font-size:16px; display:grid; place-items:center; transition:border-color .2s;
+  }
+  .icon-btn:hover{ border-color:var(--accent); }
+  .icon-btn.ghost{ visibility:hidden; }
+
+  /* ============ HOME ============ */
+  .hero{ text-align:center; padding:26px 0 18px; }
+  .tagline{
+    font-family:"Fraunces", Georgia, serif; font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
+    font-weight:600; font-size:clamp(34px,9.5vw,46px); line-height:1.04; letter-spacing:-.01em; margin:0 0 12px;
+    color:var(--num-solid); -webkit-text-fill-color:var(--num-solid);
+  }
+  @supports ((-webkit-mask-image:linear-gradient(#000,#000)) or (mask-image:linear-gradient(#000,#000))){
+    .tagline{ -webkit-mask-image:var(--num-mask); mask-image:var(--num-mask); }
+  }
+  .claim{ margin:0 auto 6px; max-width:30ch; font:600 16.5px/1.4 "DM Sans"; color:var(--ink); }
+  .sub{ margin:0 0 18px; font:500 13.5px/1.4 "DM Sans"; color:var(--muted); }
+  .week{ margin:22px 0 0; }
+  .week-h{ display:flex; align-items:baseline; gap:8px; margin:0 2px 10px; }
+  .week-h b{ font:700 12px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
+  .week-h span{ font:500 13.5px/1.2 "DM Sans"; color:var(--ink-2); }
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; }
+  @media (min-width:420px){ .grid{ grid-template-columns:repeat(4,1fr); } }
+  .tile{
+    -webkit-appearance:none; appearance:none; cursor:pointer; text-align:left; position:relative;
+    display:flex; flex-direction:column; gap:4px; min-height:92px; padding:10px 10px 9px;
+    border-radius:16px; border:1px solid var(--card-border); color:var(--ink);
+    background:linear-gradient(180deg, var(--card-bg), var(--card-bg2));
+    transition:border-color .15s, transform .12s;
+  }
+  .tile:hover{ border-color:color-mix(in srgb, var(--accent) 55%, transparent); }
+  .tile:active{ transform:scale(.98); }
+  .tile.next{ border-color:var(--accent); box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
+  .tile .dn{ font:700 18px/1 "DM Sans"; }
+  .tile .dt{ font:500 11.5px/1.25 "DM Sans"; color:var(--ink-2); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .tile .marks{ margin-top:auto; display:flex; gap:5px; font:700 11px/1 "DM Sans"; color:var(--muted); }
+  .tile .marks i{ font-style:normal; opacity:.45; }
+  .tile .marks i.on{ opacity:1; color:var(--ok); }
+  .tile .marks i.star{ opacity:.8; color:var(--gold); }
+  .tile .marks i.star.on{ color:var(--ok); }
+  .tile.done .dn::after{ content:" ✓"; color:var(--ok); font-size:14px; }
+
+  .howto{ margin:30px 0 4px; padding:16px; border-radius:18px; border:1px solid var(--card-border); background:var(--soft); }
+  .howto h3{ margin:0 0 8px; font:700 13px/1 "DM Sans"; letter-spacing:.04em; color:var(--accent); }
+  .howto p{ margin:0 0 9px; font:400 13.5px/1.55 "DM Sans"; color:var(--ink-2); }
+  .howto p:last-child{ margin-bottom:0; }
+
+  /* ============ DAY VIEW ============ */
+  .dayhead{ text-align:center; padding:14px 0 6px; }
+  .eyebrow{ font:600 11px/1.2 "DM Sans"; letter-spacing:.17em; text-transform:uppercase; color:var(--muted); }
+  .dtitle{ margin:8px 0 6px; font-family:"Fraunces", Georgia, serif; font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600; font-weight:600; font-size:clamp(26px,7.5vw,34px); line-height:1.1; }
+  .dnew{ font:500 14px/1.4 "DM Sans"; color:var(--ink-2); }
+  .scard{
+    margin-top:12px; padding:16px; border-radius:20px; border:1px solid var(--card-border);
+    background:linear-gradient(180deg, var(--card-bg), var(--card-bg2)); box-shadow:var(--card-shadow);
+  }
+  .scard.test{ border-style:dashed; border-color:color-mix(in srgb, var(--gold) 55%, transparent); box-shadow:none; }
+  .s-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:6px; }
+  .s-name{ font:700 18px/1.2 "DM Sans"; }
+  .s-stat{ font:700 12px/1 "DM Sans"; padding:5px 9px; border-radius:999px; background:var(--soft); color:var(--muted); white-space:nowrap; }
+  .s-stat.ok{ color:var(--ok); background:color-mix(in srgb, var(--ok) 14%, transparent); }
+  .s-stat.gold{ color:var(--gold); background:color-mix(in srgb, var(--gold) 14%, transparent); }
+  .s-line{ font:500 13.5px/1.45 "DM Sans"; color:var(--ink-2); margin-bottom:4px; }
+  .s-note{ font:500 12.5px/1.45 "DM Sans"; color:var(--muted); margin-bottom:12px; }
+  .daynav{ display:flex; justify-content:space-between; gap:10px; margin-top:16px; }
+  .daynav .btn{ width:auto; flex:1; }
+  .newlist{ margin-top:16px; padding:12px 14px; border-radius:16px; border:1px solid var(--card-border); background:var(--soft); }
+  .newlist summary{ cursor:pointer; font:600 13.5px/1.3 "DM Sans"; color:var(--ink); }
+  .nl-row{ display:flex; align-items:baseline; gap:10px; padding:7px 0; border-bottom:1px solid var(--card-border); cursor:pointer; }
+  .nl-row:last-child{ border-bottom:none; }
+  .nl-row .th{ font:500 18px/1.3 "Sarabun","Noto Sans Thai",sans-serif; color:var(--blue); }
+  .nl-row .en{ font:500 13px/1.3 "DM Sans"; color:var(--ink-2); }
+  .nl-row .tag{ margin-left:auto; font:700 9.5px/1 "DM Sans"; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+
+  /* ============ RUN VIEW ============ */
+  .run{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column; gap:10px; }
+  .runhead{ flex:0 0 auto; }
+  .segs{ display:flex; gap:4px; height:6px; }
+  .seg{ position:relative; border-radius:99px; background:var(--card-border); overflow:hidden; }
+  .seg i{ position:absolute; left:0; top:0; bottom:0; width:0; background:var(--ind-grad); border-radius:99px; }
+  .runmeta{ display:flex; justify-content:space-between; align-items:baseline; gap:8px; margin-top:9px; }
+  .runmeta .bl{ font:700 14px/1.2 "DM Sans"; }
+  .runmeta .bl small{ font-weight:500; color:var(--muted); margin-left:6px; }
+  .runmeta .tl{ font:700 14px/1 "DM Sans"; font-variant-numeric:tabular-nums; color:var(--ink-2); }
+  .runmeta .tl.low{ color:var(--accent); }
+
+  .card{
+    flex:1 1 auto; min-height:0; position:relative; overflow:hidden;
+    border-radius:26px; padding:6px;
+    background:linear-gradient(180deg, var(--card-bg), var(--card-bg2));
+    border:1px solid var(--card-border); box-shadow:var(--card-shadow);
+  }
+  .card.pulse{ animation:okPulse .72s ease; }
+  .stage{
+    height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+    text-align:center; gap:11px; padding:18px 14px 14px; overflow-y:auto; overflow-x:hidden; scrollbar-width:none;
+  }
+  .stage::-webkit-scrollbar{ display:none; }
+  .stage > *{ flex-shrink:0; }
+  .stage.center{ justify-content:center; }
+  .grow{ flex:1 1 auto !important; min-height:6px; }
+  .newtag{
+    display:inline-flex; margin-left:7px; padding:2px 8px; border-radius:999px; vertical-align:middle;
+    font:700 10px/1 "DM Sans"; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--gold); border:1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+  }
+  .overlay{
+    position:absolute; inset:0; z-index:5; display:flex; align-items:center; justify-content:center; text-align:center;
+    background:color-mix(in srgb, var(--bg-0) 82%, transparent); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+    border-radius:26px; cursor:pointer;
+  }
+  .ov-title{ font-family:"Fraunces", Georgia, serif; font-weight:600; font-size:34px; line-height:1.1; color:var(--ink); }
+  .ov-sub{ font:600 13px/1.3 "DM Sans"; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:6px 0; }
+  .quit{ flex:0 0 auto; }
+
+  /* exercise parts (same look as the tool pages) */
+  .bigword{
+    font-family:"Fraunces", Georgia, "Times New Roman", serif; font-weight:600;
+    font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
+    font-size:clamp(34px, 10.5vw, 54px); line-height:1.04; letter-spacing:-.012em;
+    margin:2px 0 0; max-width:100%; overflow-wrap:break-word;
+    color:var(--num-solid); -webkit-text-fill-color:var(--num-solid);
+  }
+  .bigword.long{ font-size:clamp(28px, 8.2vw, 40px); }
+  .bigword.prompt{ font-size:clamp(23px, 6.6vw, 30px); line-height:1.2; max-width:340px; }
+  .bigword.num{ font-size:clamp(66px, 21vw, 104px); line-height:.94; font-variant-numeric:lining-nums; }
+  @supports ((-webkit-mask-image:linear-gradient(#000,#000)) or (mask-image:linear-gradient(#000,#000))){
+    .bigword{ -webkit-mask-image:var(--num-mask); mask-image:var(--num-mask); }
+  }
+  .bigword.in{ animation:numIn .44s cubic-bezier(.2,.72,.2,1); }
+  .reveal{ display:flex; flex-direction:column; gap:3px; align-items:center; justify-content:center; }
+  .reveal.show{ animation:fadeUp .36s ease; }
+  .thai{ font-family:"Sarabun","Noto Sans Thai",sans-serif; font-weight:500; font-size:clamp(28px, 8.5vw, 38px); line-height:1.3; color:var(--blue); }
+  .thai.long{ font-size:clamp(24px, 7vw, 31px); }
+  .thai.xlong{ font-size:clamp(20px, 6vw, 26px); }
+  .rom{ font:500 clamp(16px,4.8vw,20px)/1.3 "DM Sans"; color:var(--ink-2); }
+  .meaning{ font:500 14px/1.3 "DM Sans"; color:var(--muted); }
+  .meaning:empty, .note:empty, .rom:empty{ display:none; }
+  .note{ font:500 12.5px/1.4 "DM Sans"; color:var(--muted); max-width:300px; margin-top:4px; padding:6px 10px; border-radius:10px; background:var(--soft); }
+  .hint{ font:500 13.5px/1.35 "DM Sans"; color:var(--muted); min-height:18px; }
+  .verdict{ font:700 17px/1.3 "DM Sans"; min-height:22px; }
+  .verdict.ok{ color:var(--ok); } .verdict.bad{ color:var(--bad); } .verdict.idk{ color:var(--blue); }
+  .verdict.ok, .verdict.bad, .verdict.idk{ animation:pop .32s ease; }
+  .answer{
+    width:100%; height:60px; text-align:center;
+    font-family:"Fraunces", Georgia, serif; font-weight:500; font-size:38px; font-variant-numeric:lining-nums;
+    color:var(--ink); background:var(--soft); border:1.5px solid var(--card-border); border-radius:16px; outline:none;
+    -webkit-appearance:none; appearance:none;
+  }
+  .answer:focus{ border-color:var(--accent); box-shadow:0 0 0 4px var(--ring); }
+
+  /* buttons */
+  .btn{
+    width:100%; -webkit-appearance:none; appearance:none; border:none; cursor:pointer;
+    font-family:"DM Sans"; font-weight:600; border-radius:16px;
+    display:inline-flex; align-items:center; justify-content:center; gap:8px; user-select:none;
+    transition:transform .12s ease, box-shadow .2s ease, background .2s, border-color .2s; text-decoration:none;
+  }
+  .btn:active{ transform:translateY(1px) scale(.992); }
+  .btn.primary{
+    height:54px; font-size:17px; color:var(--on-accent);
+    background:linear-gradient(180deg, var(--accent), var(--accent-2));
+    box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+  }
+  .btn.ghost{ height:50px; font-size:16px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
+  .btn.ghost:hover{ border-color:var(--accent); }
+  .btn.play{ height:54px; font-size:17px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
+  .btn.play:hover{ border-color:var(--blue); }
+  .btn.text{ height:42px; font-size:14px; color:var(--muted); background:transparent; }
+  .btn.text:hover{ color:var(--ink); }
+  .btn.text.idk{ height:38px; text-decoration:underline; text-decoration-color:color-mix(in srgb, var(--muted) 45%, transparent); text-underline-offset:4px; }
+  .rate-row{ display:flex; gap:10px; width:100%; }
+  .btn.rate{ height:52px; font-size:15px; border:1px solid var(--card-border); background:var(--soft); }
+  .btn.rate.got{ color:var(--ok); } .btn.rate.miss{ color:var(--bad); }
+  .btn.rate.chosen.got{ background:color-mix(in srgb, var(--ok) 18%, transparent); border-color:var(--ok); }
+  .btn.rate.chosen.miss{ background:color-mix(in srgb, var(--bad) 18%, transparent); border-color:var(--bad); }
+
+  /* hear & choose tiles */
+  .tiles{ display:grid; grid-template-columns:1fr 1fr; gap:9px; width:100%; }
+  .choice-t{
+    -webkit-appearance:none; appearance:none; cursor:pointer; min-height:68px; padding:10px;
+    border-radius:16px; border:1.5px solid var(--card-border); background:var(--soft); color:var(--ink);
+    font:600 14.5px/1.25 "DM Sans"; position:relative;
+  }
+  .choice-t .k{ position:absolute; top:6px; left:9px; font:600 10px/1 "DM Sans"; color:var(--muted); opacity:.7; }
+  .choice-t.long{ font-size:13px; }
+  .choice-t.right{ border-color:var(--ok); background:color-mix(in srgb, var(--ok) 16%, transparent); }
+  .choice-t.wrong{ border-color:var(--bad); background:color-mix(in srgb, var(--bad) 16%, transparent); }
+  .choice-t[disabled]{ cursor:default; }
+  .choice-t[disabled]:not(.right):not(.wrong){ opacity:.55; }
+
+  /* tone rows (same as /sounds) */
+  .choices{ display:flex; flex-direction:column; gap:8px; width:100%; }
+  .row{
+    -webkit-appearance:none; appearance:none; cursor:pointer; width:100%;
+    display:grid; grid-template-columns:54px 66px 1fr; align-items:center; gap:9px;
+    min-height:60px; padding:7px 12px 7px 10px; border-radius:16px; text-align:left;
+    border:1.5px solid var(--card-border); background:var(--soft); color:var(--ink);
+  }
+  .choices.many .row{ min-height:50px; padding-top:4px; padding-bottom:4px; }
+  .row[disabled]{ opacity:.5; cursor:default; }
+  .row.right{ border-color:var(--ok); background:color-mix(in srgb, var(--ok) 16%, transparent); }
+  .row.wrong{ border-color:var(--bad); background:color-mix(in srgb, var(--bad) 16%, transparent); }
+  .shape{ width:54px; height:28px; display:block; }
+  .shape path{ fill:none; stroke:var(--blue); stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; }
+  .shape .guide{ stroke:var(--card-border); stroke-width:1; stroke-dasharray:2 3; }
+  .lenbar{ display:block; height:7px; border-radius:99px; background:var(--card-border); position:relative; }
+  .lenbar i{ position:absolute; left:0; top:0; bottom:0; border-radius:99px; background:var(--blue); }
+  .lbl{ font:700 13.5px/1.15 "DM Sans"; }
+  .lbl small{ display:block; font:500 10.5px/1.2 "DM Sans"; color:var(--muted); margin-top:2px; }
+  .word{ min-width:0; display:flex; flex-direction:column; gap:1px; }
+  .word .line{ display:flex; align-items:baseline; gap:7px; flex-wrap:wrap; }
+  .word .th{ font:500 20px/1.25 "Sarabun","Noto Sans Thai",sans-serif; color:var(--blue); }
+  .word .ro{ font:500 14px/1.2 "DM Sans"; color:var(--ink-2); }
+  .word .en{ font:500 12px/1.25 "DM Sans"; color:var(--muted); }
+
+  /* ============ END VIEW ============ */
+  .endbox{ text-align:center; padding:18px 0 4px; }
+  .score{ font-family:"Fraunces", Georgia, serif; font-weight:600; font-size:64px; line-height:1; margin:10px 0 6px; }
+  .score small{ font-size:30px; color:var(--muted); }
+  .end-title{ font-family:"Fraunces", Georgia, serif; font-weight:600; font-size:clamp(24px,7vw,32px); line-height:1.15; margin:8px 0; }
+  .end-sub{ font:500 15px/1.45 "DM Sans"; color:var(--ink-2); max-width:34ch; margin:0 auto; }
+  .breakdown{ display:flex; flex-wrap:wrap; justify-content:center; gap:7px; margin:16px 0 4px; }
+  .breakdown span{ font:600 12.5px/1 "DM Sans"; padding:7px 10px; border-radius:999px; background:var(--soft); border:1px solid var(--card-border); color:var(--ink-2); }
+  .breakdown span.weak{ border-color:var(--bad); color:var(--bad); }
+  .misses{ margin:18px 0 0; display:flex; flex-direction:column; gap:8px; }
+  .misses-title{ font:600 11px/1 "DM Sans"; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); text-align:center; margin-bottom:2px; }
+  .miss{
+    -webkit-appearance:none; appearance:none; cursor:pointer; width:100%; text-align:left;
+    display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:14px;
+    border:1px solid var(--card-border); background:var(--soft); color:var(--ink-2); font:500 13.5px/1.35 "DM Sans";
+  }
+  .miss .th{ font:500 17px/1.3 "Sarabun","Noto Sans Thai",sans-serif; color:var(--blue); }
+  .miss b{ color:var(--ink); font-weight:600; }
+  .endbtns{ display:flex; flex-direction:column; gap:10px; margin-top:20px; }
+  .share{ margin:18px 0 0; padding:14px; border-radius:16px; border:1px dashed var(--gold); background:var(--soft); text-align:left; }
+  .share pre{ margin:0 0 12px; white-space:pre-wrap; font:500 13.5px/1.5 "DM Sans"; color:var(--ink); }
+
+  /* ============ FOOTER ============ */
+  footer{ border-top:1px solid var(--card-border); margin-top:30px; padding:22px 0 30px; text-align:center; }
+  footer nav{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px 18px; }
+  footer nav a{ color:var(--muted); text-decoration:none; font:500 13.5px/1 "DM Sans"; }
+  footer nav a:hover{ color:var(--ink); }
+  body.running footer{ display:none; }
+
+  /* ============ TOAST ============ */
+  .warn{
+    position:fixed; left:50%; bottom:calc(16px + env(safe-area-inset-bottom));
+    transform:translateX(-50%); width:min(92%,420px); z-index:60;
+    background:var(--pop-bg); border:1px solid var(--card-border); color:var(--ink-2);
+    font:500 12.5px/1.45 "DM Sans"; padding:12px 38px 12px 14px; border-radius:14px; box-shadow:var(--card-shadow);
+  }
+  .warn b{ color:var(--ink); }
+  /* during a session the answer buttons live at the bottom: keep toasts off them */
+  body.running .warn{ top:calc(10px + env(safe-area-inset-top)); bottom:auto; }
+  .warn-x{ position:absolute; top:6px; right:6px; width:28px; height:28px; border:0; background:none; color:var(--muted); font-size:14px; cursor:pointer; }
+
+  /* ============ SHEETS ============ */
+  .sheet-wrap{ position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center; padding:18px; }
+  .sheet-scrim{ position:absolute; inset:0; background:rgba(8,10,16,.5); backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px); }
+  .sheet{
+    position:relative; width:100%; max-width:380px; max-height:86svh; overflow:auto;
+    background:var(--pop-bg); border:1px solid var(--card-border); border-radius:24px;
+    box-shadow:var(--card-shadow); padding:20px; animation:sheetIn .24s cubic-bezier(.2,.8,.2,1);
+  }
+  .sheet-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .sheet-title{ font:700 18px/1.2 "DM Sans"; }
+  .sheet p{ font:400 13.5px/1.55 "DM Sans"; color:var(--ink-2); }
+  .sheet-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 0; border-bottom:1px solid var(--card-border); }
+  .row-label{ font:600 14px/1.2 "DM Sans"; }
+  .row-label small{ display:block; font:500 12px/1.3 "DM Sans"; color:var(--muted); margin-top:3px; }
+  .row-val{ font:600 13px/1.3 "DM Sans"; color:var(--muted); text-align:right; }
+  .mini-btn{
+    -webkit-appearance:none; appearance:none; cursor:pointer; border-radius:11px; flex:0 0 auto;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    font:600 14px/1 "DM Sans"; padding:10px 14px; min-height:40px; min-width:58px;
+  }
+  .mini-btn.on{ background:var(--ind-grad); color:#fff; border-color:transparent; }
+  .mini-btn.danger{ color:var(--bad); }
+  .mini-btn.danger.solid{ background:var(--bad); color:#fff; border-color:transparent; }
+  .pick-row{ display:flex; flex-direction:column; gap:10px; margin-top:14px; }
+  .about{ margin-top:16px; padding-top:14px; border-top:1px solid var(--card-border); }
+  .about-title{ font:700 13px/1 "DM Sans"; letter-spacing:.04em; color:var(--accent); margin-bottom:8px; }
+  .about p{ margin:0 0 9px; font-size:13px; }
+
+  :focus-visible{ outline:2px solid var(--ring); outline-offset:2px; }
+  @media (max-height:700px){
+    .stage{ gap:8px; padding:12px 12px 10px; }
+    .btn.play{ height:46px; } .btn.primary{ height:50px; }
+    .choice-t{ min-height:56px; } .row{ min-height:52px; } .choices.many .row{ min-height:44px; }
+    .bigword.num{ font-size:72px; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+  }
+  @keyframes numIn{ from{opacity:0; transform:translateY(16px) scale(.94);} to{opacity:1; transform:none;} }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(7px);} to{opacity:1; transform:none;} }
+  @keyframes pop{ 0%{opacity:0; transform:scale(.78);} 62%{transform:scale(1.07);} 100%{opacity:1; transform:scale(1);} }
+  @keyframes okPulse{
+    0%{ box-shadow:var(--card-shadow), 0 0 0 0 rgba(93,186,140,0); }
+    30%{ box-shadow:var(--card-shadow), 0 0 0 5px color-mix(in srgb, var(--ok) 28%, transparent), 0 0 44px color-mix(in srgb, var(--ok) 30%, transparent); }
+    100%{ box-shadow:var(--card-shadow), 0 0 0 0 rgba(93,186,140,0); }
+  }
+  @keyframes sheetIn{ from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;} }
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+
+<main class="app">
+  <header class="bar">
+    <button class="icon-btn ghost" id="backBtn" aria-label="Back">‹</button>
+    <h1 class="title"><a class="home-link" href="/" aria-label="LekThai home">LekThai</a><button class="beta-tag" id="betaTag" title="About the beta">beta</button></h1>
+    <button class="icon-btn" id="gearBtn" aria-label="Settings">⚙</button>
+  </header>
+
+  <!-- HOME: the 30-day grid -->
+  <section id="vHome">
+    <div class="hero">
+      <div class="eyebrow">30 days · two 15-minute sessions a day</div>
+      <h2 class="tagline" style="margin-top:12px">0 to Survival Thai</h2>
+      <p class="claim">Order, pay, get around and ask for help in Thai, in 30 days.</p>
+      <p class="sub">Free · no signup · progress saved on this device</p>
+      <button class="btn primary" id="contBtn">Start Day 1 →</button>
+    </div>
+    <div id="weeks"></div>
+    <div class="howto">
+      <h3>How it works</h3>
+      <p><b>Every day has two 15-minute sessions.</b> ① Listen trains your ear: tones, numbers, words and phrases you hear and pick. ② Speak makes you say them out loud from memory, then check yourself.</p>
+      <p><b>Morning and night works best,</b> but any time is fine. Missed a day? Just carry on. Want to skip ahead? Tap any day.</p>
+      <p><b>New things come back</b> 1, 3, 7 and 14 days after you first meet them, and anything you miss comes back sooner.</p>
+      <p><b>★ Tests</b> on Days 7, 14, 21 and 30 are optional. Pass with 80% overall and enough spoken right. Retake as often as you like.</p>
+    </div>
+  </section>
+
+  <!-- DAY: the session cards for one day -->
+  <section id="vDay" hidden>
+    <div class="dayhead">
+      <div class="eyebrow" id="dWeek"></div>
+      <h2 class="dtitle" id="dTitle"></h2>
+      <div class="dnew" id="dNew"></div>
+    </div>
+    <div class="scard" id="card1">
+      <div class="s-top"><span class="s-name">① Listen</span><span class="s-stat" id="st1"></span></div>
+      <div class="s-line" id="ln1"></div>
+      <div class="s-note">Tap Start, put your sound on, and answer what you hear.</div>
+      <button class="btn primary" id="go1">Start</button>
+    </div>
+    <div class="scard" id="card2">
+      <div class="s-top"><span class="s-name">② Speak</span><span class="s-stat" id="st2"></span></div>
+      <div class="s-line" id="ln2"></div>
+      <div class="s-note">Say each one out loud before you reveal it.</div>
+      <button class="btn primary" id="go2">Start</button>
+    </div>
+    <div class="scard test" id="cardT" hidden>
+      <div class="s-top"><span class="s-name" id="tName">★ Test</span><span class="s-stat" id="stT"></span></div>
+      <div class="s-line" id="lnT"></div>
+      <div class="s-note">Optional, but suggested. Best done after ① and ②.</div>
+      <button class="btn ghost" id="goT">Start test</button>
+    </div>
+    <details class="newlist" id="newList"><summary id="newSum">What’s new today</summary><div id="newRows"></div></details>
+    <div class="daynav">
+      <button class="btn ghost" id="prevDay">‹ Day</button>
+      <button class="btn ghost" id="nextDay">Day ›</button>
+    </div>
+  </section>
+
+  <!-- RUN: a timed session or an untimed test -->
+  <section id="vRun" class="run" hidden>
+    <div class="runhead">
+      <div class="segs" id="segs"></div>
+      <div class="runmeta"><span class="bl" id="blockLabel"></span><span class="tl" id="timeLeft"></span></div>
+    </div>
+    <div class="card" id="card">
+      <div class="stage" id="stage"></div>
+      <div class="overlay" id="pauseOv" hidden><div><div class="ov-title">Paused</div><div class="ov-sub">Tap to continue</div></div></div>
+      <div class="overlay" id="nextOv" hidden><div><div class="ov-sub">Next</div><div class="ov-title" id="nextLabel"></div></div></div>
+    </div>
+    <button class="btn text quit" id="quitBtn">Leave</button>
+  </section>
+
+  <!-- END: session results or test result -->
+  <section id="vEnd" hidden>
+    <div class="endbox" id="endBox"></div>
+  </section>
+
+  <footer>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/sounds/">Sounds</a>
+      <a href="/words/">Words</a>
+      <a href="/learn/">Numbers</a>
+      <a href="/phrases/">Phrases</a>
+      <a href="/thai-numbers">Guides</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </nav>
+  </footer>
+</main>
+
+<div class="warn" id="warn" hidden role="status"><span id="warnText"></span><button class="warn-x" id="warnX" aria-label="Dismiss">✕</button></div>
+
+<!-- First visit: polite ending -->
+<div class="sheet-wrap" id="politeSheet" hidden>
+  <div class="sheet-scrim"></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Polite ending">
+    <div class="sheet-title">One question first</div>
+    <p>Thais end most sentences with a polite word. Which one do you use? The app adds it to everything you say.</p>
+    <div class="pick-row">
+      <button class="btn ghost" data-polite="m">ครับ (khráp) · I’m a man</button>
+      <button class="btn ghost" data-polite="f">ค่ะ (khâ) · I’m a woman</button>
+      <button class="btn text" data-polite="">Skip for now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings -->
+<div class="sheet-wrap" id="settings" hidden>
+  <div class="sheet-scrim" id="settingsScrim"></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">
+    <div class="sheet-head"><span class="sheet-title">Settings</span><button class="icon-btn" id="settingsClose" aria-label="Close settings">✕</button></div>
+    <div class="sheet-row"><span class="row-label">Appearance</span><button class="mini-btn" id="themeBtn">◑</button></div>
+    <div class="sheet-row"><span class="row-label">Polite ending<small>ครับ (men) or ค่ะ (women), added to what you say</small></span><button class="mini-btn" id="politeBtn"></button></div>
+    <div class="sheet-row"><span class="row-label">English-letter spelling<small>e.g. phèt under เผ็ด</small></span><button class="mini-btn" id="romBtn"></button></div>
+    <div class="sheet-row"><span class="row-label">Slow voice<small>speak the Thai more slowly</small></span><button class="mini-btn" id="slowBtn"></button></div>
+    <div class="sheet-row"><span class="row-label">Voice</span><span class="row-val" id="voiceVal">—</span></div>
+    <div class="sheet-row" style="border-bottom:none">
+      <span class="row-label">Reset 30-day progress<small>Clears day ticks and test scores only. Word, phrase and number progress stays (it’s shared with the other pages).</small></span>
+      <button class="mini-btn danger" id="resetBtn">Reset</button>
+    </div>
+    <div class="pick-row" id="resetConfirm" hidden>
+      <span class="row-label">Erase all day ticks and test scores on this device?</span>
+      <div style="display:flex;gap:10px"><button class="mini-btn" id="resetNo" style="flex:1">Cancel</button><button class="mini-btn danger solid" id="resetYes" style="flex:1">Reset</button></div>
+    </div>
+    <div class="about">
+      <div class="about-title">Beta</div>
+      <p>The tones and spellings haven’t been checked by a native Thai speaker yet, and the audio is your phone’s built-in voice. Trust your ears over the letters.</p>
+    </div>
+    <div class="about">
+      <div class="about-title">Pausing</div>
+      <p>If you don’t tap anything for 5 seconds the clock pauses (10 seconds in Speak, so you have time to say it out loud). A pause is never a wrong answer. Tap to carry on.</p>
+    </div>
+    <div class="about">
+      <div class="about-title">Be honest in Speak</div>
+      <p>Speak is self-rated. If you hesitated, or the tone was wrong when you heard it back, tap Missed. It comes back sooner, which is the point.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* =====================================================================
+   DATA — the curriculum (lekthai_30day_curriculum v1.1).
+   Every item uses its real id from /words or /phrases, so progress is
+   shared with those pages. d = the day it's introduced.
+   Words:   [id, thai, say, tone, english, day, gender('m'|'f'|''), note]
+   Phrases: [id, thai, say, tone, english, prompt, use('s' say | 'h' hear), day, note]
+   ===================================================================== */
+var W_RAW = [
+ ["greet-01","สวัสดี","sa-wat-dii","L-L-M","hello / goodbye",1],
+ ["greet-02","ครับ","khrap","H","polite ending (men)",1,"m","Men end sentences with this."],
+ ["greet-03","ค่ะ","kha","F","polite ending (women)",1,"f","Women end statements with this."],
+ ["greet-05","ขอบคุณ","khaawp-khun","L-M","thank you",1],
+ ["greet-07","ขอโทษ","khaaw-thoot","R-F","sorry / excuse me",1],
+ ["greet-08","ไม่เป็นไร","mai pen rai","F-M-M","no worries / it's fine",2],
+ ["greet-09","ใช่","chai","F","yes / that's right",2],
+ ["greet-11","ไม่","mai","F","no / not",2],
+ ["greet-12","ได้","dai","F","can / OK",2],
+ ["greet-13","ไม่ได้","mai dai","F-F","can't",2],
+ ["greet-04","คะ","kha","H","polite ending, questions (women)",3,"f","Women end questions with this."],
+ ["greet-15","สบายดีไหม","sa-baai-dii mai","L-M-M-H","how are you?",3],
+ ["greet-16","สบายดี","sa-baai-dii","L-M-M","I'm fine",3],
+ ["people-01","ผม","phom","R","I (men)",3,"m"],
+ ["people-02","ฉัน","chan","R","I (women)",3,"f","Dictionary tone is rising; usually said with a high tone."],
+ ["people-03","คุณ","khun","M","you",4],
+ ["talk-16","ไม่เข้าใจ","mai khao-jai","F-F-M","I don't understand",4],
+ ["talk-17","ไม่รู้","mai ruu","F-H","I don't know",4],
+ ["talk-18","พูดช้าๆ หน่อย","phuut chaa-chaa nooi","F-H-H-L","please speak slowly",4],
+ ["talk-19","พูดอีกครั้ง","phuut iik khrang","F-L-H","say it again",4],
+ ["money-03","เท่าไหร่","thao-rai","F-L","how much?",5],
+ ["money-02","บาท","baat","L","baht",5],
+ ["place-03","ห้องน้ำ","haawng-naam","F-H","toilet / bathroom",5],
+ ["ask-02","ที่ไหน","thii-nai","F-R","where?",5],
+ ["greet-20","ขอ...","khaaw","R","may I have...",5],
+ ["ask-12","ได้ไหม","dai mai","F-H","can you / may I?",6],
+ ["ask-09","ไหม","mai","H","yes/no question marker",6,"","Dictionary tone is rising; usually said with a high tone."],
+ ["ask-01","อะไร","a-rai","L-M","what?",6],
+ ["num-22","นิดหน่อย","nit-nooi","H-L","a little bit",6],
+ ["greet-21","ช่วย...","chuai","F","please (do something) / help",6],
+ ["food-02","ข้าว","khaao","F","rice / a meal",8],
+ ["food-03","น้ำ","naam","H","water / liquid",8],
+ ["food-04","น้ำเปล่า","naam plao","H-L","plain water",8],
+ ["food-05","น้ำแข็ง","naam-khaeng","H-R","ice",8],
+ ["food-06","กาแฟ","kaa-fae","M-M","coffee",8],
+ ["food-10","ไก่","kai","L","chicken",9],
+ ["food-11","หมู","muu","R","pork",9],
+ ["food-13","ปลา","plaa","M","fish",9],
+ ["food-14","กุ้ง","kung","F","shrimp",9],
+ ["food-15","ไข่","khai","L","egg",9,"","Low tone. Same letters as ไข้ (fever, falling tone)."],
+ ["food-24","เผ็ด","phet","L","spicy",10],
+ ["food-25","ไม่เผ็ด","mai phet","F-L","not spicy",10],
+ ["food-27","อร่อย","a-rooi","L-L","delicious",10],
+ ["food-18","ข้าวผัด","khaao phat","F-L","fried rice",10],
+ ["verb-05","เอา","ao","M","want / take (a thing)",10],
+ ["food-34","ไม่ใส่...","mai sai","F-L","without...",11],
+ ["food-38","กินที่นี่","kin thii-nii","M-F-F","eat here",11],
+ ["food-39","ห่อกลับบ้าน","haaw klap baan","L-L-F","take away",11],
+ ["food-37","เช็คบิล","chek bin","H-M","the bill, please",11,"","Borrowed from English 'check bill'."],
+ ["food-07","ชา","chaa","M","tea",11],
+ ["food-08","เบียร์","bia","M","beer",11],
+ ["money-05","แพง","phaeng","M","expensive",12],
+ ["money-06","ถูก","thuuk","L","cheap",12],
+ ["money-07","ลดได้ไหม","lot dai mai","H-F-H","can you discount?",12],
+ ["money-27","อันนี้","an-nii","M-H","this one",12],
+ ["money-28","อันนั้น","an-nan","M-H","that one",12],
+ ["money-10","จ่าย","jaai","L","pay",13],
+ ["money-11","เงินสด","ngoen-sot","M-L","cash",13],
+ ["money-14","สแกน","sa-kaen","L-M","scan (QR pay)",13],
+ ["money-24","ไม่เอาถุง","mai ao thung","F-M-R","no bag, thanks",13],
+ ["money-25","แค่ดู","khae duu","F-M","just looking",13],
+ ["money-19","หมด","mot","L","sold out / finished",13],
+ ["travel-02","แท็กซี่","thaek-sii","H-F","taxi",15],
+ ["travel-11","ซ้าย","saai","H","left",15],
+ ["travel-12","ขวา","khwaa","R","right",15],
+ ["travel-13","ตรงไป","trong pai","M-M","go straight",15],
+ ["travel-14","เลี้ยว","liao","H","turn",15],
+ ["travel-15","จอด","jaawt","L","stop / pull over",16],
+ ["travel-17","ตรงนี้","trong-nii","M-H","right here",16],
+ ["travel-18","ที่นี่","thii-nii","F-F","here",16],
+ ["travel-35","เปิดมิเตอร์","poet mi-toe","L-H-M","turn on the meter",16],
+ ["travel-32","ช้าๆ","chaa-chaa","H-H","slowly",16],
+ ["place-02","โรงแรม","roong-raem","M-M","hotel",17],
+ ["place-04","ตลาด","ta-laat","L-L","market",17],
+ ["place-13","สนามบิน","sa-naam-bin","L-R-M","airport",17],
+ ["place-07","เซเว่น","see-wen","M-F","7-Eleven",17],
+ ["place-05","ร้านอาหาร","raan aa-haan","H-M-R","restaurant",17],
+ ["travel-20","ใกล้","klai","F","near",18,"","Falling tone. Rising/mid mix-up turns 'near' into 'far' (ไกล)."],
+ ["travel-21","ไกล","klai","M","far",18,"","Mid tone. Compare ใกล้ (near, falling tone)."],
+ ["verb-01","ไป","pai","M","go",18],
+ ["verb-02","มา","maa","M","come",18],
+ ["verb-44","กลับ","klap","L","go back / return",18],
+ ["place-09","โรงพยาบาล","roong pha-yaa-baan","M-H-M-M","hospital",19],
+ ["place-10","ร้านขายยา","raan khaai yaa","H-R-M","pharmacy",19],
+ ["health-01","ไม่สบาย","mai sa-baai","F-L-M","unwell",19],
+ ["health-03","เจ็บ","jep","L","hurts (sharp pain / injury)",19],
+ ["health-14","ยา","yaa","M","medicine",19],
+ ["verb-03","กิน","kin","M","eat",20],
+ ["verb-04","ดื่ม","deum","L","drink",20],
+ ["verb-06","อยาก","yaak","L","want to (do)",20],
+ ["verb-07","มี","mii","M","have / there is",20],
+ ["verb-36","รอ","raaw","M","wait",20],
+ ["verb-37","หา","haa","R","look for",20],
+ ["time-02","วันนี้","wan-nii","M-H","today",22],
+ ["time-03","พรุ่งนี้","phrung-nii","F-H","tomorrow",22],
+ ["time-04","เมื่อวาน","meua-waan","F-M","yesterday",22],
+ ["time-05","ตอนนี้","taawn-nii","M-H","now",22],
+ ["time-06","เดี๋ยว","diao","R","in a moment / wait",22],
+ ["time-20","กี่โมง","kii moong","L-M","what time?",23],
+ ["time-18","ชั่วโมง","chua-moong","F-M","hour",23],
+ ["time-19","นาที","naa-thii","M-M","minute",23],
+ ["time-26","แล้ว","laew","H","already",23],
+ ["time-27","ยัง","yang","M","still / not yet",23],
+ ["health-05","ปวดหัว","puat hua","L-R","headache",24],
+ ["health-06","ปวดท้อง","puat thaawng","L-H","stomachache",24],
+ ["health-07","ท้องเสีย","thaawng sia","H-R","diarrhoea",24],
+ ["health-08","ไข้","khai","F","fever",24,"","Falling tone. Same letters as ไข่ (egg, low tone)."],
+ ["health-13","แพ้","phae","H","allergic to",24],
+ ["health-15","ฉุกเฉิน","chuk-choen","L-R","emergency",24],
+ ["talk-01","คุณชื่ออะไร","khun cheu a-rai","M-F-L-M","what's your name?",25],
+ ["talk-02","ผมชื่อ...","phom cheu...","R-F","my name is... (men)",25,"m"],
+ ["talk-03","ฉันชื่อ...","chan cheu...","R-F","my name is... (women)",25,"f"],
+ ["talk-04","มาจากไหน","maa jaak nai","M-L-R","where are you from?",25],
+ ["talk-05","มาจาก...","maa jaak...","M-L","I'm from...",25],
+ ["talk-21","พูดภาษาอังกฤษได้ไหม","phuut phaa-saa ang-krit dai mai","F-M-R-M-L-F-H","can you speak English?",25],
+ ["feel-01","หิว","hiu","R","hungry",26],
+ ["feel-02","หิวน้ำ","hiu naam","R-H","thirsty",26],
+ ["feel-03","เหนื่อย","neuai","L","tired",26],
+ ["desc-01","ดี","dii","M","good",26],
+ ["desc-03","มาก","maak","F","very / a lot",26],
+ ["desc-04","สวย","suai","R","beautiful",26],
+ ["verb-19","เข้าใจ","khao-jai","F-M","understand",27],
+ ["verb-17","รู้","ruu","H","know (a fact)",27],
+ ["verb-13","พูด","phuut","F","speak",27],
+ ["ask-04","ใคร","khrai","M","who?",27],
+ ["ask-03","เมื่อไหร่","meua-rai","F-L","when?",27],
+ ["ask-06","ยังไง","yang-ngai","M-M","how?",27]
+];
+var P_RAW = [
+ ["p-help-03","อะไรนะ","a-rai na","L-M-H","Sorry, what?","You didn't catch that. Ask gently.","s",1,"Keep it soft. นะ makes it friendly."],
+ ["p-help-08","รอสักครู่","raaw sak-khruu","M-L-F","Wait a moment, please.","You need a second. Ask them to wait.","s",2,"Staff say it to you too."],
+ ["p-help-02","ขอโทษ ไม่ได้ยิน","khaaw-thoot mai dai-yin","R-F-F-F-M","Sorry, I didn't catch that.","It's noisy and you missed what they said.","s",3,""],
+ ["p-help-05","เข้าใจแล้ว","khao-jai laew","F-M-H","Got it, I understand now.","After a confusing exchange, it finally makes sense.","s",4,""],
+ ["p-way-01","ห้องน้ำอยู่ที่ไหน","haawng-naam yuu thii-nai","F-H-L-F-R","Where's the toilet?","You need the toilet.","s",5,"Pattern: place + อยู่ที่ไหน = where is...?"],
+ ["p-help-01","ช่วยหน่อยได้ไหม","chuai nooi dai mai","F-L-F-H","Can you help me?","You need a hand from a stranger.","s",6,""],
+ ["p-eat-12","ขอน้ำเปล่า","khaaw naam plao","R-H-L","Plain water, please.","Order a drinking water.","s",8,"Pattern: ขอ + thing = may I have."],
+ ["p-eat-03","เอาอะไรดี","ao a-rai dii","M-L-M-M","What would you like?","The vendor is ready to take your order and asks:","h",8,""],
+ ["p-eat-05","เอาอันนี้","ao an-nii","M-M-H","I'll have this one.","You point at a dish on the menu.","s",9,"Pointing + this phrase = you can order anything."],
+ ["p-eat-01","กี่ท่าน","kii thaan","L-F","How many people?","A restaurant host greets you and asks:","h",9,"Polite form. Answer with a number + คน: สองคน (saawng khon) = two people."],
+ ["p-eat-07","กินเผ็ดได้ไหม","kin phet dai mai","M-L-F-H","Can you eat spicy food?","The cook looks at you and asks:","h",10,"You'll hear this constantly. Answer ได้ (can) or ไม่ได้ (can't)."],
+ ["p-eat-08","เผ็ดน้อย","phet nooi","L-H","Only a little spicy.","You like some heat, but not much.","s",10,"Thai 'a little spicy' is still spicy."],
+ ["p-eat-11","ทานที่นี่หรือกลับบ้าน","thaan thii-nii reu klap baan","M-F-F-R-L-F","Eat here or take away?","At the counter, the staff ask:","h",11,"ทาน is the polite word for 'eat'. Answer ทานที่นี่ or กลับบ้าน."],
+ ["p-eat-14","หวานน้อย","waan nooi","R-H","Not too sweet.","Thai drinks are very sweet. Ask for less sugar.","s",11,"Works for coffee, tea, shakes, anything sweet."],
+ ["p-eat-16","แค่นี้","khae nii","F-H","That's all.","You've ordered everything you want.","s",12,"The natural reply to 'anything else?'"],
+ ["p-eat-17","เก็บเงินด้วย","kep ngoen duai","L-M-F","The bill, please.","You've finished eating and want to pay.","s",12,"The everyday Thai way."],
+ ["p-shop-12","อุ่นไหม","un mai","L-H","Do you want it heated up?","At 7-Eleven, buying a toastie, the cashier asks:","h",12,"Answer อุ่นด้วย (un duai) = 'heat it, please', or ไม่ต้อง (no need)."],
+ ["p-shop-01","แพงไป","phaeng pai","M-M","Too expensive.","The price is too high. Start bargaining.","s",13,"Smile. Bargaining is friendly, at markets only, not in shops with fixed prices."],
+ ["p-shop-08","สแกนได้ไหม","sa-kaen dai mai","L-M-F-H","Can I pay by QR scan?","You want to pay with a QR code instead of cash.","s",13,""],
+ ["p-shop-11","รับถุงไหม","rap thung mai","H-R-H","Do you need a bag?","At 7-Eleven the cashier asks:","h",13,"Answer ไม่เอาถุง (no bag)."],
+ ["p-shop-13","หมดแล้ว","mot laew","L-H","It's sold out.","You ask for something and the seller says:","h",13,""],
+ ["p-ride-04","เลี้ยวซ้าย","liao saai","H-H","Turn left.","Tell the driver to turn left.","s",15,""],
+ ["p-ride-05","เลี้ยวขวา","liao khwaa","H-R","Turn right.","Tell the driver to turn right.","s",15,"ขวา has a rising tone; ซ้าย a high one."],
+ ["p-ride-07","จอดตรงนี้","jaawt trong-nii","L-M-H","Stop here.","You've arrived. Tell the driver to pull over right here.","s",16,"Say it a little early."],
+ ["p-ride-01","ไปสนามบิน","pai sa-naam-bin","M-L-R-M","To the airport, please.","You get into a taxi. Tell the driver where to go.","s",16,"Pattern: ไป + place."],
+ ["p-ride-02","ไปโรงแรมนี้ได้ไหม","pai roong-raem nii dai mai","M-M-M-H-F-H","Can you take me to this hotel?","You show the driver your hotel on your phone.","s",17,""],
+ ["p-ride-03","ไปตลาดเท่าไหร่","pai ta-laat thao-rai","M-L-L-F-L","How much to the market?","Agree the fare before you get in.","s",17,"Swap ตลาด for any place."],
+ ["p-way-03","ไปตลาดยังไง","pai ta-laat yang-ngai","M-L-L-M-M","How do I get to the market?","Ask someone for directions to the market.","s",18,"Pattern: ไป + place + ยังไง."],
+ ["p-way-04","ไกลไหม","klai mai","M-H","Is it far?","Ask how far away it is.","s",18,"Mid tone. ใกล้ (near) has a falling tone. Mix them up and you've asked the opposite."],
+ ["p-way-08","หลงทาง","long thaang","R-M","I'm lost.","You don't know where you are.","s",19,""],
+ ["p-health-01","รู้สึกไม่สบาย","ruu-seuk mai sa-baai","H-L-F-L-M","I don't feel well.","Tell someone you're not feeling well.","s",19,""],
+ ["p-trouble-10","มีใครพูดภาษาอังกฤษได้ไหม","mii khrai phuut phaa-saa ang-krit dai mai","M-M-F-M-R-M-L-F-H","Does anyone here speak English?","You're stuck and need someone who speaks English.","s",20,""],
+ ["p-trouble-07","โทรศัพท์หาย","thoo-ra-sap haai","M-H-L-R","I've lost my phone.","Your phone is gone.","s",20,"Pattern: thing + หาย = it's lost."],
+ ["p-plan-01","กี่โมงแล้ว","kii moong laew","L-M-H","What time is it?","You want to know the time.","s",22,""],
+ ["p-plan-02","เปิดกี่โมง","poet kii moong","L-L-M","What time do you open?","Ask a shop when it opens.","s",22,""],
+ ["p-plan-11","ยังไม่ได้","yang mai dai","M-F-F","Not yet.","Someone asks if you've done it. You haven't.","s",23,""],
+ ["p-plan-06","พรุ่งนี้เจอกัน","phrung-nii joe kan","F-H-M-M","See you tomorrow.","Say goodbye until tomorrow.","s",23,""],
+ ["p-plan-07","ไปกัน","pai kan","M-M","Let's go!","Get your friends moving.","s",23,""],
+ ["p-health-03","เจ็บตรงนี้","jep trong-nii","L-M-H","It hurts here.","Point to where it hurts.","s",24,""],
+ ["p-health-04","แพ้ถั่ว","phae thua","H-L","I'm allergic to peanuts.","Warn the cook or doctor about your allergy.","s",24,"Pattern: แพ้ + thing. Learn the word for YOUR allergy."],
+ ["p-trouble-01","เรียกรถพยาบาล","riak rot pha-yaa-baan","F-H-H-M-M","Call an ambulance!","Someone is badly hurt.","s",24,"Ambulance: 1669. Police: 191. Tourist Police (English): 1155."],
+ ["p-trouble-02","เรียกตำรวจ","riak tam-ruat","F-M-L","Call the police!","You need the police.","s",24,"Tourist Police speak English: 1155."],
+ ["p-meet-01","มาเที่ยว","maa thiao","M-F","I'm here on holiday.","Someone asks why you're in Thailand.","s",25,""],
+ ["p-meet-08","กำลังเรียนภาษาไทย","kam-lang rian phaa-saa thai","M-M-M-M-R-M","I'm learning Thai.","Explain why your Thai is basic.","s",25,"People will slow down and help you."],
+ ["p-meet-06","พูดไทยเก่งมาก","phuut thai keng maak","F-M-L-F","Your Thai is very good!","You say one Thai sentence and they reply:","h",26,"You will hear this a lot."],
+ ["p-meet-07","ไม่เก่งหรอก","mai keng raawk","F-L-L","Not really, only a little.","Someone praises your Thai. Reply modestly.","s",26,"Being modest is the polite reply."],
+ ["p-meet-03","พักที่ไหน","phak thii-nai","H-F-R","Where are you staying?","Ask a new friend where they're staying.","s",26,"You'll be asked this too."],
+ ["p-stay-01","จองไว้แล้ว","jaawng wai laew","M-H-H","I have a booking.","You arrive at the hotel desk.","s",27,""],
+ ["p-stay-02","รหัสไวไฟอะไร","ra-hat wai-fai a-rai","H-L-M-M-L-M","What's the Wi-Fi password?","You need the Wi-Fi password.","s",27,""],
+ ["p-help-04","เข้าใจไหม","khao-jai mai","F-M-H","Do you understand?","Someone explains something and checks:","h",27,"Answer เข้าใจแล้ว (got it) or ไม่เข้าใจ (I don't understand)."]
+];
+var WORDS = W_RAW.map(function(r){ return {k:'w', id:r[0], thai:r[1], say:r[2], tone:r[3], english:r[4], d:r[5], g:r[6]||'', note:r[7]||''}; });
+var PHRASES = P_RAW.map(function(r){ return {k:'p', id:r[0], thai:r[1], say:r[2], tone:r[3], english:r[4], prompt:r[5], use:r[6], d:r[7], note:r[8]||''}; });
+
+/* Sounds: same sets as /sounds */
+var TONE_SETS = [
+  [['maa-M','มา','maa','M','come'],['maa-H','ม้า','maa','H','horse'],['maa-R','หมา','maa','R','dog']],
+  [['khaa-M','คา','khaa','M','stuck (in)'],['khaa-L','ข่า','khaa','L','galangal'],['khaa-F','ค่า','khaa','F','cost / fee'],['khaa-H','ค้า','khaa','H','trade'],['khaa-R','ขา','khaa','R','leg']],
+  [['khaao-M','คาว','khaao','M','fishy (smell)'],['khaao-L','ข่าว','khaao','L','news'],['khaao-F','ข้าว','khaao','F','rice'],['khaao-R','ขาว','khaao','R','white']],
+  [['mai-M','ไมล์','mai','M','mile'],['mai-L','ใหม่','mai','L','new'],['mai-F','ไม่','mai','F','not'],['mai-H','ไม้','mai','H','wood'],['mai-R','ไหม','mai','R','silk']],
+  [['naa-M','นา','naa','M','rice field'],['naa-F','หน้า','naa','F','face'],['naa-H','น้า','naa','H','aunt / uncle (mum’s younger sibling)'],['naa-R','หนา','naa','R','thick']],
+  [['seua-L','เสื่อ','seua','L','mat'],['seua-F','เสื้อ','seua','F','shirt'],['seua-R','เสือ','seua','R','tiger']],
+  [['paa-M','ปา','paa','M','throw'],['paa-L','ป่า','paa','L','forest'],['paa-F','ป้า','paa','F','aunt']],
+  [['kao-M','เกา','kao','M','scratch'],['kao-L','เก่า','kao','L','old (things)'],['kao-F','เก้า','kao','F','nine']],
+  [['puu-M','ปู','puu','M','crab'],['puu-L','ปู่','puu','L','grandpa (dad’s side)']],
+  [['khai-L','ไข่','khai','L','egg'],['khai-F','ไข้','khai','F','fever']],
+  [['klai-M','ไกล','klai','M','far'],['klai-F','ใกล้','klai','F','near']],
+  [['suai-M','ซวย','suai','M','unlucky (slang)'],['suai-R','สวย','suai','R','beautiful']],
+  [['sii-L','สี่','sii','L','four'],['sii-R','สี','sii','R','colour']],
+  [['haa-F','ห้า','haa','F','five'],['haa-R','หา','haa','R','look for']],
+  [['long-M','ลง','long','M','go down / get off'],['long-R','หลง','long','R','lost']],
+  [['chai-F','ใช่','chai','F','yes / that’s right'],['chai-H','ใช้','chai','H','use']]
+].map(function(set,i){ return {id:'t'+i, words:set.map(function(w){ return {id:w[0],thai:w[1],say:w[2],tone:w[3],english:w[4]}; })}; });
+var LEN_PAIRS = [
+  [['khao-S','เข้า','khao','F','S','enter'],['khao-Lg','ข้าว','khaao','F','L','rice']],
+  [['fan-S','ฟัน','fan','M','S','teeth'],['fan-Lg','ฟาน','faan','M','L','barking deer']],
+  [['khan-S','คัน','khan','M','S','itchy'],['khan-Lg','คาน','khaan','M','L','beam (wood)']],
+  [['hak-S','หัก','hak','L','S','snap / break'],['hak-Lg','หาก','haak','L','L','if (formal)']],
+  [['pak-S','ปัก','pak','L','S','stick in / embroider'],['pak-Lg','ปาก','paak','L','L','mouth']],
+  [['sak-S','สัก','sak','L','S','tattoo'],['sak-Lg','สาก','saak','L','L','pestle']],
+  [['fanR-S','ฝัน','fan','R','S','dream'],['fanR-Lg','ฝาน','faan','R','L','slice thinly']]
+].map(function(set,i){ return {id:'l'+i, words:set.map(function(w){ return {id:w[0],thai:w[1],say:w[2],tone:w[3],len:w[4],english:w[5]}; })}; });
+var TONE_ORDER=['M','L','F','H','R'];
+var TONE_NAME={M:'mid',L:'low',F:'falling',H:'high',R:'rising'};
+var TONE_DESC={M:'flat',L:'low, flat',F:'up, then down',H:'high',R:'dips, then up'};
+var TONE_PATH={M:'M5 15 L55 15',L:'M5 18 Q30 22 55 24',F:'M5 11 Q20 5 55 26',H:'M5 10 Q32 10 55 5',R:'M5 19 Q26 27 55 4'};
+var DRILLS={ t2:{kind:'tone',tones:['M','R'],name:'2 tones'}, t3:{kind:'tone',tones:['M','F','R'],name:'3 tones'},
+             t5:{kind:'tone',tones:['M','L','F','H','R'],name:'all 5 tones'}, len:{kind:'len',name:'short vs long vowels'} };
+
+/* Numbers: same Prices list as /learn */
+var PRICES=[20,30,40,50,60,70,80,90,100,120,150,180,200,250,300,350,400,500,600,750,1000,1200,1500,2000];
+
+/* ---------- days ---------- */
+var DAY_TITLES=[null,
+ 'Hello and thank you','Yes, no, no worries','How are you?','I don’t understand','How much? Where’s the toilet?','Asking for things','Review week 1',
+ 'Water, coffee, ice','Chicken, pork, fish','Spicy or not?','Eat here or take away','Too expensive, that’s all','Paying','Review week 2',
+ 'Left, right, straight','Stop here','Where you’re going','Near or far','Feeling unwell','Eat, drink, want, wait','Review week 3',
+ 'Today, tomorrow','What time?','Pain and emergencies','Who are you?','Hungry, tired, beautiful','Understand and ask',
+ 'Review weeks 1–2','Review weeks 3–4','Final review'];
+var WEEKS=[
+  {name:'Week 1', theme:'Be polite, understand, ask', days:[1,2,3,4,5,6,7]},
+  {name:'Week 2', theme:'Order and pay', days:[8,9,10,11,12,13,14]},
+  {name:'Week 3', theme:'Get around', days:[15,16,17,18,19,20,21]},
+  {name:'Week 4', theme:'Get by and get help', days:[22,23,24,25,26,27]},
+  {name:'Review + Final', theme:'', days:[28,29,30]}
+];
+/* review days: no new items; sessions are built from this range, weak first, focus range next */
+var REVIEW={ 7:{from:1,to:6}, 14:{from:1,to:13,focus:[8,13]}, 21:{from:1,to:20,focus:[15,20]},
+             28:{from:1,to:13}, 29:{from:15,to:27}, 30:{from:1,to:27} };
+var TEST_ON_DAY={7:1,14:2,21:3,30:4};
+var REPEATS=[1,3,7,14];   // an item comes back this many days after it's introduced
+
+function weekOf(day){ for(var i=0;i<WEEKS.length;i++) if(WEEKS[i].days.indexOf(day)>-1) return WEEKS[i]; return WEEKS[0]; }
+function toneFor(day){
+  if(day<=7) return 't2';
+  if(day<=14) return 't3';
+  if(day<=21) return (day===15||day===17||day===19) ? 'len' : 't3';
+  if(day===23||day===25||day===27) return 't5';
+  return 't3';
+}
+function poolFor(day){
+  if(day<=2) return '1-10';
+  if(day<=4) return '1-20';
+  if(day<=7) return '1-20t';
+  if(day<=9) return '1-50';
+  if(day<=11) return '1-100h';
+  if(day<=21 || day===28) return 'p100';
+  return 'p1000';
+}
+
+/* ---------- tests (curriculum §4) ---------- */
+var TESTS={
+  1:{day:7,  from:1,to:6,  tones:[['t2',10]],            num:'1-20t', nNum:8,  wH:12, pH:4,  wS:4, pS:2, total:40, pass:32, speakMin:4,  practise:[5,6]},
+  2:{day:14, from:1,to:13, focus:[8,13], tones:[['t3',10]], num:'p100', nNum:10, wH:8, pH:6, wS:3, pS:3, total:40, pass:32, speakMin:4, practise:[12,13], hearMin:2},
+  3:{day:21, from:1,to:20, focus:[15,20], tones:[['t3',5],['len',5]], num:'p100', nNum:10, wH:8, pH:6, wS:3, pS:3, total:40, pass:32, speakMin:4, practise:[19,20]},
+  4:{day:30, from:1,to:27, tones:[['t3',10]], num:'final', nNum:12, wH:14, pH:10, wS:6, pS:8, total:60, pass:48, speakMin:10, practise:[28,29], hearMin:3, weekEach:true}
+};
+
+/* =====================================================================
+   STORAGE — shared with the tool pages (same keys, same formats)
+   ===================================================================== */
+var KEY_W='lekthai-words-stats-v1', KEY_P='lekthai-phrases-stats-v1', KEY_N='lekthai-stats-v1',
+    KEY_PROG='lekthai-30day-v1', KEY_PREFS='lekthai-30day-prefs-v1', KEY_THEME='lekthai-theme', KEY_BETA='lekthai-30day-beta-seen';
+var storageOK=false, store=(function(){
+  try{ var k='__lekthai'+Math.random(); localStorage.setItem(k,'1'); if(localStorage.getItem(k)!=='1') throw 0; localStorage.removeItem(k); storageOK=true; return localStorage; }
+  catch(e){ var m={}; return {getItem:function(k){return k in m?m[k]:null}, setItem:function(k,v){m[k]=String(v)}, removeItem:function(k){delete m[k]}}; }
+})();
+function load(k,f){ try{ var v=store.getItem(k); return v?JSON.parse(v):f; }catch(e){ return f; } }
+function save(k,v){ try{ store.setItem(k,JSON.stringify(v)); }catch(e){} }
+
+var ST={w:{},p:{},n:{}};
+function reloadStats(){ ST.w=load(KEY_W,{})||{}; ST.p=load(KEY_P,{})||{}; ST.n=load(KEY_N,{})||{}; }
+reloadStats();
+var PROG=Object.assign({done:{}, tests:{}}, load(KEY_PROG,{}));
+function saveProg(){ save(KEY_PROG,PROG); }
+var PREFS=Object.assign({polite:null, roman:true, slow:false}, load(KEY_PREFS,{}));
+if(PREFS.polite===null){ var pp=load('lekthai-phrases-prefs-v1',null); if(pp && pp.polite) PREFS.polite=pp.polite; }
+function savePrefs(){ save(KEY_PREFS,PREFS); }
+
+/* Words/phrases: same record rule as /words and /phrases (first-ever sight is a lesson, not a miss).
+   The tool pages also keep a last-seen time (t); it's written here only so they keep working the same. */
+function recItem(it, pass, dontKnow){
+  var S=ST[it.k], first=!S[it.id], s=S[it.id]||(S[it.id]={c:0,m:0,r:0,t:0});
+  if(pass) s.c++; else if(!first) s.m++;
+  if(dontKnow) s.d=(s.d||0)+1;
+  s.r=pass?1:0; s.t=Date.now();
+  save(it.k==='w'?KEY_W:KEY_P, S);
+}
+/* Numbers: same format as /learn */
+function recNum(n, pass){ var k=''+n, e=ST.n[k]||(ST.n[k]={c:0,m:0}); if(pass) e.c++; else e.m++; save(KEY_N, ST.n); }
+function isWeak(it){ var s=ST[it.k][it.id]; return !!(s && s.r===0); }
+function isSeen(it){ return !!ST[it.k][it.id]; }
+
+/* =====================================================================
+   HELPERS
+   ===================================================================== */
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)),t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function rnd(a){ return a[Math.floor(Math.random()*a.length)]; }
+function now(){ return (window.performance&&performance.now)?performance.now():Date.now(); }
+
+var MARK={M:'',L:'\u0300',F:'\u0302',H:'\u0301',R:'\u030C'};
+function accented(w){
+  var codes=w.tone.split('-'), i=0;
+  var out=w.say.replace(/[a-z]+/g,function(s){ var c=codes[i++], v=s.search(/[aeiou]/);
+    return (!c||v<0||!MARK[c]) ? s : s.slice(0,v+1)+MARK[c]+s.slice(v+1); });
+  return out.normalize ? out.normalize('NFC') : out;
+}
+/* polite ending: phrases you SAY only, same rule as /phrases */
+function ending(it){
+  if(!it || it.k!=='p' || it.use!=='s' || !PREFS.polite) return null;
+  if(PREFS.polite==='m') return {thai:'ครับ', say:'khrap', tone:'H'};
+  return /\?\s*$/.test(it.english) ? {thai:'คะ', say:'kha', tone:'H'} : {thai:'ค่ะ', say:'kha', tone:'F'};
+}
+function thaiOf(it){ var e=ending(it); return e ? it.thai+e.thai : it.thai; }
+function romOf(it){ var e=ending(it); return accented(e ? {say:it.say+' '+e.say, tone:it.tone+'-'+e.tone} : it); }
+function thaiSize(text){ var n=String(text).replace(/\s/g,'').length; return n>18?' xlong':(n>11?' long':''); }
+
+/* Thai number builder (same as /learn) */
+var ones=['ศูนย์','หนึ่ง','สอง','สาม','สี่','ห้า','หก','เจ็ด','แปด','เก้า'];
+var onesR=['sǔun','nèung','sǎawng','sǎam','sìi','hâa','hòk','jèt','pàet','kâao'];
+var places=['','สิบ','ร้อย','พัน','หมื่น','แสน'], placesR=['','sìp','róoi','phan','mèun','sǎen'];
+function numToThai(n){
+  if(n===0) return {thai:'ศูนย์', rom:'sǔun'};
+  var s=String(n).split('').map(Number), len=s.length, thai='', rom=[];
+  for(var i=0;i<len;i++){
+    var d=s[i], pos=len-1-i; if(d===0) continue;
+    if(pos===1){ if(d===1){thai+='สิบ';rom.push('sìp');} else if(d===2){thai+='ยี่สิบ';rom.push('yîi-sìp');} else {thai+=ones[d]+'สิบ';rom.push(onesR[d]+'-sìp');} }
+    else if(pos===0){ if(d===1&&len>1){thai+='เอ็ด';rom.push('èt');} else {thai+=ones[d];rom.push(onesR[d]);} }
+    else { thai+=ones[d]+places[pos]; rom.push(onesR[d]+'-'+placesR[pos]); }
+  }
+  return {thai:thai, rom:rom.join(' ')};
+}
+
+/* number pools (curriculum §5) */
+function range(a,b,step){ var r=[]; for(var i=a;i<=b;i+=(step||1)) r.push(i); return r; }
+var POOLS={
+  '1-10':   {list:range(1,10)},
+  '1-20':   {list:range(1,20)},
+  '1-20t':  {list:range(1,20).concat(range(30,100,10))},
+  '1-50':   {list:range(1,50)},
+  '1-100h': {list:range(1,100).concat(range(200,1000,100))},
+  'p100':   {prices:true, max:100},
+  'p1000':  {prices:true, max:1000}
+};
+function inPool(n, name){ var P=POOLS[name]; if(P.list) return P.list.indexOf(n)>-1; return PRICES.indexOf(n)>-1 || (n>=1&&n<=P.max); }
+function rawPick(name, priceShare){
+  var P=POOLS[name]; if(P.list) return rnd(P.list);
+  return Math.random()<priceShare ? rnd(PRICES) : 1+Math.floor(Math.random()*P.max);
+}
+function pickNum(b){
+  b.lastNums=b.lastNums||[];
+  var n, tries=0;
+  // about 1 in 4: a number you've struggled with in this pool
+  if(Math.random()<0.25){
+    var weak=Object.keys(ST.n).map(Number).filter(function(x){
+      var e=ST.n[''+x]; if(!e||!inPool(x,b.pool)) return false; var a=e.c+e.m; return e.m>0 && e.c/a<0.7; });
+    weak=weak.filter(function(x){ return b.lastNums.indexOf(x)<0; });
+    if(weak.length) n=rnd(weak);
+  }
+  while(n==null || (b.lastNums.indexOf(n)>-1 && tries<12)){ n=rawPick(b.pool, b.priceShare||0.5); tries++; }
+  b.lastNums.push(n); if(b.lastNums.length>3) b.lastNums.shift();
+  return n;
+}
+
+/* =====================================================================
+   VOICE (same approach as the tool pages: always try Thai, warn if none)
+   ===================================================================== */
+var hasTTS='speechSynthesis' in window, thaiVoice=null, voiceChecked=false, speaking=false, spkTimer=null, lastAct=now();
+function loadVoices(){
+  if(!hasTTS) return;
+  var v=speechSynthesis.getVoices()||[];
+  thaiVoice=v.filter(function(x){ return x.lang && /^th/i.test(x.lang); })[0]||null;
+  if(v.length){ voiceChecked=true; if(!thaiVoice) showWarn('voice'); else if(warnKind==='voice') hideWarn(); }
+}
+function speak(texts){
+  if(!hasTTS) return;
+  if(!Array.isArray(texts)) texts=[texts];
+  try{
+    speechSynthesis.cancel();
+    texts.forEach(function(t,i){
+      var u=new SpeechSynthesisUtterance(String(t).replace(/\.\.\.|…|\//g,' ').trim());
+      u.lang='th-TH'; u.rate=PREFS.slow?0.6:0.85; if(thaiVoice) u.voice=thaiVoice;
+      if(i===texts.length-1) u.onend=u.onerror=function(){ speaking=false; lastAct=now(); };
+      speechSynthesis.speak(u);
+    });
+    speaking=true; lastAct=now();
+    clearTimeout(spkTimer); spkTimer=setTimeout(function(){ if(speaking){ speaking=false; lastAct=now(); } }, 5000+2000*texts.length);
+  }catch(e){ speaking=false; }
+}
+
+/* toast */
+var warnKind='';
+function showWarn(kind){
+  warnKind=kind;
+  $('warnText').innerHTML = kind==='voice'
+    ? '⚠️ <b>No Thai voice found in this browser.</b> The app will still try to speak. If you hear nothing, install a Thai text-to-speech voice in your phone’s settings, or try Chrome.'
+    : kind==='notts' ? '⚠️ <b>This browser can’t speak.</b> Listen sessions need audio. Try Chrome or Safari.'
+    : kind==='copied' ? '✓ Copied. Paste it anywhere.'
+    : '<b>Beta.</b> Tones and spellings not yet checked by a native Thai speaker, and the audio is your phone’s own voice. Trust your ears.';
+  $('warn').hidden=false;
+  if(kind==='copied') setTimeout(function(){ if(warnKind==='copied') hideWarn(); },2200);
+}
+function hideWarn(){ $('warn').hidden=true; if(warnKind==='beta') save(KEY_BETA,1); warnKind=''; }
+
+/* =====================================================================
+   SESSION BUILDER (curriculum §2)
+   ===================================================================== */
+function okFor(it, speakMode){
+  if(!speakMode) return true;
+  if(it.k==='p' && it.use==='h') return false;                       // hear-only phrases never in See & Say
+  if(it.g && PREFS.polite && it.g!==PREFS.polite) return false;      // [M]/[F]: only yours in Speak
+  return true;
+}
+function itemsForDay(day, list){
+  var R=REVIEW[day], fresh=[], rest=[];
+  if(R){
+    var weak=[], focus=[], other=[];
+    list.forEach(function(it){
+      if(it.d<R.from || it.d>R.to) return;
+      if(isWeak(it)) weak.push(it);
+      else if(R.focus && it.d>=R.focus[0] && it.d<=R.focus[1]) focus.push(it);
+      else other.push(it);
+    });
+    rest=shuffle(weak).concat(shuffle(focus), shuffle(other));
+  } else {
+    fresh=list.filter(function(it){ return it.d===day; });
+    var due=list.filter(function(it){ return REPEATS.indexOf(day-it.d)>-1; });
+    var weak2=shuffle(list.filter(function(it){ return it.d<day && isWeak(it) && due.indexOf(it)<0; })).slice(0,3);
+    rest=shuffle(due).concat(weak2);
+  }
+  return {fresh:fresh, rest:rest};
+}
+function buildSession(day, s){
+  reloadStats();
+  var speakMode = s===2, blocks=[];
+  var w=itemsForDay(day, WORDS), p=itemsForDay(day, PHRASES);
+  function entries(x){
+    return x.fresh.filter(function(it){ return okFor(it,speakMode); }).map(function(it){ return {it:it, fresh:true}; })
+      .concat(x.rest.filter(function(it){ return okFor(it,speakMode); }).map(function(it){ return {it:it, fresh:false}; }));
+  }
+  var we=entries(w), pe=entries(p);
+  var mode=speakMode?'say':'hear';
+  var wb={type:'items', mode:mode, min:6, label:'Words', items:we};
+  var pb={type:'items', mode:mode, min:speakMode?6:3, label:'Phrases', items:pe};
+  // a block with fewer than 4 items merges into the other one (new items first)
+  function merge(a,b,label){
+    var f=a.items.filter(function(e){return e.fresh;}).concat(b.items.filter(function(e){return e.fresh;}));
+    var r=a.items.filter(function(e){return !e.fresh;}).concat(b.items.filter(function(e){return !e.fresh;}));
+    a.items=f.concat(r); a.min+=b.min; a.label=label;
+  }
+  if(pe.length<4){ merge(wb,pb, pe.length?'Words & phrases':'Words'); pb=null; }
+  else if(we.length<4){ merge(pb,wb, we.length?'Phrases & words':'Phrases'); wb=null; }
+  var numB={type:'num', mode:mode, min:speakMode?3:4, label:'Numbers', pool:poolFor(day), priceShare:(speakMode&&day>=12)?0.75:0.5};
+  if(!speakMode){
+    blocks.push({type:'tones', min:2, label:'Tones', drill:toneFor(day)});
+    blocks.push(numB);
+    if(wb) blocks.push(wb);
+    if(pb) blocks.push(pb);
+  } else {
+    if(pb) blocks.push(pb);
+    if(wb) blocks.push(wb);
+    blocks.push(numB);
+  }
+  return blocks;
+}
+function contentsLine(blocks){
+  return blocks.map(function(b){ return b.min+' min '+b.label.toLowerCase(); }).join(' · ');
+}
+
+/* =====================================================================
+   WRONG-ANSWER CHOICES (same overlap rules as /words and /phrases)
+   ===================================================================== */
+var STOP={a:1,an:1,the:1,to:1,of:1,in:1,on:1,at:1,'for':1,and:1,or:1,is:1,it:1,be:1,'do':1,did:1,does:1,you:1,your:1,i:1,me:1,my:1,m:1,s:1,ve:1,t:1,
+  'this':1,that:1,'with':1,from:1,as:1,by:1,are:1,am:1,can:1,what:1,how:1,very:1,lot:1,little:1,bit:1,
+  men:1,women:1,thing:1,things:1,someone:1,something:1,word:1,counting:1,general:1,safe:1,'default':1};
+var SYN=[['sick','unwell','ill','fever','cold'],['happy','glad','fun'],['sad','sorry','unlucky'],['afraid','scared','worried'],
+  ['hurts','aches','pain','headache','stomachache'],['tired','sleepy'],['near','close'],['know','understand'],
+  ['stop','pull'],['here','there'],['hot','spicy'],['cold','cool'],['big','fat'],['small','little','thin'],
+  ['market','shop','mall'],['food','meal','rice'],['money','cash','baht','price','expensive','cheap'],
+  ['now','moment','soon'],['old','new'],['good','well','correct','right','yes'],['no','not','wrong'],['ok','fine','worries']];
+var SYNOF={}; SYN.forEach(function(g,i){ g.forEach(function(w){ (SYNOF[w]=SYNOF[w]||[]).push(i); }); });
+var KEYCACHE={};
+function keys(w){
+  if(KEYCACHE[w.id]) return KEYCACHE[w.id];
+  var k={}; w.english.toLowerCase().replace(/[^a-z]+/g,' ').split(' ').forEach(function(x){
+    if(!x||STOP[x]) return; var stem=x.replace(/(ing|es|s)$/,''); k[x]=1; if(stem.length>2) k[stem]=1;
+    (SYNOF[x]||[]).forEach(function(i){ k['#'+i]=1; });
+  });
+  return (KEYCACHE[w.id]=k);
+}
+var PRONOUN_I={'ผม':1,'ฉัน':1};
+var SAME=[['p-help-02','p-help-03']];
+function overlaps(a,b){
+  if(a.thai===b.thai || a.english.toLowerCase()===b.english.toLowerCase()) return true;
+  var x=a.thai.replace(/\s/g,''), y=b.thai.replace(/\s/g,'');
+  if(x.length>1 && y.length>1 && (x.indexOf(y)>-1 || y.indexOf(x)>-1)) return true;
+  if(a.k==='p') return SAME.some(function(p){ return p.indexOf(a.id)>-1 && p.indexOf(b.id)>-1; });
+  if(PRONOUN_I[a.thai] && PRONOUN_I[b.thai]) return true;
+  var ka=keys(a), kb=keys(b); for(var z in ka) if(kb[z]) return true;
+  return false;
+}
+function makeChoices(it, maxDay){
+  var list=it.k==='w'?WORDS:PHRASES, picks=[], grp=it.id.split('-').slice(0, it.k==='p'?2:1).join('-');
+  function take(x){ if(picks.length<3 && x!==it && !overlaps(x,it) && !picks.some(function(p){ return overlaps(p,x); })) picks.push(x); }
+  var known=list.filter(function(x){ return x.d<=maxDay; });
+  shuffle(known.filter(function(x){ return x.id.indexOf(grp+'-')===0; })).forEach(take);   // same group first
+  if(picks.length<3) shuffle(known).forEach(take);
+  if(picks.length<3) shuffle(list).forEach(take);
+  return shuffle(picks.concat([it]));
+}
+
+/* tone question (same as /sounds) */
+var toneRecent=[];
+function makeToneQ(drillKey){
+  var d=DRILLS[drillKey], sets, choices;
+  if(d.kind==='len') sets=LEN_PAIRS;
+  else sets=TONE_SETS.filter(function(s){ return s.words.filter(function(w){ return d.tones.indexOf(w.tone)>-1; }).length>=2; });
+  var avail=sets.filter(function(s){ return toneRecent.indexOf(s.id)<0; }); if(!avail.length) avail=sets;
+  var set=rnd(avail);
+  toneRecent.push(set.id); while(toneRecent.length>Math.min(3,sets.length-1)) toneRecent.shift();
+  if(d.kind==='len') choices=set.words.slice();
+  else choices=set.words.filter(function(w){ return d.tones.indexOf(w.tone)>-1; })
+       .sort(function(a,b){ return TONE_ORDER.indexOf(a.tone)-TONE_ORDER.indexOf(b.tone); });
+  return {drill:drillKey, kind:d.kind, choices:choices, target:rnd(choices)};
+}
+function shapeSVG(t){ return '<svg class="shape" viewBox="0 0 60 30" aria-hidden="true"><path class="guide" d="M3 15 L57 15"/><path d="'+TONE_PATH[t]+'"/></svg>'; }
+
+/* =====================================================================
+   VIEWS
+   ===================================================================== */
+var VIEW='home', curDay=1;
+function show(v){
+  VIEW=v;
+  ['vHome','vDay','vRun','vEnd'].forEach(function(id){ $(id).hidden = (id!=='v'+v.charAt(0).toUpperCase()+v.slice(1)); });
+  document.body.classList.toggle('running', v==='run');
+  if(v==='run' && warnKind==='beta') hideWarn();   // starting a session counts as having seen the beta note
+  $('backBtn').classList.toggle('ghost', v==='home' || v==='run');
+  if(v!=='run') window.scrollTo(0,0);
+}
+function dayDone(d){ return !!(PROG.done[d+'-1'] && PROG.done[d+'-2']); }
+function nextDay(){ for(var d=1; d<=30; d++) if(!dayDone(d)) return d; return 30; }
+
+function renderHome(){
+  var nd=nextDay(), anyDone=Object.keys(PROG.done).length>0;
+  $('contBtn').textContent = !anyDone ? 'Start Day 1 →' : (dayDone(30) ? 'Open Day 30 →' : 'Continue: Day '+nd+' →');
+  $('weeks').innerHTML = WEEKS.map(function(w){
+    return '<div class="week"><div class="week-h"><b>'+esc(w.name)+'</b><span>'+esc(w.theme)+'</span></div><div class="grid">'+
+      w.days.map(function(d){
+        var t=TEST_ON_DAY[d], tr=t&&PROG.tests[t];
+        return '<button class="tile'+(d===nd&&!dayDone(30)?' next':'')+(dayDone(d)?' done':'')+'" data-day="'+d+'">'+
+          '<span class="dn">'+d+'</span><span class="dt">'+esc(DAY_TITLES[d])+'</span>'+
+          '<span class="marks"><i class="'+(PROG.done[d+'-1']?'on':'')+'">①</i><i class="'+(PROG.done[d+'-2']?'on':'')+'">②</i>'+
+          (t?'<i class="star'+(tr&&tr.passed?' on':'')+'">★</i>':'')+'</span></button>';
+      }).join('')+'</div></div>';
+  }).join('');
+}
+function renderDay(){
+  var d=curDay, w=weekOf(d), t=TEST_ON_DAY[d];
+  $('dWeek').textContent = w.name+(w.theme?' · '+w.theme:'');
+  $('dTitle').textContent = 'Day '+d+' · '+DAY_TITLES[d];
+  var nw=WORDS.filter(function(x){return x.d===d;}), np=PHRASES.filter(function(x){return x.d===d;});
+  $('dNew').textContent = REVIEW[d] ? 'Review day: nothing new. Built from what you’ve learned, weakest first.'
+    : 'New today: '+nw.length+' word'+(nw.length===1?'':'s')+' · '+np.length+' phrase'+(np.length===1?'':'s');
+  [1,2].forEach(function(s){
+    $('ln'+s).textContent = contentsLine(buildSession(d,s));
+    var done=PROG.done[d+'-'+s];
+    $('st'+s).textContent = done?'✓ done':'15 min';
+    $('st'+s).className = 's-stat'+(done?' ok':'');
+    $('go'+s).textContent = done?'Do it again':'Start';
+  });
+  if(t){
+    var T=TESTS[t], r=PROG.tests[t], sp=T.wS+T.pS;
+    $('cardT').hidden=false;
+    $('tName').textContent = t===4 ? '★ Final test' : '★ Test '+t;
+    $('lnT').textContent = T.total+' questions · no timer · about '+(t===4?15:10)+' min · pass is '+T.pass+', with at least '+T.speakMin+' of '+sp+' spoken';
+    $('stT').textContent = r ? ('Best '+r.best+'/'+T.total+(r.passed?' · passed':'')) : 'not taken';
+    $('stT').className = 's-stat'+(r&&r.passed?' ok':' gold');
+    $('goT').textContent = r ? 'Try again' : 'Start test';
+  } else $('cardT').hidden=true;
+  // what's new
+  if(REVIEW[d]){ $('newList').hidden=true; }
+  else {
+    $('newList').hidden=false;
+    $('newSum').textContent='What’s new today ('+(nw.length+np.length)+')';
+    $('newRows').innerHTML = nw.concat(np).map(function(it){
+      return '<div class="nl-row" data-say="'+esc(thaiOf(it))+'"><span class="th" lang="th">'+esc(thaiOf(it))+'</span><span class="en">'+esc(it.english)+'</span><span class="tag">'+
+        (it.k==='w'?'word':(it.use==='h'?'you’ll hear':'phrase'))+(it.g?' · '+(it.g==='m'?'men':'women'):'')+'</span></div>';
+    }).join('');
+  }
+  $('prevDay').hidden = d<=1; $('nextDay').hidden = d>=30;
+  $('prevDay').textContent='‹ Day '+(d-1); $('nextDay').textContent='Day '+(d+1)+' ›';
+}
+function openDay(d){ curDay=Math.max(1,Math.min(30,d)); renderDay(); show('day'); }
+
+/* =====================================================================
+   RUNNER — timed sessions and untimed tests share it
+   ===================================================================== */
+var RUN=null, EX=null, exToken=0;
+
+function startSession(day, s){
+  var blocks=buildSession(day,s);
+  RUN={mode:'session', day:day, s:s, blocks:blocks, bi:-1, scores:blocks.map(function(){ return {ok:0,n:0}; }),
+       misses:[], paused:false, inter:false, left:0, timeUp:false, lastTick:now(), maxDay:day};
+  toneRecent=[];
+  show('run'); $('quitBtn').textContent='Leave session'; quitArmed=false;
+  renderSegs();
+  nextBlock();
+}
+function startTest(n){
+  reloadStats();
+  var qs=buildTest(n);
+  RUN={mode:'test', n:n, day:TESTS[n].day, qs:qs, qi:-1, secs:{}, misses:[], maxDay:TESTS[n].day, paused:false, inter:false};
+  toneRecent=[];
+  show('run'); $('quitBtn').textContent='Leave test'; quitArmed=false;
+  renderSegs();
+  nextTestQ();
+}
+function renderSegs(){
+  if(RUN.mode==='test'){ $('segs').innerHTML='<div class="seg" style="flex:1"><i id="segFill0"></i></div>'; return; }
+  $('segs').innerHTML = RUN.blocks.map(function(b,i){ return '<div class="seg" style="flex:'+b.min+'"><i id="segFill'+i+'"></i></div>'; }).join('');
+}
+function fmt(ms){ var s=Math.max(0,Math.ceil(ms/1000)); return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2); }
+function renderRunMeta(){
+  if(!RUN) return;
+  if(RUN.mode==='test'){
+    var q=RUN.qs[RUN.qi]; if(!q) return;
+    $('blockLabel').innerHTML = esc(q.sec)+'<small>'+(RUN.n===4?'Final test':'Test '+RUN.n)+'</small>';
+    $('timeLeft').textContent = (RUN.qi+1)+' / '+RUN.qs.length; $('timeLeft').className='tl';
+    var f=$('segFill0'); if(f) f.style.width=(100*RUN.qi/RUN.qs.length)+'%';
+    return;
+  }
+  var b=RUN.blocks[RUN.bi]; if(!b) return;
+  $('blockLabel').innerHTML = esc(b.label)+'<small>Day '+RUN.day+' · '+(RUN.s===1?'① Listen':'② Speak')+'</small>';
+  $('timeLeft').textContent = RUN.timeUp ? 'last one' : fmt(RUN.left)+' left';
+  $('timeLeft').className = 'tl'+(RUN.left<20000?' low':'');
+  RUN.blocks.forEach(function(bb,i){
+    var f=$('segFill'+i); if(!f) return;
+    f.style.width = i<RUN.bi ? '100%' : i>RUN.bi ? '0%' : (100*(1-RUN.left/(bb.min*60000)))+'%';
+  });
+}
+function nextBlock(){
+  RUN.bi++;
+  if(RUN.bi>=RUN.blocks.length) return endSession();
+  var b=RUN.blocks[RUN.bi]; b.pos=0;
+  RUN.left=b.min*60000; RUN.timeUp=false;
+  if(RUN.bi===0){ renderRunMeta(); nextEx(); return; }
+  RUN.inter=true; $('nextLabel').textContent=b.label; $('nextOv').hidden=false; EX=null; $('stage').innerHTML='';
+  setTimeout(function(){ if(!RUN) return; RUN.inter=false; $('nextOv').hidden=true; RUN.lastTick=now(); lastAct=now(); renderRunMeta(); nextEx(); }, 1300);
+}
+function nextItem(b){
+  if(b.pos>=b.items.length){
+    var last=b.items[b.items.length-1];
+    var weak=b.items.filter(function(e){ return isWeak(e.it); }), rest=b.items.filter(function(e){ return !isWeak(e.it); });
+    b.items=shuffle(weak).concat(shuffle(rest)).map(function(e){ return {it:e.it, fresh:false}; });
+    if(b.items.length>1 && last && b.items[0].it===last.it){ var t=b.items[0]; b.items[0]=b.items[1]; b.items[1]=t; }
+    b.pos=0;
+  }
+  return b.items[b.pos++];
+}
+function nextEx(){
+  var b=RUN.blocks[RUN.bi];
+  if(b.type==='tones') startEx({kind:'tone', q:makeToneQ(b.drill)});
+  else if(b.type==='num') startEx({kind:b.mode==='hear'?'numH':'numS', n:pickNum(b)});
+  else { var e=nextItem(b); startEx({kind:b.mode==='hear'?'itemH':'itemS', it:e.it, fresh:e.fresh && !isSeen(e.it)}); }
+  renderRunMeta();
+}
+function answered(ok, miss){
+  if(RUN.mode==='session'){ var sc=RUN.scores[RUN.bi]; sc.n++; if(ok) sc.ok++; }
+  else {
+    var q=RUN.qs[RUN.qi], s=RUN.secs[q.sec]||(RUN.secs[q.sec]={ok:0,n:0}); s.n++; if(ok) s.ok++;
+  }
+  if(!ok && miss && RUN.misses.length<40) RUN.misses.push(miss);
+  if(ok){ var c=$('card'); c.classList.remove('pulse'); void c.offsetWidth; c.classList.add('pulse'); }
+}
+function finishEx(){
+  if(!RUN) return;
+  if(RUN.mode==='test') return nextTestQ();
+  if(RUN.timeUp) nextBlock(); else nextEx();
+}
+
+/* ---- clock: counts only while you're active and no Thai is playing ---- */
+function idleLimit(){ return (EX && (EX.kind==='itemS'||EX.kind==='numS') && !EX.revealed) ? 10000 : 5000; }
+setInterval(function(){
+  if(!RUN || RUN.mode!=='session' || VIEW!=='run') return;
+  var t=now(), dt=t-RUN.lastTick; RUN.lastTick=t;
+  if(RUN.inter || RUN.paused) return;
+  if(speaking){ lastAct=t; return; }
+  if(t-lastAct > idleLimit()){ pauseRun(); return; }
+  if(!RUN.timeUp){
+    RUN.left-=dt;
+    if(RUN.left<=0){ RUN.left=0; RUN.timeUp=true; }
+  }
+  renderRunMeta();
+}, 250);
+function pauseRun(){ if(!RUN||RUN.mode!=='session'||RUN.paused||RUN.inter) return; RUN.paused=true; $('pauseOv').hidden=false; }
+function resumeRun(){ if(!RUN||!RUN.paused) return; RUN.paused=false; $('pauseOv').hidden=true; lastAct=now(); RUN.lastTick=now(); }
+$('pauseOv').addEventListener('pointerdown', function(e){ e.preventDefault(); e.stopPropagation(); resumeRun(); });
+document.addEventListener('visibilitychange', function(){ if(document.hidden) pauseRun(); });
+['pointerdown','keydown','input'].forEach(function(ev){ document.addEventListener(ev, function(){ lastAct=now(); }, true); });
+
+/* =====================================================================
+   EXERCISES
+   ===================================================================== */
+var stage=$('stage');
+function startEx(spec){
+  EX=spec; spec.answered=false; spec.revealed=false; exToken++;
+  RENDER[spec.kind](spec);
+  lastAct=now();
+}
+function newTag(){ return EX && EX.fresh ? '<span class="newtag">New</span>' : ''; }
+function nextBtnHTML(){ return '<div class="grow"></div><button class="btn primary" data-act="next" id="exNext" hidden>Next →</button>'; }
+function showNext(){ var n=$('exNext'); if(n) n.hidden=false; }
+function autoNext(ms){ var tk=exToken; setTimeout(function(){ if(tk===exToken && RUN) finishEx(); }, ms); }
+
+var RENDER={}, ACT={};
+
+/* ---- Tones ---- */
+RENDER.tone=function(x){
+  var q=x.q;
+  stage.innerHTML =
+    '<div class="eyebrow">'+(q.kind==='len'?'Short or long vowel?':'Which tone did you hear?')+'</div>'+
+    '<button class="btn play" data-act="play"><span class="ico">🔊</span> Play again</button>'+
+    '<div class="hint" id="exHint">Pick the one you heard.</div>'+
+    '<div class="choices'+(q.choices.length>3?' many':'')+'" id="choices"></div>'+ nextBtnHTML();
+  renderToneRows(x);
+  setTimeout(function(){ if(EX===x) speak(q.target.thai); },180);
+};
+function renderToneRows(x){
+  var q=x.q;
+  $('choices').innerHTML = q.choices.map(function(w,i){
+    var cls=''; if(x.answered){ if(w===q.target) cls=' right'; else if(w===x.picked) cls=' wrong'; }
+    var left = q.kind==='len' ? '<span class="lenbar"><i style="width:'+(w.len==='S'?'34%':'100%')+'"></i></span>' : shapeSVG(w.tone);
+    var name = q.kind==='len' ? (w.len==='S'?'short':'long')+'<small>vowel</small>' : TONE_NAME[w.tone]+'<small>'+TONE_DESC[w.tone]+'</small>';
+    return '<button class="row'+cls+'" data-act="pick" data-i="'+i+'">'+left+'<span class="lbl">'+name+'</span>'+
+      '<span class="word"><span class="line"><span class="th" lang="th">'+esc(w.thai)+'</span>'+(PREFS.roman?'<span class="ro">'+esc(accented(w))+'</span>':'')+'</span>'+
+      '<span class="en">'+esc(w.english)+'</span></span></button>';
+  }).join('');
+}
+ACT.tone=function(act, el){
+  var x=EX, q=x.q;
+  if(act==='play'){ speak(q.target.thai); return; }
+  if(act==='next'){ if(x.answered) finishEx(); return; }
+  if(act!=='pick') return;
+  var w=q.choices[+el.dataset.i]; if(!w) return;
+  if(x.answered){ speak(w.thai); return; }          // after answering: tap a row to compare
+  x.answered=true; x.picked=w;
+  var ok=w===q.target, nm=function(z){ return q.kind==='len' ? (z.len==='S'?'short':'long') : TONE_NAME[z.tone]; };
+  answered(ok, ok?null:{html:'Heard <b>'+nm(q.target)+'</b> <span class="th">'+esc(q.target.thai)+'</span> ('+esc(q.target.english)+'), picked <b>'+nm(w)+'</b>', say:[q.target.thai, w.thai]});
+  var h=$('exHint'); h.className='verdict '+(ok?'ok':'bad');
+  h.textContent = ok ? '✓ Yes — '+nm(q.target) : '✗ It was '+nm(q.target)+', not '+nm(w);
+  renderToneRows(x);
+  var c=document.createElement('div'); c.className='hint'; c.textContent='Tap each row to compare.'; h.after(c);
+  showNext();
+  if(ok) autoNext(1300);
+};
+
+/* ---- Numbers · Hear & Type ---- */
+RENDER.numH=function(x){
+  stage.innerHTML =
+    '<div class="eyebrow">Listen &amp; type the digits</div>'+
+    '<button class="btn play" data-act="play"><span class="ico">🔊</span> Play number</button>'+
+    '<input class="answer" id="numIn" inputmode="numeric" pattern="[0-9]*" placeholder="?" autocomplete="off" enterkeyhint="done">'+
+    '<button class="btn primary" data-act="check" id="numCheck">Check</button>'+
+    '<div class="verdict" id="verdict"></div>'+
+    '<div class="reveal" id="reveal"><div class="thai" id="rThai"></div><div class="rom" id="rRom"></div></div>'+ nextBtnHTML();
+  var inp=$('numIn');
+  inp.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); if(x.answered) finishEx(); else ACT.numH('check'); } });
+  try{ inp.focus({preventScroll:true}); }catch(e){}
+  setTimeout(function(){ if(EX===x) speak(numToThai(x.n).thai); },180);
+};
+ACT.numH=function(act){
+  var x=EX;
+  if(act==='play'){ speak(numToThai(x.n).thai); return; }
+  if(act==='next'){ if(x.answered) finishEx(); return; }
+  if(act!=='check' || x.answered) return;
+  var raw=$('numIn').value.replace(/[^0-9]/g,''); if(!raw) return;
+  var ok=parseInt(raw,10)===x.n, r=numToThai(x.n);
+  x.answered=true; recNum(x.n, ok);
+  answered(ok, ok?null:{html:'Heard <b>'+x.n.toLocaleString()+'</b> <span class="th">'+esc(r.thai)+'</span>, typed '+esc(raw), say:[r.thai]});
+  var v=$('verdict'); v.className='verdict '+(ok?'ok':'bad'); v.textContent = ok?'✓ Correct!':'✗ It was '+x.n.toLocaleString();
+  $('rThai').textContent=r.thai; $('rRom').textContent=PREFS.roman?r.rom:'';
+  $('reveal').classList.add('show'); $('numCheck').hidden=true;
+  showNext();
+  if(ok) autoNext(700);
+};
+
+/* ---- Numbers · See & Say ---- */
+RENDER.numS=function(x){
+  stage.className='stage center';
+  stage.innerHTML =
+    '<div class="eyebrow">Say it in Thai</div>'+
+    '<div class="bigword num in">'+x.n.toLocaleString()+'</div>'+
+    '<div class="reveal" id="reveal"><div class="thai" id="rThai"></div><div class="rom" id="rRom"></div></div>'+
+    '<div class="hint" id="sHint">Say it out loud first…</div>'+ sayButtons();
+};
+function sayButtons(){
+  return '<button class="btn ghost" data-act="reveal" id="sReveal">🔊 Hear &amp; reveal</button>'+
+    '<button class="btn text" data-act="again" id="sAgain" hidden>🔊 Hear again</button>'+
+    '<div class="rate-row" id="rateRow" hidden><button class="btn rate miss" data-act="miss">✗ Missed</button><button class="btn rate got" data-act="got">✓ Got it</button></div>';
+}
+ACT.numS=function(act, el){
+  var x=EX, r=numToThai(x.n);
+  if(act==='reveal' && !x.revealed){
+    x.revealed=true;
+    $('rThai').textContent=r.thai; $('rRom').textContent=PREFS.roman?r.rom:''; $('reveal').classList.add('show');
+    $('sHint').textContent='Did you say it the same way?'; $('sReveal').hidden=true; $('sAgain').hidden=!hasTTS; $('rateRow').hidden=false;
+    speak(r.thai); return;
+  }
+  if(act==='again'){ speak(r.thai); return; }
+  if((act==='got'||act==='miss') && x.revealed && !x.answered){
+    var ok=act==='got'; x.answered=true; el.classList.add('chosen'); recNum(x.n, ok);
+    answered(ok, ok?null:{html:'Say <b>'+x.n.toLocaleString()+'</b>: <span class="th">'+esc(r.thai)+'</span>', say:[r.thai]});
+    setTimeout(finishEx, 220);
+  }
+};
+
+/* ---- Words / phrases · Hear & Choose ---- */
+RENDER.itemH=function(x){
+  var it=x.it;
+  x.choices=makeChoices(it, RUN?RUN.maxDay:30);
+  stage.innerHTML =
+    '<div class="eyebrow">Listen · what does it mean?'+newTag()+'</div>'+
+    '<button class="btn play" data-act="play"><span class="ico">🔊</span> Play '+(it.k==='w'?'word':'phrase')+'</button>'+
+    '<div class="hint" id="hHint">Think of the meaning first.</div>'+
+    '<button class="btn primary" data-act="ready" id="hReady">I’ve got it — show choices</button>'+
+    '<button class="btn text idk" data-act="idk" id="hNoIdea">No idea — show me</button>'+
+    '<div class="tiles" id="tiles" hidden></div>'+
+    '<button class="btn text idk" data-act="idk" id="hIdk" hidden>I don’t know</button>'+
+    '<div class="verdict" id="verdict"></div>'+
+    '<div class="reveal" id="reveal"><div class="thai" id="rThai" lang="th"></div><div class="rom" id="rRom"></div><div class="meaning" id="rMean"></div><div class="note" id="rNote"></div></div>'+
+    nextBtnHTML();
+  setTimeout(function(){ if(EX===x) speak(thaiOf(it)); },150);
+};
+function renderTiles(x){
+  var it=x.it;
+  $('tiles').innerHTML = x.choices.map(function(c,i){
+    var cls=''; if(x.answered){ if(c.id===it.id) cls=' right'; else if(c.id===x.picked) cls=' wrong'; }
+    if(c.english.length>24) cls+=' long';
+    return '<button class="choice-t'+cls+'" data-act="choose" data-i="'+i+'"'+(x.answered?' disabled':'')+'><span class="k">'+(i+1)+'</span>'+esc(c.english)+'</button>';
+  }).join('');
+}
+function revealItemH(x, kind, text){
+  var it=x.it;
+  renderTiles(x); $('tiles').hidden=false; $('hIdk').hidden=true; $('hReady').hidden=true; $('hNoIdea').hidden=true; $('hHint').textContent='';
+  var v=$('verdict'); v.className='verdict '+kind; v.textContent=text;
+  $('rThai').textContent=thaiOf(it); $('rThai').className='thai'+thaiSize(thaiOf(it));
+  $('rRom').textContent=PREFS.roman?romOf(it):'';
+  $('rMean').textContent = it.k==='p' && it.use==='h' ? '👂 '+it.prompt.replace(/:\s*$/,'') : '';
+  $('rNote').textContent=it.note||'';
+  $('reveal').classList.add('show');
+  showNext();
+}
+function missHTML(it){ return '<span class="th">'+esc(thaiOf(it))+'</span> <b>'+esc(it.english)+'</b>'; }
+ACT.itemH=function(act, el){
+  var x=EX, it=x.it;
+  if(act==='play'){ speak(thaiOf(it)); return; }
+  if(act==='next'){ if(x.answered) finishEx(); return; }
+  if(x.answered) return;
+  if(act==='ready'){ $('hReady').hidden=true; $('hNoIdea').hidden=true; $('hHint').textContent='Tap the meaning closest to yours.'; renderTiles(x); $('tiles').hidden=false; $('hIdk').hidden=false; return; }
+  if(act==='idk'){
+    x.answered=true; recItem(it,false,true);
+    answered(false, {html:missHTML(it), say:[thaiOf(it)]});
+    revealItemH(x,'idk','Now you know: “'+it.english+'”'); return;
+  }
+  if(act==='choose'){
+    var c=x.choices[+el.dataset.i]; if(!c) return;
+    var ok=c.id===it.id; x.answered=true; x.picked=c.id; recItem(it,ok);
+    answered(ok, ok?null:{html:missHTML(it), say:[thaiOf(it)]});
+    revealItemH(x, ok?'ok':'bad', ok?'✓ Correct!':'✗ It was “'+it.english+'”');
+    if(ok) autoNext(1400);
+  }
+};
+
+/* ---- Words / phrases · See & Say ---- */
+RENDER.itemS=function(x){
+  var it=x.it, prompt = it.k==='p' ? it.prompt : it.english;
+  stage.className='stage center';
+  stage.innerHTML =
+    '<div class="eyebrow">'+(it.k==='w'?'Say it in Thai':'What would you say?')+newTag()+'</div>'+
+    '<div class="bigword in'+(it.k==='p'?' prompt':(prompt.length>16?' long':''))+'">'+esc(prompt)+'</div>'+
+    '<div class="reveal" id="reveal"><div class="thai" id="rThai" lang="th"></div><div class="rom" id="rRom"></div><div class="meaning" id="rMean"></div><div class="note" id="rNote"></div></div>'+
+    '<div class="hint" id="sHint">'+(x.fresh?'New one: tap reveal and learn it, then say it back.':'Say it out loud first. Don’t know it yet? Tap reveal and learn it.')+'</div>'+ sayButtons();
+};
+ACT.itemS=function(act, el){
+  var x=EX, it=x.it;
+  if(act==='reveal' && !x.revealed){
+    x.revealed=true;
+    $('rThai').textContent=thaiOf(it); $('rThai').className='thai'+thaiSize(thaiOf(it));
+    $('rRom').textContent=PREFS.roman?romOf(it):'';
+    $('rMean').textContent = it.k==='p' ? '“'+it.english+'”' : '';
+    $('rNote').textContent=it.note||''; $('reveal').classList.add('show');
+    $('sHint').textContent='Did you say it — and the tones — the same way?';
+    $('sReveal').hidden=true; $('sAgain').hidden=!hasTTS; $('rateRow').hidden=false;
+    speak(thaiOf(it)); return;
+  }
+  if(act==='again'){ speak(thaiOf(it)); return; }
+  if((act==='got'||act==='miss') && x.revealed && !x.answered){
+    var ok=act==='got'; x.answered=true; el.classList.add('chosen'); recItem(it,ok);
+    answered(ok, ok?null:{html:'Say: '+missHTML(it), say:[thaiOf(it)]});
+    setTimeout(finishEx, 220);
+  }
+};
+
+/* stage events */
+stage.addEventListener('click', function(e){
+  var b=e.target.closest('[data-act]'); if(!b||!EX||(RUN&&(RUN.paused||RUN.inter))) return;
+  ACT[EX.kind](b.dataset.act, b);
+});
+var _render=RENDER;
+Object.keys(_render).forEach(function(k){ var f=_render[k]; _render[k]=function(x){ stage.className='stage'; stage.scrollTop=0; f(x); }; });
+
+/* desktop keyboard */
+document.addEventListener('keydown', function(e){
+  if(e.key==='Escape'){ if(!$('settings').hidden) closeSettings(); return; }
+  if(VIEW!=='run' || !EX || !$('settings').hidden) return;
+  if(RUN.paused){ resumeRun(); e.preventDefault(); return; }
+  var t=e.target; if(t && t.tagName==='INPUT') return;           // numbers input handles its own Enter
+  var x=EX, k=e.key, act=function(a,el){ e.preventDefault(); ACT[x.kind](a,el); };
+  if(x.kind==='tone'){
+    if(k===' ') act('play'); else if(k==='Enter'&&x.answered) act('next');
+    else if(/^[1-5]$/.test(k)){ var r=stage.querySelectorAll('.row')[+k-1]; if(r) act('pick',r); }
+  } else if(x.kind==='itemH'){
+    if(k===' ') act('play');
+    else if(k==='Enter'){ if(x.answered) act('next'); else if(!$('hReady').hidden) act('ready'); }
+    else if(/^[1-4]$/.test(k)){ if(!$('hReady').hidden) ACT.itemH('ready'); var c=stage.querySelectorAll('.choice-t')[+k-1]; if(c) act('choose',c); }
+    else if(k==='0') act('idk');
+  } else if(x.kind==='itemS'||x.kind==='numS'){
+    if(!x.revealed){ if(k===' '||k==='Enter') act('reveal'); }
+    else if(k==='Enter'||k==='ArrowRight'){ var g=stage.querySelector('.rate.got'); if(g) act('got',g); }
+    else if(k==='ArrowLeft'){ var m=stage.querySelector('.rate.miss'); if(m) act('miss',m); }
+  }
+});
+
+/* =====================================================================
+   TESTS (curriculum §4)
+   ===================================================================== */
+function pickTestItems(list, n, T, speakMode, used, opts){
+  opts=opts||{};
+  var out=[];
+  function add(it){ if(out.length<n && !used[it.id]){ used[it.id]=1; out.push(it); } }
+  var cand=list.filter(function(it){ return it.d>=T.from && it.d<=T.to && okFor(it,speakMode); });
+  if(opts.hearMin) shuffle(cand.filter(function(it){ return it.use==='h'; })).slice(0,opts.hearMin).forEach(add);
+  if(opts.weekEach) [[1,6],[8,13],[15,20],[22,27]].forEach(function(r){
+    var c=shuffle(cand.filter(function(it){ return it.d>=r[0] && it.d<=r[1] && !used[it.id]; })); if(c[0]) add(c[0]); });
+  var rest=cand.filter(function(it){ return !used[it.id]; });
+  if(T.focus){
+    var inF=function(it){ return it.d>=T.focus[0] && it.d<=T.focus[1]; };
+    var f=shuffle(rest.filter(inF)), o=shuffle(rest.filter(function(it){ return !inF(it); }));
+    var nf=Math.round((n-out.length)*0.6);
+    f.slice(0,nf).forEach(add); o.forEach(add); f.forEach(add);
+  } else shuffle(rest).forEach(add);
+  return out;
+}
+function testNumbers(T){
+  var out=[], seen={};
+  function add(n){ if(!seen[n]){ seen[n]=1; out.push(n); } }
+  if(T.num==='final'){
+    shuffle(PRICES).slice(0,8).forEach(add);
+    while(out.length<12) add(1+Math.floor(Math.random()*1000));
+  } else {
+    var guard=0; while(out.length<T.nNum && guard++<500) add(rawPick(T.num,0.5));
+  }
+  return out;
+}
+function buildTest(n){
+  var T=TESTS[n], qs=[], used={};
+  T.tones.forEach(function(tc){ for(var i=0;i<tc[1];i++) qs.push({sec:'Tones', kind:'tone', drill:tc[0]}); });
+  testNumbers(T).forEach(function(x){ qs.push({sec:'Numbers', kind:'numH', n:x}); });
+  pickTestItems(WORDS, T.wH, T, false, used).forEach(function(it){ qs.push({sec:'Words', kind:'itemH', it:it}); });
+  pickTestItems(PHRASES, T.pH, T, false, used, {hearMin:T.hearMin}).forEach(function(it){ qs.push({sec:'Phrases', kind:'itemH', it:it}); });
+  pickTestItems(WORDS, T.wS, T, true, used).forEach(function(it){ qs.push({sec:'Speaking', kind:'itemS', it:it}); });
+  pickTestItems(PHRASES, T.pS, T, true, used, {weekEach:T.weekEach}).forEach(function(it){ qs.push({sec:'Speaking', kind:'itemS', it:it}); });
+  return qs;
+}
+function nextTestQ(){
+  RUN.qi++;
+  if(RUN.qi>=RUN.qs.length) return endTest();
+  var q=RUN.qs[RUN.qi];
+  if(q.kind==='tone') startEx({kind:'tone', q:makeToneQ(q.drill)});
+  else if(q.kind==='numH') startEx({kind:'numH', n:q.n});
+  else startEx({kind:q.kind, it:q.it, fresh:false});
+  renderRunMeta();
+}
+
+/* =====================================================================
+   END SCREENS
+   ===================================================================== */
+function missesHTML(R){
+  if(!R.misses.length) return '';
+  return '<div class="misses"><div class="misses-title">Your misses · tap to hear</div>'+
+    R.misses.map(function(m,i){ return '<button class="miss" data-m="'+i+'"><span>🔊</span><span>'+m.html+'</span></button>'; }).join('')+'</div>';
+}
+var LAST=null;
+function endSession(){
+  var R=RUN; LAST=R; EX=null; RUN=null; if(hasTTS) speechSynthesis.cancel();
+  PROG.done[R.day+'-'+R.s]=1; saveProg();
+  var tot=R.scores.reduce(function(a,s){ return {ok:a.ok+s.ok, n:a.n+s.n}; },{ok:0,n:0});
+  var html='<div class="eyebrow">Day '+R.day+' · '+(R.s===1?'① Listen':'② Speak')+'</div>'+
+    '<div class="end-title">Done. '+(tot.n?tot.ok+' of '+tot.n+' right.':'')+'</div>'+
+    '<div class="breakdown">'+R.blocks.map(function(b,i){ var s=R.scores[i]; return '<span>'+esc(b.label)+' '+s.ok+'/'+s.n+'</span>'; }).join('')+'</div>'+
+    '<div class="end-sub">'+(R.s===1?'Now say them: ② Speak is next, later today if you can.':(TEST_ON_DAY[R.day]?'Both sessions done. The ★ test is ready when you are.':'Both sessions done. See you tomorrow.'))+'</div>'+
+    missesHTML(R)+
+    '<div class="endbtns">'+
+      (R.s===1?'<button class="btn primary" data-end="speak">Go to ② Speak</button>':'')+
+      (R.s===2&&TEST_ON_DAY[R.day]?'<button class="btn primary" data-end="test">★ Take the test</button>':'')+
+      (R.s===2&&!TEST_ON_DAY[R.day]&&R.day<30?'<button class="btn primary" data-end="next">Day '+(R.day+1)+' →</button>':'')+
+      '<button class="btn ghost" data-end="day">Done</button></div>';
+  $('endBox').innerHTML=html; show('end');
+}
+function endTest(){
+  var R=RUN; LAST=R; EX=null; RUN=null; if(hasTTS) speechSynthesis.cancel();
+  var T=TESTS[R.n], secs=['Tones','Numbers','Words','Phrases','Speaking'];
+  var total=0; secs.forEach(function(s){ total+=(R.secs[s]?R.secs[s].ok:0); });
+  var sp=R.secs.Speaking||{ok:0,n:T.wS+T.pS}, spN=T.wS+T.pS;
+  var passAll=total>=T.pass, passSp=sp.ok>=T.speakMin, passed=passAll&&passSp;
+  var prev=PROG.tests[R.n]||{best:0,passed:false};
+  PROG.tests[R.n]={best:Math.max(prev.best,total), passed:prev.passed||passed}; saveProg();
+  var weakest=null, wr=2;
+  secs.forEach(function(s){ var x=R.secs[s]; if(x&&x.n){ var r=x.ok/x.n; if(r<wr){ wr=r; weakest=s; } } });
+  var pd=T.practise, title, sub;
+  if(passed){
+    title = R.n===4 ? 'You did it. Survival Thai: passed.' : 'Passed · '+total+'/'+T.total;
+    sub = R.n===4 ? 'You can order, pay, get around and ask for help in Thai.' : 'Week '+(R.n+1)+' is next.';
+  } else if(passAll && !passSp){
+    title = total+'/'+T.total+', but '+sp.ok+' of '+spN+' spoken · not yet.';
+    sub = 'Your listening is there. Practise ② Speak on Days '+pd[0]+' and '+pd[1]+', then try again.';
+  } else {
+    title = total+'/'+T.total+' · not yet.';
+    sub = 'Practise Days '+pd[0]+' and '+pd[1]+', then try again. You need '+T.pass+', with at least '+T.speakMin+' of '+spN+' spoken.';
+  }
+  var share='🇹🇭 0 to Survival Thai — passed\nDay 30 · '+total+'/'+T.total+'\n127 words · 50 phrases · prices · tones\nlekthai.app/30-days';
+  var html='<div class="eyebrow">'+(R.n===4?'Final test':'Test '+R.n)+'</div>'+
+    '<div class="score">'+total+'<small>/'+T.total+'</small></div>'+
+    '<div class="end-title">'+esc(title)+'</div><div class="end-sub">'+esc(sub)+'</div>'+
+    '<div class="breakdown">'+secs.filter(function(s){ return R.secs[s]; }).map(function(s){
+      var x=R.secs[s]; return '<span class="'+(s===weakest&&!passed?'weak':'')+'">'+s+' '+x.ok+'/'+x.n+'</span>'; }).join('')+'</div>'+
+    (passed&&R.n===4 ? '<div class="share"><pre>'+esc(share)+'</pre><button class="btn primary" data-end="copy">Copy my result</button></div>' : '')+
+    missesHTML(R)+
+
+    '<div class="endbtns">'+
+      (!passed?'<button class="btn primary" data-end="retry">Try again</button>':'')+
+      (passed&&R.n<4?'<button class="btn primary" data-end="next">Day '+(R.day+1)+' →</button>':'')+
+      '<button class="btn ghost" data-end="day">Done</button></div>';
+  $('endBox').innerHTML=html; LAST.share=share; show('end');
+}
+$('endBox').addEventListener('click', function(e){
+  var m=e.target.closest('.miss'); if(m && LAST){ var x=LAST.misses[+m.dataset.m]; if(x) speak(x.say); return; }
+  var b=e.target.closest('[data-end]'); if(!b||!LAST) return;
+  var a=b.dataset.end, d=LAST.day;
+  if(a==='speak') startSession(d,2);
+  else if(a==='test') startTest(TEST_ON_DAY[d]);
+  else if(a==='retry') startTest(LAST.n);
+  else if(a==='next') openDay(d+1);
+  else if(a==='copy') copyText(LAST.share);
+  else openDay(d);
+});
+function copyText(t){
+  function fallback(){ var ta=document.createElement('textarea'); ta.value=t; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(e){} ta.remove(); showWarn('copied'); }
+  if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function(){ showWarn('copied'); }, fallback);
+  else fallback();
+}
+
+/* leave a session or test (two taps, so it can't happen by accident) */
+var quitArmed=false, quitTimer=null;
+$('quitBtn').addEventListener('click', function(){
+  if(!quitArmed){ quitArmed=true; $('quitBtn').textContent='Tap again to leave (this one won’t be ticked)'; clearTimeout(quitTimer);
+    quitTimer=setTimeout(function(){ quitArmed=false; if(RUN) $('quitBtn').textContent=RUN.mode==='test'?'Leave test':'Leave session'; },3000); return; }
+  quitArmed=false; var d=RUN?RUN.day:curDay; RUN=null; EX=null; if(hasTTS) speechSynthesis.cancel();
+  $('pauseOv').hidden=true; $('nextOv').hidden=true; openDay(d);
+});
+
+/* =====================================================================
+   SETTINGS + NAV
+   ===================================================================== */
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  $('themeBtn').textContent = t==='dark'?'◑':'◐';
+  try{ localStorage.setItem(KEY_THEME,t); }catch(e){}
+}
+function syncSheet(){
+  $('romBtn').textContent=PREFS.roman?'On':'Off'; $('romBtn').classList.toggle('on',PREFS.roman);
+  $('slowBtn').textContent=PREFS.slow?'On':'Off'; $('slowBtn').classList.toggle('on',PREFS.slow);
+  $('politeBtn').textContent = PREFS.polite==='m'?'ครับ':PREFS.polite==='f'?'ค่ะ':'Off'; $('politeBtn').classList.toggle('on',!!PREFS.polite);
+  $('voiceVal').textContent = !hasTTS?'Not supported here':thaiVoice?(thaiVoice.name||'Thai'):(voiceChecked?'No Thai voice listed':'Checking…');
+}
+function openSettings(){ syncSheet(); $('settings').hidden=false; if(RUN) pauseRun(); }
+function closeSettings(){ $('settings').hidden=true; $('resetConfirm').hidden=true; if(VIEW==='day') renderDay(); if(VIEW==='home') renderHome(); }
+$('gearBtn').addEventListener('click', openSettings);
+$('settingsClose').addEventListener('click', closeSettings);
+$('settingsScrim').addEventListener('click', closeSettings);
+$('themeBtn').addEventListener('click', function(){ setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'); });
+$('romBtn').addEventListener('click', function(){ PREFS.roman=!PREFS.roman; savePrefs(); syncSheet(); });
+$('slowBtn').addEventListener('click', function(){ PREFS.slow=!PREFS.slow; savePrefs(); syncSheet(); });
+$('politeBtn').addEventListener('click', function(){ PREFS.polite = PREFS.polite==='m'?'f':PREFS.polite==='f'?'':'m'; savePrefs(); syncSheet(); });
+$('resetBtn').addEventListener('click', function(){ $('resetConfirm').hidden=false; });
+$('resetNo').addEventListener('click', function(){ $('resetConfirm').hidden=true; });
+$('resetYes').addEventListener('click', function(){ PROG={done:{},tests:{}}; saveProg(); $('resetConfirm').hidden=true; closeSettings(); renderHome(); show('home'); });
+$('betaTag').addEventListener('click', function(){ showWarn('beta'); });
+$('warnX').addEventListener('click', hideWarn);
+$('politeSheet').addEventListener('click', function(e){
+  var b=e.target.closest('[data-polite]'); if(!b) return;
+  PREFS.polite=b.dataset.polite; savePrefs(); $('politeSheet').hidden=true;
+  if(VIEW==='day') renderDay();
+});
+
+$('backBtn').addEventListener('click', function(){
+  if(VIEW==='day'){ renderHome(); show('home'); }
+  else if(VIEW==='end'){ openDay(LAST?LAST.day:curDay); }
+});
+$('contBtn').addEventListener('click', function(){ openDay(nextDay()); });
+$('weeks').addEventListener('click', function(e){ var t=e.target.closest('.tile'); if(t) openDay(+t.dataset.day); });
+$('prevDay').addEventListener('click', function(){ openDay(curDay-1); });
+$('nextDay').addEventListener('click', function(){ openDay(curDay+1); });
+$('go1').addEventListener('click', function(){ startSession(curDay,1); });
+$('go2').addEventListener('click', function(){ startSession(curDay,2); });
+$('goT').addEventListener('click', function(){ startTest(TEST_ON_DAY[curDay]); });
+$('newRows').addEventListener('click', function(e){ var r=e.target.closest('.nl-row'); if(r) speak(r.dataset.say); });
+
+/* ---------- boot ---------- */
+(function(){
+  var saved='dark'; try{ saved=localStorage.getItem(KEY_THEME)||'dark'; }catch(e){}
+  setTheme(saved);
+  if(hasTTS){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; } else showWarn('notts');
+  if($('warn').hidden && !load(KEY_BETA,0)) showWarn('beta');
+  if(PREFS.polite===null) $('politeSheet').hidden=false;
+  renderHome(); show('home');
+})();
+
+/* test hook (used by automated checks only; harmless in the browser) */
+window.__lt30 = {WORDS:WORDS, PHRASES:PHRASES, buildSession:buildSession, buildTest:buildTest, makeChoices:makeChoices,
+  startSession:startSession, startTest:startTest, finishEx:finishEx, getRun:function(){ return RUN; }, getEx:function(){ return EX; }, ACT:ACT};
+
+})();
+</script>
+</body>
+</html>
