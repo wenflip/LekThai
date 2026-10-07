@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
-<title>LekThai — Thai Numbers</title>
+<title>LekThai — Drill</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -346,14 +346,13 @@
      input and buttons, so it can't be hit by accident mid-drill. */
   .home-link{
     display:inline-flex; align-items:center; gap:4px; height:38px; padding:0;
-    margin:0 -4px;   /* sit inside the title's side padding so the header keeps its original widths */
-    color:inherit; text-decoration:none; border-radius:10px;
+    vertical-align:middle; color:inherit; text-decoration:none; border-radius:10px;
   }
-  .home-ico{ flex:0 0 auto; color:var(--muted); transition:color .2s; }
+  .home-ico{ flex:0 0 auto; color:var(--muted); transition:color .2s; display:none; }
   .home-link:hover .home-ico{ color:var(--accent); }
-  /* Narrow phones: the header has no spare width for the icon, so show the
-     wordmark alone (still the home link). Keeps the header no wider than before. */
-  @media (max-width:389px){ .home-ico{ display:none; } }
+  /* The house only shows when the header has room for it (decided by the small
+     script at the end of the page). Keeps the header no more crowded than before. */
+  .bar.home-roomy .home-ico{ display:block; }
 
   /* mastery: tiny inline checkmark on a mastered number */
   .mbadge{
@@ -1075,6 +1074,26 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').catch(function(){});
   });
 }
+</script>
+<script>
+/* Home link icon: show the house only when the header has spare room for it,
+   so it never pushes into the pill, beta tag or streak chip (pill labels change
+   width). The word "LekThai" is the home link either way. Presentation only. */
+(function(){
+  var bar=document.querySelector('.bar'), title=bar&&bar.querySelector('.title');
+  if(!title||!window.ResizeObserver||!document.createRange) return;
+  var NEED=18;   // icon 14px + 4px gap; the header's own 10px gaps stay intact
+  function fit(){
+    bar.classList.remove('home-roomy');
+    var cs=getComputedStyle(title), r=document.createRange(); r.selectNodeContents(title);
+    var room=title.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-r.getBoundingClientRect().width;
+    if(room>=NEED) bar.classList.add('home-roomy');
+  }
+  new ResizeObserver(fit).observe(bar);
+  var pill=bar.querySelector('.pill'); if(pill) new ResizeObserver(fit).observe(pill);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+  fit();
+})();
 </script>
 </body>
 </html>
