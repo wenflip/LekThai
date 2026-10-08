@@ -98,7 +98,7 @@
   .trust{ margin:0; font:500 13.5px/1 "DM Sans"; color:var(--muted); }
 
   /* ---------- 30-DAY COURSE (primary call to action) ---------- */
-  .course{ margin:30px auto 0; max-width:440px; }
+  .course{ margin:0 auto 34px; max-width:440px; text-align:center; }
   .cta{
     display:flex; align-items:center; justify-content:center; gap:9px;
     width:100%; min-height:60px; padding:14px 24px; border-radius:16px; text-decoration:none;
@@ -111,6 +111,22 @@
   .cta .arr{ transition:transform .2s; }
   .cta:hover .arr{ transform:translateX(3px); }
   .course-sub{ margin:12px 0 0; font:500 13.5px/1.45 "DM Sans"; color:var(--ink-2); }
+  .cta-blue{
+    color:#0f1117;
+    background:linear-gradient(180deg, #a9bbdc, #7f96c0);
+    box-shadow:0 14px 28px -14px #7f96c0, inset 0 1px 0 rgba(255,255,255,.30);
+  }
+  .thai-inline{ font-family:"Sarabun","Noto Sans Thai",sans-serif; font-weight:600; }
+
+  /* ---------- SPEAK / READ TRACKS ---------- */
+  .track{ padding:22px 0 50px; }
+  .track-read{ border-top:1px solid var(--card-border); padding-top:46px; }
+  .track-head{ text-align:center; margin-bottom:22px; }
+  .track-title{
+    font-family:"Fraunces", Georgia, serif; font-variation-settings:"opsz" 144,"SOFT" 30,"wght" 600;
+    font-weight:600; font-size:clamp(26px,6.5vw,34px); line-height:1.1; color:var(--ink); margin:0 0 6px;
+  }
+  .track-sub{ margin:0; font-size:15.5px; color:var(--ink-2); }
 
   /* ---------- SECTIONS ---------- */
   .section{ padding:8px 0 44px; }
@@ -149,7 +165,7 @@
     font-size:24px; line-height:1;
   }
   .tool .icon.thai{ font-family:"Sarabun","Noto Sans Thai",sans-serif; font-weight:600; font-size:22px; color:var(--blue); }
-  .tool h2{ margin:0 0 4px; font:600 18px/1.2 "DM Sans"; color:var(--ink); }
+  .tool h3{ margin:0 0 4px; font:600 18px/1.2 "DM Sans"; color:var(--ink); }
   .tool p{ margin:0; font-size:14px; line-height:1.45; color:var(--ink-2); }
   .tool .arr{ position:absolute; right:18px; top:50%; transform:translateY(-50%); color:var(--accent); font-size:18px; transition:transform .2s; }
   .tool:hover .arr{ transform:translate(3px,-50%); }
@@ -187,20 +203,26 @@
     <h1 class="tagline">Thai,<br>drilled.</h1>
     <p class="subhead">Hear it. Say it. Know it.</p>
     <p class="trust">Free · no signup · works in your browser</p>
+  </section>
+
+  <!-- ===== SPEAK ===== -->
+  <section class="track" aria-labelledby="speak-h">
+    <div class="track-head">
+      <h2 id="speak-h" class="track-title">Speak Thai</h2>
+      <p class="track-sub">Order, pay, get around.</p>
+    </div>
 
     <div class="course">
       <a class="cta" href="/30-days/">0 to Survival Thai in 30 days <span class="arr" aria-hidden="true">→</span></a>
       <p class="course-sub">Two 15-minute sessions a day · progress saved on this device</p>
     </div>
-  </section>
 
-  <section class="section">
     <p class="eyebrow">Or practise one skill</p>
     <div class="tools">
       <a class="tool" href="/sounds/">
         <span class="icon" aria-hidden="true">👂</span>
         <span>
-          <h2>Sounds</h2>
+          <h3>Sounds</h3>
           <p>Train your ear for Thai tones and vowel length.</p>
         </span>
         <span class="arr" aria-hidden="true">→</span>
@@ -208,7 +230,7 @@
       <a class="tool" href="/words/">
         <span class="icon" aria-hidden="true">🍜</span>
         <span>
-          <h2>Words</h2>
+          <h3>Words</h3>
           <p>Everyday words: see &amp; say, or hear &amp; choose.</p>
         </span>
         <span class="arr" aria-hidden="true">→</span>
@@ -216,7 +238,7 @@
       <a class="tool" href="/learn/">
         <span class="icon thai" aria-hidden="true">๖๔</span>
         <span>
-          <h2>Numbers</h2>
+          <h3>Numbers</h3>
           <p>Prices, times, counting: see &amp; say, hear &amp; type.</p>
         </span>
         <span class="arr" aria-hidden="true">→</span>
@@ -224,15 +246,32 @@
       <a class="tool" href="/phrases/">
         <span class="icon" aria-hidden="true">💬</span>
         <span>
-          <h2>Phrases</h2>
+          <h3>Phrases</h3>
           <p>Survival phrases for food, taxis and shopping.</p>
         </span>
         <span class="arr" aria-hidden="true">→</span>
       </a>
+    </div>
+  </section>
+
+  <!-- ===== READ ===== -->
+  <section class="track track-read" aria-labelledby="read-h">
+    <div class="track-head">
+      <h2 id="read-h" class="track-title">Read Thai</h2>
+      <p class="track-sub">Menus, signs, and the alphabet behind them.</p>
+    </div>
+
+    <div class="course">
+      <a class="cta cta-blue" href="/alphabet/"><span><span class="thai-inline">ก to ฮ</span>: the Thai alphabet</span> <span class="arr" aria-hidden="true">→</span></a>
+      <p class="course-sub">12 short stages · letters, words, then spelling</p>
+    </div>
+
+    <p class="eyebrow">Or practise one skill</p>
+    <div class="tools">
       <a class="tool" href="/read/">
         <span class="icon thai" aria-hidden="true">ก</span>
         <span>
-          <h2>Read</h2>
+          <h3>Read</h3>
           <p>The Thai alphabet, vowels, and the signs you see every day.</p>
         </span>
         <span class="arr" aria-hidden="true">→</span>
@@ -291,6 +330,7 @@
       <a href="/learn/">Numbers</a>
       <a href="/phrases/">Phrases</a>
       <a href="/read/">Read</a>
+      <a href="/alphabet/">Alphabet</a>
       <a href="/thai-numbers">Guides</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
