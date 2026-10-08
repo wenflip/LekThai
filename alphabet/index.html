@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<title>LekThai — ก to ฮ: Learn the Thai Alphabet</title>
+<!-- /alphabet v1.0 (2026-10-08): built from lekthai_alphabet_spec v1 + the /read letter data. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@144,400..700,30&family=DM+Sans:wght@400;500;600;700&family=Sarabun:wght@400;500;600&family=Kanit:wght@400;500&display=swap" rel="stylesheet">
+
+<meta name="description" content="ก to ฮ: learn the Thai alphabet from zero in 12 short stages. Letters, then words built only from letters you know, then spelling. Free, no accounts.">
+<meta name="theme-color" content="#0f1117">
+<meta name="color-scheme" content="dark light">
+<link rel="canonical" href="https://lekthai.app/alphabet">
+<!-- App shell, same as the other tool pages: noindex. -->
+<meta name="robots" content="noindex">
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LekThai">
+<meta property="og:title" content="LekThai — ก to ฮ: Learn the Thai Alphabet">
+<meta property="og:description" content="Learn the Thai alphabet from zero, one stage at a time. Free, no accounts.">
+<meta property="og:url" content="https://lekthai.app/alphabet">
+<meta property="og:image" content="https://lekthai.app/og-home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="LekThai — learn Thai step by step.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LekThai — ก to ฮ: Learn the Thai Alphabet">
+<meta name="twitter:description" content="Learn the Thai alphabet from zero, one stage at a time. Free, no accounts.">
+<meta name="twitter:image" content="https://lekthai.app/og-home.png">
+
+<style>
+  /* ============ THEME TOKENS (identical to the tool pages) ============ */
+  :root, [data-theme="dark"]{
+    color-scheme:dark;
+    --bg-0:#0f1117; --bg-1:#171a24;
+    --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
+    --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
+    --ok:#5dba8c; --bad:#e27d89;
+    --card-bg:rgba(255,255,255,.055); --card-bg2:rgba(255,255,255,.016);
+    --card-border:rgba(255,255,255,.10);
+    --card-shadow:0 28px 64px -28px rgba(0,0,0,.75), 0 8px 26px -14px rgba(0,0,0,.55);
+    --seg-bg:rgba(255,255,255,.05);
+    --soft:rgba(255,255,255,.06);
+    --pop-bg:#1b1f2a;
+    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
+    --ring:rgba(213,114,127,.65);
+    --num-solid:#f5f2eb;
+    --num-mask:linear-gradient(176deg, #000 0%, rgba(0,0,0,.84) 118%);
+    --on-accent:#fff;
+    --thai:"Sarabun","Noto Sans Thai",sans-serif;
+  }
+  [data-theme="light"]{
+    color-scheme:light;
+    --bg-0:#e6e9f1; --bg-1:#f5f7fb;
+    --ink:#1b2233; --ink-2:#3c4458; --muted:#6c7387;
+    --accent:#b5495a; --accent-2:#95384a; --blue:#43589a;
+    --ok:#2c8c5e; --bad:#bd4259;
+    --card-bg:rgba(255,255,255,.74); --card-bg2:rgba(255,255,255,.48);
+    --card-border:rgba(20,30,60,.10);
+    --card-shadow:0 28px 56px -30px rgba(30,40,80,.42), 0 6px 18px -10px rgba(30,40,80,.18);
+    --seg-bg:rgba(20,30,60,.055);
+    --soft:rgba(20,30,60,.045);
+    --pop-bg:#ffffff;
+    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --glow-red:rgba(181,73,90,.10); --glow-blue:rgba(67,89,154,.12);
+    --ring:rgba(181,73,90,.5);
+    --num-solid:#1f273b;
+    --num-mask:linear-gradient(176deg, #000 0%, rgba(0,0,0,.79) 128%);
+    --on-accent:#fff;
+  }
+  /* Letter style: classic (looped, what learners are taught) vs sign style (loopless, like many signs and menus) */
+  html.sign-style{ --thai:"Kanit","Noto Sans Thai",sans-serif; }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0; overflow:hidden;
+    background:var(--bg-0); color:var(--ink);
+    font-family:"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    -webkit-tap-highlight-color:transparent;
+    display:flex; justify-content:center; align-items:stretch;
+  }
+  .ambient{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(58% 48% at 16% 6%, var(--glow-red), transparent 72%),
+      radial-gradient(54% 50% at 90% 98%, var(--glow-blue), transparent 72%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  }
+
+  /* ============ APP SHELL ============ */
+  .app{
+    position:relative; width:100%; max-width:440px;
+    height:100vh; height:100svh;
+    display:flex; flex-direction:column; gap:11px;
+    padding:14px 16px calc(14px + env(safe-area-inset-bottom));
+  }
+  @media (min-width:480px){
+    body{ align-items:center; padding:24px; }
+    .app{
+      height:min(100svh, 900px);
+      border-radius:36px; padding:20px 20px;
+      border:1px solid var(--card-border);
+      background:linear-gradient(180deg, rgba(255,255,255,.025), transparent 40%);
+      box-shadow:0 48px 110px -44px rgba(0,0,0,.7);
+      overflow:hidden;
+    }
+  }
+
+  /* ============ HEADER ============ */
+  .bar{ flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .pill-wrap{ position:relative; min-width:0; }
+  .pill{
+    display:inline-flex; align-items:center; gap:7px; height:38px; padding:0 13px; max-width:150px;
+    border-radius:999px; background:var(--soft); border:1px solid var(--card-border);
+    color:var(--ink); font:600 13px/1 "DM Sans"; cursor:pointer; user-select:none;
+  }
+  .pill:hover{ border-color:var(--accent); }
+  .pill-label{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .chev{ color:var(--muted); font-size:10px; transition:transform .22s ease; flex:0 0 auto; }
+  .pill[aria-expanded="true"] .chev{ transform:rotate(180deg); }
+  .title{
+    flex:1 1 auto; min-width:0; margin:0; padding:0 2px;
+    font:700 19px/1 "DM Sans"; letter-spacing:.01em; color:var(--ink); white-space:nowrap; text-align:center;
+  }
+  .home-link{ display:inline-flex; align-items:center; gap:4px; height:38px; vertical-align:middle; color:inherit; text-decoration:none; }
+  .home-ico{ flex:0 0 auto; color:var(--muted); display:none; }
+  .bar.home-roomy .home-ico{ display:block; }
+  .beta-tag{
+    display:inline-block; vertical-align:middle; margin-left:5px; padding:3px 6px 2px; border-radius:999px;
+    font:700 9px/1 "DM Sans"; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    background:none; cursor:pointer;
+  }
+  .bar-right{ display:flex; align-items:center; gap:8px; }
+  .streak{
+    display:inline-flex; align-items:center; gap:5px; height:34px; padding:0 12px;
+    border-radius:999px; background:var(--soft); border:1px solid var(--card-border);
+    font:700 14px/1 "DM Sans"; color:var(--ink); user-select:none;
+  }
+  .streak.live{ border-color:color-mix(in srgb, var(--accent) 55%, transparent); }
+  .streak-ico{ font-size:13px; filter:saturate(.85); }
+  .streak.live .streak-ico{ filter:drop-shadow(0 0 7px var(--accent)); }
+  .streak.hot{ animation:streakPop .5s ease; }
+  .icon-btn{
+    width:38px; height:38px; border-radius:999px; cursor:pointer;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    font-size:16px; display:grid; place-items:center;
+  }
+  .icon-btn:hover{ border-color:var(--accent); }
+
+  /* ============ SET POPOVER ============ */
+  .scrim{ position:fixed; inset:0; z-index:40; background:rgba(8,10,16,.28); }
+  .pop{
+    position:absolute; z-index:50; top:calc(100% + 10px); left:0;
+    width:min(86vw,340px); max-height:min(74svh,600px); overflow:auto; padding:15px;
+    border-radius:20px; background:var(--pop-bg); border:1px solid var(--card-border);
+    box-shadow:var(--card-shadow); transform-origin:top left;
+    opacity:0; transform:translateY(-6px) scale(.97); transition:opacity .16s ease, transform .16s ease;
+  }
+  .pop.show{ opacity:1; transform:none; }
+  .pop-title{ font:600 11px/1 "DM Sans"; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin:3px 2px 11px; }
+  .pop-title + .chips{ margin-bottom:16px; }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    padding:9px 13px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--card-border); background:var(--soft); color:var(--ink-2);
+    font:600 13px/1.1 "DM Sans"; text-align:left;
+  }
+  .chip small{ font-weight:500; color:var(--muted); margin-left:4px; }
+  .chip:hover{ color:var(--ink); }
+  .chip.active{ background:var(--ind-grad); color:#fff; border-color:transparent; }
+  .chip.active small{ color:rgba(255,255,255,.85); }
+  .chip .tc{ font-family:var(--thai); font-weight:500; }
+
+  /* ============ SEGMENTED TABS ============ */
+  .seg{ flex:0 0 auto; position:relative; display:flex; padding:5px; background:var(--seg-bg); border:1px solid var(--card-border); border-radius:15px; }
+  .tab{
+    flex:1; position:relative; z-index:2; border:none; background:transparent; cursor:pointer;
+    color:var(--muted); font:600 14px/1 "DM Sans"; padding:12px 6px; border-radius:11px; white-space:nowrap;
+  }
+  .tab:hover{ color:var(--ink); }
+  .tab.active{ color:#fff; }
+  .seg-ind{
+    position:absolute; z-index:1; top:5px; bottom:5px; left:5px; width:calc(50% - 5px);
+    border-radius:11px; background:var(--ind-grad);
+    box-shadow:0 8px 18px -10px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+    transition:transform .3s cubic-bezier(.3,.85,.25,1);
+  }
+  .seg:has(#tabSay.active) .seg-ind{ transform:translateX(100%); }
+
+  /* ============ MAIN CARD ============ */
+  .card{
+    flex:1 1 auto; min-height:0; position:relative; overflow:hidden;
+    border-radius:26px; padding:6px;
+    background:linear-gradient(180deg, var(--card-bg), var(--card-bg2));
+    border:1px solid var(--card-border); box-shadow:var(--card-shadow);
+  }
+  .card.pulse{ animation:okPulse .72s ease; }
+  .panel{ height:100%; }
+  .panel[hidden]{ display:none; }
+  .panel-inner{ height:100%; display:flex; flex-direction:column; padding:18px 16px 14px; }
+  .stage{
+    flex:1 1 auto; min-height:0; display:flex; flex-direction:column; align-items:center;
+    text-align:center; gap:10px; overflow-y:auto; overflow-x:hidden; scrollbar-width:none;
+  }
+  .stage::-webkit-scrollbar{ display:none; }
+  .stage > *{ flex-shrink:0; }
+  .stage.center{ justify-content:center; }
+
+  .eyebrow{ font:600 11px/1.2 "DM Sans"; letter-spacing:.17em; text-transform:uppercase; color:var(--muted); }
+  .mbadge{
+    display:inline-flex; margin-left:7px; padding:2px 8px; border-radius:999px; vertical-align:middle;
+    font:700 10px/1 "DM Sans"; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ok); background:color-mix(in srgb, var(--ok) 16%, transparent);
+    border:1px solid color-mix(in srgb, var(--ok) 34%, transparent);
+  }
+  .mbadge[hidden]{ display:none; }
+
+  /* the Thai prompt (See & Say): the star of the page */
+  .bigthai{
+    font-family:var(--thai); font-weight:500; color:var(--num-solid);
+    font-size:clamp(84px, 30vw, 132px); line-height:1.15; margin:4px 0 0; max-width:100%; overflow-wrap:anywhere;
+  }
+  .bigthai.mid{ font-size:clamp(48px, 15vw, 70px); }
+  .bigthai.long{ font-size:clamp(34px, 10vw, 46px); }
+  .bigthai.xlong{ font-size:clamp(26px, 7.6vw, 34px); line-height:1.3; }
+  .bigthai.in{ animation:numIn .44s cubic-bezier(.2,.72,.2,1); }
+
+  .reveal{ display:flex; flex-direction:column; gap:3px; align-items:center; justify-content:center; }
+  .reveal.show{ animation:fadeUp .36s ease; }
+  .thai{ font-family:var(--thai); font-weight:500; font-size:clamp(24px, 7vw, 30px); line-height:1.3; color:var(--blue); }
+  .rom{ font:500 clamp(16px,4.8vw,20px)/1.3 "DM Sans"; color:var(--ink-2); }
+  .meaning{ font:600 15px/1.35 "DM Sans"; color:var(--ink); }
+  .note{ font:500 12.5px/1.4 "DM Sans"; color:var(--muted); max-width:310px; margin-top:4px; padding:6px 10px; border-radius:10px; background:var(--soft); }
+  .thai:empty, .rom:empty, .meaning:empty, .note:empty{ display:none; }
+  .hint{ font:500 13.5px/1.35 "DM Sans"; color:var(--muted); min-height:18px; }
+  .verdict{ font:700 17px/1.3 "DM Sans"; min-height:22px; }
+  .verdict.ok{ color:var(--ok); } .verdict.bad{ color:var(--bad); } .verdict.idk{ color:var(--blue); }
+  .verdict.ok, .verdict.bad, .verdict.idk{ animation:pop .32s ease; }
+  .empty{ font:500 14px/1.5 "DM Sans"; color:var(--ink-2); max-width:290px; margin-top:30px; }
+
+  /* ============ BUTTONS ============ */
+  .actions{ flex:0 0 auto; display:flex; flex-direction:column; gap:10px; padding-top:12px; }
+  .btn{
+    width:100%; -webkit-appearance:none; appearance:none; border:none; cursor:pointer;
+    font-family:"DM Sans"; font-weight:600; border-radius:16px;
+    display:inline-flex; align-items:center; justify-content:center; gap:8px; user-select:none;
+  }
+  .btn:active{ transform:translateY(1px) scale(.992); }
+  .btn[hidden]{ display:none; }
+  .btn.primary{
+    height:54px; font-size:17px; color:var(--on-accent);
+    background:linear-gradient(180deg, var(--accent), var(--accent-2));
+    box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
+  }
+  .btn.ghost{ height:50px; font-size:16px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
+  .btn.ghost:hover{ border-color:var(--accent); }
+  .btn.play{ height:54px; font-size:17px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
+  .btn.play:hover{ border-color:var(--blue); }
+  .btn.text{ height:40px; font-size:14px; color:var(--muted); background:transparent; }
+  .btn.text:hover{ color:var(--ink); }
+  .btn.text.idk{ text-decoration:underline; text-decoration-color:color-mix(in srgb, var(--muted) 45%, transparent); text-underline-offset:4px; }
+  .rate-row{ display:flex; gap:10px; }
+  .rate-row[hidden]{ display:none; }
+  .btn.rate{ height:50px; font-size:15px; border:1px solid var(--card-border); background:var(--soft); }
+  .btn.rate.got{ color:var(--ok); } .btn.rate.miss{ color:var(--bad); }
+  .btn.rate.chosen.got{ background:color-mix(in srgb, var(--ok) 18%, transparent); border-color:var(--ok); }
+  .btn.rate.chosen.miss{ background:color-mix(in srgb, var(--bad) 18%, transparent); border-color:var(--bad); }
+
+  /* ============ THAI ANSWER TILES ============ */
+  .tiles{ display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; }
+  .tile{
+    -webkit-appearance:none; appearance:none; cursor:pointer; min-height:84px; padding:8px;
+    border-radius:16px; border:1.5px solid var(--card-border); background:var(--soft); color:var(--ink);
+    font-family:var(--thai); font-weight:500; font-size:44px; line-height:1.15; position:relative;
+    display:flex; align-items:center; justify-content:center; overflow-wrap:anywhere;
+  }
+  .tile.mid{ font-size:28px; } .tile.long{ font-size:20px; } .tile.xlong{ font-size:16px; line-height:1.3; }
+  .tile:hover{ border-color:var(--accent); }
+  .tile .k{ position:absolute; top:6px; left:9px; font:600 10px/1 "DM Sans"; color:var(--muted); opacity:.7; }
+  .tile.right{ border-color:var(--ok); background:color-mix(in srgb, var(--ok) 16%, transparent); }
+  .tile.wrong{ border-color:var(--bad); background:color-mix(in srgb, var(--bad) 16%, transparent); }
+  .tile.done:not(.right):not(.wrong){ opacity:.6; }
+  .tile.playing{ box-shadow:0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+
+  .mastery-cap{ flex:0 0 auto; text-align:center; margin-top:8px; font:600 11px/1.3 "DM Sans"; letter-spacing:.03em; color:var(--muted); }
+  .mastery-cap .m-ico{ color:var(--accent); margin-right:4px; }
+
+  /* ============ TOAST ============ */
+  .warn{
+    position:fixed; left:50%; bottom:calc(16px + env(safe-area-inset-bottom));
+    transform:translateX(-50%); width:min(92%,420px); z-index:60;
+    background:var(--pop-bg); border:1px solid var(--card-border); color:var(--ink-2);
+    font:500 12.5px/1.45 "DM Sans"; padding:12px 38px 12px 14px; border-radius:14px; box-shadow:var(--card-shadow);
+  }
+  .warn[hidden]{ display:none; }
+  .warn b{ color:var(--ink); }
+  .warn-x{ position:absolute; top:6px; right:6px; width:28px; height:28px; border:0; background:none; color:var(--muted); font-size:14px; cursor:pointer; }
+
+  /* ============ FOOTER (below the fold) ============ */
+  .app-foot{ position:absolute; left:16px; right:16px; top:100%; padding:18px 0 30px; text-align:center; border-top:1px solid var(--card-border); }
+  .app-foot nav{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px 14px; }
+  .app-foot nav a{ color:var(--muted); text-decoration:none; font:500 13px/1 "DM Sans"; }
+  .app-foot nav a:hover{ color:var(--ink); }
+
+  /* ============ SETTINGS SHEET ============ */
+  .sheet-wrap{ position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center; padding:18px; }
+  .sheet-wrap[hidden]{ display:none; }
+  .sheet-scrim{ position:absolute; inset:0; background:rgba(8,10,16,.5); backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px); }
+  .sheet{
+    position:relative; width:100%; max-width:380px; max-height:84svh; overflow:auto;
+    background:var(--pop-bg); border:1px solid var(--card-border); border-radius:24px;
+    box-shadow:var(--card-shadow); padding:20px; animation:sheetIn .24s cubic-bezier(.2,.8,.2,1);
+  }
+  .sheet-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .sheet-title{ font:700 18px/1 "DM Sans"; }
+  .sheet-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 0; border-bottom:1px solid var(--card-border); }
+  .row-label{ font:600 14px/1.2 "DM Sans"; }
+  .row-label small{ display:block; font:500 12px/1.3 "DM Sans"; color:var(--muted); margin-top:3px; }
+  .row-val{ font:600 13px/1.3 "DM Sans"; color:var(--muted); text-align:right; }
+  .sheet-block{ padding:15px 0 4px; }
+  .mini-btn{
+    -webkit-appearance:none; appearance:none; cursor:pointer; border-radius:11px; flex:0 0 auto;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    font:600 14px/1 "DM Sans"; padding:10px 14px; min-height:40px; min-width:58px;
+  }
+  .mini-btn.on{ background:var(--ind-grad); color:#fff; border-color:transparent; }
+  .mini-btn.thaiw{ font-family:var(--thai); font-size:16px; }
+  .mini-btn.danger{ color:var(--bad); }
+  .mini-btn.danger.solid{ background:var(--bad); color:#fff; border-color:transparent; }
+  .reset-confirm{ margin-top:12px; display:flex; flex-direction:column; gap:10px; }
+  .reset-confirm[hidden]{ display:none; }
+  .rc-q{ font:500 13px/1.4 "DM Sans"; color:var(--ink-2); }
+  .rc-btns{ display:flex; gap:10px; } .rc-btns .mini-btn{ flex:1; }
+  .about{ margin-top:18px; padding-top:16px; border-top:1px solid var(--card-border); }
+  .about-title{ font:700 13px/1 "DM Sans"; letter-spacing:.04em; color:var(--accent); margin-bottom:9px; }
+  .about p{ margin:0 0 10px; font:400 13px/1.55 "DM Sans"; color:var(--ink-2); }
+  .about p:last-child{ margin-bottom:0; }
+
+  @media (max-height:700px){
+    .app{ gap:9px; padding-top:10px; }
+    .seg .tab{ padding:10px 6px; }
+    .panel-inner{ padding:12px 12px 10px; }
+    .stage{ gap:8px; }
+    .btn.play{ height:46px; font-size:16px; }
+    .btn.primary{ height:50px; }
+    .tile{ min-height:66px; font-size:36px; }
+    .bigthai{ font-size:84px; }
+  }
+  :focus-visible{ outline:2px solid var(--ring); outline-offset:2px; }
+  @media (prefers-reduced-motion:reduce){ *{ animation-duration:.001ms !important; transition-duration:.001ms !important; } }
+  @keyframes numIn{ from{opacity:0; transform:translateY(16px) scale(.94);} to{opacity:1; transform:none;} }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(7px);} to{opacity:1; transform:none;} }
+  @keyframes pop{ 0%{opacity:0; transform:scale(.78);} 62%{transform:scale(1.07);} 100%{opacity:1; transform:scale(1);} }
+  @keyframes okPulse{
+    0%{ box-shadow:var(--card-shadow), 0 0 0 0 rgba(93,186,140,0); }
+    30%{ box-shadow:var(--card-shadow), 0 0 0 5px color-mix(in srgb, var(--ok) 28%, transparent), 0 0 44px color-mix(in srgb, var(--ok) 30%, transparent); }
+    100%{ box-shadow:var(--card-shadow), 0 0 0 0 rgba(93,186,140,0); }
+  }
+  @keyframes streakPop{ 0%{transform:scale(1);} 38%{transform:scale(1.2);} 100%{transform:scale(1);} }
+  @keyframes sheetIn{ from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;} }
+
+  /* ============ ก to ฮ: COURSE VIEWS ============ */
+  .view{ height:100%; display:flex; flex-direction:column; padding:16px 14px 12px; }
+  .scroll{ flex:1 1 auto; min-height:0; overflow-y:auto; overflow-x:hidden; scrollbar-width:none; display:flex; flex-direction:column; gap:12px; }
+  .scroll::-webkit-scrollbar{ display:none; }
+  .scroll > *{ flex-shrink:0; }
+  .tc{ font-family:var(--thai); font-weight:500; }
+  .pill.home{ cursor:default; }
+  .pill.home:hover{ border-color:var(--card-border); }
+  .pill .tc{ font-size:15px; }
+
+  /* map */
+  .hero{ text-align:center; padding:4px 4px 2px; }
+  .h-thai{ font-family:var(--thai); font-weight:600; font-size:46px; line-height:1.2; color:var(--num-solid); }
+  .h-sub{ font:500 13.5px/1.4 "DM Sans"; color:var(--muted); }
+  .pbar{ height:8px; border-radius:99px; background:var(--soft); overflow:hidden; margin:14px 0 7px; border:1px solid var(--card-border); }
+  .pbar i{ display:block; height:100%; background:var(--ind-grad); border-radius:inherit; transition:width .4s ease; }
+  .pcap{ font:600 12px/1.3 "DM Sans"; color:var(--muted); }
+  .slist{ display:flex; flex-direction:column; gap:8px; }
+  .scard{
+    -webkit-appearance:none; appearance:none; display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+    padding:10px 12px; border-radius:16px; border:1px solid var(--card-border); background:var(--soft); color:var(--ink);
+    cursor:pointer; font-family:"DM Sans";
+  }
+  .scard:hover{ border-color:var(--accent); }
+  .scard.future{ opacity:.62; }
+  .scard.cur{ border-color:var(--accent); box-shadow:0 0 0 2px color-mix(in srgb, var(--accent) 28%, transparent); opacity:1; }
+  .sn{ flex:0 0 34px; height:34px; border-radius:50%; display:grid; place-items:center; font:700 14px/1 "DM Sans"; border:1px solid var(--card-border); color:var(--ink-2); }
+  .scard.cur .sn{ background:var(--ind-grad); color:#fff; border-color:transparent; }
+  .scard.done .sn{ background:color-mix(in srgb, var(--ok) 20%, transparent); color:var(--ok); border-color:color-mix(in srgb, var(--ok) 45%, transparent); }
+  .sbody{ flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:3px; }
+  .sbody b{ font:600 14.5px/1.2 "DM Sans"; }
+  .ssym{ font-family:var(--thai); font-size:15px; line-height:1.3; color:var(--ink-2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .dots{ flex:0 0 auto; display:flex; gap:4px; }
+  .dot{ width:9px; height:9px; border-radius:50%; border:1.5px solid var(--muted); opacity:.7; }
+  .dot.on{ background:var(--ok); border-color:var(--ok); opacity:1; }
+
+  /* stage */
+  .st-top{ text-align:center; }
+  .st-name{ font:700 22px/1.2 "DM Sans"; margin:4px 0 0; }
+  .st-sym{ font-family:var(--thai); font-weight:500; font-size:28px; line-height:1.35; color:var(--blue); text-align:center; word-spacing:.18em; }
+  .introbox{ background:var(--soft); border:1px solid var(--card-border); border-radius:14px; padding:12px 14px; font:500 14px/1.55 "DM Sans"; color:var(--ink-2); }
+  .introbox p{ margin:0 0 6px; } .introbox p:last-child{ margin:0; }
+  .introbox .tc{ color:var(--ink); font-size:1.12em; }
+  .introbox b{ color:var(--ink); }
+  .parts{ display:flex; flex-direction:column; gap:8px; }
+  .part{ display:flex; align-items:center; gap:11px; padding:11px 12px; border-radius:14px; border:1px solid var(--card-border); background:var(--soft); }
+  .part .pt{ flex:1 1 auto; min-width:0; }
+  .part b{ display:block; font:600 15px/1.2 "DM Sans"; }
+  .part small{ display:block; margin-top:3px; font:500 12.5px/1.3 "DM Sans"; color:var(--muted); }
+  .part.done{ border-color:color-mix(in srgb, var(--ok) 45%, transparent); }
+  .part.done small{ color:var(--ok); }
+  .part.nyet small{ color:var(--accent); }
+  .pk{ flex:0 0 26px; height:26px; border-radius:50%; display:grid; place-items:center; border:1.5px solid var(--muted); font:700 13px/1 "DM Sans"; color:var(--muted); }
+  .part.done .pk{ background:var(--ok); border-color:var(--ok); color:#fff; }
+  .row2{ display:flex; gap:10px; } .row2 .btn{ flex:1; }
+  .navrow{ display:flex; justify-content:space-between; }
+  .navrow .btn.text{ width:auto; padding:0 6px; }
+
+  /* run */
+  .runhead{ flex:0 0 auto; display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .runhead .rt{ flex:1 1 auto; min-width:0; font:600 11px/1.3 "DM Sans"; letter-spacing:.11em; text-transform:uppercase; color:var(--muted); text-align:center; }
+  .runhead .icon-btn{ width:34px; height:34px; font-size:14px; flex:0 0 auto; }
+  .rh-sp{ width:64px; flex:0 0 auto; }
+  .chk{ flex:0 0 auto; min-width:64px; padding:9px 11px; min-height:34px; font-size:13px; }
+  .chk.ready{ background:var(--ind-grad); color:#fff; border-color:transparent; animation:pop .4s ease; }
+  .qbar{ flex:0 0 auto; height:4px; border-radius:99px; background:var(--soft); overflow:hidden; margin:-2px 0 10px; }
+  .qbar i{ display:block; height:100%; background:var(--ind-grad); transition:width .3s ease; }
+  .qbody{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px; overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+  .qbody::-webkit-scrollbar{ display:none; }
+  .qbody > *{ flex-shrink:0; }
+  .qbody.center{ justify-content:center; }
+  .qbody .btn.primary, .qbody .btn.ghost{ margin-top:2px; }
+  .readybtn{ border-color:var(--accent) !important; color:var(--accent) !important; }
+  .tiles.three{ grid-template-columns:1fr 1fr 1fr; }
+  .tiles.two .tile{ min-height:96px; }
+
+  /* intro card */
+  .newtag{ display:inline-block; padding:4px 10px; border-radius:999px; font:700 10px/1 "DM Sans"; letter-spacing:.12em; text-transform:uppercase; color:#fff; background:var(--ind-grad); }
+
+  /* spell */
+  .prompt{ display:flex; align-items:center; gap:10px; justify-content:center; width:100%; }
+  .prompt .btn.play{ width:auto; padding:0 18px; height:46px; font-size:15px; }
+  .prompt .meaning{ font-size:17px; }
+  .slot{ font-family:var(--thai); font-weight:500; font-size:clamp(46px,14vw,62px); line-height:1.25; min-height:78px; color:var(--num-solid); display:flex; align-items:center; justify-content:center; max-width:100%; overflow-wrap:anywhere; }
+  .slot .ph{ color:var(--muted); opacity:.45; font-family:"DM Sans"; font-size:28px; }
+  .slot.right{ color:var(--ok); } .slot.wrong{ color:var(--bad); }
+  .boxes{ display:flex; gap:5px; justify-content:center; margin-top:-4px; }
+  .box{ width:16px; height:5px; border-radius:3px; background:var(--soft); border:1px solid var(--card-border); }
+  .box.on{ background:var(--blue); border-color:var(--blue); }
+  .keys{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; width:100%; }
+  .key{
+    -webkit-appearance:none; appearance:none; min-height:60px; padding:4px; cursor:pointer;
+    font-family:var(--thai); font-weight:500; font-size:30px; line-height:1.1;
+    border-radius:14px; border:1.5px solid var(--card-border); background:var(--soft); color:var(--ink);
+  }
+  .key:hover{ border-color:var(--accent); }
+  .key:disabled{ opacity:.22; cursor:default; }
+  .key.flash{ border-color:var(--blue); box-shadow:0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+  .srow{ display:flex; gap:8px; width:100%; }
+  .srow .btn{ flex:1; height:46px; font-size:15px; }
+  .rightsp{ font:500 14px/1.4 "DM Sans"; color:var(--ink-2); }
+  .rightsp .tc{ font-size:24px; color:var(--ok); }
+  .ex{ display:flex; flex-direction:column; gap:6px; width:100%; max-width:320px; text-align:left; }
+  .ex div{ display:flex; justify-content:space-between; align-items:center; padding:8px 12px; border-radius:12px; background:var(--soft); border:1px solid var(--card-border); font:500 13px/1.3 "DM Sans"; color:var(--ink-2); }
+  .ex .tc{ font-size:22px; color:var(--ink); }
+  .ex .ord{ font-family:var(--thai); font-size:18px; color:var(--blue); }
+
+  /* result */
+  .res-ico{ font-size:46px; line-height:1; margin-top:6px; }
+  .res-big{ font:700 30px/1.2 "DM Sans"; }
+  .res-big.ok{ color:var(--ok); } .res-big.ny{ color:var(--accent); }
+  .res-sub{ font:500 14px/1.45 "DM Sans"; color:var(--ink-2); max-width:320px; }
+  .misses{ width:100%; max-width:320px; display:flex; flex-direction:column; gap:6px; }
+  .misses .mh{ font:600 11px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); text-align:left; margin:4px 2px 2px; }
+  .mrow{ display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border-radius:12px; background:var(--soft); border:1px solid var(--card-border); }
+  .mrow .tc{ font-size:22px; }
+  .mrow .arw{ color:var(--muted); margin:0 8px; font-family:"DM Sans"; }
+  .mrow small{ font:600 12px/1 "DM Sans"; color:var(--muted); }
+  .calm{ font:500 13px/1.5 "DM Sans"; color:var(--ink-2); background:color-mix(in srgb, var(--blue) 12%, transparent); border:1px solid color-mix(in srgb, var(--blue) 30%, transparent); border-radius:12px; padding:10px 12px; max-width:320px; }
+
+  /* finished + reference */
+  .fin-thai{ font-family:var(--thai); font-weight:600; font-size:40px; color:var(--num-solid); }
+  .fin-stats{ font:600 14px/1.5 "DM Sans"; color:var(--ink-2); }
+  .refgrid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; width:100%; }
+  .refgrid button{ -webkit-appearance:none; appearance:none; cursor:pointer; padding:10px 8px; border-radius:14px; border:1px solid var(--card-border); background:var(--soft); color:var(--ink); display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .refgrid .tc{ font-size:34px; line-height:1.2; }
+  .refgrid small{ font:500 11.5px/1.3 "DM Sans"; color:var(--muted); }
+  .refh{ font:600 11px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); align-self:flex-start; margin-top:6px; }
+  @media (max-height:700px){
+    .key{ min-height:50px; font-size:26px; }
+    .slot{ min-height:64px; font-size:48px; }
+  }
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+
+<main class="app">
+  <header class="bar">
+    <div class="pill-wrap">
+      <button class="pill" id="backPill" aria-label="All stages"><span class="pill-label" id="backLabel">ก to ฮ</span></button>
+    </div>
+    <h1 class="title"><a class="home-link" href="/" aria-label="LekThai home"><svg class="home-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>LekThai</a><button class="beta-tag" id="betaTag" title="About the beta">beta</button></h1>
+    <div class="bar-right">
+      <button class="icon-btn" id="gearBtn" aria-label="Settings" aria-haspopup="dialog">⚙</button>
+    </div>
+  </header>
+
+  <section class="card" id="card">
+    <div class="view" id="view"></div>
+  </section>
+
+  <footer class="app-foot">
+    <nav>
+      <a href="/">Home</a><a href="/sounds/">Sounds</a><a href="/words/">Words</a><a href="/learn/">Numbers</a>
+      <a href="/phrases/">Phrases</a><a href="/read/">Read</a><a href="/alphabet/">ก to ฮ</a><a href="/thai-numbers">Guides</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a>
+    </nav>
+  </footer>
+</main>
+
+<div class="warn" id="warn" hidden role="status"><span id="warnText"></span><button class="warn-x" id="warnX" aria-label="Dismiss">✕</button></div>
+
+<div class="sheet-wrap" id="settings" hidden>
+  <div class="sheet-scrim" id="settingsScrim"></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">
+    <div class="sheet-head"><span class="sheet-title">Settings</span><button class="icon-btn" id="settingsClose" aria-label="Close settings">✕</button></div>
+    <div class="sheet-row"><span class="row-label">Appearance</span><button class="mini-btn" id="themeBtn">◑</button></div>
+    <div class="sheet-row"><span class="row-label">Letter style<small>Classic: looped letters, as taught. Sign style: modern loopless letters, as on many signs and menus.</small></span><button class="mini-btn thaiw" id="styleBtn"></button></div>
+    <div class="sheet-row"><span class="row-label">English-letter spelling<small>shown only after you answer</small></span><button class="mini-btn" id="romBtn"></button></div>
+    <div class="sheet-row"><span class="row-label">Slow voice<small>speak the Thai more slowly</small></span><button class="mini-btn" id="slowBtn"></button></div>
+    <div class="sheet-row"><span class="row-label">Voice</span><span class="row-val" id="voiceVal">—</span></div>
+    <div class="sheet-row"><span class="row-label">Progress</span><span class="row-val" id="progressVal">—</span></div>
+    <div class="sheet-block">
+      <button class="mini-btn danger" id="resetBtn">Reset course progress</button>
+      <div class="reset-confirm" id="resetConfirm" hidden>
+        <span class="rc-q">Erase all ก to ฮ course progress on this device? (Your Read Thai, words, phrases and numbers progress is kept.)</span>
+        <div class="rc-btns"><button class="mini-btn" id="resetCancel">Cancel</button><button class="mini-btn danger solid" id="resetYes">Reset</button></div>
+      </div>
+    </div>
+    <div class="about">
+      <div class="about-title">Beta</div>
+      <p>The audio is your phone’s built-in voice. If the voice and the letters disagree, trust the letters here and tell us.</p>
+    </div>
+    <div class="about">
+      <div class="about-title">How the course works</div>
+      <p><b>12 stages, in order.</b> Each stage teaches a few new letters, then words made only from letters you already know.</p>
+      <p><b>Three parts per stage:</b> ① Letters, ② Words, ③ Spell. Each part is practice first (not marked), then a short check.</p>
+      <p><b>Pass a check with 90%</b> to get a tick: 18/20 for letters, 9/10 for words and spelling. Three ticks and you’re ready for the next stage.</p>
+      <p><b>Not yet?</b> Tap “Practise these” to drill only what you missed, then try the check again. Unlimited tries. Every stage stays open, so you can jump around whenever you like.</p>
+      <p><b>Tones are never tested.</b> The voice always says words with the right tone, so copy it.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* =====================================================================
+   DATA
+   Letters, vowels, marks and look-alikes: same data and ids as /read.
+   Course words and stage contents: lekthai_alphabet_spec v1.
+   ===================================================================== */
+/* Consonants: [id, letter, name spelling, voice text, picture word, meaning, starts as, ends as, class, group]
+   group: L1 L2 L3 RARE OBS (obsolete: shown in the list, never drilled) */
+var CONS = [
+ ['c01','ก','kaaw kai','กอ ไก่','ไก่','chicken','k','k','mid','L1'],
+ ['c02','ข','khaaw khai','ขอ ไข่','ไข่','egg','kh','k','high','L3'],
+ ['c03','ฃ','khaaw khuat','ฃอ ขวด','ขวด','bottle','kh','—','high','OBS'],
+ ['c04','ค','khaaw khwaai','คอ ควาย','ควาย','water buffalo','kh','k','low','L2'],
+ ['c05','ฅ','khaaw khon','ฅอ คน','คน','person','kh','—','low','OBS'],
+ ['c06','ฆ','khaaw ra-khang','ฆอ ระฆัง','ระฆัง','bell','kh','k','low','RARE'],
+ ['c07','ง','ngaaw nguu','งอ งู','งู','snake','ng','ng','low','L2'],
+ ['c08','จ','jaaw jaan','จอ จาน','จาน','plate','j','t','mid','L2'],
+ ['c09','ฉ','chaaw ching','ฉอ ฉิ่ง','ฉิ่ง','small cymbals','ch','—','high','L3'],
+ ['c10','ช','chaaw chaang','ชอ ช้าง','ช้าง','elephant','ch','t','low','L2'],
+ ['c11','ซ','saaw soo','ซอ โซ่','โซ่','chain','s','t','low','L3'],
+ ['c12','ฌ','chaaw choe','ฌอ เฌอ','เฌอ','tree','ch','t','low','RARE'],
+ ['c13','ญ','yaaw ying','ญอ หญิง','หญิง','woman','y','n','low','RARE'],
+ ['c14','ฎ','daaw cha-daa','ฎอ ชฎา','ชฎา','dancer’s headdress','d','t','mid','RARE'],
+ ['c15','ฏ','taaw pa-tak','ฏอ ปฏัก','ปฏัก','goad (ox prod)','t','t','mid','RARE'],
+ ['c16','ฐ','thaaw thaan','ฐอ ฐาน','ฐาน','pedestal','th','t','high','RARE'],
+ ['c17','ฑ','thaaw mon-thoo','ฑอ มณโฑ','มณโฑ','Montho (Ramakien character)','th (sometimes d)','t','low','RARE'],
+ ['c18','ฒ','thaaw phuu-thao','ฒอ ผู้เฒ่า','ผู้เฒ่า','old man','th','t','low','RARE'],
+ ['c19','ณ','naaw neen','ณอ เณร','เณร','novice monk','n','n','low','RARE'],
+ ['c20','ด','daaw dek','ดอ เด็ก','เด็ก','child','d','t','mid','L1'],
+ ['c21','ต','taaw tao','ตอ เต่า','เต่า','turtle','t','t','mid','L1'],
+ ['c22','ถ','thaaw thung','ถอ ถุง','ถุง','bag','th','t','high','L3'],
+ ['c23','ท','thaaw tha-haan','ทอ ทหาร','ทหาร','soldier','th','t','low','L2'],
+ ['c24','ธ','thaaw thong','ธอ ธง','ธง','flag','th','t','low','RARE'],
+ ['c25','น','naaw nuu','นอ หนู','หนู','mouse','n','n','low','L1'],
+ ['c26','บ','baaw bai-mai','บอ ใบไม้','ใบไม้','leaf','b','p','mid','L1'],
+ ['c27','ป','paaw plaa','ปอ ปลา','ปลา','fish','p','p','mid','L1'],
+ ['c28','ผ','phaaw pheung','ผอ ผึ้ง','ผึ้ง','bee','ph','—','high','L3'],
+ ['c29','ฝ','faaw faa','ฝอ ฝา','ฝา','lid','f','—','high','L3'],
+ ['c30','พ','phaaw phaan','พอ พาน','พาน','offering tray','ph','p','low','L2'],
+ ['c31','ฟ','faaw fan','ฟอ ฟัน','ฟัน','tooth','f','p','low','L3'],
+ ['c32','ภ','phaaw sam-phao','ภอ สำเภา','สำเภา','junk (sailing ship)','ph','p','low','RARE'],
+ ['c33','ม','maaw maa','มอ ม้า','ม้า','horse','m','m','low','L1'],
+ ['c34','ย','yaaw yak','ยอ ยักษ์','ยักษ์','giant','y','y (vowel glide)','low','L2'],
+ ['c35','ร','raaw reua','รอ เรือ','เรือ','boat','r','n','low','L1'],
+ ['c36','ล','laaw ling','ลอ ลิง','ลิง','monkey','l','n','low','L1'],
+ ['c37','ว','waaw waen','วอ แหวน','แหวน','ring','w','w (vowel glide)','low','L2'],
+ ['c38','ศ','saaw saa-laa','ศอ ศาลา','ศาลา','pavilion','s','t','high','L3'],
+ ['c39','ษ','saaw reu-sii','ษอ ฤๅษี','ฤๅษี','hermit','s','t','high','L3'],
+ ['c40','ส','saaw seua','สอ เสือ','เสือ','tiger','s','t','high','L2'],
+ ['c41','ห','haaw hiip','หอ หีบ','หีบ','chest (box)','h','—','high','L2'],
+ ['c42','ฬ','laaw ju-laa','ฬอ จุฬา','จุฬา','kite','l','n','low','RARE'],
+ ['c43','อ','aaw aang','ออ อ่าง','อ่าง','basin','silent (carries vowels)','—','mid','L1'],
+ ['c44','ฮ','haaw nok-huuk','ฮอ นกฮูก','นกฮูก','owl','h','—','low','L3']
+];
+/* Vowels on อ: [id, form, sound, length, group, note]   group: V1 V2 VS REF (reference: never drilled) */
+var VOWS = [
+ ['v01','อะ','a','short','V1',''], ['v02','อา','aa','long','V1',''],
+ ['v03','อิ','i','short','V1',''], ['v04','อี','ii','long','V1',''],
+ ['v05','อุ','u','short','V1',''], ['v06','อู','uu','long','V1',''],
+ ['v07','เอะ','e','short','V1',''], ['v08','เอ','ee','long','V1','Written before the consonant, said after it.'],
+ ['v09','แอะ','ae','short','V1',''], ['v10','แอ','ae','long','V1','Written before the consonant, said after it.'],
+ ['v11','โอะ','o','short','V1',''], ['v12','โอ','oo','long','V1','Written before the consonant, said after it.'],
+ ['v13','อึ','eu','short','V2',''], ['v14','อือ','eu','long','V2',''],
+ ['v15','เอาะ','aw','short','V2',''], ['v16','ออ','aaw','long','V2','อ is both the holder and the vowel here.'],
+ ['v17','เออะ','oe','short','V2',''], ['v18','เออ','oe','long','V2',''],
+ ['v19','เอียะ','ia','short','V2','Rare in real words.'], ['v20','เอีย','ia','long','V2',''],
+ ['v21','เอือะ','eua','short','REF','Almost no real words use it.'], ['v22','เอือ','eua','long','V2',''],
+ ['v23','อัวะ','ua','short','V2',''], ['v24','อัว','ua','long','V2',''],
+ ['v25','อำ','am','short','VS',''], ['v26','ใอ','ai','short','VS','Same sound as ไอ. Only about 20 words use this one.'],
+ ['v27','ไอ','ai','short','VS','Same sound as ใอ. This is the common one.'], ['v28','เอา','ao','short','VS','']
+];
+/* Marks (See & Say only): [id, shown, name spelling, voice text, what it does] */
+var MARKS = [
+ ['m01','อ่','mai ek','ไม้เอก','Tone mark 1: changes the word’s tone'],
+ ['m02','อ้','mai tho','ไม้โท','Tone mark 2: changes the word’s tone'],
+ ['m03','อ๊','mai tri','ไม้ตรี','Tone mark 3: changes the word’s tone'],
+ ['m04','อ๋','mai jat-ta-waa','ไม้จัตวา','Tone mark 4: changes the word’s tone'],
+ ['m05','อ์','than-tha-khaat','ทัณฑฆาต','Silent letter: the letter under it isn’t said'],
+ ['m06','อ็','mai tai-khuu','ไม้ไต่คู้','Makes the vowel short'],
+ ['m07','ๆ','mai ya-mok','ไม้ยมก','Repeat the word before it: ช้าๆ = chaa-chaa, “slowly”'],
+ ['m08','ฯ','pai-yaan-noi','ไปยาลน้อย','Shortened name: กรุงเทพฯ = Bangkok, short form']
+];
+/* Look-alikes: the best wrong answers */
+var LOOK_C = ['ดตคศ','บปษ','ผฝพฟ','ขชซ','ถภฎฏ','มนหฬ','รธฐ','ลส','อฮ','ทฑฒ','ญฌณ'];
+var LOOK_V = [['อิ','อี','อึ','อือ'],['อุ','อู'],['เอ','แอ'],['โอ','ไอ','ใอ'],['อำ','อา'],['เอา','เอาะ'],['อะ','อา'],['เออ','เอือ','เอีย']];
+var COURSE = {"neu": {"1": ["c01", "c33", "c25", "c21", "c43", "v02", "v04"], "2": ["c20", "c26", "c27", "v06", "v16"], "3": ["c35", "c36", "c34", "c37", "c07"], "4": ["c08", "v03", "v05"], "5": ["v08", "v10", "v12", "v27", "v26", "v28"], "6": ["v01", "v25", "v13", "v14", "v07", "v09", "v11"], "7": ["c02", "c22", "c28", "c29", "c40", "c41", "c09"], "8": ["c04", "c10", "c23", "c30", "c11", "c31", "c44"], "9": ["v20", "v22", "v24", "v18", "v15"], "10": ["m01", "m02", "m03", "m04", "m05", "m06", "m07"], "11": ["c06", "c12", "c13", "c14", "c15", "c16", "c17", "c18", "c19", "c24", "c32", "c42", "c38", "c39"]}, "ch": {"1": "กมนตอาี", "2": "ดบปู", "3": "รลยวง", "4": "จิุ", "5": "เแโไใ", "6": "ะัำึื", "7": "ขถผฝสหฉ", "8": "คชทพซฟฮ", "9": "", "10": "่้๊๋์็ๆ", "11": "ฆฌญฎฏฐฑฒณธภฬศษ", "12": ""}, "words": {"1": [["มา", "maa", "M", "come", ""], ["นา", "naa", "M", "rice field", ""], ["ตา", "taa", "M", "eye; grandpa (mum's side)", ""], ["กา", "kaa", "M", "crow; kettle", ""], ["อา", "aa", "M", "aunt/uncle (dad's younger sibling)", "อ is silent here: it just holds the vowel"], ["มี", "mii", "M", "have", ""], ["ตี", "tii", "M", "hit", ""], ["ตาม", "taam", "M", "follow", "ม at the end = m"], ["นาม", "naam", "M", "name (formal)", ""], ["นาน", "naan", "M", "a long time", ""]], "2": [["ดี", "dii", "M", "good", ""], ["ดู", "duu", "M", "look; watch", ""], ["ปู", "puu", "M", "crab", ""], ["ปี", "pii", "M", "year", ""], ["ปีน", "piin", "M", "climb", ""], ["ปา", "paa", "M", "throw", ""], ["นอน", "naawn", "M", "sleep", "ออ = aaw: here อ is the vowel"], ["ตอน", "taawn", "M", "when; part (of a story)", ""], ["บาน", "baan", "M", "bloom; (counter for doors/windows)", ""]], "3": [["งาน", "ngaan", "M", "work; party", ""], ["ยา", "yaa", "M", "medicine", ""], ["ยาว", "yaao", "M", "long", "ว at the end = o/w glide"], ["ยาย", "yaai", "M", "grandma (mum's side)", "ย at the end = i/y glide"], ["นาย", "naai", "M", "Mr; boss", ""], ["ลอง", "laawng", "M", "try", "ง at the end = ng"], ["รอ", "raaw", "M", "wait", ""], ["ดาว", "daao", "M", "star", ""], ["งู", "nguu", "M", "snake", ""], ["มอง", "maawng", "M", "look at", ""], ["ลาว", "laao", "M", "Lao", ""], ["ยาง", "yaang", "M", "rubber; tyre", ""]], "4": [["กิน", "kin", "M", "eat", ""], ["บิน", "bin", "M", "fly", ""], ["ลิง", "ling", "M", "monkey", ""], ["ยุง", "yung", "M", "mosquito", ""], ["จาน", "jaan", "M", "plate", ""], ["จีน", "jiin", "M", "China; Chinese", ""], ["ปาก", "paak", "L", "mouth", "ก at the end = clipped k"], ["มาก", "maak", "F", "very; a lot", ""], ["ปิด", "pit", "L", "close; closed", "ด at the end = clipped t. Also a sign word"], ["จุด", "jut", "L", "dot; point", ""], ["บอก", "baawk", "L", "tell", ""], ["ออก", "aawk", "L", "go out", "also in ทางออก (exit)"], ["ลูก", "luuk", "F", "child (your own)", ""]], "5": [["ไป", "pai", "M", "go", "ไ written first, said after ป"], ["ใน", "nai", "M", "in", ""], ["ใจ", "jai", "M", "heart; mind", ""], ["ใบ", "bai", "M", "leaf; (counter for flat things)", ""], ["แมว", "maeo", "M", "cat", ""], ["แดง", "daeng", "M", "red", ""], ["แกง", "kaeng", "M", "curry", ""], ["แปด", "paet", "L", "eight", ""], ["โต", "too", "M", "big; grow up", ""], ["โมง", "moong", "M", "o'clock", ""], ["โรงแรม", "roong-raem", "M-M", "hotel", "two syllables, read one at a time"], ["เอา", "ao", "M", "take; want", ""], ["เรา", "rao", "M", "we", ""], ["เวลา", "wee-laa", "M-M", "time", ""]], "6": [["จะ", "ja", "L", "will (future)", ""], ["นะ", "na", "H", "softener (ok? / you know)", ""], ["กัน", "kan", "M", "together", "อะ + end letter: ะ becomes ั"], ["วัน", "wan", "M", "day", ""], ["มัน", "man", "M", "it; oily", ""], ["ดัง", "dang", "M", "loud; famous", ""], ["จับ", "jap", "L", "catch; hold", ""], ["กับ", "kap", "L", "with; and", "looks like กัน, good practice"], ["รัก", "rak", "H", "love", ""], ["ดำ", "dam", "M", "black", ""], ["จำ", "jam", "M", "remember", ""], ["มือ", "meu", "M", "hand", ""], ["ดึง", "deung", "M", "pull", "sign word on doors"], ["ลืม", "leum", "M", "forget", "อือ + end letter: the อ drops out"], ["เตะ", "te", "L", "kick", ""], ["แกะ", "kae", "L", "sheep; peel", ""]], "7": [["ขา", "khaa", "R", "leg", ""], ["ขาว", "khaao", "R", "white", ""], ["ขาย", "khaai", "R", "sell", ""], ["ขอ", "khaaw", "R", "ask for", ""], ["ขับ", "khap", "L", "drive", ""], ["สาม", "saam", "R", "three", ""], ["สี", "sii", "R", "colour", ""], ["สอง", "saawng", "R", "two", ""], ["สิบ", "sip", "L", "ten", ""], ["หา", "haa", "R", "look for", ""], ["หิว", "hiu", "R", "hungry", ""], ["ถาม", "thaam", "R", "ask (a question)", ""], ["ถุง", "thung", "R", "bag", ""], ["ฉัน", "chan", "R", "I; me", ""], ["ผัก", "phak", "L", "vegetable", ""], ["เขา", "khao", "R", "he; she; they", ""]], "8": [["คอ", "khaaw", "M", "neck", ""], ["ทาง", "thaang", "M", "way; route", ""], ["ทำ", "tham", "M", "do; make", ""], ["ชา", "chaa", "M", "tea", ""], ["ชาย", "chaai", "M", "man; male", "on toilet signs"], ["ชอบ", "chaawp", "F", "like", ""], ["พา", "phaa", "M", "take (someone)", ""], ["พูด", "phuut", "F", "speak", ""], ["แพง", "phaeng", "M", "expensive", ""], ["ซอย", "saawy", "M", "side street (soi)", ""], ["ฟัน", "fan", "M", "tooth", ""], ["ไฟ", "fai", "M", "fire; light", ""], ["คิด", "khit", "H", "think", ""], ["ทุก", "thuk", "H", "every", ""], ["ทะเล", "tha-lee", "H-M", "sea", ""], ["กาแฟ", "kaa-fae", "M-M", "coffee", ""], ["ฮา", "haa", "M", "funny (lol)", ""]], "9": [["คน", "khon", "M", "person", "no vowel written: say o between the letters"], ["นม", "nom", "M", "milk", ""], ["ผม", "phom", "R", "I (male); hair", ""], ["ฝน", "fon", "R", "rain", ""], ["รถ", "rot", "H", "car; vehicle", "ถ at the end = t"], ["ปลา", "plaa", "M", "fish", "ปล = pl, said together"], ["กลัว", "klua", "M", "afraid", "กล = kl"], ["ครับ", "khrap", "H", "polite ending (men)", "คร = khr"], ["หมา", "maa", "R", "dog", "silent ห in front. Never shown with มา: same sound"], ["หมู", "muu", "R", "pork; pig", "silent ห"], ["หนาว", "naao", "R", "cold", "silent ห"], ["เรียน", "riian", "M", "study; learn", ""], ["เรือ", "reua", "M", "boat", ""], ["เสือ", "seua", "R", "tiger", ""], ["ตัว", "tua", "M", "body; ticket; (counter for animals, clothes)", ""], ["เดิน", "doen", "M", "walk", "เออ + end letter: อ becomes ิ"], ["เกาะ", "kaw", "L", "island", ""], ["เสีย", "sia", "R", "broken; lose", ""]], "10": [["ไม่", "mai", "F", "not; no", ""], ["แม่", "mae", "F", "mother", ""], ["พ่อ", "phaaw", "F", "father", ""], ["พี่", "phii", "F", "older brother/sister", ""], ["น้อง", "naawng", "H", "younger brother/sister", ""], ["บ้าน", "baan", "F", "house; home", ""], ["น้ำ", "naam", "H", "water", ""], ["ห้อง", "haawng", "F", "room", ""], ["ร้าน", "raan", "H", "shop", ""], ["ไก่", "kai", "L", "chicken", ""], ["ไข่", "khai", "L", "egg", "looks like ไก่: good practice"], ["ช้าง", "chaang", "H", "elephant", ""], ["เด็ก", "dek", "L", "child", "็ = short vowel"], ["เล็ก", "lek", "H", "small", ""], ["โต๊ะ", "to", "H", "table", "๊ = tone mark 3"], ["เดี๋ยว", "diao", "R", "wait a moment", "๋ = tone mark 4"], ["ช้าๆ", "chaa-chaa", "H-H", "slowly", "ๆ = say it twice"], ["เบอร์", "boe", "M", "number (phone, size)", "์ = this letter is silent"]], "12": [["ห้องน้ำ", "haawng-naam", "F-H", "toilet", ""], ["ทางเข้า", "thaang khao", "M-F", "entrance", ""], ["ทางออก", "thaang aawk", "M-L", "exit", ""], ["เปิด", "poet", "L", "open", ""], ["ห้ามเข้า", "haam khao", "F-F", "no entry", ""], ["ราคา", "raa-khaa", "M-M", "price", ""], ["ลดราคา", "lot raa-khaa", "H-M-M", "sale; discount", ""], ["ร้านขายยา", "raan khaai yaa", "H-R-M", "pharmacy", ""], ["โรงพยาบาล", "roong pha-yaa-baan", "M-H-M-M", "hospital", ""], ["สุขา", "su-khaa", "L-R", "toilet (on signs)", ""], ["ผลัก", "phlak", "L", "push", ""], ["ฉุกเฉิน", "chuk-choen", "L-R", "emergency", ""], ["ห้ามสูบบุหรี่", "haam suup bu-rii", "F-L-L-L", "no smoking", ""], ["อาหาร", "aa-haan", "M-R", "food", ""], ["ข้าว", "khao", "F", "rice", ""], ["ข้าวผัด", "khao phat", "F-L", "fried rice", ""], ["กุ้ง", "kung", "F", "shrimp", ""]]}, "spot": [["คุณ", "khun", "M", "you", "ณ at the end = n"], ["ภาษา", "phaa-saa", "M-R", "language", "ภ and ษ"], ["ธนาคาร", "tha-naa-khaan", "H-M-M", "bank", "ธ"], ["หญิง", "ying", "R", "woman", "ญ (silent ห)"], ["ศาลา", "saa-laa", "R-M", "pavilion; rest shelter", "ศ"], ["กรุณา", "ka-ru-naa", "L-H-M", "please (on signs)", "ณ"], ["กีฬา", "kii-laa", "M-M", "sport", "ฬ"], ["ระฆัง", "ra-khang", "H-M", "bell", "ฆ"], ["กฎ", "kot", "L", "rule; law", "ฎ"]]};   // {neu:{stage:[ids]}, ch:{stage:'chars'}, words:{stage:[[thai,say,tone,meaning,note]]}, spot:[...]}
+
+function T(s){ return '<span class="tc" lang="th">'+s+'</span>'; }
+/* [name, parts, intro lines] */
+var STAGE_INFO = [
+ ['First letters','LWS',['Thai letters are consonants. Vowels are marks that sit around them.',
+   T('อ')+' is a silent “holder”: it carries a vowel when there’s no other letter ('+T('อา')+' = aa).',
+   'Read left to right: '+T('ม')+' + '+T('า')+' = '+T('มา')+' (maa).']],
+ ['More letters','LWS',[T('ออ')+' is a vowel too: “aaw”. In '+T('นอน')+' the middle '+T('อ')+' is the vowel.',
+   'Watch '+T('ด / ต')+' and '+T('บ / ป')+': they look alike.']],
+ ['Glide letters','LWS',['Some letters sound different at the end of a word:',
+   T('ย')+' at the end = “i” ('+T('ยาย')+' = yaai) · '+T('ว')+' at the end = “o/w” ('+T('ดาว')+' = daao) · '+T('ง')+' at the end = “ng” ('+T('ลอง')+' = laawng).']],
+ ['End sounds','LWS',['At the end of a word, some letters make a short, clipped stop:',
+   T('ก')+' → k ('+T('ปาก')+' = paak) · '+T('ด')+' → t ('+T('ปิด')+' = pit) · '+T('บ')+' → p.',
+   'Short vowels '+T('อิ อุ')+' sit on top of or under the letter.']],
+ ['Vowels that go first','LWS',['These vowels are <b>written before</b> the letter but <b>said after</b> it.',
+   T('ไ')+' + '+T('ป')+' = '+T('ไป')+' (pai), not “ai-p”.',
+   T('ไ')+' and '+T('ใ')+' sound the same (ai). You’ll never be asked to choose between them by sound.']],
+ ['Short vowels','LWS',[T('ะ')+' makes a vowel short: '+T('จะ')+' = ja.',
+   'When a letter follows, '+T('ะ')+' changes shape to '+T('อั')+': '+T('กัน')+' = kan.',
+   T('อำ')+' = “am” ('+T('ดำ')+' = dam).']],
+ ['High letters','LWS',['New sounds: kh, th, ph, f, s, h, ch.',
+   'These letters change the tone of the word. You don’t need the rule; just copy the voice.',
+   T('ผ / ฝ')+' look alike, so watch the tail.']],
+ ['Low letters','LWS',['Same sounds as some letters you know, different letters:',
+   T('ค = ข')+' (kh) · '+T('ช = ฉ')+' (ch) · '+T('ท = ถ')+' (th) · '+T('พ = ผ')+' (ph) · '+T('ฟ = ฝ')+' (f) · '+T('ซ = ส')+' (s) · '+T('ฮ = ห')+' (h).',
+   'You’ll never have to choose between two same-sound letters by ear.']],
+ ['Word tricks','LWS',['1. <b>No vowel written?</b> Say <b>o</b> between the letters: '+T('คน')+' = khon.',
+   '2. <b>Two letters together</b> blend: '+T('ปล')+' = pl ('+T('ปลา')+' = plaa).',
+   '3. <b>Silent '+T('ห')+'</b> in front of a letter: just skip it. '+T('หมา')+' = maa (dog).']],
+ ['Marks','LWS',['The four tone marks ('+T('อ่ อ้ อ๊ อ๋')+') change the tone. You don’t need the rules; the voice shows you.',
+   T('อ็')+' = short vowel · '+T('อ์')+' = silent letter · '+T('ๆ')+' = say it twice.',
+   'The Marks check plays the mark’s <b>name</b> (like “mai ek”), never its pitch.']],
+ ['Rare letters','L',['These letters are rare, but you’ll see them on signs and in names.',
+   'Most share a sound with a letter you know: '+T('ศ ษ')+' = s, '+T('ณ')+' = n, '+T('ธ')+' = th, '+T('ภ')+' = ph.']],
+ ['Final: Read Thailand','F',['Everything together: letters, vowels, marks, words and spelling.',
+   '30 questions. Pass is <b>27/30</b>.',
+   'Want a warm-up first? Practise real signs and menus below.']]
+];
+var NSTAGES=12, MAXTICKS=32;
+var NEED={L:[18,20], W:[9,10], S:[9,10], F:[27,30]};
+var PART_NAME={L:'Letters', W:'Words', S:'Spell', F:'Final check'};
+var PART_NUM={L:'①', W:'②', S:'③', F:'★'};
+function partName(s,p){ return p==='L'&&s===10 ? 'Marks' : PART_NAME[p]; }
+
+/* reference cards (shown, never drilled) */
+var REF = {
+ 10:[['ฯ','ไปยาลน้อย','pai-yaan-noi · shortened name: กรุงเทพฯ = Bangkok, short form']],
+ 11:[['ฃ','ฃอ ขวด','khaaw khuat · not used any more'],['ฅ','ฅอ คน','khaaw khon · not used any more'],
+     ['เออะ','เออะ','oe · short, rare'],['เอียะ','เอียะ','ia · short, rare'],['เอือะ','เอือะ','eua · short, almost never used'],['อัวะ','อัวะ','ua · short, rare'],
+     ['ฤ','รึ','rue · works as a vowel (อังกฤษ = English)'],['ฤๅ','รือ','ruue · rare'],['ฦ','ลึ','lue · not used any more'],['ฦๅ','ลือ','luue · not used any more']]
+};
+
+var CONFIG = { rate:0.85, rateSlow:0.6, autoNextMs:1300, checkNextMs:850 };
+
+/* =====================================================================
+   ITEMS
+   ===================================================================== */
+var MARKTONE={M:'',L:'̀',F:'̂',H:'́',R:'̌'};
+function accented(say, tone){
+  var codes=(tone||'').split('-'), i=0;
+  var out=say.replace(/[a-z]+/g,function(s){ var c=codes[i++], v=s.search(/[aeiou]/);
+    return (!c||v<0||!MARKTONE[c]) ? s : s.slice(0,v+1)+MARKTONE[c]+s.slice(v+1); });
+  return out.normalize ? out.normalize('NFC') : out;
+}
+function plainSay(s){ return String(s).toLowerCase().replace(/[^a-z]/g,''); }
+
+var IT={}, CINFO={};
+CONS.forEach(function(r){
+  if(r[9]==='OBS') return;
+  var st=r[6].split(' ')[0], en=r[7].split(' ')[0];
+  IT[r[0]]={id:r[0], k:'c', show:r[1], voice:r[3], rThai:r[3].replace(/^\S+/, r[1]+'อ'), rom:r[2], mean:r[4]+' = '+r[5],
+            note:'Starts as '+r[6]+' · ends as '+r[7], snd:'c:'+st};
+  CINFO[r[1]]={s:st, e:en};
+});
+VOWS.forEach(function(r){
+  if(r[4]==='REF') return;
+  IT[r[0]]={id:r[0], k:'v', show:r[1], voice:r[1], rThai:'', rom:r[2]+' · '+r[3], mean:r[3]+' vowel', note:r[5], snd:'v:'+r[2]+':'+r[3]};
+});
+MARKS.forEach(function(r){
+  if(r[0]==='m08') return;
+  IT[r[0]]={id:r[0], k:'m', show:r[1], voice:r[3], rThai:r[3], rom:r[2], mean:r[4], note:'', snd:'m:'+r[0]};
+});
+var LSTAGE={};       // letter id -> stage
+var NEWOF={};        // stage -> [items]
+for(var s=1;s<=11;s++){ NEWOF[s]=(COURSE.neu[s]||[]).map(function(id){ LSTAGE[id]=s; return IT[id]; }); }
+
+var WORDS={}, ALLW=[], SPOTW=[];
+function mkWord(id, r, stage){
+  return {id:id, k:'w', show:r[0], voice:r[0], rThai:'', rom:accented(r[1],r[2]), mean:r[3], note:r[4]||'', snd:'s:'+plainSay(r[1]), stage:stage};
+}
+Object.keys(COURSE.words).forEach(function(k){
+  var s=+k; WORDS[s]=COURSE.words[k].map(function(r,i){ var w=mkWord('a'+(s<10?'0':'')+s+'-'+(i<9?'0':'')+(i+1), r, s); ALLW.push(w); return w; });
+});
+SPOTW=COURSE.spot.map(function(r,i){ return mkWord('a11-'+(i<9?'0':'')+(i+1), r, 11); });
+/* same-sound pairs: the later word gets a small teaching note */
+(function(){
+  var first={};
+  ALLW.forEach(function(w){
+    var f=first[w.snd];
+    if(!f){ first[w.snd]=w; return; }
+    if(f.show!==w.show) w.pair=f;
+  });
+})();
+
+function lettersUpTo(s){ var out=[]; for(var i=1;i<=Math.min(s,11);i++) out=out.concat(NEWOF[i]); return out; }
+function wordsUpTo(s){ var out=[]; for(var i=1;i<=s;i++) if(WORDS[i]) out=out.concat(WORDS[i]); return out; }
+function charsUpTo(s){ var out=''; for(var i=1;i<=s;i++) out+=(COURSE.ch[i]||''); return out; }
+
+/* look-alikes */
+var LOOKOF={};
+LOOK_C.forEach(function(g){ g.split('').forEach(function(ch){ LOOKOF[ch]=g.split(''); }); });
+LOOK_V.forEach(function(g){ g.forEach(function(f){ LOOKOF[f]=(LOOKOF[f]||[]).concat(g); }); });
+var LOOK_CH = ['ิีึื','ุู','เแ','โไใ','ะา','ัำ'];
+LOOK_C.concat(LOOK_CH).forEach(function(g){ g.split('').forEach(function(ch){ LOOKOF['ch:'+ch]=(LOOKOF['ch:'+ch]||[]).concat(g.split('')); }); });
+
+/* =====================================================================
+   STORAGE (browser only, no dates)
+   ===================================================================== */
+var KEY_PROG='lekthai-alphabet-v1', KEY_PREFS='lekthai-alphabet-prefs-v1', KEY_THEME='lekthai-theme', KEY_BETA='lekthai-alphabet-beta-seen';
+var storageOK=false, store=(function(){
+  try{ var k='__lekthai'+Math.random(); localStorage.setItem(k,'1'); if(localStorage.getItem(k)!=='1') throw 0; localStorage.removeItem(k); storageOK=true; return localStorage; }
+  catch(e){ var m={}; return {getItem:function(k){return k in m?m[k]:null}, setItem:function(k,v){m[k]=String(v)}, removeItem:function(k){delete m[k]}}; }
+})();
+function load(k,f){ try{ var v=store.getItem(k); return v?JSON.parse(v):f; }catch(e){ return f; } }
+function save(k,v){ try{ store.setItem(k,JSON.stringify(v)); }catch(e){} }
+function freshProg(){ return {ticks:{}, notYet:{}, items:{}}; }
+var PROG=Object.assign(freshProg(), load(KEY_PROG,{}));
+var PREFS=Object.assign({roman:true, slow:false, style:'classic', seen:{}}, load(KEY_PREFS,{}));
+function saveProg(){ save(KEY_PROG,PROG); }
+function savePrefs(){ save(KEY_PREFS,PREFS); }
+
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)),t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+
+/* item stats: {c,m,r} — used only to choose weak items for practice and review */
+function record(id, pass, lessonOK){
+  var first=!PROG.items[id], s=PROG.items[id]||(PROG.items[id]={c:0,m:0,r:0});
+  if(pass) s.c++; else if(!(first&&lessonOK)) s.m++;     // practice: first-ever sight is a lesson, not a miss
+  s.r=pass?1:0; saveProg();
+}
+function weightOf(id){ var s=PROG.items[id]; if(!s) return 1.5; var n=s.c+s.m; return 1+2*(n?s.m/n:0)+(s.r===0&&n?1:0); }
+var RECENT=[];
+function wpick(list, boost){
+  var cd=Math.min(2,list.length-1);
+  var avail=list.filter(function(x){ return RECENT.indexOf(x.id)===-1; }); if(!avail.length) avail=list;
+  var tot=0, ws=avail.map(function(x){ var v=weightOf(x.id)*(boost?boost(x):1); tot+=v; return v; });
+  var r=Math.random()*tot, i=0; for(; i<avail.length-1; i++){ r-=ws[i]; if(r<=0) break; }
+  var it=avail[i]; RECENT.push(it.id); while(RECENT.length>cd) RECENT.shift(); return it;
+}
+function wsample(list, n){   // weighted sample without replacement (weak first), repeats only if list is short
+  var out=[];
+  while(out.length<n){
+    var keyed=list.map(function(x){ return [Math.pow(Math.random(),1/weightOf(x.id)), x]; }).sort(function(a,b){ return b[0]-a[0]; });
+    out=out.concat(keyed.map(function(p){ return p[1]; }));
+  }
+  return out.slice(0,n);
+}
+function fill(list, n){ var out=[]; while(out.length<n) out=out.concat(shuffle(list)); return out.slice(0,n); }
+function spreadAdj(arr){   // avoid the same item twice in a row
+  for(var i=1;i<arr.length;i++){
+    if(arr[i].item.id===arr[i-1].item.id){
+      for(var j=i+1;j<arr.length;j++){ if(arr[j].item.id!==arr[i-1].item.id && (j+1>=arr.length || arr[j+1].item.id!==arr[i].item.id)){ var t=arr[i]; arr[i]=arr[j]; arr[j]=t; break; } }
+    }
+  }
+  return arr;
+}
+
+/* ---------- progress ---------- */
+function tk(key){ return PROG.ticks[key]; }
+function passed(s,p){ var t=tk(s+p); return !!(t&&t.pass); }
+function stageDone(s){ return STAGE_INFO[s-1][1].split('').every(function(p){ return passed(s,p); }); }
+function tickCount(){ var n=0; for(var s=1;s<=NSTAGES;s++) STAGE_INFO[s-1][1].split('').forEach(function(p){ if(passed(s,p)) n++; }); return n; }
+function curStage(){ for(var s=1;s<=NSTAGES;s++) if(!stageDone(s)) return s; return 0; }
+function stageSyms(s){ return s===12 ? 'everything together' : NEWOF[s].map(function(it){ return it.show; }).join(' '); }
+
+/* =====================================================================
+   WRONG ANSWERS (Hear & Choose)
+   never the same item, never the same Thai, never two that SOUND the same;
+   letters: look-alikes first; words: similar-looking first.
+   ===================================================================== */
+function sharedChars(a,b){ var s={},n=0; a.split('').forEach(function(c){ s[c]=1; }); b.split('').forEach(function(c){ if(s[c]){ n++; s[c]=0; } }); return n; }
+function makeChoices(it, pool){
+  var picks=[];
+  function ok(x){
+    if(x.id===it.id || x.show===it.show || x.snd===it.snd) return false;
+    for(var i=0;i<picks.length;i++){ if(picks[i].snd===x.snd || picks[i].show===x.show) return false; }
+    return true;
+  }
+  function take(x){ if(picks.length<3 && ok(x)) picks.push(x); }
+  var same=pool.filter(function(x){ return x.k===it.k; });
+  if(it.k!=='w'){
+    var looks=LOOKOF[it.show]||[];
+    shuffle(same.filter(function(x){ return looks.indexOf(x.show)>-1; })).forEach(take);
+    shuffle(same.filter(function(x){ return LSTAGE[x.id]===LSTAGE[it.id]; })).forEach(take);
+    shuffle(same).forEach(take);
+    if(picks.length<3 && it.k!=='m') shuffle(pool.filter(function(x){ return x.k==='c'||x.k==='v'; })).forEach(take);   // early stages: too few vowels
+  } else {
+    var scored=same.map(function(x){
+      return [sharedChars(it.show,x.show)*2 - Math.abs(it.show.length-x.show.length) + (x.stage===it.stage?2:0) + Math.random()*3, x];
+    }).sort(function(a,b){ return b[0]-a[0]; });
+    scored.slice(0,10).forEach(function(p){ take(p[1]); });
+    scored.forEach(function(p){ take(p[1]); });
+  }
+  return shuffle(picks.concat([it]));
+}
+
+/* =====================================================================
+   SPELLING TILES
+   word letters + up to 3 safe wrong tiles. A wrong tile is never one that
+   sounds the same as a letter in the word (start or end sound), never ใ/ไ
+   for each other, never a tone mark the word doesn't use.
+   ===================================================================== */
+var LEADV='เแโไใ', TONEM='่้๊๋', COMBINING='ัิีึืุู่้๊๋็์';
+function isCons(ch){ return !!CINFO[ch]; }
+function finalsOf(chars){
+  var f=[];
+  chars.forEach(function(ch,i){
+    if(!isCons(ch) || i===0) return;
+    var prev=chars[i-1], nx=chars[i+1];
+    if(LEADV.indexOf(prev)>-1) return;                     // after a front vowel = start of a syllable
+    if(nx===undefined || isCons(nx) || LEADV.indexOf(nx)>-1) f.push(ch);
+  });
+  return f;
+}
+function tileSafe(d, chars){
+  if(chars.indexOf(d)>-1) return false;
+  if(TONEM.indexOf(d)>-1) return false;
+  if((d==='ใ'&&chars.indexOf('ไ')>-1) || (d==='ไ'&&chars.indexOf('ใ')>-1)) return false;
+  if(isCons(d)){
+    var di=CINFO[d];
+    for(var i=0;i<chars.length;i++){ var c=chars[i]; if(isCons(c) && CINFO[c].s===di.s) return false; }
+    if(di.e!=='—'){ var fs=finalsOf(chars); for(var j=0;j<fs.length;j++){ if(CINFO[fs[j]].e===di.e) return false; } }
+  }
+  return true;
+}
+function spellTiles(word, stage){
+  var chars=word.split(''), allowed=charsUpTo(stage).split(''), picks=[];
+  function take(d){ if(picks.length<3 && picks.indexOf(d)===-1 && allowed.indexOf(d)>-1 && tileSafe(d,chars)) picks.push(d); }
+  chars.forEach(function(c){ shuffle(LOOKOF['ch:'+c]||[]).forEach(take); });
+  shuffle(allowed).forEach(take);
+  return shuffle(chars.concat(picks)).map(function(ch){ return {ch:ch, used:false}; });
+}
+function tileLabel(ch){
+  if(COMBINING.indexOf(ch)>-1 || ch==='ำ' || ch==='ะ' || ch==='า') return '◌'+ch;
+  if(LEADV.indexOf(ch)>-1) return ch+'◌';
+  return ch;
+}
+
+/* =====================================================================
+   VOICE
+   ===================================================================== */
+var hasTTS='speechSynthesis' in window, thaiVoice=null, voiceChecked=false;
+function loadVoices(){
+  if(!hasTTS) return;
+  var v=speechSynthesis.getVoices()||[];
+  thaiVoice=v.filter(function(x){ return x.lang && /^th/i.test(x.lang); })[0]||null;
+  if(v.length){ voiceChecked=true; if(!thaiVoice) showWarn('voice'); else if(warnKind==='voice') hideWarn(); }
+  syncSheet();
+}
+function speak(text){
+  if(!hasTTS) return;
+  try{
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(String(text).trim());
+    u.lang='th-TH'; u.rate=PREFS.slow?CONFIG.rateSlow:CONFIG.rate;
+    if(thaiVoice) u.voice=thaiVoice;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function hush(){ if(hasTTS) try{ speechSynthesis.cancel(); }catch(e){} }
+
+var warnKind='';
+function showWarn(kind, html){
+  warnKind=kind;
+  $('warnText').innerHTML = html || (kind==='voice'
+    ? '⚠️ <b>No Thai voice found in this browser.</b> The app will still try to speak. If you hear nothing, install a Thai text-to-speech voice in your phone’s settings, or try Chrome.'
+    : kind==='notts' ? '⚠️ <b>This browser can’t speak.</b> Most of this course needs audio. Try Chrome or Safari.'
+    : '<b>Beta.</b> The audio is your phone’s own voice. Progress is saved on this device only.');
+  $('warn').hidden=false;
+}
+function hideWarn(){ $('warn').hidden=true; if(warnKind==='beta') save(KEY_BETA,1); warnKind=''; }
+
+/* =====================================================================
+   VIEWS
+   ===================================================================== */
+var VIEW='map', VSTAGE=1, RUN=null, Q=null, RES=null, timer=null;
+function clearTimer(){ clearTimeout(timer); timer=null; }
+function go(view, stage){ clearTimer(); hush(); VIEW=view; if(stage) VSTAGE=stage; render(true); }
+
+function render(scrollTop){
+  var v=$('view');
+  var html = VIEW==='map' ? mapHTML() : VIEW==='stage' ? stageHTML(VSTAGE) : VIEW==='run' ? runHTML()
+           : VIEW==='result' ? resultHTML() : VIEW==='done' ? doneHTML() : VIEW==='ref' ? refHTML(VSTAGE) : '';
+  v.innerHTML=html;
+  $('backPill').classList.toggle('home', VIEW==='map');
+  $('backLabel').innerHTML = VIEW==='map' ? '<span class="tc">ก to ฮ</span>' : '◀ Stages';
+  if(scrollTop){ var sc=v.querySelector('.scroll,.qbody'); if(sc) sc.scrollTop=0; }
+  if(VIEW==='map'){ var c=v.querySelector('.scard.cur'); if(c && scrollTop && c.scrollIntoView) c.scrollIntoView({block:'center'}); }
+}
+
+/* ---------- course map ---------- */
+function mapHTML(){
+  var cur=curStage(), n=tickCount();
+  var h='<div class="scroll"><div class="hero"><div class="h-thai" lang="th">ก to ฮ</div><div class="h-sub">Learn the Thai alphabet, one stage at a time</div>'+
+    '<div class="pbar"><i style="width:'+Math.round(n/MAXTICKS*100)+'%"></i></div>'+
+    '<div class="pcap">'+(cur?'Stage '+cur+' of '+NSTAGES+' · ':'Course finished · ')+n+'/'+MAXTICKS+' ticks</div></div><div class="slist">';
+  for(var s=1;s<=NSTAGES;s++){
+    var done=stageDone(s), parts=STAGE_INFO[s-1][1].split('');
+    var cls=done?' done':s===cur?' cur':s>cur&&cur?' future':'';
+    h+='<button class="scard'+cls+'" data-act="stage" data-arg="'+s+'"><span class="sn">'+(done?'✓':s===cur?'▶':s)+'</span>'+
+       '<span class="sbody"><b>'+s+' · '+esc(STAGE_INFO[s-1][0])+'</b><span class="ssym" lang="th">'+esc(stageSyms(s))+'</span></span>'+
+       '<span class="dots">'+parts.map(function(p){ return '<i class="dot'+(passed(s,p)?' on':'')+'"></i>'; }).join('')+'</span></button>';
+  }
+  h+='</div>';
+  if(!cur) h+='<button class="btn ghost" data-act="done">🎉 Your result</button>';
+  else h+='<button class="btn primary" data-act="stage" data-arg="'+cur+'">▶ '+(n?'Continue: Stage '+cur:'Start Stage 1')+'</button>';
+  return h+'</div>';
+}
+
+/* ---------- stage screen ---------- */
+function partStatus(s,p){
+  var t=tk(s+p), need=NEED[p];
+  if(t&&t.pass) return {cls:' done', txt:'✓ Passed · best '+t.best+'/'+need[1]};
+  if(t) return {cls:' nyet', txt:'Not yet · best '+t.best+'/'+need[1]+' (need '+need[0]+')'};
+  var d={L:s===10?'Practice, then hear a mark’s name and pick it (20)':'Practice, then a 20-question check',
+         W:'Sound out words, then a 10-question check', S:'Build words from tiles, then spell 10',
+         F:'30 mixed questions · pass 27'}[p];
+  return {cls:'', txt:d};
+}
+function nextPart(s){ var ps=STAGE_INFO[s-1][1].split(''); for(var i=0;i<ps.length;i++) if(!passed(s,ps[i])) return ps[i]; return null; }
+function stageHTML(s){
+  var info=STAGE_INFO[s-1], parts=info[1].split(''), np=nextPart(s);
+  var h='<div class="scroll"><div class="st-top"><div class="eyebrow">Stage '+s+' of '+NSTAGES+(stageDone(s)?' · ✓ done':'')+'</div>'+
+    '<h2 class="st-name">'+esc(info[0])+'</h2></div>'+
+    (s<12?'<div class="st-sym" lang="th">'+esc(stageSyms(s))+'</div>':'')+
+    '<div class="introbox">'+info[2].map(function(l){ return '<p>'+l+'</p>'; }).join('')+'</div><div class="parts">';
+  parts.forEach(function(p){
+    var st=partStatus(s,p);
+    h+='<div class="part'+st.cls+'"><span class="pk">'+(st.cls===' done'?'✓':PART_NUM[p])+'</span><div class="pt"><b>'+partName(s,p)+'</b><small>'+esc(st.txt)+'</small></div>'+
+       '<button class="mini-btn" data-act="part" data-arg="'+p+'">'+(p==='F'?(passed(s,p)?'Retake':'Start'):(passed(s,p)?'Redo':'Start'))+'</button></div>';
+  });
+  h+='</div>';
+  if(np) h+='<button class="btn primary" data-act="part" data-arg="'+np+'">▶ '+(np===parts[0]&&!tk(s+np)?(s===12?'Start the Final':'Start stage'):'Continue: '+partName(s,np))+'</button>';
+  else if(s<12) h+='<button class="btn primary" data-act="stage" data-arg="'+(s+1)+'">Move to Stage '+(s+1)+' ▶</button>';
+  else h+='<button class="btn primary" data-act="done">🎉 Your result</button>';
+  if(s===11) h+='<div class="row2"><button class="btn ghost" data-act="spot">👀 Spot them</button><button class="btn ghost" data-act="ref">📖 Reference</button></div>';
+  if(s===10) h+='<button class="btn ghost" data-act="ref">📖 Reference: ฯ</button>';
+  if(s===12) h+='<button class="btn ghost" data-act="real">🪧 Practise real signs &amp; menus</button>';
+  h+='<div class="navrow">'+(s>1?'<button class="btn text" data-act="stage" data-arg="'+(s-1)+'">◀ Stage '+(s-1)+'</button>':'<span></span>')+
+     (s<12?'<button class="btn text" data-act="stage" data-arg="'+(s+1)+'">Stage '+(s+1)+' ▶</button>':'<span></span>')+'</div>';
+  return h+'</div>';
+}
+
+/* ---------- reference card ---------- */
+function refHTML(s){
+  var rows=REF[s]||[];
+  return '<div class="runhead"><button class="icon-btn" data-act="back" aria-label="Back">✕</button><span class="rt">Stage '+s+' · Reference</span><span class="rh-sp"></span></div>'+
+    '<div class="qbody"><div class="res-sub">Good to recognise. Not drilled and not in any check. Tap one to hear it.</div><div class="refgrid">'+
+    rows.map(function(r,i){ return '<button data-act="refplay" data-arg="'+i+'"><span class="tc" lang="th">'+esc(r[0])+'</span><small>'+esc(r[2])+'</small></button>'; }).join('')+
+    '</div></div>';
+}
+
+/* =====================================================================
+   RUN: practice and checks
+   RUN = {s, part (L W S F SPOT REAL), mode ('practice'|'check'), ...}
+   ===================================================================== */
+function startPart(s, p){
+  clearTimer(); hush(); RECENT=[];
+  if(p==='F'){ startCheck(s,'F'); return; }
+  RUN={s:s, part:p, mode:'practice', hc:{}, sc:{}, said:{}, readyNoted:false, retry:null, rc:{}};
+  if(p==='L'){
+    RUN.newI=NEWOF[s].slice(); RUN.oldI=lettersUpTo(s-1); RUN.pool=lettersUpTo(s);
+    RUN.introQ=RUN.newI.slice();
+  } else if(p==='W' || p==='SPOT' || p==='REAL'){
+    RUN.words = p==='SPOT' ? SPOTW.slice() : WORDS[s].slice();
+    RUN.pool = p==='SPOT' ? SPOTW.concat(ALLW) : wordsUpTo(s);
+    RUN.sayQ = shuffle(RUN.words);
+  } else if(p==='S'){
+    RUN.words=WORDS[s].slice();
+    var help = s===1||s===5||s===10;
+    RUN.tileHelp = help && !PREFS.seen['tiles'+s];
+  }
+  VIEW='run'; nextQ();
+}
+function hasCheck(){ return RUN && (RUN.part==='L'||RUN.part==='W'||RUN.part==='S'); }
+function isReady(){
+  var R=RUN; if(!R || R.mode!=='practice' || R.retry || !hasCheck()) return false;
+  if(R.part==='L') return R.newI.every(function(it){ return (R.hc[it.id]||0)>=2; });
+  if(R.part==='W') return R.words.every(function(w){ return R.said[w.id] && (R.hc[w.id]||0)>=1; });
+  if(R.part==='S') return R.words.every(function(w){ return (R.sc[w.id]||0)>=1; });
+  return false;
+}
+function boostLow(map, target){ return function(x){ return (map[x.id]||0)<target ? 3 : 1; }; }
+
+function nextQ(){
+  clearTimer();
+  var R=RUN;
+  if(R.mode==='check'){
+    if(R.qi>=R.qs.length){ finishCheck(); return; }
+    var e=R.qs[R.qi]; newQ(e.type, e.item); return;
+  }
+  if(R.retry){
+    var left=R.retry.filter(function(e){ return (R.rc[e.type+e.item.id]||0)<2; });
+    if(!left.length){ startCheck(R.s, R.part); return; }
+    var pickE=wpick(left.map(function(e){ return {id:e.type+e.item.id, e:e}; })).e;
+    newQ(pickE.type, pickE.item); return;
+  }
+  if(R.part==='L'){
+    if(R.introQ.length){ newQ('intro', R.introQ.shift()); return; }
+    var useOld = R.oldI.length && Math.random()<0.4;
+    var it = useOld ? wpick(R.oldI) : wpick(R.newI, boostLow(R.hc,2));
+    newQ(Math.random()<0.67?'hear':'say', it);
+  } else if(R.part==='W' || R.part==='SPOT' || R.part==='REAL'){
+    if(R.sayQ.length){ newQ('say', R.sayQ.shift()); return; }
+    newQ(Math.random()<0.75?'hear':'say', wpick(R.words, boostLow(R.hc,1)));
+  } else if(R.part==='S'){
+    if(R.tileHelp){ R.tileHelp=false; newQ('tilehelp', null); return; }
+    newQ('spell', wpick(R.words, boostLow(R.sc,1)));
+  }
+}
+function newQ(type, item){
+  var R=RUN;
+  Q={type:type, item:item, answered:false, picked:null, ok:null, revealed:false, rated:false, fresh:true, built:[], tiles:null, checked:false};
+  if(type==='hear') Q.choices=makeChoices(item, R.pool);
+  if(type==='spell') Q.tiles=spellTiles(item.show, R.part==='F'||R.final ? 12 : R.s);
+  render(true);
+  Q.fresh=false;
+  if(type==='hear' || type==='spell') setTimeout(function(){ if(Q&&Q.item===item&&!Q.answered&&!Q.checked) speak(item.voice); },180);
+  if(type==='intro') setTimeout(function(){ if(Q&&Q.item===item) speak(item.voice); },180);
+}
+
+/* ---------- checks ---------- */
+function startCheck(s, p){
+  clearTimer(); hush(); RECENT=[];
+  var qs=[], n;
+  if(p==='L'){
+    var neu=NEWOF[s], old=lettersUpTo(s-1);
+    var nNew = old.length ? 12 : 20;
+    qs = fill(neu, nNew).map(function(it){ return {type:'hear', item:it}; })
+         .concat(old.length ? wsample(old, 20-nNew).map(function(it){ return {type:'hear', item:it}; }) : []);
+    qs = spreadAdj(shuffle(qs));
+  } else if(p==='W'){
+    qs = spreadAdj(fill(WORDS[s],10).map(function(w){ return {type:'hear', item:w}; }));
+  } else if(p==='S'){
+    qs = spreadAdj(fill(WORDS[s],10).map(function(w){ return {type:'spell', item:w}; }));
+  } else if(p==='F'){
+    var spellPool=wordsUpTo(9), wordPool=wordsUpTo(10).concat(WORDS[12]);
+    qs = wsample(lettersUpTo(11),10).map(function(it){ return {type:'hear', item:it}; })
+      .concat(shuffle(wordPool).slice(0,12).map(function(w){ return {type:'hear', item:w}; }))
+      .concat(shuffle(spellPool).slice(0,8).map(function(w){ return {type:'spell', item:w}; }));
+  }
+  var pool = p==='L' ? lettersUpTo(s) : p==='F' ? lettersUpTo(11).concat(ALLW) : wordsUpTo(s);
+  RUN={s:s, part:p, mode:'check', qs:qs, qi:0, score:0, misses:[], pool:pool, final:p==='F'};
+  VIEW='run'; nextQ();
+}
+function checkAnswered(ok, picked){
+  var R=RUN, e=R.qs[R.qi];
+  record(e.item.id, ok, false);
+  if(ok) R.score++; else R.misses.push({type:e.type, item:e.item, picked:picked});
+  timer=setTimeout(function(){ R.qi++; nextQ(); }, CONFIG.checkNextMs);
+}
+function finishCheck(){
+  var R=RUN, key=R.s+R.part, need=NEED[R.part], pass=R.score>=need[0];
+  var t=PROG.ticks[key]||{best:0,pass:0};
+  t.best=Math.max(t.best,R.score); if(pass) t.pass=1; PROG.ticks[key]=t;
+  var nyCount=0;
+  if(pass) delete PROG.notYet[key]; else { nyCount=PROG.notYet[key]=(PROG.notYet[key]||0)+1; }
+  saveProg();
+  RES={s:R.s, part:R.part, score:R.score, total:need[1], need:need[0], pass:pass, misses:R.misses, ny:nyCount};
+  VIEW='result'; render(true);
+}
+function practiseThese(){
+  var r=RES, seen={}, list=[];
+  r.misses.forEach(function(m){ var k=m.type+m.item.id; if(!seen[k]){ seen[k]=1; list.push({type:m.type, item:m.item}); } });
+  RECENT=[];
+  var pool = r.part==='L' ? lettersUpTo(r.s) : r.part==='F' ? lettersUpTo(11).concat(ALLW) : wordsUpTo(r.s);
+  RUN={s:r.s, part:r.part, mode:'practice', retry:list, rc:{}, hc:{}, sc:{}, said:{}, pool:pool, final:r.part==='F'};
+  VIEW='run'; nextQ();
+}
+
+/* ---------- answering (practice + check) ---------- */
+function choose(i){
+  if(!Q || Q.type!=='hear') return;
+  var c=Q.choices[i]; if(!c) return;
+  if(Q.answered){ if(RUN.mode==='practice'){ speak(c.voice); } return; }
+  var ok=c.id===Q.item.id; Q.answered=true; Q.picked=c; Q.ok=ok;
+  if(RUN.mode==='check'){ render(); checkAnswered(ok, c); return; }
+  record(Q.item.id, ok, true);
+  if(ok){ RUN.hc[Q.item.id]=(RUN.hc[Q.item.id]||0)+1; if(RUN.retry) bumpRetry('hear'); }
+  render();
+  if(ok){ var card=$('card'); card.classList.remove('pulse'); void card.offsetWidth; card.classList.add('pulse'); timer=setTimeout(nextQ, CONFIG.autoNextMs); }
+}
+function bumpRetry(type){ var k=type+Q.item.id; RUN.rc[k]=(RUN.rc[k]||0)+1; }
+function dontKnow(){
+  if(!Q || Q.type!=='hear' || Q.answered || RUN.mode!=='practice') return;
+  Q.answered=true; Q.picked=null; Q.ok=false; Q.idk=true; record(Q.item.id,false,true); render();
+}
+function revealSay(){ if(!Q||Q.type!=='say'||Q.revealed) return; Q.revealed=true; render(); speak(Q.item.voice); }
+function rateSay(ok){
+  if(!Q||!Q.revealed||Q.rated) return; Q.rated=true;
+  record(Q.item.id, ok, true); RUN.said[Q.item.id]=1;
+  setTimeout(nextQ, 180);
+}
+function tapTile(i){
+  if(!Q||Q.type!=='spell'||Q.checked) return;
+  var t=Q.tiles[i]; if(!t||t.used||Q.built.length>=Q.item.show.length) return;
+  t.used=true; Q.built.push(i); render();
+}
+function undoTile(){ if(!Q||Q.type!=='spell'||Q.checked||!Q.built.length) return; Q.tiles[Q.built.pop()].used=false; render(); }
+function builtStr(){ return Q.built.map(function(i){ return Q.tiles[i].ch; }).join(''); }
+function hintTile(){
+  if(!Q||Q.type!=='spell'||Q.checked||RUN.mode!=='practice') return;
+  var w=Q.item.show;
+  while(Q.built.length && w.indexOf(builtStr())!==0) Q.tiles[Q.built.pop()].used=false;
+  var need=w.charAt(Q.built.length);
+  for(var i=0;i<Q.tiles.length;i++){ if(!Q.tiles[i].used && Q.tiles[i].ch===need){ Q.tiles[i].used=true; Q.built.push(i); break; } }
+  Q.hinted=true; render();
+}
+function checkSpell(){
+  if(!Q||Q.type!=='spell'||Q.checked||Q.built.length!==Q.item.show.length) return;
+  var str=builtStr(), ok=str===Q.item.show; Q.checked=true; Q.ok=ok; Q.str=str;
+  if(RUN.mode==='check'){ render(); checkAnswered(ok, str); return; }
+  record(Q.item.id, ok, true);
+  if(ok){ RUN.sc[Q.item.id]=(RUN.sc[Q.item.id]||0)+1; if(RUN.retry) bumpRetry('spell'); }
+  render(); speak(Q.item.voice);
+  if(ok) timer=setTimeout(nextQ, CONFIG.autoNextMs+300);
+  else if(!RUN.retry) RUN.words.push(Q.item);   // comes back later in the round
+}
+
+/* ---------- run rendering ---------- */
+function runTitle(){
+  var R=RUN, s=R.s;
+  if(R.part==='SPOT') return 'Stage 11 · Spot them';
+  if(R.part==='REAL') return 'Real signs & menus';
+  var base = R.part==='F' ? 'Final' : 'Stage '+s+' · '+partName(s,R.part);
+  if(R.mode==='check') return base+' · '+(R.part==='F'?'':'Check ')+Math.min(R.qi+1,R.qs.length)+'/'+R.qs.length;
+  if(R.retry) return base+' · Practise these';
+  return base+' · Practice';
+}
+function headHTML(){
+  var R=RUN, right;
+  if(R.mode==='practice' && (hasCheck()||R.part==='F')){
+    var ready=isReady();
+    right='<button class="mini-btn chk'+(ready?' ready':'')+'" data-act="tocheck">Check ▶</button>';
+  } else right='<span class="rh-sp"></span>';
+  var h='<div class="runhead"><button class="icon-btn" data-act="quit" aria-label="Stop">✕</button><span class="rt">'+esc(runTitle())+'</span>'+right+'</div>';
+  if(R.mode==='check') h+='<div class="qbar"><i style="width:'+Math.round(R.qi/R.qs.length*100)+'%"></i></div>';
+  else if(R.retry){ var done=R.retry.filter(function(e){ return (R.rc[e.type+e.item.id]||0)>=2; }).length; h+='<div class="qbar"><i style="width:'+Math.round(done/R.retry.length*100)+'%"></i></div>'; }
+  return h;
+}
+function sizeClass(text){
+  var n=String(text).replace(/\s/g,'').length;
+  return n<=2 ? '' : n<=5 ? ' mid' : n<=10 ? ' long' : ' xlong';
+}
+function revealHTML(it){
+  var note=it.note||'';
+  if(it.pair) note=(note?note+' · ':'')+'Sounds like '+it.pair.show+', but means “'+it.mean+'”. Thai tells them apart by tone.';
+  return '<div class="reveal show">'+(it.rThai?'<div class="thai" lang="th">'+esc(it.rThai)+'</div>':'')+
+    (PREFS.roman?'<div class="rom">'+esc(it.rom)+'</div>':'')+
+    (it.mean?'<div class="meaning">'+esc(it.k==='w'?'“'+it.mean+'”':it.mean)+'</div>':'')+
+    (note?'<div class="note">'+esc(note)+'</div>':'')+'</div>';
+}
+function readyHTML(){
+  if(RUN.mode!=='practice' || RUN.retry || !isReady()) return '';
+  return '<button class="btn ghost readybtn" data-act="tocheck">Ready for the check ▶</button>';
+}
+function eyebrowFor(it, type){
+  if(type==='hear') return it.k==='c'?'Listen · which letter?':it.k==='v'?'Listen · which vowel?':it.k==='m'?'Listen to the name · which mark?':'Listen · which word?';
+  return it.k==='c'?'Say this letter’s name':it.k==='v'?'Say this vowel':it.k==='m'?'What is this mark?':'Sound it out loud';
+}
+function runHTML(){
+  var R=RUN, it=Q.item, h=headHTML();
+  if(Q.type==='intro'){
+    var idx=R.newI.indexOf(it)+1;
+    h+='<div class="qbody center"><span class="newtag">New '+(it.k==='c'?'letter':it.k==='v'?'vowel':'mark')+' · '+idx+' of '+R.newI.length+'</span>'+
+      '<div class="bigthai'+sizeClass(it.show)+(Q.fresh?' in':'')+'" lang="th">'+esc(it.show)+'</div>'+
+      '<div class="reveal show">'+(it.rThai?'<div class="thai" lang="th">'+esc(it.rThai)+'</div>':'')+'<div class="rom">'+esc(it.rom)+'</div>'+
+      '<div class="meaning">'+esc(it.mean)+'</div>'+(it.note?'<div class="note">'+esc(it.note)+'</div>':'')+'</div>'+
+      '<div class="row2" style="width:100%"><button class="btn ghost" data-act="play">🔊 Hear</button><button class="btn primary" data-act="next">'+(R.introQ.length?'Next →':'Start practice →')+'</button></div></div>';
+    return h;
+  }
+  if(Q.type==='tilehelp'){
+    h+='<div class="qbody center"><span class="newtag">How spelling works</span>'+
+      '<div class="res-sub">Hear the word, then tap the tiles in the order you write Thai: <b>left to right</b>. Anything that sits <b>above or below</b> a letter comes straight after that letter.</div>'+
+      '<div class="ex">'+
+      '<div><span class="tc" lang="th">ไป</span><span class="ord" lang="th">ไ◌ → ป</span></div>'+
+      '<div><span class="tc" lang="th">แมว</span><span class="ord" lang="th">แ◌ → ม → ว</span></div>'+
+      '<div><span class="tc" lang="th">กิน</span><span class="ord" lang="th">ก → ◌ิ → น</span></div>'+
+      '<div><span class="tc" lang="th">ไม่</span><span class="ord" lang="th">ไ◌ → ม → ◌่</span></div>'+
+      '</div><div class="res-sub">⌫ undoes the last tile. 💡 shows the next tile (practice only).</div>'+
+      '<button class="btn primary" data-act="tilesok">Got it →</button></div>';
+    return h;
+  }
+  if(Q.type==='hear'){
+    var practice=R.mode==='practice', n=Q.choices.length;
+    h+='<div class="qbody"><div class="eyebrow">'+eyebrowFor(it,'hear')+'</div>'+
+      '<button class="btn play" data-act="play"><span>🔊</span> Play</button>'+
+      '<div class="tiles'+(n===3?' three':n===2?' two':'')+'">'+Q.choices.map(function(c,i){
+        var cls=sizeClass(c.show);
+        if(Q.answered){ cls+=' done'; if(c.id===it.id) cls+=' right'; else if(Q.picked && c.id===Q.picked.id) cls+=' wrong'; }
+        return '<button class="tile'+cls+'" data-act="choose" data-arg="'+i+'" lang="th"><span class="k">'+(i+1)+'</span>'+esc(c.show)+'</button>';
+      }).join('')+'</div>';
+    if(practice){
+      if(!Q.answered) h+=(hasTTS?'':'<div class="hint">This browser can’t play audio. Try Chrome or Safari.</div>')+'<button class="btn text idk" data-act="idk">I don’t know</button>';
+      else {
+        h+='<div class="verdict '+(Q.ok?'ok':Q.idk?'idk':'bad')+'">'+(Q.ok?'✓ Correct!':Q.idk?'This one:':'✗ Not that one')+'</div>'+revealHTML(it)+
+           '<div class="hint">Tap any tile to hear it.</div>'+(Q.ok?'':'<button class="btn primary" data-act="next">Next →</button>');
+      }
+      h+=readyHTML();
+    } else if(Q.answered){
+      h+='<div class="verdict '+(Q.ok?'ok':'bad')+'">'+(Q.ok?'✓':'✗')+'</div>';
+    }
+    return h+'</div>';
+  }
+  if(Q.type==='say'){
+    h+='<div class="qbody center"><div class="eyebrow">'+eyebrowFor(it,'say')+'</div>'+
+      '<div class="bigthai'+sizeClass(it.show)+(Q.fresh?' in':'')+'" lang="th">'+esc(it.show)+'</div>';
+    if(Q.revealed) h+=revealHTML(it)+'<div class="hint">'+(it.k==='m'?'Did you know what it does?':'Did you say it the same way?')+'</div>'+
+      '<button class="btn text" data-act="play">🔊 Hear again</button>'+
+      '<div class="rate-row" style="width:100%"><button class="btn rate miss" data-act="rate" data-arg="0">✗ Missed</button><button class="btn rate got" data-act="rate" data-arg="1">✓ Got it</button></div>';
+    else h+='<div class="hint">'+(it.k==='m'?'Think what it does, then tap.':'Say it out loud first. Not sure yet? Tap and learn it.')+'</div>'+
+      '<button class="btn ghost" data-act="reveal" style="width:100%">🔊 Hear &amp; reveal</button>';
+    return h+readyHTML()+'</div>';
+  }
+  if(Q.type==='spell'){
+    var practiceS=R.mode==='practice', w=it.show, str=builtStr(), full=Q.built.length===w.length;
+    h+='<div class="qbody"><div class="eyebrow">Spell it</div>'+
+      '<div class="prompt"><button class="btn play" data-act="play">🔊 Play</button><span class="meaning">“'+esc(it.mean)+'”</span></div>'+
+      '<div class="slot'+(Q.checked?(Q.ok?' right':' wrong'):'')+'" lang="th">'+(str?esc(str):'<span class="ph">tap the tiles</span>')+'</div>'+
+      '<div class="boxes">'+w.split('').map(function(_,i){ return '<i class="box'+(i<Q.built.length?' on':'')+'"></i>'; }).join('')+'</div>';
+    if(!Q.checked){
+      h+='<div class="keys">'+Q.tiles.map(function(t,i){ return '<button class="key" data-act="tile" data-arg="'+i+'" lang="th"'+(t.used?' disabled':'')+'>'+esc(tileLabel(t.ch))+'</button>'; }).join('')+'</div>'+
+        '<div class="srow"><button class="btn ghost" data-act="undo"'+(Q.built.length?'':' disabled')+'>⌫ Undo</button>'+
+        (practiceS?'<button class="btn ghost" data-act="hint">💡 Hint</button>':'')+'</div>'+
+        (full?'<button class="btn primary" data-act="spellcheck">Check</button>':'');
+    } else if(practiceS){
+      h+='<div class="verdict '+(Q.ok?'ok':'bad')+'">'+(Q.ok?'✓ Correct!':'✗ Not quite')+'</div>'+
+        (Q.ok?'':'<div class="rightsp">Right spelling: '+T(esc(w))+'</div>')+revealHTML(it)+
+        (Q.ok?'':'<button class="btn primary" data-act="next">Next →</button>');
+    } else h+='<div class="verdict '+(Q.ok?'ok':'bad')+'">'+(Q.ok?'✓':'✗')+'</div>';
+    if(practiceS) h+=readyHTML();
+    return h+'</div>';
+  }
+  return h;
+}
+
+/* ---------- result ---------- */
+function resultHTML(){
+  var r=RES, s=r.s, label=partName(s,r.part);
+  var h='<div class="runhead"><button class="icon-btn" data-act="back" aria-label="Back to stage">✕</button><span class="rt">'+(r.part==='F'?'Final':'Stage '+s+' · '+label)+'</span><span class="rh-sp"></span></div><div class="qbody center">';
+  if(r.pass){
+    var parts=STAGE_INFO[s-1][1].split(''), np=nextPart(s);
+    var line = np ? partName(s,np)+' next.' : r.part==='F' ? 'You finished the course.' : 'Stage '+s+' done!';
+    h+='<div class="res-ico">✓</div><div class="res-big ok">'+esc(label)+' '+r.score+'/'+r.total+'</div><div class="res-sub">Nice. '+esc(line)+'</div>';
+    if(np) h+='<button class="btn primary" data-act="part" data-arg="'+np+'">Next: '+partName(s,np)+' ▶</button>';
+    else if(r.part==='F') h+='<button class="btn primary" data-act="done">🎉 See your result</button>';
+    else h+='<button class="btn primary" data-act="stage" data-arg="'+(s+1)+'">Move to Stage '+(s+1)+' ▶</button>';
+    h+='<button class="btn ghost" data-act="back">Back to stage</button>';
+  } else {
+    h+='<div class="res-big ny">Not yet: '+r.score+'/'+r.total+'</div><div class="res-sub">You need '+r.need+'. Practise what you missed, then try again.</div>';
+    h+=missesHTML(r.misses);
+    if(r.ny===2) h+='<div class="calm">These ones look alike, so take your time on them.'+(s>1&&s<12?' A quick look back at Stage '+(s-1)+' can help too.':'')+'</div>';
+    h+='<button class="btn primary" data-act="practise">▶ Practise these</button><button class="btn ghost" data-act="retry">Retry check now</button><button class="btn text" data-act="back">Back to stage</button>';
+  }
+  return h+'</div>';
+}
+function missesHTML(ms){
+  var groups={}, order=[];
+  ms.forEach(function(m){
+    var right=m.item.show, got = m.type==='spell' ? (m.picked||'') : (m.picked?m.picked.show:'—');
+    var k=m.type+'|'+right+'|'+got;
+    if(!groups[k]){ groups[k]={right:right, got:got, type:m.type, n:0}; order.push(k); }
+    groups[k].n++;
+  });
+  return '<div class="misses"><div class="mh">You mixed up</div>'+order.map(function(k){
+    var g=groups[k];
+    return '<div class="mrow"><span>'+T(esc(g.right))+'<span class="arw">'+(g.type==='spell'?'you built':'↔')+'</span>'+T(esc(g.got))+'</span><small>'+(g.n>1?g.n+'×':'')+'</small></div>';
+  }).join('')+'</div>';
+}
+
+/* ---------- finished ---------- */
+function shareText(){
+  var t=tk('12F'), best=t?t.best:0;
+  return '🇹🇭 ก to ฮ: I can read Thai\nFinal '+best+'/30 · 42 letters · '+ALLW.length+' words\nlekthai.app/alphabet';
+}
+function doneHTML(){
+  var t=tk('12F');
+  var h='<div class="runhead"><button class="icon-btn" data-act="tomap" aria-label="Back">✕</button><span class="rt">ก to ฮ</span><span class="rh-sp"></span></div><div class="qbody center">';
+  if(t&&t.pass){
+    h+='<div class="res-ico">🎉</div><div class="res-big ok">You can read Thai.</div>'+
+      '<div class="fin-stats">42 letters · 24 vowels · 7 marks · '+ALLW.length+' words<br>Final '+t.best+'/30</div>'+
+      '<button class="btn primary" data-act="share">Share</button>'+
+      '<a class="btn ghost" href="/read/" style="text-decoration:none">Keep practising in Read Thai →</a>';
+  } else {
+    h+='<div class="res-sub">Pass the Final (27/30) to finish the course.</div><button class="btn primary" data-act="stage" data-arg="12">Go to the Final</button>';
+  }
+  return h+'</div>';
+}
+function share(){
+  var text=shareText();
+  if(navigator.share){ navigator.share({text:text}).catch(function(){}); return; }
+  try{ navigator.clipboard.writeText(text).then(function(){ showWarn('copied','✓ Copied. Paste it anywhere.'); }); }
+  catch(e){ showWarn('copied', esc(text).replace(/\n/g,'<br>')); }
+}
+
+/* =====================================================================
+   SETTINGS
+   ===================================================================== */
+function setTheme(t){ document.documentElement.setAttribute('data-theme',t); $('themeBtn').textContent=t==='dark'?'◑':'◐'; try{ localStorage.setItem(KEY_THEME,t); }catch(e){} }
+function applyStyle(){ document.documentElement.classList.toggle('sign-style', PREFS.style==='sign'); }
+function syncSheet(){
+  $('romBtn').textContent=PREFS.roman?'On':'Off'; $('romBtn').classList.toggle('on',PREFS.roman);
+  $('slowBtn').textContent=PREFS.slow?'On':'Off'; $('slowBtn').classList.toggle('on',PREFS.slow);
+  $('styleBtn').textContent = PREFS.style==='sign' ? 'ก Sign' : 'ก Classic';
+  $('voiceVal').textContent = !hasTTS?'Not supported here':thaiVoice?(thaiVoice.name||'Thai'):(voiceChecked?'No Thai voice listed':'Checking…');
+  $('progressVal').textContent = storageOK ? tickCount()+'/'+MAXTICKS+' ticks' : 'Saving is off';
+}
+function openSettings(){ syncSheet(); $('settings').hidden=false; }
+function closeSettings(){ $('settings').hidden=true; $('resetConfirm').hidden=true; }
+
+/* =====================================================================
+   EVENTS
+   ===================================================================== */
+$('view').addEventListener('click',function(e){
+  var b=e.target.closest('[data-act]'); if(!b || b.disabled) return;
+  var a=b.dataset.act, arg=b.dataset.arg;
+  switch(a){
+    case 'stage': go('stage', +arg); break;
+    case 'part': startPart(VIEW==='result'?RES.s:VSTAGE, arg); break;
+    case 'spot': startPart(11,'SPOT'); break;
+    case 'real': startPart(12,'REAL'); break;
+    case 'ref': go('ref'); break;
+    case 'refplay': speak((REF[VSTAGE][+arg]||[])[1]); break;
+    case 'done': go('done'); break;
+    case 'tomap': go('map'); break;
+    case 'back': go('stage', VIEW==='result'?RES.s:VSTAGE); break;
+    case 'quit': go('stage', RUN?RUN.s:VSTAGE); break;
+    case 'tocheck': startCheck(RUN.s, RUN.part); break;
+    case 'play': if(Q&&Q.item) speak(Q.item.voice); break;
+    case 'next': nextQ(); break;
+    case 'choose': choose(+arg); break;
+    case 'idk': dontKnow(); break;
+    case 'reveal': revealSay(); break;
+    case 'rate': rateSay(arg==='1'); break;
+    case 'tile': tapTile(+arg); break;
+    case 'undo': undoTile(); break;
+    case 'hint': hintTile(); break;
+    case 'spellcheck': checkSpell(); break;
+    case 'tilesok': PREFS.seen['tiles'+RUN.s]=1; savePrefs(); nextQ(); break;
+    case 'practise': practiseThese(); break;
+    case 'retry': startCheck(RES.s, RES.part); break;
+    case 'share': share(); break;
+  }
+});
+$('backPill').addEventListener('click',function(){ if(VIEW!=='map') go('map'); });
+$('gearBtn').addEventListener('click',openSettings);
+$('settingsClose').addEventListener('click',closeSettings);
+$('settingsScrim').addEventListener('click',closeSettings);
+$('betaTag').addEventListener('click',function(){ showWarn('beta'); });
+$('warnX').addEventListener('click',hideWarn);
+$('themeBtn').addEventListener('click',function(){ setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'); });
+$('styleBtn').addEventListener('click',function(){ PREFS.style=PREFS.style==='sign'?'classic':'sign'; savePrefs(); applyStyle(); syncSheet(); });
+$('romBtn').addEventListener('click',function(){ PREFS.roman=!PREFS.roman; savePrefs(); syncSheet(); if(VIEW==='run') render(); });
+$('slowBtn').addEventListener('click',function(){ PREFS.slow=!PREFS.slow; savePrefs(); syncSheet(); });
+$('resetBtn').addEventListener('click',function(){ $('resetConfirm').hidden=false; });
+$('resetCancel').addEventListener('click',function(){ $('resetConfirm').hidden=true; });
+$('resetYes').addEventListener('click',function(){
+  PROG=freshProg(); try{ store.removeItem(KEY_PROG); }catch(e){}
+  PREFS.seen={}; savePrefs(); closeSettings(); go('map');
+});
+
+/* desktop keyboard: Space replay · 1–4 choose · Enter next/check · Backspace undo */
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){ if(!$('settings').hidden) closeSettings(); return; }
+  if(!$('settings').hidden || VIEW!=='run' || !Q) return;
+  var t=e.target; if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA')) return;
+  if(e.key===' '){ e.preventDefault(); if(Q.item) speak(Q.item.voice); }
+  else if(Q.type==='hear' && /^[1-4]$/.test(e.key)){ e.preventDefault(); choose(+e.key-1); }
+  else if(e.key==='Enter'){
+    e.preventDefault();
+    if(Q.type==='intro'||Q.type==='tilehelp'){ var b=document.querySelector('[data-act="next"],[data-act="tilesok"]'); if(b) b.click(); }
+    else if(Q.type==='say'){ if(!Q.revealed) revealSay(); else rateSay(true); }
+    else if(Q.type==='spell'){ if(!Q.checked) checkSpell(); else if(RUN.mode==='practice') nextQ(); }
+    else if(Q.answered && RUN.mode==='practice') nextQ();
+  }
+  else if(e.key==='Backspace' && Q.type==='spell'){ e.preventDefault(); undoTile(); }
+});
+
+/* ---------- boot ---------- */
+(function(){
+  var saved='dark'; try{ saved=localStorage.getItem(KEY_THEME)||'dark'; }catch(e){}
+  setTheme(saved); applyStyle();
+  if(hasTTS){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; } else showWarn('notts');
+  if($('warn').hidden && !load(KEY_BETA,0)) showWarn('beta');
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) hush(); });
+  render(true);
+})();
+
+/* test hook for automated checks only; harmless in the browser */
+window.__ltAbc={IT:IT, NEWOF:NEWOF, WORDS:WORDS, ALLW:ALLW, SPOTW:SPOTW, makeChoices:makeChoices, spellTiles:spellTiles, tileSafe:tileSafe,
+  lettersUpTo:lettersUpTo, wordsUpTo:wordsUpTo, charsUpTo:charsUpTo, startPart:startPart, startCheck:startCheck,
+  state:function(){ return {VIEW:VIEW, RUN:RUN, Q:Q, RES:RES, PROG:PROG}; }, isReady:isReady};
+})();
+</script>
+
+<script>
+/* Home link icon: show the house only when the header has spare room (same as the other pages). */
+(function(){
+  var bar=document.querySelector('.bar'), title=bar&&bar.querySelector('.title');
+  if(!title||!window.ResizeObserver||!document.createRange) return;
+  function fit(){
+    bar.classList.remove('home-roomy');
+    var cs=getComputedStyle(title), r=document.createRange(); r.selectNodeContents(title);
+    var room=title.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-r.getBoundingClientRect().width;
+    if(room>=18) bar.classList.add('home-roomy');
+  }
+  new ResizeObserver(fit).observe(bar);
+  var pill=bar.querySelector('.pill'); if(pill) new ResizeObserver(fit).observe(pill);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+  fit();
+})();
+</script>
+</body>
+</html>
