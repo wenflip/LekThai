@@ -128,7 +128,11 @@
 
   /* ---------- TOOLS (the hub) ---------- */
   .tools{ display:grid; gap:12px; grid-template-columns:1fr; }
-  @media (min-width:620px){ .tools{ grid-template-columns:repeat(2,1fr); gap:14px; } }
+  @media (min-width:620px){
+    .tools{ grid-template-columns:repeat(2,1fr); gap:14px; }
+    /* odd number of tools: the last card spans the full row instead of sitting alone at half width */
+    .tools .tool:last-child:nth-child(odd){ grid-column:1 / -1; }
+  }
   .tool{
     position:relative; display:flex; align-items:center; gap:16px;
     border-radius:18px; padding:18px 44px 18px 18px; text-decoration:none; color:var(--ink);
@@ -225,6 +229,14 @@
         </span>
         <span class="arr" aria-hidden="true">→</span>
       </a>
+      <a class="tool" href="/read/">
+        <span class="icon thai" aria-hidden="true">ก</span>
+        <span>
+          <h2>Read</h2>
+          <p>The Thai alphabet, vowels, and the signs you see every day.</p>
+        </span>
+        <span class="arr" aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 
@@ -278,6 +290,7 @@
       <a href="/words/">Words</a>
       <a href="/learn/">Numbers</a>
       <a href="/phrases/">Phrases</a>
+      <a href="/read/">Read</a>
       <a href="/thai-numbers">Guides</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
