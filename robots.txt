@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
 
-# The drill itself is noindex (see its meta robots tag) so it doesn't
-# compete with the landing page for the primary keyword. Crawling is
-# still allowed so the link graph stays intact.
+# The tool pages are noindex (see their meta robots tags) so they don't
+# compete with the home page and the guides in search. Crawling is still
+# allowed so the link graph stays intact.
 
 Sitemap: https://lekthai.app/sitemap.xml
