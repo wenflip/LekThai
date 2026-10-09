@@ -73,7 +73,10 @@
   strong{ color:var(--ink); font-weight:600; }
   a{ color:var(--blue); text-decoration:none; }
   a:hover{ text-decoration:underline; }
-  footer{ border-top:1px solid var(--card-border); margin-top:44px; padding-top:22px; font-size:13.5px; color:var(--muted); }
+  footer{ border-top:1px solid var(--card-border); margin-top:44px; padding-top:22px; font-size:13.5px; color:var(--muted); text-align:center; }
+  footer nav{ display:flex; flex-wrap:wrap; justify-content:center; gap:0 2px; }
+  footer nav a{ display:inline-flex; align-items:center; min-height:44px; padding:0 9px; margin:0; color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; white-space:nowrap; }
+  footer nav a[aria-current="page"]{ color:var(--ink); }
   :focus-visible{ outline:2px solid rgba(213,114,127,.65); outline-offset:3px; }
 </style>
 </head>
@@ -121,6 +124,19 @@
   <p>If you have any questions about this policy, contact us at <a href="mailto:hello@lekthai.app">hello@lekthai.app</a>.</p>
 
   <footer>
+    <nav aria-label="Site">
+      <a href="/">Home</a>
+      <a href="/30-days/">30 days</a>
+      <a href="/sounds/">Sounds</a>
+      <a href="/words/">Words</a>
+      <a href="/learn/">Numbers</a>
+      <a href="/phrases/">Phrases</a>
+      <a href="/read/">Read</a>
+      <a href="/alphabet/">Alphabet</a>
+      <a href="/thai-numbers/">Guides</a>
+      <a href="/privacy/" aria-current="page">Privacy</a>
+      <a href="/terms/">Terms</a>
+    </nav>
     LekThai is an independent project based in Thailand. This policy applies to the LekThai website at lekthai.app and the LekThai app.
   </footer>
 </main>

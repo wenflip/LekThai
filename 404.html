@@ -118,8 +118,9 @@
   }
   .btn.ghost{ height:50px; font-size:16px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
   .btn.ghost:hover{ border-color:var(--accent); }
-  nav{ margin-top:22px; padding-top:16px; border-top:1px solid var(--card-border); }
-  nav a{ color:var(--muted); text-decoration:none; font:500 13px/1 "DM Sans"; margin:0 8px; white-space:nowrap; }
+  nav{ margin-top:22px; padding-top:16px; border-top:1px solid var(--card-border); display:flex; flex-wrap:wrap; justify-content:center; gap:0 2px; }
+  nav a{ display:inline-flex; align-items:center; min-height:44px; padding:0 9px; margin:0; color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; white-space:nowrap; }
+  nav a[aria-current="page"]{ color:var(--ink); }
   nav a:hover{ color:var(--ink); }
   :focus-visible{ outline:2px solid var(--ring); outline-offset:2px; }
 </style>
@@ -144,9 +145,16 @@
     <a class="btn ghost" href="/">Go to the home page</a>
   </div>
 
-  <nav>
+  <nav aria-label="Site">
+    <a href="/">Home</a>
+    <a href="/30-days/">30 days</a>
+    <a href="/sounds/">Sounds</a>
+    <a href="/words/">Words</a>
+    <a href="/learn/">Numbers</a>
+    <a href="/phrases/">Phrases</a>
+    <a href="/read/">Read</a>
+    <a href="/alphabet/">Alphabet</a>
     <a href="/thai-numbers/">Guides</a>
-    <a href="/thai-numbers-1-100/">Numbers 1–100</a>
     <a href="/privacy/">Privacy</a>
     <a href="/terms/">Terms</a>
   </nav>

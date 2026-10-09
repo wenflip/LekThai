@@ -176,8 +176,9 @@
 
   /* ---------- FOOTER ---------- */
   footer{ border-top:1px solid var(--card-border); margin-top:26px; padding:26px 0 46px; text-align:center; }
-  footer nav{ display:flex; flex-wrap:wrap; justify-content:center; gap:12px 22px; }
-  footer nav a{ color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; }
+  footer nav{ display:flex; flex-wrap:wrap; justify-content:center; gap:0 2px; }
+  footer nav a{ display:inline-flex; align-items:center; min-height:44px; padding:0 9px; margin:0; color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; white-space:nowrap; }
+  footer nav a[aria-current="page"]{ color:var(--ink); }
   footer nav a:hover{ color:var(--ink); }
   footer .copy{ margin-top:18px; font-size:13px; color:var(--muted); }
 
@@ -322,8 +323,8 @@
   </section>
 
   <footer>
-    <nav>
-      <a href="/">Home</a>
+    <nav aria-label="Site">
+      <a href="/" aria-current="page">Home</a>
       <a href="/30-days/">30 days</a>
       <a href="/sounds/">Sounds</a>
       <a href="/words/">Words</a>

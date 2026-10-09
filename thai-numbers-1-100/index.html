@@ -129,7 +129,9 @@
   details p{ margin:10px 0 0; }
 
   footer{ border-top:1px solid var(--card-border); margin-top:50px; padding:26px 0 60px; text-align:center; }
-  footer nav a{ color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; margin:0 12px; }
+  footer nav{ display:flex; flex-wrap:wrap; justify-content:center; gap:0 2px; }
+  footer nav a{ display:inline-flex; align-items:center; min-height:44px; padding:0 9px; margin:0; color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; white-space:nowrap; }
+  footer nav a[aria-current="page"]{ color:var(--ink); }
   footer nav a:hover{ color:var(--ink); }
   footer .copy{ margin-top:16px; font-size:13px; color:var(--muted); }
   :focus-visible{ outline:2px solid rgba(213,114,127,.65); outline-offset:3px; }
@@ -315,9 +317,16 @@
 <ul class="related"><li><a href="/thai-numbers/">Thai numbers &amp; numerals</a> &mdash; The full reference: the Thai digits, the words, and the two rules.</li><li><a href="/thai-number-pronunciation/">Pronunciation &amp; tones</a> &mdash; The tone on every number, and the pairs people confuse.</li><li><a href="/learn-thai-numbers/">How to learn them</a> &mdash; The method, and a seven-day plan.</li><li><a href="/how-to-count-in-thai/">How to count in Thai</a> &mdash; Counting objects, classifiers, and ordinals.</li></ul>
 
   <footer>
-    <nav>
+    <nav aria-label="Site">
       <a href="/">Home</a>
-      <a href="/learn/">Open the drill</a>
+      <a href="/30-days/">30 days</a>
+      <a href="/sounds/">Sounds</a>
+      <a href="/words/">Words</a>
+      <a href="/learn/">Numbers</a>
+      <a href="/phrases/">Phrases</a>
+      <a href="/read/">Read</a>
+      <a href="/alphabet/">Alphabet</a>
+      <a href="/thai-numbers/">Guides</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
     </nav>
