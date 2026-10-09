@@ -384,9 +384,6 @@
            color:var(--muted); font-size:14px; cursor:pointer; border-radius:8px; }
 
   /* ============ FOOTER (below the fold, like /learn) ============ */
-  .app-foot{ position:absolute; left:16px; right:16px; top:100%; padding:18px 0 30px; text-align:center; border-top:1px solid var(--card-border); }
-  .app-foot nav a{ color:var(--muted); text-decoration:none; font:500 13px/1 "DM Sans"; margin:0 8px; }
-  .app-foot nav a:hover{ color:var(--ink); }
 
   /* ============ SETTINGS SHEET (same as /learn) ============ */
   .sheet-wrap{ position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center; padding:18px; }
@@ -440,6 +437,20 @@
   @keyframes streakPop{ 0%{transform:scale(1);} 38%{transform:scale(1.2);} 100%{transform:scale(1);} }
   @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
   @keyframes sheetIn{ from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;} }
+  /* ============ SITE NAVIGATION (set menu + Settings) ============
+     Replaces the old footer, which sat below the full-height app and could
+     never be scrolled to. */
+  .toolnav{ display:flex; flex-wrap:wrap; gap:8px; }
+  .toolnav a{
+    display:inline-flex; align-items:center; min-height:44px; padding:0 14px; border-radius:999px;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    text-decoration:none; font:600 13px/1 "DM Sans";
+  }
+  .toolnav a:hover{ border-color:var(--accent); }
+  .toolnav a[aria-current="page"]{ border-color:var(--accent); color:var(--accent); }
+  .sheet-nav{ padding:12px 0 16px; border-bottom:1px solid var(--card-border); }
+  .ranges + .pop-title, .pop-note + .pop-title{ margin-top:16px; }
+  .sheet-nav-title{ margin:0 0 10px; font:600 11px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
 </style>
 </head>
 <body>
@@ -460,6 +471,18 @@
         <div class="chips" id="groupChips"></div>
         <div class="pop-title">Level</div>
         <div class="chips" id="levelChips"></div>
+        <div class="pop-title">Other tools</div>
+        <nav class="toolnav" aria-label="LekThai tools">
+          <a href="/">Home</a>
+          <a href="/30-days/">30 days</a>
+          <a href="/sounds/">Sounds</a>
+          <a href="/words/" aria-current="page">Words</a>
+          <a href="/learn/">Numbers</a>
+          <a href="/phrases/">Phrases</a>
+          <a href="/read/">Read</a>
+          <a href="/alphabet/">Alphabet</a>
+          <a href="/thai-numbers/">Guides</a>
+        </nav>
       </div>
     </div>
     <h1 class="title"><a class="home-link" href="/" aria-label="LekThai home"><svg class="home-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>LekThai</a></h1>
@@ -531,15 +554,6 @@
 
   </section>
 
-  <footer class="app-foot">
-    <nav>
-      <a href="/">Home</a>
-      <a href="/learn/">Numbers</a>
-      <a href="/thai-numbers/">Guides</a>
-      <a href="/privacy/">Privacy</a>
-      <a href="/terms/">Terms</a>
-    </nav>
-  </footer>
 </main>
 
 <div class="warn" id="warn" hidden role="status"><span id="warnText"></span><button class="warn-x" id="warnX" aria-label="Dismiss">✕</button></div>
@@ -552,6 +566,22 @@
       <span class="sheet-title">Settings</span>
       <button class="icon-btn" id="settingsClose" aria-label="Close settings">✕</button>
     </div>
+    <nav class="sheet-nav" aria-label="LekThai tools">
+      <p class="sheet-nav-title">Go to</p>
+      <div class="toolnav">
+        <a href="/">Home</a>
+        <a href="/30-days/">30 days</a>
+        <a href="/sounds/">Sounds</a>
+        <a href="/words/" aria-current="page">Words</a>
+        <a href="/learn/">Numbers</a>
+        <a href="/phrases/">Phrases</a>
+        <a href="/read/">Read</a>
+        <a href="/alphabet/">Alphabet</a>
+        <a href="/thai-numbers/">Guides</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </div>
+    </nav>
     <div class="sheet-row">
       <span class="row-label">Appearance</span>
       <button class="mini-btn" id="themeBtn" aria-label="Switch to light theme">◑</button>

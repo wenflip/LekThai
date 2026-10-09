@@ -388,6 +388,19 @@
     100%{ box-shadow:var(--card-shadow), 0 0 0 0 rgba(93,186,140,0); }
   }
   @keyframes sheetIn{ from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;} }
+  /* ============ SITE NAVIGATION (set menu + Settings) ============
+     Replaces the old footer, which sat below the full-height app and could
+     never be scrolled to. */
+  .toolnav{ display:flex; flex-wrap:wrap; gap:8px; }
+  .toolnav a{
+    display:inline-flex; align-items:center; min-height:44px; padding:0 14px; border-radius:999px;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    text-decoration:none; font:600 13px/1 "DM Sans";
+  }
+  .toolnav a:hover{ border-color:var(--accent); }
+  .toolnav a[aria-current="page"]{ border-color:var(--accent); color:var(--accent); }
+  .sheet-nav{ padding:12px 0 16px; border-bottom:1px solid var(--card-border); }
+  .sheet-nav-title{ margin:0 0 10px; font:600 11px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
 </style>
 </head>
 <body>
@@ -505,6 +518,22 @@
   <div class="sheet-scrim" id="settingsScrim"></div>
   <div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">
     <div class="sheet-head"><span class="sheet-title">Settings</span><button class="icon-btn" id="settingsClose" aria-label="Close settings">✕</button></div>
+    <nav class="sheet-nav" aria-label="LekThai tools">
+      <p class="sheet-nav-title">Go to</p>
+      <div class="toolnav">
+        <a href="/">Home</a>
+        <a href="/30-days/" aria-current="page">30 days</a>
+        <a href="/sounds/">Sounds</a>
+        <a href="/words/">Words</a>
+        <a href="/learn/">Numbers</a>
+        <a href="/phrases/">Phrases</a>
+        <a href="/read/">Read</a>
+        <a href="/alphabet/">Alphabet</a>
+        <a href="/thai-numbers/">Guides</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </div>
+    </nav>
     <div class="sheet-row"><span class="row-label">Appearance</span><button class="mini-btn" id="themeBtn" aria-label="Switch to light theme">◑</button></div>
     <div class="sheet-row"><span class="row-label">Polite ending<small>ครับ (men) or ค่ะ (women), added to what you say</small></span><button class="mini-btn" id="politeBtn"></button></div>
     <div class="sheet-row"><span class="row-label">English-letter spelling<small>e.g. phèt under เผ็ด</small></span><button class="mini-btn" id="romBtn"></button></div>

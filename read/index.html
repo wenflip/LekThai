@@ -305,10 +305,6 @@
   .warn-x{ position:absolute; top:6px; right:6px; width:28px; height:28px; border:0; background:none; color:var(--muted); font-size:14px; cursor:pointer; }
 
   /* ============ FOOTER (below the fold) ============ */
-  .app-foot{ position:absolute; left:16px; right:16px; top:100%; padding:18px 0 30px; text-align:center; border-top:1px solid var(--card-border); }
-  .app-foot nav{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px 14px; }
-  .app-foot nav a{ color:var(--muted); text-decoration:none; font:500 13px/1 "DM Sans"; }
-  .app-foot nav a:hover{ color:var(--ink); }
 
   /* ============ SETTINGS SHEET ============ */
   .sheet-wrap{ position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center; padding:18px; }
@@ -366,6 +362,20 @@
   }
   @keyframes streakPop{ 0%{transform:scale(1);} 38%{transform:scale(1.2);} 100%{transform:scale(1);} }
   @keyframes sheetIn{ from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;} }
+  /* ============ SITE NAVIGATION (set menu + Settings) ============
+     Replaces the old footer, which sat below the full-height app and could
+     never be scrolled to. */
+  .toolnav{ display:flex; flex-wrap:wrap; gap:8px; }
+  .toolnav a{
+    display:inline-flex; align-items:center; min-height:44px; padding:0 14px; border-radius:999px;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    text-decoration:none; font:600 13px/1 "DM Sans";
+  }
+  .toolnav a:hover{ border-color:var(--accent); }
+  .toolnav a[aria-current="page"]{ border-color:var(--accent); color:var(--accent); }
+  .sheet-nav{ padding:12px 0 16px; border-bottom:1px solid var(--card-border); }
+  .ranges + .pop-title, .pop-note + .pop-title{ margin-top:16px; }
+  .sheet-nav-title{ margin:0 0 10px; font:600 11px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
 </style>
 </head>
 <body>
@@ -383,6 +393,18 @@
         <div class="pop-title">Words</div><div class="chips" id="wordChips"></div>
         <div class="pop-title">Phrases</div><div class="chips" id="phraseChips"></div>
         <div class="pop-title">Level (words &amp; phrases)</div><div class="chips" id="levelChips"></div>
+        <div class="pop-title">Other tools</div>
+        <nav class="toolnav" aria-label="LekThai tools">
+          <a href="/">Home</a>
+          <a href="/30-days/">30 days</a>
+          <a href="/sounds/">Sounds</a>
+          <a href="/words/">Words</a>
+          <a href="/learn/">Numbers</a>
+          <a href="/phrases/">Phrases</a>
+          <a href="/read/" aria-current="page">Read</a>
+          <a href="/alphabet/">Alphabet</a>
+          <a href="/thai-numbers/">Guides</a>
+        </nav>
       </div>
     </div>
     <h1 class="title"><a class="home-link" href="/" aria-label="LekThai home"><svg class="home-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>LekThai</a></h1>
@@ -448,12 +470,6 @@
     </div>
   </section>
 
-  <footer class="app-foot">
-    <nav>
-      <a href="/">Home</a><a href="/sounds/">Sounds</a><a href="/words/">Words</a><a href="/learn/">Numbers</a>
-      <a href="/phrases/">Phrases</a><a href="/read/">Read</a><a href="/thai-numbers/">Guides</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a>
-    </nav>
-  </footer>
 </main>
 
 <div class="warn" id="warn" hidden role="status"><span id="warnText"></span><button class="warn-x" id="warnX" aria-label="Dismiss">✕</button></div>
@@ -462,6 +478,22 @@
   <div class="sheet-scrim" id="settingsScrim"></div>
   <div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">
     <div class="sheet-head"><span class="sheet-title">Settings</span><button class="icon-btn" id="settingsClose" aria-label="Close settings">✕</button></div>
+    <nav class="sheet-nav" aria-label="LekThai tools">
+      <p class="sheet-nav-title">Go to</p>
+      <div class="toolnav">
+        <a href="/">Home</a>
+        <a href="/30-days/">30 days</a>
+        <a href="/sounds/">Sounds</a>
+        <a href="/words/">Words</a>
+        <a href="/learn/">Numbers</a>
+        <a href="/phrases/">Phrases</a>
+        <a href="/read/" aria-current="page">Read</a>
+        <a href="/alphabet/">Alphabet</a>
+        <a href="/thai-numbers/">Guides</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </div>
+    </nav>
     <div class="sheet-row"><span class="row-label">Appearance</span><button class="mini-btn" id="themeBtn" aria-label="Switch to light theme">◑</button></div>
     <div class="sheet-row"><span class="row-label">Letter style<small>Classic: looped letters, as taught. Sign style: modern loopless letters, as on many signs and menus.</small></span><button class="mini-btn thaiw" id="styleBtn"></button></div>
     <div class="sheet-row"><span class="row-label">English-letter spelling<small>shown only after you answer</small></span><button class="mini-btn" id="romBtn"></button></div>
