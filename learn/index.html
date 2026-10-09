@@ -1068,14 +1068,6 @@ buildRanges();
 })();
 </script>
 <script>
-/* PWA: register the service worker (offline + installability). Root scope. */
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function(){
-    navigator.serviceWorker.register('/sw.js').catch(function(){});
-  });
-}
-</script>
-<script>
 /* Home link icon: show the house only when the header has spare room for it,
    so it never pushes into the pill, beta tag or streak chip (pill labels change
    width). The word "LekThai" is the home link either way. Presentation only. */
