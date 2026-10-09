@@ -533,7 +533,7 @@
   <div class="sheet-scrim" id="settingsScrim"></div>
   <div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">
     <div class="sheet-head"><span class="sheet-title">Settings</span><button class="icon-btn" id="settingsClose" aria-label="Close settings">✕</button></div>
-    <div class="sheet-row"><span class="row-label">Appearance</span><button class="mini-btn" id="themeBtn">◑</button></div>
+    <div class="sheet-row"><span class="row-label">Appearance</span><button class="mini-btn" id="themeBtn" aria-label="Switch to light theme">◑</button></div>
     <div class="sheet-row"><span class="row-label">Letter style<small>Classic: looped letters, as taught. Sign style: modern loopless letters, as on many signs and menus.</small></span><button class="mini-btn thaiw" id="styleBtn"></button></div>
     <div class="sheet-row"><span class="row-label">English-letter spelling<small>shown only after you answer</small></span><button class="mini-btn" id="romBtn"></button></div>
     <div class="sheet-row"><span class="row-label">Slow voice<small>speak the Thai more slowly</small></span><button class="mini-btn" id="slowBtn"></button></div>
@@ -1359,7 +1359,7 @@ function share(){
 /* =====================================================================
    SETTINGS
    ===================================================================== */
-function setTheme(t){ document.documentElement.setAttribute('data-theme',t); $('themeBtn').textContent=t==='dark'?'◑':'◐'; try{ localStorage.setItem(KEY_THEME,t); }catch(e){} }
+function setTheme(t){ document.documentElement.setAttribute('data-theme',t); $('themeBtn').textContent=t==='dark'?'◑':'◐'; $('themeBtn').setAttribute('aria-label', t==='dark'?'Switch to light theme':'Switch to dark theme'); try{ localStorage.setItem(KEY_THEME,t); }catch(e){} }
 function applyStyle(){ document.documentElement.classList.toggle('sign-style', PREFS.style==='sign'); }
 function syncSheet(){
   $('romBtn').textContent=PREFS.roman?'On':'Off'; $('romBtn').classList.toggle('on',PREFS.roman);
