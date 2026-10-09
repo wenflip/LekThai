@@ -121,7 +121,7 @@
   .bar{ flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; }
   .pill-wrap{ position:relative; min-width:0; }
   .pill{
-    display:inline-flex; align-items:center; gap:7px; height:38px; padding:0 13px; max-width:150px;
+    display:inline-flex; align-items:center; gap:7px; height:44px; padding:0 13px; max-width:150px;
     border-radius:999px; background:var(--soft); border:1px solid var(--card-border);
     color:var(--ink); font:600 13px/1 "DM Sans"; cursor:pointer; user-select:none;
     transition:background .2s, border-color .2s;
@@ -139,7 +139,7 @@
      tappable, and it sits in the header, away from the Play button and answer
      rows, so it can't be hit by accident mid-round. The beta tag stays separate. */
   .home-link{
-    display:inline-flex; align-items:center; gap:4px; height:38px; padding:0;
+    display:inline-flex; align-items:center; gap:4px; height:44px; padding:0;
     vertical-align:middle; color:inherit; text-decoration:none; border-radius:10px;
   }
   .home-ico{ flex:0 0 auto; color:var(--muted); transition:color .2s; display:none; }
@@ -158,7 +158,7 @@
   .streak.live .streak-ico{ filter:drop-shadow(0 0 7px var(--accent)); }
   .streak.hot{ animation:streakPop .5s ease; }
   .icon-btn{
-    width:38px; height:38px; border-radius:999px; cursor:pointer;
+    width:44px; height:44px; border-radius:999px; cursor:pointer;
     background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
     font-size:16px; display:grid; place-items:center; transition:background .2s, border-color .2s;
   }
@@ -337,7 +337,7 @@
   .mini-btn{
     -webkit-appearance:none; appearance:none; cursor:pointer; border-radius:11px;
     background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
-    font:600 14px/1 "DM Sans"; padding:10px 14px; min-height:40px; min-width:58px; transition:background .2s, border-color .2s, transform .12s;
+    font:600 14px/1 "DM Sans"; padding:10px 14px; min-height:44px; min-width:58px; transition:background .2s, border-color .2s, transform .12s;
   }
   .mini-btn:active{ transform:scale(.97); }
   .mini-btn:hover{ border-color:var(--accent); }
@@ -378,6 +378,18 @@
   @keyframes streakPop{ 0%{transform:scale(1);} 38%{transform:scale(1.2);} 100%{transform:scale(1);} }
   @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
   @keyframes sheetIn{ from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;} }
+  /* Header: the wordmark keeps its size; a long set name in the pill truncates
+     with an ellipsis instead of sliding under the wordmark. */
+  .bar .pill-wrap{ flex:0 1 auto; min-width:0; }
+  .bar .pill{ max-width:min(150px, 100%); }
+  .bar .title{ flex:1 0 auto; }
+  /* Small phones (under 360px): pill + wordmark + streak + gear no longer fit,
+     so the wordmark shrinks to the house icon alone. It stays the home link
+     (its aria-label still says "LekThai home"). */
+  @media (max-width:359.98px){
+    .title .home-link{ font-size:0; gap:0; min-width:44px; justify-content:center; }
+    .title .home-ico{ display:block; width:22px; height:22px; }
+  }
   /* ============ SITE NAVIGATION (set menu + Settings) ============
      Replaces the old footer, which sat below the full-height app and could
      never be scrolled to. */
