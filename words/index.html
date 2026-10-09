@@ -446,6 +446,15 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
   @keyframes streakPop{ 0%{transform:scale(1);} 38%{transform:scale(1.2);} 100%{transform:scale(1);} }
   @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
   @keyframes sheetIn{ from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;} }
+  /* Desktop: no phone-shaped frame around the app; the narrow column sits on the page. */
+  @media (min-width:480px){
+    .app{ border:none; border-radius:0; background:none; box-shadow:none; height:min(100svh, 820px); }
+  }
+  /* Tall screens: start the question a little lower instead of hugging the top of an
+     otherwise empty card. Content still grows downward when the choices appear. */
+  @media (min-height:740px){
+    .stage-hear{ padding-top:clamp(8px, 6vh, 56px); }
+  }
   /* Header: the wordmark keeps its size; a long set name in the pill truncates
      with an ellipsis instead of sliding under the wordmark. */
   .bar .pill-wrap{ flex:0 1 auto; min-width:0; }
