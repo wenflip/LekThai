@@ -163,7 +163,8 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
   }
   .card h3{ margin:0 0 7px; font:600 16px/1.2 "DM Sans"; color:var(--ink); }
   .card p{ margin:0; font-size:14.5px; color:var(--ink-2); }
-  .card .k{ font-size:20px; margin-bottom:10px; }
+  .card .k{ margin-bottom:10px; color:var(--accent); line-height:0; }
+  .tool .icon svg{ color:var(--blue); }
 
   /* ---------- TOOLS (the hub) ---------- */
   .tools{ display:grid; gap:12px; grid-template-columns:1fr; }
@@ -244,7 +245,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     <p class="eyebrow">Or practise one skill</p>
     <div class="tools">
       <a class="tool" href="/sounds/">
-        <span class="icon" aria-hidden="true">👂</span>
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"/><path d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"/></svg></span>
         <span>
           <h3>Sounds</h3>
           <p>Train your ear for Thai tones and vowel length.</p>
@@ -252,7 +253,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
         <span class="arr" aria-hidden="true">→</span>
       </a>
       <a class="tool" href="/words/">
-        <span class="icon" aria-hidden="true">🍜</span>
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
         <span>
           <h3>Words</h3>
           <p>Everyday words: see &amp; say, or hear &amp; choose.</p>
@@ -268,7 +269,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
         <span class="arr" aria-hidden="true">→</span>
       </a>
       <a class="tool" href="/phrases/">
-        <span class="icon" aria-hidden="true">💬</span>
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
         <span>
           <h3>Phrases</h3>
           <p>Survival phrases for food, taxis and shopping.</p>
@@ -307,17 +308,17 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     <p class="eyebrow">How it works</p>
     <div class="cards">
       <div class="card">
-        <div class="k">👂</div>
+        <div class="k" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"/><path d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"/></svg></div>
         <h3>Hear it</h3>
         <p>Listen first, then work out what you heard. Instant feedback, then the next one.</p>
       </div>
       <div class="card">
-        <div class="k">🗣️</div>
+        <div class="k" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg></div>
         <h3>Say it</h3>
         <p>Say it aloud from memory, then tap to hear the Thai and check yourself.</p>
       </div>
       <div class="card">
-        <div class="k">🎯</div>
+        <div class="k" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
         <h3>Weak spots, first</h3>
         <p>What you miss comes back sooner and more often. What you know fades to quick check-ins.</p>
       </div>
