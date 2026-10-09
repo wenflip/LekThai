@@ -137,12 +137,6 @@
   .home-link{ display:inline-flex; align-items:center; gap:4px; height:38px; vertical-align:middle; color:inherit; text-decoration:none; }
   .home-ico{ flex:0 0 auto; color:var(--muted); display:none; }
   .bar.home-roomy .home-ico{ display:block; }
-  .beta-tag{
-    display:inline-block; vertical-align:middle; margin-left:5px; padding:3px 6px 2px; border-radius:999px;
-    font:700 9px/1 "DM Sans"; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-    background:none; cursor:pointer;
-  }
   .bar-right{ display:flex; align-items:center; gap:8px; }
   .streak{
     display:inline-flex; align-items:center; gap:5px; height:34px; padding:0 12px;
@@ -390,7 +384,7 @@
         <div class="pop-title">Level (words &amp; phrases)</div><div class="chips" id="levelChips"></div>
       </div>
     </div>
-    <h1 class="title"><a class="home-link" href="/" aria-label="LekThai home"><svg class="home-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>LekThai</a><button class="beta-tag" id="betaTag" title="About the beta">beta</button></h1>
+    <h1 class="title"><a class="home-link" href="/" aria-label="LekThai home"><svg class="home-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>LekThai</a></h1>
     <div class="bar-right">
       <div class="streak" id="streakChip" title="Correct in a row (Hear &amp; Choose)"><span class="streak-ico">⚡</span><span id="streakVal">0</span></div>
       <button class="icon-btn" id="gearBtn" aria-label="Settings" aria-haspopup="dialog">⚙</button>
@@ -1019,7 +1013,6 @@ $('rateMiss').addEventListener('click',function(){ rateSay(false); });
 $('gearBtn').addEventListener('click',openSettings);
 $('settingsClose').addEventListener('click',closeSettings);
 $('settingsScrim').addEventListener('click',closeSettings);
-$('betaTag').addEventListener('click',function(){ showWarn('beta'); });
 $('warnX').addEventListener('click',hideWarn);
 $('themeBtn').addEventListener('click',function(){ setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'); });
 $('styleBtn').addEventListener('click',function(){ PREFS.style=PREFS.style==='sign'?'classic':'sign'; savePrefs(); applyStyle(); syncSheet(); });
