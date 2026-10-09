@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script>
+/* Theme before first paint: the visitor's saved choice, otherwise the phone's
+   light/dark setting. Also keeps the browser-bar colour (theme-color) in step. */
+(function(){var d=document.documentElement,t;try{t=localStorage.getItem('lekthai-theme')}catch(e){}
+if(t!=='light'&&t!=='dark')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+d.setAttribute('data-theme',t);
+function bar(){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',d.getAttribute('data-theme')==='light'?'#f5f7fb':'#0f1117')}
+document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new MutationObserver(bar).observe(d,{attributes:true,attributeFilter:['data-theme']});})();
+</script>
 <title>Page not found — LekThai</title>
 <!-- Never index a 404. All paths below are absolute (/...) because this page
      is served at whatever broken address was requested, at any folder depth. -->
@@ -118,8 +127,9 @@
   }
   .btn.ghost{ height:50px; font-size:16px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
   .btn.ghost:hover{ border-color:var(--accent); }
-  nav{ margin-top:22px; padding-top:16px; border-top:1px solid var(--card-border); }
-  nav a{ color:var(--muted); text-decoration:none; font:500 13px/1 "DM Sans"; margin:0 8px; white-space:nowrap; }
+  nav{ margin-top:22px; padding-top:16px; border-top:1px solid var(--card-border); display:flex; flex-wrap:wrap; justify-content:center; gap:0 2px; }
+  nav a{ display:inline-flex; align-items:center; min-height:44px; padding:0 9px; margin:0; color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; white-space:nowrap; }
+  nav a[aria-current="page"]{ color:var(--ink); }
   nav a:hover{ color:var(--ink); }
   :focus-visible{ outline:2px solid var(--ring); outline-offset:2px; }
 </style>
@@ -144,17 +154,22 @@
     <a class="btn ghost" href="/">Go to the home page</a>
   </div>
 
-  <nav>
+  <nav aria-label="Site">
+    <a href="/">Home</a>
+    <a href="/30-days/">30 days</a>
+    <a href="/sounds/">Sounds</a>
+    <a href="/words/">Words</a>
+    <a href="/learn/">Numbers</a>
+    <a href="/phrases/">Phrases</a>
+    <a href="/read/">Read</a>
+    <a href="/alphabet/">Alphabet</a>
     <a href="/thai-numbers/">Guides</a>
-    <a href="/thai-numbers-1-100/">Numbers 1–100</a>
     <a href="/privacy/">Privacy</a>
     <a href="/terms/">Terms</a>
   </nav>
 </main>
 
 <script>
-  // Match the visitor's dark/light choice from /learn (same storage key).
-  try{ var t=localStorage.getItem('lekthai-theme'); if(t==='light'||t==='dark') document.documentElement.setAttribute('data-theme',t); }catch(e){}
   // Play the Thai for 404, same voice settings as /learn. The button only shows if the browser can speak.
   if('speechSynthesis' in window){
     var b=document.getElementById('hear'); b.hidden=false;

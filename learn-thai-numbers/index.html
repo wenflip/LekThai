@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script>
+/* Theme before first paint: the visitor's saved choice, otherwise the phone's
+   light/dark setting. Also keeps the browser-bar colour (theme-color) in step. */
+(function(){var d=document.documentElement,t;try{t=localStorage.getItem('lekthai-theme')}catch(e){}
+if(t!=='light'&&t!=='dark')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+d.setAttribute('data-theme',t);
+function bar(){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',d.getAttribute('data-theme')==='light'?'#f5f7fb':'#0f1117')}
+document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new MutationObserver(bar).observe(d,{attributes:true,attributeFilter:['data-theme']});})();
+</script>
 <title>How to Learn Thai Numbers (Fast) | LekThai</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,8 +20,8 @@
 
 <meta name="description" content="The fastest way to learn Thai numbers: short drills, real audio and spaced repetition — plus a seven-day plan that actually works.">
 <meta name="theme-color" content="#0f1117">
-<!-- Dark-only page: tells forced-dark browsers (Brave/Android night mode) to leave it alone. -->
-<meta name="color-scheme" content="dark">
+<!-- Both themes are handled by the page itself, so forced-dark browsers leave it alone. -->
+<meta name="color-scheme" content="dark light">
 <link rel="canonical" href="https://lekthai.app/learn-thai-numbers/">
 
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
@@ -37,6 +46,7 @@
 
 <style>
   :root, [data-theme="dark"]{
+    color-scheme:dark;
     --bg-0:#0f1117; --bg-1:#171a24;
     --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
     --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
@@ -47,6 +57,21 @@
     --num-grad:linear-gradient(176deg, #f5f2eb 0%, #cdd2df 118%);
     --num-solid:#f5f2eb;
     --num-mask:linear-gradient(176deg, #000 0%, rgba(0,0,0,.84) 118%);
+  }
+  [data-theme="light"]{
+    color-scheme:light;
+    --bg-0:#e6e9f1; --bg-1:#f5f7fb;
+    --ink:#1b2233; --ink-2:#3c4458; --muted:#596075;
+    --accent:#b5495a; --accent-2:#95384a; --blue:#43589a;
+    --card-bg:rgba(255,255,255,.74); --card-bg2:rgba(255,255,255,.48);
+    --card-border:rgba(20,30,60,.10);
+    --card-shadow:0 28px 56px -30px rgba(30,40,80,.42), 0 6px 18px -10px rgba(30,40,80,.18);
+    --soft:rgba(20,30,60,.045);
+    --glow-red:rgba(181,73,90,.10); --glow-blue:rgba(67,89,154,.12);
+    --num-grad:linear-gradient(176deg, #1f273b 0%, #4b5980 128%);
+    --num-solid:#1f273b;
+    --num-mask:linear-gradient(176deg, #000 0%, rgba(0,0,0,.79) 128%);
+    --num-glow:rgba(67,89,154,.10);
   }
   *{ box-sizing:border-box; }
   html,body{ margin:0; min-height:100%; }
@@ -129,7 +154,9 @@
   details p{ margin:10px 0 0; }
 
   footer{ border-top:1px solid var(--card-border); margin-top:50px; padding:26px 0 60px; text-align:center; }
-  footer nav a{ color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; margin:0 12px; }
+  footer nav{ display:flex; flex-wrap:wrap; justify-content:center; gap:0 2px; }
+  footer nav a{ display:inline-flex; align-items:center; min-height:44px; padding:0 9px; margin:0; color:var(--muted); text-decoration:none; font:500 14px/1 "DM Sans"; white-space:nowrap; }
+  footer nav a[aria-current="page"]{ color:var(--ink); }
   footer nav a:hover{ color:var(--ink); }
   footer .copy{ margin-top:16px; font-size:13px; color:var(--muted); }
   :focus-visible{ outline:2px solid rgba(213,114,127,.65); outline-offset:3px; }
@@ -239,9 +266,16 @@
 <ul class="related"><li><a href="/thai-numbers/">Thai numbers &amp; numerals</a> &mdash; The full reference: the Thai digits, the words, and the two rules.</li><li><a href="/thai-numbers-1-100/">Thai numbers 1&ndash;100</a> &mdash; Every number from 1 to 100 in one table.</li><li><a href="/thai-number-pronunciation/">Pronunciation &amp; tones</a> &mdash; The tone on every number, and the pairs people confuse.</li><li><a href="/how-to-count-in-thai/">How to count in Thai</a> &mdash; Counting objects, classifiers, and ordinals.</li></ul>
 
   <footer>
-    <nav>
+    <nav aria-label="Site">
       <a href="/">Home</a>
-      <a href="/learn/">Open the drill</a>
+      <a href="/30-days/">30 days</a>
+      <a href="/sounds/">Sounds</a>
+      <a href="/words/">Words</a>
+      <a href="/learn/">Numbers</a>
+      <a href="/phrases/">Phrases</a>
+      <a href="/read/">Read</a>
+      <a href="/alphabet/">Alphabet</a>
+      <a href="/thai-numbers/">Guides</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
     </nav>

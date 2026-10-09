@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<script>
+/* Theme before first paint: the visitor's saved choice, otherwise the phone's
+   light/dark setting. Also keeps the browser-bar colour (theme-color) in step. */
+(function(){var d=document.documentElement,t;try{t=localStorage.getItem('lekthai-theme')}catch(e){}
+if(t!=='light'&&t!=='dark')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+d.setAttribute('data-theme',t);
+function bar(){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',d.getAttribute('data-theme')==='light'?'#f5f7fb':'#0f1117')}
+document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new MutationObserver(bar).observe(d,{attributes:true,attributeFilter:['data-theme']});})();
+</script>
 <title>LekThai — ก to ฮ: Learn the Thai Alphabet</title>
 <!-- /alphabet v1.0 (2026-10-08): built from lekthai_alphabet_spec v1 + the /read letter data. -->
 
@@ -123,7 +132,7 @@
   .bar{ flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; gap:10px; }
   .pill-wrap{ position:relative; min-width:0; }
   .pill{
-    display:inline-flex; align-items:center; gap:7px; height:38px; padding:0 13px; max-width:150px;
+    display:inline-flex; align-items:center; gap:7px; height:44px; padding:0 13px; max-width:150px;
     border-radius:999px; background:var(--soft); border:1px solid var(--card-border);
     color:var(--ink); font:600 13px/1 "DM Sans"; cursor:pointer; user-select:none;
   }
@@ -135,7 +144,7 @@
     flex:1 1 auto; min-width:0; margin:0; padding:0 2px;
     font:700 19px/1 "DM Sans"; letter-spacing:.01em; color:var(--ink); white-space:nowrap; text-align:center;
   }
-  .home-link{ display:inline-flex; align-items:center; gap:4px; height:38px; vertical-align:middle; color:inherit; text-decoration:none; }
+  .home-link{ display:inline-flex; align-items:center; gap:4px; height:44px; vertical-align:middle; color:inherit; text-decoration:none; }
   .home-ico{ flex:0 0 auto; color:var(--muted); display:none; }
   .bar.home-roomy .home-ico{ display:block; }
   .bar-right{ display:flex; align-items:center; gap:8px; }
@@ -149,7 +158,7 @@
   .streak.live .streak-ico{ filter:drop-shadow(0 0 7px var(--accent)); }
   .streak.hot{ animation:streakPop .5s ease; }
   .icon-btn{
-    width:38px; height:38px; border-radius:999px; cursor:pointer;
+    width:44px; height:44px; border-radius:999px; cursor:pointer;
     background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
     font-size:16px; display:grid; place-items:center;
   }
@@ -182,7 +191,7 @@
   /* ============ SEGMENTED TABS ============ */
   .seg{ flex:0 0 auto; position:relative; display:flex; padding:5px; background:var(--seg-bg); border:1px solid var(--card-border); border-radius:15px; }
   .tab{
-    flex:1; position:relative; z-index:2; border:none; background:transparent; cursor:pointer;
+    min-height:44px; flex:1; position:relative; z-index:2; border:none; background:transparent; cursor:pointer;
     color:var(--muted); font:600 14px/1 "DM Sans"; padding:12px 6px; border-radius:11px; white-space:nowrap;
   }
   .tab:hover{ color:var(--ink); }
@@ -264,7 +273,7 @@
   .btn.ghost:hover{ border-color:var(--accent); }
   .btn.play{ height:54px; font-size:17px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
   .btn.play:hover{ border-color:var(--blue); }
-  .btn.text{ height:40px; font-size:14px; color:var(--muted); background:transparent; }
+  .btn.text{ height:44px; font-size:14px; color:var(--muted); background:transparent; }
   .btn.text:hover{ color:var(--ink); }
   .btn.text.idk{ text-decoration:underline; text-decoration-color:color-mix(in srgb, var(--muted) 45%, transparent); text-underline-offset:4px; }
   .rate-row{ display:flex; gap:10px; }
@@ -305,10 +314,6 @@
   .warn-x{ position:absolute; top:6px; right:6px; width:28px; height:28px; border:0; background:none; color:var(--muted); font-size:14px; cursor:pointer; }
 
   /* ============ FOOTER (below the fold) ============ */
-  .app-foot{ position:absolute; left:16px; right:16px; top:100%; padding:18px 0 30px; text-align:center; border-top:1px solid var(--card-border); }
-  .app-foot nav{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px 14px; }
-  .app-foot nav a{ color:var(--muted); text-decoration:none; font:500 13px/1 "DM Sans"; }
-  .app-foot nav a:hover{ color:var(--ink); }
 
   /* ============ SETTINGS SHEET ============ */
   .sheet-wrap{ position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center; padding:18px; }
@@ -329,7 +334,7 @@
   .mini-btn{
     -webkit-appearance:none; appearance:none; cursor:pointer; border-radius:11px; flex:0 0 auto;
     background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
-    font:600 14px/1 "DM Sans"; padding:10px 14px; min-height:40px; min-width:58px;
+    font:600 14px/1 "DM Sans"; padding:10px 14px; min-height:44px; min-width:58px;
   }
   .mini-btn.on{ background:var(--ind-grad); color:#fff; border-color:transparent; }
   .mini-btn.thaiw{ font-family:var(--thai); font-size:16px; }
@@ -499,6 +504,31 @@
     .key{ min-height:50px; font-size:26px; }
     .slot{ min-height:64px; font-size:48px; }
   }
+  /* Header: the wordmark keeps its size; a long set name in the pill truncates
+     with an ellipsis instead of sliding under the wordmark. */
+  .bar .pill-wrap{ flex:0 1 auto; min-width:0; }
+  .bar .pill{ max-width:min(150px, 100%); }
+  .bar .title{ flex:1 0 auto; }
+  /* Small phones (under 360px): pill + wordmark + streak + gear no longer fit,
+     so the wordmark shrinks to the house icon alone. It stays the home link
+     (its aria-label still says "LekThai home"). */
+  @media (max-width:359.98px){
+    .title .home-link{ font-size:0; gap:0; min-width:44px; justify-content:center; }
+    .title .home-ico{ display:block; width:22px; height:22px; }
+  }
+  /* ============ SITE NAVIGATION (set menu + Settings) ============
+     Replaces the old footer, which sat below the full-height app and could
+     never be scrolled to. */
+  .toolnav{ display:flex; flex-wrap:wrap; gap:8px; }
+  .toolnav a{
+    display:inline-flex; align-items:center; min-height:44px; padding:0 14px; border-radius:999px;
+    background:var(--soft); border:1px solid var(--card-border); color:var(--ink);
+    text-decoration:none; font:600 13px/1 "DM Sans";
+  }
+  .toolnav a:hover{ border-color:var(--accent); }
+  .toolnav a[aria-current="page"]{ border-color:var(--accent); color:var(--accent); }
+  .sheet-nav{ padding:12px 0 16px; border-bottom:1px solid var(--card-border); }
+  .sheet-nav-title{ margin:0 0 10px; font:600 11px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
 </style>
 </head>
 <body>
@@ -519,12 +549,6 @@
     <div class="view" id="view"></div>
   </section>
 
-  <footer class="app-foot">
-    <nav>
-      <a href="/">Home</a><a href="/sounds/">Sounds</a><a href="/words/">Words</a><a href="/learn/">Numbers</a>
-      <a href="/phrases/">Phrases</a><a href="/read/">Read</a><a href="/alphabet/">ก to ฮ</a><a href="/thai-numbers/">Guides</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a>
-    </nav>
-  </footer>
 </main>
 
 <div class="warn" id="warn" hidden role="status"><span id="warnText"></span><button class="warn-x" id="warnX" aria-label="Dismiss">✕</button></div>
@@ -533,6 +557,22 @@
   <div class="sheet-scrim" id="settingsScrim"></div>
   <div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">
     <div class="sheet-head"><span class="sheet-title">Settings</span><button class="icon-btn" id="settingsClose" aria-label="Close settings">✕</button></div>
+    <nav class="sheet-nav" aria-label="LekThai tools">
+      <p class="sheet-nav-title">Go to</p>
+      <div class="toolnav">
+        <a href="/">Home</a>
+        <a href="/30-days/">30 days</a>
+        <a href="/sounds/">Sounds</a>
+        <a href="/words/">Words</a>
+        <a href="/learn/">Numbers</a>
+        <a href="/phrases/">Phrases</a>
+        <a href="/read/">Read</a>
+        <a href="/alphabet/" aria-current="page">Alphabet</a>
+        <a href="/thai-numbers/">Guides</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </div>
+    </nav>
     <div class="sheet-row"><span class="row-label">Appearance</span><button class="mini-btn" id="themeBtn" aria-label="Switch to light theme">◑</button></div>
     <div class="sheet-row"><span class="row-label">Letter style<small>Classic: looped letters, as taught. Sign style: modern loopless letters, as on many signs and menus.</small></span><button class="mini-btn thaiw" id="styleBtn"></button></div>
     <div class="sheet-row"><span class="row-label">English-letter spelling<small>shown only after you answer</small></span><button class="mini-btn" id="romBtn"></button></div>
@@ -1440,8 +1480,11 @@ document.addEventListener('keydown',function(e){
 
 /* ---------- boot ---------- */
 (function(){
-  var saved='dark'; try{ saved=localStorage.getItem(KEY_THEME)||'dark'; }catch(e){}
-  setTheme(saved); applyStyle();
+  // Theme was already applied in <head> (saved choice, else the phone's setting).
+  // Only a tap on the toggle saves it, so an unsaved visitor keeps following the phone.
+  var hadSaved=false; try{ hadSaved=!!localStorage.getItem(KEY_THEME); }catch(e){}
+  setTheme(document.documentElement.getAttribute('data-theme')==='light'?'light':'dark');
+  if(!hadSaved){ try{ localStorage.removeItem(KEY_THEME); }catch(e){} } applyStyle();
   if(hasTTS){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; } else showWarn('notts');
   if($('warn').hidden && !load(KEY_BETA,0)) showWarn('beta');
   document.addEventListener('visibilitychange',function(){ if(document.hidden) hush(); });
