@@ -439,7 +439,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
   <header class="bar">
     <div class="pill-wrap">
       <button class="pill" id="drillPill" aria-haspopup="true" aria-expanded="false" aria-label="Choose a drill">
-        <span class="pill-label" id="drillLabel">🎵 2 tones</span><span class="chev"><svg class="i" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        <span class="pill-label" id="drillLabel">2 tones</span><span class="chev"><svg class="i" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
       </button>
       <div class="pop" id="drillPop" hidden>
         <div class="pop-title">Tones</div>
@@ -686,10 +686,10 @@ var TONE_PATH = {
   R:'M5 19 Q26 27 55 4'
 };
 var DRILLS = {
-  t2:  {kind:'tone', tones:['M','R'],               label:'🎵 2 tones', chip:'2 tones',  sub:'mid · rising'},
-  t3:  {kind:'tone', tones:['M','F','R'],           label:'🎵 3 tones', chip:'3 tones',  sub:'+ falling'},
-  t5:  {kind:'tone', tones:['M','L','F','H','R'],   label:'🎵 5 tones', chip:'All 5',    sub:'the real thing'},
-  len: {kind:'len',                                 label:'⏱ Length',   chip:'Short vs long', sub:'same tone'}
+  t2:  {kind:'tone', tones:['M','R'],               label:'2 tones', chip:'2 tones',  sub:'mid · rising'},
+  t3:  {kind:'tone', tones:['M','F','R'],           label:'3 tones', chip:'3 tones',  sub:'+ falling'},
+  t5:  {kind:'tone', tones:['M','L','F','H','R'],   label:'5 tones', chip:'All 5',    sub:'the real thing'},
+  len: {kind:'len',                                 label:'Length',   chip:'Short vs long', sub:'same tone'}
 };
 
 var CONFIG = { roundLen:10, cooldown:3, rate:0.85, rateSlow:0.6 };

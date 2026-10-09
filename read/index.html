@@ -451,13 +451,13 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
   </header>
 
   <nav class="seg" role="tablist" aria-label="Practice mode">
-    <button class="tab active" id="tabHear" role="tab">① Hear &amp; Choose</button>
-    <button class="tab" id="tabSay" role="tab">② See &amp; Say</button>
+    <button class="tab active" id="tabHear" role="tab">Hear &amp; Choose</button>
+    <button class="tab" id="tabSay" role="tab">See &amp; Say</button>
     <span class="seg-ind" aria-hidden="true"></span>
   </nav>
 
   <section class="card" id="card">
-    <!-- ① HEAR & CHOOSE: hear it, pick the Thai -->
+    <!-- HEAR & CHOOSE: hear it, pick the Thai -->
     <div class="panel" id="panelHear">
       <div class="panel-inner">
         <div class="stage" id="hearStage">
@@ -479,7 +479,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
       </div>
     </div>
 
-    <!-- ② SEE & SAY: see the Thai, say it, reveal, rate -->
+    <!-- SEE & SAY: see the Thai, say it, reveal, rate -->
     <div class="panel" id="panelSay" hidden>
       <div class="panel-inner">
         <div class="stage center" id="sayStage">
@@ -549,8 +549,8 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     </div>
     <div class="about">
       <div class="about-title">How to use it</div>
-      <p><b>① Hear &amp; Choose</b> plays a letter, vowel, number or word. Tap the Thai that matches. Wrong choices are look-alikes on purpose: telling them apart is the skill.</p>
-      <p><b>② See &amp; Say</b> shows Thai only. Say it out loud first, then tap reveal to hear it and check yourself. Be honest: if you hesitated, tap Missed.</p>
+      <p><b>Hear &amp; Choose</b> plays a letter, vowel, number or word. Tap the Thai that matches. Wrong choices are look-alikes on purpose: telling them apart is the skill.</p>
+      <p><b>See &amp; Say</b> shows Thai only. Say it out loud first, then tap reveal to hear it and check yourself. Be honest: if you hesitated, tap Missed.</p>
       <p><b>Letters</b> play their full name, like a picture alphabet: ด is “dor dek” (เด็ก, child). Several letters share one sound, and the picture word is what tells them apart.</p>
       <p><b>Vowels</b> are shown on อ, a silent letter that holds a vowel when there’s no consonant. Some vowels are written before the consonant but said after it, like เ in เด็ก.</p>
       <p><b>Start with Letters 1 and Vowels 1</b>, then the words you already know from /words. Reading words you can already say is the fastest way in.</p>
@@ -734,11 +734,11 @@ SIGN_NEW.forEach(function(r){
 var ALPHA_SETS=[['a:L1','Letters 1','กดตบป'],['a:V1','Vowels 1','อา'],['a:L2','Letters 2','งยวสห'],['a:V2','Vowels 2','เอีย'],
   ['a:L3','Letters 3','ขถผฝฟ'],['a:VS','Special vowels','อำ ไอ'],['a:D','Thai digits','๑๒๓'],['a:M','Marks','อ่ อ้ ๆ'],['a:RARE','Rare letters','ฆฌญ']];
 ALPHA_SETS.forEach(function(s){ SETS[s[0]]={name:s[1], short:s[1], sample:s[2]}; });
-WDATA.groups.forEach(function(g){ SETS['w:'+g.id]={name:g.icon+' '+g.name, short:g.icon+' '+g.short}; });
-SETS['sign']={name:'🪧 Signs', short:'🪧 Signs'};
-PDATA.groups.forEach(function(g){ SETS['p:'+g.id]={name:g.icon+' '+g.name, short:g.icon+' '+g.short}; });
-SETS['mix']={name:'🔀 Mix all', short:'🔀 Mix all'};
-SETS['weak']={name:'🎯 Weak', short:'🎯 Weak'};
+WDATA.groups.forEach(function(g){ SETS['w:'+g.id]={name:g.name, short:g.short}; });
+SETS['sign']={name:'Signs', short:'Signs'};
+PDATA.groups.forEach(function(g){ SETS['p:'+g.id]={name:g.name, short:g.short}; });
+SETS['mix']={name:'Mix all', short:'Mix all'};
+SETS['weak']={name:'Weak', short:'Weak'};
 
 /* look-alike lookup */
 var LOOKOF={};
@@ -808,7 +808,7 @@ function poolFor(set){
 function setShort(set){ return (SETS[set]||{short:set}).short; }
 function emptyMsg(){
   if(PREFS.set==='weak') return 'No weak ones yet. Practise a set first — anything you miss shows up here.';
-  if(PREFS.set==='a:M' && PREFS.mode==='hear') return 'Marks have no sound of their own. Use ② See & Say to learn what each one does.';
+  if(PREFS.set==='a:M' && PREFS.mode==='hear') return 'Marks have no sound of their own. Use See & Say to learn what each one does.';
   return 'Nothing in this set.';
 }
 
@@ -882,8 +882,8 @@ var warnKind='';
 function showWarn(kind){
   warnKind=kind;
   $('warnText').innerHTML = kind==='voice'
-    ? '⚠️ <b>No Thai voice found in this browser.</b> The app will still try to speak. If you hear nothing, install a Thai text-to-speech voice in your phone’s settings, or try Chrome. ② See &amp; Say still works without sound.'
-    : kind==='notts' ? '⚠️ <b>This browser can’t speak.</b> ① Hear &amp; Choose needs audio. Try Chrome or Safari, or use ② See &amp; Say.'
+    ? '⚠️ <b>No Thai voice found in this browser.</b> The app will still try to speak. If you hear nothing, install a Thai text-to-speech voice in your phone’s settings, or try Chrome. See &amp; Say still works without sound.'
+    : kind==='notts' ? '⚠️ <b>This browser can’t speak.</b> Hear &amp; Choose needs audio. Try Chrome or Safari, or use See &amp; Say.'
     : '<b>Beta.</b> Spellings and the new sign words not yet checked by a native Thai speaker, and the audio is your phone’s own voice.';
   $('warn').hidden=false;
 }
@@ -906,15 +906,15 @@ function knownIn(pool){ return pool.filter(function(w){ return isKnown(w.id); })
 function chip(set,label,count,extraCls){
   return '<button class="chip'+(PREFS.set===set?' active':'')+(extraCls||'')+'" data-set="'+set+'">'+label+(count!=null?'<small>'+count+'</small>':'')+'</button>';
 }
-function countLabel(set){ var p=poolFor(set); return p.length ? knownIn(p)+'/'+p.length : (set==='a:M'&&PREFS.mode==='hear'?'② only':'0'); }
+function countLabel(set){ var p=poolFor(set); return p.length ? knownIn(p)+'/'+p.length : (set==='a:M'&&PREFS.mode==='hear'?'only':'0'); }
 function buildPop(){
   var weakN=poolFor('weak').length;
-  $('quickChips').innerHTML = chip('a:L1','✦ First letters',null)+chip('mix','🔀 Mix all',countLabel('mix'))+chip('weak','🎯 Weak',weakN?weakN:'none yet');
+  $('quickChips').innerHTML = chip('a:L1','First letters',null)+chip('mix','Mix all',countLabel('mix'))+chip('weak','Weak',weakN?weakN:'none yet');
   $('alphaChips').innerHTML = ALPHA_SETS.map(function(s){
     return chip(s[0], s[1]+' <span class="tc">'+esc(s[2])+'</span>', countLabel(s[0]));
   }).join('');
-  $('wordChips').innerHTML = WDATA.groups.map(function(g){ return chip('w:'+g.id, g.icon+' '+g.name, countLabel('w:'+g.id)); }).join('')+chip('sign','🪧 Signs',countLabel('sign'));
-  $('phraseChips').innerHTML = PDATA.groups.map(function(g){ return chip('p:'+g.id, g.icon+' '+g.name, countLabel('p:'+g.id)); }).join('');
+  $('wordChips').innerHTML = WDATA.groups.map(function(g){ return chip('w:'+g.id, g.name, countLabel('w:'+g.id)); }).join('')+chip('sign','Signs',countLabel('sign'));
+  $('phraseChips').innerHTML = PDATA.groups.map(function(g){ return chip('p:'+g.id, g.name, countLabel('p:'+g.id)); }).join('');
   $('levelChips').innerHTML =
     '<button class="chip'+(PREFS.level===1?' active':'')+'" data-level="1">Level 1<small>learn first</small></button>'+
     '<button class="chip'+(PREFS.level===2?' active':'')+'" data-level="2">Level 1 + 2<small>everything</small></button>';
@@ -952,7 +952,7 @@ function fillReveal(prefix, it){
 }
 function clearReveal(prefix){ ['Thai','Rom','Mean','Note'].forEach(function(s){ $(prefix+s).textContent=''; }); }
 
-/* ① Hear & Choose */
+/* Hear & Choose */
 function newHear(autoplay){
   hear={answered:false,choices:[],picked:null};
   $('hearVerdict').textContent=''; $('hearVerdict').className='verdict';
@@ -960,7 +960,7 @@ function newHear(autoplay){
   if(!cur){ $('tiles').innerHTML='<div class="empty" style="grid-column:1/-1">'+esc(emptyMsg())+'</div>'; $('playBtn').hidden=true; $('idkBtn').hidden=true; $('hearEyebrow').textContent=''; return; }
   $('playBtn').hidden=false; $('idkBtn').hidden=false;
   $('hearEyebrow').textContent=eyebrowFor(cur);
-  if(!hasTTS) $('hearHint').textContent='This browser can’t play audio, so this mode won’t work here. Try ② See & Say.';
+  if(!hasTTS) $('hearHint').textContent='This browser can’t play audio, so this mode won’t work here. Try See & Say.';
   hear.choices=makeChoices(cur);
   renderTiles();
   if(autoplay!==false) setTimeout(function(){ if(cur) speak(cur.voice); },150);
@@ -997,7 +997,7 @@ function revealHear(kind,text){
 }
 function flash(i){ var el=$('tiles').children[i]; if(!el) return; el.classList.add('playing'); setTimeout(function(){ el.classList.remove('playing'); },700); }
 
-/* ② See & Say */
+/* See & Say */
 function newSay(){
   say={revealed:false,rated:false};
   clearReveal('s');
@@ -1097,7 +1097,7 @@ $('resetYes').addEventListener('click',function(){
   renderStreak(); closeSettings(); startSet();
 });
 
-/* desktop keyboard: ① Space replay · 1–4 choose · 0 don't know · Enter next   ② Space/Enter reveal → Enter/→ got it, ← missed */
+/* desktop keyboard: Space replay · 1–4 choose · 0 don't know · Enter next   Space/Enter reveal → Enter/→ got it, ← missed */
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){ if(!$('settings').hidden) closeSettings(); else if(popOpen()) closePop(); return; }
   if(!$('settings').hidden||popOpen()) return;
