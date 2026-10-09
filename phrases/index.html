@@ -70,7 +70,7 @@
   [data-theme="light"]{
     color-scheme:light;
     --bg-0:#e6e9f1; --bg-1:#f5f7fb;
-    --ink:#1b2233; --ink-2:#3c4458; --muted:#6c7387;
+    --ink:#1b2233; --ink-2:#3c4458; --muted:#596075;
     --accent:#b5495a; --accent-2:#95384a; --blue:#43589a;
     --ok:#2c8c5e; --bad:#bd4259;
     --card-bg:rgba(255,255,255,.74); --card-bg2:rgba(255,255,255,.48);
@@ -90,6 +90,7 @@
   }
 
   *{box-sizing:border-box;}
+  button, input, select, textarea{ font-family:inherit; }
   html,body{height:100%;}
   body{
     margin:0; overflow:hidden;
@@ -157,12 +158,6 @@
   /* The house only shows when the header has room for it (decided by the small
      script at the end of the page). Keeps the header no more crowded than before. */
   .bar.home-roomy .home-ico{ display:block; }
-  .beta-tag{
-    display:inline-block; vertical-align:middle; margin-left:5px; padding:3px 6px 2px; border-radius:999px;
-    font:700 9px/1 "DM Sans"; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-    background:none; cursor:pointer;
-  }
   .bar-right{ display:flex; align-items:center; gap:8px; }
   .streak{
     display:inline-flex; align-items:center; gap:5px; height:34px; padding:0 12px;
@@ -479,7 +474,7 @@
         <div class="chips" id="levelChips"></div>
       </div>
     </div>
-    <h1 class="title"><a class="home-link" href="/" aria-label="LekThai home"><svg class="home-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>LekThai</a><button class="beta-tag" id="betaTag" title="About the beta">beta</button></h1>
+    <h1 class="title"><a class="home-link" href="/" aria-label="LekThai home"><svg class="home-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>LekThai</a></h1>
     <div class="bar-right">
       <div class="streak" id="streakChip" title="Correct in a row (Hear &amp; Choose)">
         <span class="streak-ico">⚡</span><span id="streakVal">0</span>
@@ -996,7 +991,6 @@ $('nextBtn').addEventListener('click',next);
 $('gearBtn').addEventListener('click',openSettings);
 $('settingsClose').addEventListener('click',closeSettings);
 $('settingsScrim').addEventListener('click',closeSettings);
-$('betaTag').addEventListener('click',function(){ showWarn('beta'); });
 $('warnX').addEventListener('click',hideWarn);
 $('themeBtn').addEventListener('click',function(){ setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'); });
 $('romBtn').addEventListener('click',function(){ PREFS.roman=!PREFS.roman; savePrefs(); syncSheet();
@@ -1050,7 +1044,6 @@ document.addEventListener('keydown',function(e){
   updateMastery();
 })();
 </script>
-<!-- No service worker registration here on purpose: /sw.js doesn't exist in the repo yet. -->
 <script>
 /* Home link icon: show the house only when the header has spare room for it,
    so it never pushes into the pill, beta tag or streak chip (pill labels change
