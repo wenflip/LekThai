@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<script>
+/* Theme before first paint: the visitor's saved choice, otherwise the phone's
+   light/dark setting. Also keeps the browser-bar colour (theme-color) in step. */
+(function(){var d=document.documentElement,t;try{t=localStorage.getItem('lekthai-theme')}catch(e){}
+if(t!=='light'&&t!=='dark')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+d.setAttribute('data-theme',t);
+function bar(){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',d.getAttribute('data-theme')==='light'?'#f5f7fb':'#0f1117')}
+document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new MutationObserver(bar).observe(d,{attributes:true,attributeFilter:['data-theme']});})();
+</script>
 <title>0 to Survival Thai — LekThai</title>
 <!-- /30-days v1.1 (2026-10-07): built from lekthai_30day_curriculum v1.2. Tone drills removed. -->
 
@@ -1602,8 +1611,11 @@ $('newRows').addEventListener('click', function(e){ var r=e.target.closest('.nl-
 
 /* ---------- boot ---------- */
 (function(){
-  var saved='dark'; try{ saved=localStorage.getItem(KEY_THEME)||'dark'; }catch(e){}
-  setTheme(saved);
+  // Theme was already applied in <head> (saved choice, else the phone's setting).
+  // Only a tap on the toggle saves it, so an unsaved visitor keeps following the phone.
+  var hadSaved=false; try{ hadSaved=!!localStorage.getItem(KEY_THEME); }catch(e){}
+  setTheme(document.documentElement.getAttribute('data-theme')==='light'?'light':'dark');
+  if(!hadSaved){ try{ localStorage.removeItem(KEY_THEME); }catch(e){} }
   if(hasTTS){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; } else showWarn('notts');
   if($('warn').hidden && !load(KEY_BETA,0)) showWarn('beta');
   if(PREFS.polite===null) $('politeSheet').hidden=false;

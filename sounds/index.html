@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<script>
+/* Theme before first paint: the visitor's saved choice, otherwise the phone's
+   light/dark setting. Also keeps the browser-bar colour (theme-color) in step. */
+(function(){var d=document.documentElement,t;try{t=localStorage.getItem('lekthai-theme')}catch(e){}
+if(t!=='light'&&t!=='dark')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+d.setAttribute('data-theme',t);
+function bar(){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',d.getAttribute('data-theme')==='light'?'#f5f7fb':'#0f1117')}
+document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new MutationObserver(bar).observe(d,{attributes:true,attributeFilter:['data-theme']});})();
+</script>
 <title>LekThai — Thai Sounds</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -938,8 +947,11 @@ document.addEventListener('keydown',function(e){
 
 /* ---------- boot ---------- */
 (function(){
-  var saved='dark'; try{ saved=localStorage.getItem(KEY_THEME)||'dark'; }catch(e){}
-  setTheme(saved);
+  // Theme was already applied in <head> (saved choice, else the phone's setting).
+  // Only a tap on the toggle saves it, so an unsaved visitor keeps following the phone.
+  var hadSaved=false; try{ hadSaved=!!localStorage.getItem(KEY_THEME); }catch(e){}
+  setTheme(document.documentElement.getAttribute('data-theme')==='light'?'light':'dark');
+  if(!hadSaved){ try{ localStorage.removeItem(KEY_THEME); }catch(e){} }
   renderStreak();
   if(hasTTS){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; } else showWarn('notts');
   if($('warn').hidden && !load(KEY_BETA,0)) showWarn('beta');
