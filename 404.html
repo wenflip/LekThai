@@ -8,6 +8,7 @@
      is served at whatever broken address was requested, at any folder depth. -->
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0f1117">
+<meta name="color-scheme" content="dark light">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,6 +32,8 @@
     --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
     --ring:rgba(213,114,127,.65);
     --num-grad:linear-gradient(176deg, #f5f2eb 0%, #cdd2df 118%);
+    --num-solid:#f5f2eb;
+    --num-mask:linear-gradient(176deg, #000 0%, rgba(0,0,0,.84) 118%);
     --num-glow:rgba(170,140,160,.20);
   }
   [data-theme="light"]{
@@ -44,6 +47,8 @@
     --glow-red:rgba(181,73,90,.10); --glow-blue:rgba(67,89,154,.12);
     --ring:rgba(181,73,90,.5);
     --num-grad:linear-gradient(176deg, #1f273b 0%, #4b5980 128%);
+    --num-solid:#1f273b;
+    --num-mask:linear-gradient(176deg, #000 0%, rgba(0,0,0,.79) 128%);
     --num-glow:rgba(67,89,154,.10);
   }
   *{box-sizing:border-box;}
@@ -80,9 +85,10 @@
     font-variant-numeric:lining-nums proportional-nums;
     font-size:clamp(84px, 28vw, 120px); line-height:.94; letter-spacing:-.012em; color:var(--ink);
   }
-  @supports ((-webkit-background-clip:text) or (background-clip:text)){
-    .bignum{ background:var(--num-grad); -webkit-background-clip:text; background-clip:text;
-             -webkit-text-fill-color:transparent; color:transparent; }
+  /* Forced-dark fix (same as home and the tool pages): solid glyphs + alpha-mask fade instead of transparent gradient text. */
+  .bignum{ color:var(--num-solid); -webkit-text-fill-color:var(--num-solid); }
+  @supports ((-webkit-mask-image:linear-gradient(#000,#000)) or (mask-image:linear-gradient(#000,#000))){
+    .bignum{ -webkit-mask-image:var(--num-mask); mask-image:var(--num-mask); }
   }
   [data-theme="dark"] .bignum{ filter:drop-shadow(0 12px 34px var(--num-glow)); }
   .thai{ margin-top:12px; font-family:"Sarabun","Noto Sans Thai",sans-serif; font-weight:500;
