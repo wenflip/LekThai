@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     color-scheme:dark;
     --bg-0:#0f1117; --bg-1:#171a24;
     --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
-    --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
+    --accent:#d5727f; --accent-2:#ba5663; --btn-a:#b9505f; --btn-b:#a3434f; --blue:#93a8ce;
     --ok:#5dba8c; --bad:#e27d89;
     --card-bg:rgba(255,255,255,.055); --card-bg2:rgba(255,255,255,.016);
     --card-border:rgba(255,255,255,.10);
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     --seg-bg:rgba(255,255,255,.05);
     --soft:rgba(255,255,255,.06);
     --pop-bg:#1b1f2a;
-    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --ind-grad:var(--btn-a);
     --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
     --ring:rgba(213,114,127,.65);
     --num-solid:#f5f2eb;
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     color-scheme:light;
     --bg-0:#e6e9f1; --bg-1:#f5f7fb;
     --ink:#1b2233; --ink-2:#3c4458; --muted:#596075;
-    --accent:#b5495a; --accent-2:#95384a; --blue:#43589a;
+    --accent:#b5495a; --accent-2:#95384a; --btn-a:#b5495a; --btn-b:#95384a; --blue:#43589a;
     --ok:#2c8c5e; --bad:#bd4259;
     --card-bg:rgba(255,255,255,.74); --card-bg2:rgba(255,255,255,.48);
     --card-border:rgba(20,30,60,.10);
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     --seg-bg:rgba(20,30,60,.055);
     --soft:rgba(20,30,60,.045);
     --pop-bg:#ffffff;
-    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --ind-grad:var(--btn-a);
     --glow-red:rgba(181,73,90,.10); --glow-blue:rgba(67,89,154,.12);
     --ring:rgba(181,73,90,.5);
     --num-solid:#1f273b;
@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
   .btn[hidden]{ display:none; }
   .btn.primary{
     height:54px; font-size:17px; color:var(--on-accent);
-    background:linear-gradient(180deg, var(--accent), var(--accent-2));
+    background:linear-gradient(180deg, var(--btn-a), var(--btn-b));
     box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
   }
   .btn.ghost{ height:50px; font-size:16px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
@@ -504,6 +504,10 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     .key{ min-height:50px; font-size:26px; }
     .slot{ min-height:64px; font-size:48px; }
   }
+  /* Desktop: no phone-shaped frame around the app; the narrow column sits on the page. */
+  @media (min-width:480px){
+    .app{ border:none; border-radius:0; background:none; box-shadow:none; height:min(100svh, 820px); }
+  }
   /* Header: the wordmark keeps its size; a long set name in the pill truncates
      with an ellipsis instead of sliding under the wordmark. */
   .bar .pill-wrap{ flex:0 1 auto; min-width:0; }
@@ -529,6 +533,12 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
   .toolnav a[aria-current="page"]{ border-color:var(--accent); color:var(--accent); }
   .sheet-nav{ padding:12px 0 16px; border-bottom:1px solid var(--card-border); }
   .sheet-nav-title{ margin:0 0 10px; font:600 11px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+  /* Icons: one inline SVG set (currentColor), replacing emoji and Unicode symbols
+     that rendered differently on every phone. */
+  .i{ display:inline-block; vertical-align:-.18em; flex:0 0 auto; }
+  .icon-btn .i{ vertical-align:middle; }
+  .streak-ico{ color:var(--accent); display:inline-flex; }
+  .chev{ display:inline-flex; }
 </style>
 </head>
 <body>
@@ -541,7 +551,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     </div>
     <h1 class="title"><a class="home-link" href="/" aria-label="LekThai home"><svg class="home-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>LekThai</a></h1>
     <div class="bar-right">
-      <button class="icon-btn" id="gearBtn" aria-label="Settings" aria-haspopup="dialog">⚙</button>
+      <button class="icon-btn" id="gearBtn" aria-label="Settings" aria-haspopup="dialog"><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button>
     </div>
   </header>
 
@@ -551,12 +561,12 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
 
 </main>
 
-<div class="warn" id="warn" hidden role="status"><span id="warnText"></span><button class="warn-x" id="warnX" aria-label="Dismiss">✕</button></div>
+<div class="warn" id="warn" hidden role="status"><span id="warnText"></span><button class="warn-x" id="warnX" aria-label="Dismiss"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
 
 <div class="sheet-wrap" id="settings" hidden>
   <div class="sheet-scrim" id="settingsScrim"></div>
   <div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">
-    <div class="sheet-head"><span class="sheet-title">Settings</span><button class="icon-btn" id="settingsClose" aria-label="Close settings">✕</button></div>
+    <div class="sheet-head"><span class="sheet-title">Settings</span><button class="icon-btn" id="settingsClose" aria-label="Close settings"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
     <nav class="sheet-nav" aria-label="LekThai tools">
       <p class="sheet-nav-title">Go to</p>
       <div class="toolnav">
@@ -573,7 +583,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
         <a href="/terms/">Terms</a>
       </div>
     </nav>
-    <div class="sheet-row"><span class="row-label">Appearance</span><button class="mini-btn" id="themeBtn" aria-label="Switch to light theme">◑</button></div>
+    <div class="sheet-row"><span class="row-label">Appearance</span><button class="mini-btn" id="themeBtn" aria-label="Theme: dark (tap for light)">Dark</button></div>
     <div class="sheet-row"><span class="row-label">Letter style<small>Classic: looped letters, as taught. Sign style: modern loopless letters, as on many signs and menus.</small></span><button class="mini-btn thaiw" id="styleBtn"></button></div>
     <div class="sheet-row"><span class="row-label">English-letter spelling<small>shown only after you answer</small></span><button class="mini-btn" id="romBtn"></button></div>
     <div class="sheet-row"><span class="row-label">Slow voice<small>speak the Thai more slowly</small></span><button class="mini-btn" id="slowBtn"></button></div>
@@ -1047,7 +1057,7 @@ function stageHTML(s){
 /* ---------- reference card ---------- */
 function refHTML(s){
   var rows=REF[s]||[];
-  return '<div class="runhead"><button class="icon-btn" data-act="back" aria-label="Back">✕</button><span class="rt">Stage '+s+' · Reference</span><span class="rh-sp"></span></div>'+
+  return '<div class="runhead"><button class="icon-btn" data-act="back" aria-label="Back"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button><span class="rt">Stage '+s+' · Reference</span><span class="rh-sp"></span></div>'+
     '<div class="qbody"><div class="res-sub">Good to recognise. Not drilled and not in any check. Tap one to hear it.</div><div class="refgrid">'+
     rows.map(function(r,i){ return '<button data-act="refplay" data-arg="'+i+'"><span class="tc" lang="th">'+esc(r[0])+'</span><small>'+esc(r[2])+'</small></button>'; }).join('')+
     '</div></div>';
@@ -1236,7 +1246,7 @@ function headHTML(){
     var ready=isReady();
     right='<button class="mini-btn chk'+(ready?' ready':'')+'" data-act="tocheck">Check ▶</button>';
   } else right='<span class="rh-sp"></span>';
-  var h='<div class="runhead"><button class="icon-btn" data-act="quit" aria-label="Stop">✕</button><span class="rt">'+esc(runTitle())+'</span>'+right+'</div>';
+  var h='<div class="runhead"><button class="icon-btn" data-act="quit" aria-label="Stop"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button><span class="rt">'+esc(runTitle())+'</span>'+right+'</div>';
   if(R.mode==='check') h+='<div class="qbar"><i style="width:'+Math.round(R.qi/R.qs.length*100)+'%"></i></div>';
   else if(R.retry){ var done=R.retry.filter(function(e){ return (R.rc[e.type+e.item.id]||0)>=2; }).length; h+='<div class="qbar"><i style="width:'+Math.round(done/R.retry.length*100)+'%"></i></div>'; }
   return h;
@@ -1269,7 +1279,7 @@ function runHTML(){
       '<div class="bigthai'+sizeClass(it.show)+(Q.fresh?' in':'')+'" lang="th">'+esc(it.show)+'</div>'+
       '<div class="reveal show">'+(it.rThai?'<div class="thai" lang="th">'+esc(it.rThai)+'</div>':'')+'<div class="rom">'+esc(it.rom)+'</div>'+
       '<div class="meaning">'+esc(it.mean)+'</div>'+(it.note?'<div class="note">'+esc(it.note)+'</div>':'')+'</div>'+
-      '<div class="row2" style="width:100%"><button class="btn ghost" data-act="play">🔊 Hear</button><button class="btn primary" data-act="next">'+(R.introQ.length?'Next →':'Start practice →')+'</button></div></div>';
+      '<div class="row2" style="width:100%"><button class="btn ghost" data-act="play"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg> Hear</button><button class="btn primary" data-act="next">'+(R.introQ.length?'Next →':'Start practice →')+'</button></div></div>';
     return h;
   }
   if(Q.type==='tilehelp'){
@@ -1287,7 +1297,7 @@ function runHTML(){
   if(Q.type==='hear'){
     var practice=R.mode==='practice', n=Q.choices.length;
     h+='<div class="qbody"><div class="eyebrow">'+eyebrowFor(it,'hear')+'</div>'+
-      '<button class="btn play" data-act="play"><span>🔊</span> Play</button>'+
+      '<button class="btn play" data-act="play"><span><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></span> Play</button>'+
       '<div class="tiles'+(n===3?' three':n===2?' two':'')+'">'+Q.choices.map(function(c,i){
         var cls=sizeClass(c.show);
         if(Q.answered){ cls+=' done'; if(c.id===it.id) cls+=' right'; else if(Q.picked && c.id===Q.picked.id) cls+=' wrong'; }
@@ -1309,16 +1319,16 @@ function runHTML(){
     h+='<div class="qbody center"><div class="eyebrow">'+eyebrowFor(it,'say')+'</div>'+
       '<div class="bigthai'+sizeClass(it.show)+(Q.fresh?' in':'')+'" lang="th">'+esc(it.show)+'</div>';
     if(Q.revealed) h+=revealHTML(it)+'<div class="hint">'+(it.k==='m'?'Did you know what it does?':'Did you say it the same way?')+'</div>'+
-      '<button class="btn text" data-act="play">🔊 Hear again</button>'+
+      '<button class="btn text" data-act="play"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg> Hear again</button>'+
       '<div class="rate-row" style="width:100%"><button class="btn rate miss" data-act="rate" data-arg="0">✗ Missed</button><button class="btn rate got" data-act="rate" data-arg="1">✓ Got it</button></div>';
     else h+='<div class="hint">'+(it.k==='m'?'Think what it does, then tap.':'Say it out loud first. Not sure yet? Tap and learn it.')+'</div>'+
-      '<button class="btn ghost" data-act="reveal" style="width:100%">🔊 Hear &amp; reveal</button>';
+      '<button class="btn ghost" data-act="reveal" style="width:100%"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg> Hear &amp; reveal</button>';
     return h+readyHTML()+'</div>';
   }
   if(Q.type==='spell'){
     var practiceS=R.mode==='practice', w=it.show, str=builtStr(), full=Q.built.length===w.length;
     h+='<div class="qbody"><div class="eyebrow">Spell it</div>'+
-      '<div class="prompt"><button class="btn play" data-act="play">🔊 Play</button><span class="meaning">“'+esc(it.mean)+'”</span></div>'+
+      '<div class="prompt"><button class="btn play" data-act="play"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg> Play</button><span class="meaning">“'+esc(it.mean)+'”</span></div>'+
       '<div class="slot'+(Q.checked?(Q.ok?' right':' wrong'):'')+'" lang="th">'+(str?esc(str):'<span class="ph">tap the tiles</span>')+'</div>'+
       '<div class="boxes">'+w.split('').map(function(_,i){ return '<i class="box'+(i<Q.built.length?' on':'')+'"></i>'; }).join('')+'</div>';
     if(!Q.checked){
@@ -1340,7 +1350,7 @@ function runHTML(){
 /* ---------- result ---------- */
 function resultHTML(){
   var r=RES, s=r.s, label=partName(s,r.part);
-  var h='<div class="runhead"><button class="icon-btn" data-act="back" aria-label="Back to stage">✕</button><span class="rt">'+(r.part==='F'?'Final':'Stage '+s+' · '+label)+'</span><span class="rh-sp"></span></div><div class="qbody center">';
+  var h='<div class="runhead"><button class="icon-btn" data-act="back" aria-label="Back to stage"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button><span class="rt">'+(r.part==='F'?'Final':'Stage '+s+' · '+label)+'</span><span class="rh-sp"></span></div><div class="qbody center">';
   if(r.pass){
     var parts=STAGE_INFO[s-1][1].split(''), np=nextPart(s);
     var line = np ? partName(s,np)+' next.' : r.part==='F' ? 'You finished the course.' : 'Stage '+s+' done!';
@@ -1378,7 +1388,7 @@ function shareText(){
 }
 function doneHTML(){
   var t=tk('12F');
-  var h='<div class="runhead"><button class="icon-btn" data-act="tomap" aria-label="Back">✕</button><span class="rt">ก to ฮ</span><span class="rh-sp"></span></div><div class="qbody center">';
+  var h='<div class="runhead"><button class="icon-btn" data-act="tomap" aria-label="Back"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button><span class="rt">ก to ฮ</span><span class="rh-sp"></span></div><div class="qbody center">';
   if(t&&t.pass){
     h+='<div class="res-ico">🎉</div><div class="res-big ok">You can read Thai.</div>'+
       '<div class="fin-stats">42 letters · 24 vowels · 7 marks · '+ALLW.length+' words<br>Final '+t.best+'/30</div>'+
@@ -1399,7 +1409,7 @@ function share(){
 /* =====================================================================
    SETTINGS
    ===================================================================== */
-function setTheme(t){ document.documentElement.setAttribute('data-theme',t); $('themeBtn').textContent=t==='dark'?'◑':'◐'; $('themeBtn').setAttribute('aria-label', t==='dark'?'Switch to light theme':'Switch to dark theme'); try{ localStorage.setItem(KEY_THEME,t); }catch(e){} }
+function setTheme(t){ document.documentElement.setAttribute('data-theme',t); $('themeBtn').textContent=t==='dark'?'Dark':'Light'; $('themeBtn').setAttribute('aria-label', t==='dark'?'Theme: dark (tap for light)':'Theme: light (tap for dark)'); try{ localStorage.setItem(KEY_THEME,t); }catch(e){} }
 function applyStyle(){ document.documentElement.classList.toggle('sign-style', PREFS.style==='sign'); }
 function syncSheet(){
   $('romBtn').textContent=PREFS.roman?'On':'Off'; $('romBtn').classList.toggle('on',PREFS.roman);

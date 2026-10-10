@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     color-scheme:dark;   /* tells forced-dark browsers this theme is already dark */
     --bg-0:#0f1117; --bg-1:#171a24;
     --ink:#ece9e2; --ink-2:#c6cad4; --muted:#848a9c;
-    --accent:#d5727f; --accent-2:#ba5663; --blue:#93a8ce;
+    --accent:#d5727f; --accent-2:#ba5663; --btn-a:#b9505f; --btn-b:#a3434f; --blue:#93a8ce;
     --ok:#5dba8c; --bad:#e27d89;
     --card-bg:rgba(255,255,255,.055); --card-bg2:rgba(255,255,255,.016);
     --card-border:rgba(255,255,255,.10);
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     --seg-bg:rgba(255,255,255,.05);
     --soft:rgba(255,255,255,.06);
     --pop-bg:#1b1f2a;
-    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --ind-grad:var(--btn-a);
     --glow-red:rgba(213,114,127,.16); --glow-blue:rgba(147,168,206,.18);
     --ring:rgba(213,114,127,.65);
     --num-grad:linear-gradient(176deg, #f5f2eb 0%, #cdd2df 118%);
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     color-scheme:light;
     --bg-0:#e6e9f1; --bg-1:#f5f7fb;
     --ink:#1b2233; --ink-2:#3c4458; --muted:#596075;
-    --accent:#b5495a; --accent-2:#95384a; --blue:#43589a;
+    --accent:#b5495a; --accent-2:#95384a; --btn-a:#b5495a; --btn-b:#95384a; --blue:#43589a;
     --ok:#2c8c5e; --bad:#bd4259;
     --card-bg:rgba(255,255,255,.74); --card-bg2:rgba(255,255,255,.48);
     --card-border:rgba(20,30,60,.10);
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     --seg-bg:rgba(20,30,60,.055);
     --soft:rgba(20,30,60,.045);
     --pop-bg:#ffffff;
-    --ind-grad:linear-gradient(135deg, var(--accent), var(--blue));
+    --ind-grad:var(--btn-a);
     --glow-red:rgba(181,73,90,.10); --glow-blue:rgba(67,89,154,.12);
     --ring:rgba(181,73,90,.5);
     --num-grad:linear-gradient(176deg, #1f273b 0%, #4b5980 128%);
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
   .btn[hidden]{ display:none; }
   .btn.primary{
     height:58px; font-size:17px; letter-spacing:.01em; color:var(--on-accent);
-    background:linear-gradient(180deg, var(--accent), var(--accent-2));
+    background:linear-gradient(180deg, var(--btn-a), var(--btn-b));
     box-shadow:0 14px 28px -14px var(--accent-2), inset 0 1px 0 rgba(255,255,255,.22);
   }
   .btn.ghost{ height:50px; font-size:16px; color:var(--ink); background:var(--soft); border:1px solid var(--card-border); }
@@ -458,6 +458,15 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
   @keyframes streakPop{ 0%{transform:scale(1);} 38%{transform:scale(1.2);} 100%{transform:scale(1);} }
   @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
   @keyframes sheetIn{ from{opacity:0; transform:translateY(14px) scale(.98);} to{opacity:1; transform:none;} }
+  /* Desktop: no phone-shaped frame around the app; the narrow column sits on the page. */
+  @media (min-width:480px){
+    .app{ border:none; border-radius:0; background:none; box-shadow:none; height:min(100svh, 820px); }
+  }
+  /* Tall screens: start the question a little lower instead of hugging the top of an
+     otherwise empty card. Content still grows downward when the choices appear. */
+  @media (min-height:740px){
+    .stage-hear{ padding-top:clamp(8px, 6vh, 56px); }
+  }
   /* Header: the wordmark keeps its size; a long set name in the pill truncates
      with an ellipsis instead of sliding under the wordmark. */
   .bar .pill-wrap{ flex:0 1 auto; min-width:0; }
@@ -484,6 +493,12 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
   .sheet-nav{ padding:12px 0 16px; border-bottom:1px solid var(--card-border); }
   .ranges + .pop-title, .pop-note + .pop-title{ margin-top:16px; }
   .sheet-nav-title{ margin:0 0 10px; font:600 11px/1 "DM Sans"; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+  /* Icons: one inline SVG set (currentColor), replacing emoji and Unicode symbols
+     that rendered differently on every phone. */
+  .i{ display:inline-block; vertical-align:-.18em; flex:0 0 auto; }
+  .icon-btn .i{ vertical-align:middle; }
+  .streak-ico{ color:var(--accent); display:inline-flex; }
+  .chev{ display:inline-flex; }
 </style>
 </head>
 <body>
@@ -495,7 +510,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
   <header class="bar">
     <div class="pill-wrap">
       <button class="pill" id="setPill" aria-haspopup="true" aria-expanded="false" aria-label="Choose what to practise">
-        <span class="pill-label" id="setLabel">Eating</span><span class="chev">▾</span>
+        <span class="pill-label" id="setLabel">Eating</span><span class="chev"><svg class="i" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
       </button>
       <div class="pop" id="setPop" hidden>
         <div class="pop-title">Quick start</div>
@@ -521,16 +536,16 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     <h1 class="title"><a class="home-link" href="/" aria-label="LekThai home"><svg class="home-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>LekThai</a></h1>
     <div class="bar-right">
       <div class="streak" id="streakChip" title="Correct in a row (Hear &amp; Choose)">
-        <span class="streak-ico">⚡</span><span id="streakVal">0</span>
+        <span class="streak-ico"><svg class="i" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><span id="streakVal">0</span>
       </div>
-      <button class="icon-btn" id="gearBtn" aria-label="Settings" aria-haspopup="dialog">⚙</button>
+      <button class="icon-btn" id="gearBtn" aria-label="Settings" aria-haspopup="dialog"><svg class="i" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button>
     </div>
   </header>
 
   <!-- Mode tabs -->
   <nav class="seg" role="tablist" aria-label="Drill mode">
-    <button class="tab active" id="tabHear" role="tab">① Hear &amp; Choose</button>
-    <button class="tab" id="tabSay" role="tab">② See &amp; Say</button>
+    <button class="tab active" id="tabHear" role="tab">Hear &amp; Choose</button>
+    <button class="tab" id="tabSay" role="tab">See &amp; Say</button>
     <span class="seg-ind" aria-hidden="true"></span>
   </nav>
 
@@ -551,8 +566,8 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
           <div class="hint" id="sayHint"></div>
         </div>
         <div class="actions">
-          <button class="btn ghost" id="sayRevealBtn">🔊 Hear &amp; reveal</button>
-          <button class="btn text" id="sayAgainBtn" hidden>🔊 Hear again</button>
+          <button class="btn ghost" id="sayRevealBtn"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg> Hear &amp; reveal</button>
+          <button class="btn text" id="sayAgainBtn" hidden><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg> Hear again</button>
           <div class="rate-row" id="sayRateRow" hidden>
             <button class="btn rate miss" id="rateMiss">✗ Missed</button>
             <button class="btn rate got" id="rateGot">✓ Got it</button>
@@ -567,7 +582,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
       <div class="panel-inner">
         <div class="stage stage-hear" id="hearStage">
           <div class="eyebrow">Listen · what does it mean? <span class="mbadge" id="hearBadge" hidden>✓ known</span></div>
-          <button class="btn play" id="playBtn"><span class="ico">🔊</span> Play phrase</button>
+          <button class="btn play" id="playBtn"><span class="ico"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></span> Play phrase</button>
           <div class="hint" id="hearHint">Think of the meaning first.</div>
           <button class="btn primary" id="readyBtn">I’ve got it — show choices</button>
           <button class="btn text idk" id="noIdeaBtn">No idea — show me</button>
@@ -590,7 +605,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
 
 </main>
 
-<div class="warn" id="warn" hidden role="status"><span id="warnText"></span><button class="warn-x" id="warnX" aria-label="Dismiss">✕</button></div>
+<div class="warn" id="warn" hidden role="status"><span id="warnText"></span><button class="warn-x" id="warnX" aria-label="Dismiss"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
 
 <!-- Settings sheet -->
 <div class="sheet-wrap" id="settings" hidden>
@@ -598,7 +613,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
   <div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">
     <div class="sheet-head">
       <span class="sheet-title">Settings</span>
-      <button class="icon-btn" id="settingsClose" aria-label="Close settings">✕</button>
+      <button class="icon-btn" id="settingsClose" aria-label="Close settings"><svg class="i" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     </div>
     <nav class="sheet-nav" aria-label="LekThai tools">
       <p class="sheet-nav-title">Go to</p>
@@ -618,7 +633,7 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     </nav>
     <div class="sheet-row">
       <span class="row-label">Appearance</span>
-      <button class="mini-btn" id="themeBtn" aria-label="Switch to light theme">◑</button>
+      <button class="mini-btn" id="themeBtn" aria-label="Theme: dark (tap for light)">Dark</button>
     </div>
     <div class="sheet-row">
       <span class="row-label">English-letter spelling<small>e.g. wǎan nóoi under หวานน้อย</small></span>
@@ -656,8 +671,8 @@ document.addEventListener('DOMContentLoaded',bar);if(window.MutationObserver)new
     </div>
     <div class="about">
       <div class="about-title">How to use it</div>
-      <p><b>① Hear &amp; Choose</b> plays a Thai phrase. Work out what it means in your head first, then show the choices and tap the one that matches. Start here: understanding comes before speaking. Some phrases are ones Thais say <i>to</i> you, like “Do you need a bag?” — this is where you learn those.</p>
-      <p><b>② See &amp; Say</b> describes a situation. Say the Thai out loud from memory, then tap reveal to hear it and check yourself — including the tones. Be honest: a wrong tone can change the meaning.</p>
+      <p><b>Hear &amp; Choose</b> plays a Thai phrase. Work out what it means in your head first, then show the choices and tap the one that matches. Start here: understanding comes before speaking. Some phrases are ones Thais say <i>to</i> you, like “Do you need a bag?” — this is where you learn those.</p>
+      <p><b>See &amp; Say</b> describes a situation. Say the Thai out loud from memory, then tap reveal to hear it and check yourself — including the tones. Be honest: a wrong tone can change the meaning.</p>
       <p><b>Polite ending:</b> Thais end most sentences with ครับ (men) or ค่ะ (women; คะ for questions). Turn it on in settings and the app adds yours to every phrase you say.</p>
       <p>Don’t guess. If you don’t know it, tap <b>No idea</b> or <b>I don’t know</b>. A lucky guess tells the app you know a phrase you don’t, so it shows it to you less. An honest “don’t know” keeps it coming back, and it won’t break your ⚡ streak.</p>
       <p>The first time you meet a phrase you won’t know it — that’s fine, the reveal is the lesson. It only counts as a miss from the second time on.</p>
@@ -778,10 +793,10 @@ function poolFor(set){
   return p.filter(inMode);
 }
 function setShort(set){
-  if(set==='first10') return '✦ First 10';
-  if(set==='mix') return '🔀 Mix all';
-  if(set==='weak') return '🎯 Weak phrases';
-  return GROUP[set].icon+' '+GROUP[set].short;
+  if(set==='first10') return 'First 10';
+  if(set==='mix') return 'Mix all';
+  if(set==='weak') return 'Weak phrases';
+  return GROUP[set].short;
 }
 
 /* ---------- voice: same approach as /learn — always try Thai, warn (never block) if no Thai voice is listed ---------- */
@@ -834,11 +849,11 @@ function knownIn(pool){ return pool.filter(function(w){ return isKnown(w.id); })
 function buildPop(){
   var weakN=poolFor('weak').length, mix=poolFor('mix');
   $('quickChips').innerHTML =
-    chip('first10','✦ First 10','taster',PREFS.set==='first10')+
-    chip('mix','🔀 Mix all',knownIn(mix)+'/'+mix.length,PREFS.set==='mix')+
-    chip('weak','🎯 Weak phrases',weakN?weakN:'none yet',PREFS.set==='weak');
+    chip('first10','First 10','taster',PREFS.set==='first10')+
+    chip('mix','Mix all',knownIn(mix)+'/'+mix.length,PREFS.set==='mix')+
+    chip('weak','Weak phrases',weakN?weakN:'none yet',PREFS.set==='weak');
   $('groupChips').innerHTML = DATA.groups.map(function(g){
-    var p=poolFor(g.id); return chip(g.id,g.icon+' '+g.name,knownIn(p)+'/'+p.length,PREFS.set===g.id);
+    var p=poolFor(g.id); return chip(g.id,g.name,knownIn(p)+'/'+p.length,PREFS.set===g.id);
   }).join('');
   $('levelChips').innerHTML =
     '<button class="chip'+(PREFS.level===1?' active':'')+'" data-level="1">Level 1<small>learn first</small></button>'+
@@ -870,7 +885,7 @@ function emptyMsg(){
   return PREFS.set==='weak' ? 'No weak phrases yet. Practise a situation first — any phrase you miss twice shows up here.' : 'Nothing in this set.';
 }
 
-/* ---------- ② See & Say ---------- */
+/* ---------- See & Say ---------- */
 function newSay(){
   say={revealed:false,rated:false};
   var bw=$('sayWord');
@@ -903,7 +918,7 @@ function rateSay(ok){
   setTimeout(next,200);
 }
 
-/* ---------- ① Hear & Choose ---------- */
+/* ---------- Hear & Choose ---------- */
 /* Wrong answers must never be a fair answer too. For phrases, two meanings "overlap" only if:
    the same Thai or the same English, one Thai phrase contains the other, or they are listed in SAME
    (different words, same meaning). Sharing a key word is fine: "Turn left" next to "Turn right"
@@ -930,7 +945,7 @@ function newHear(autoplay){
   $('nextBtn').hidden=true; $('hearStage').classList.remove('done');
   if(!cur){ $('playBtn').hidden=true; $('readyBtn').hidden=true; $('noIdeaBtn').hidden=true; $('idkBtn').hidden=true; $('hearHint').innerHTML='<span class="empty">'+emptyMsg()+'</span>'; return; }
   $('playBtn').hidden=false; $('readyBtn').hidden=false; $('noIdeaBtn').hidden=false; $('idkBtn').hidden=true;
-  $('hearHint').textContent = hasTTS ? 'Think of the meaning first.' : 'This browser can’t play audio, so this mode won’t work here. Try ② See & Say.';
+  $('hearHint').textContent = hasTTS ? 'Think of the meaning first.' : 'This browser can’t play audio, so this mode won’t work here. Try See & Say.';
   hear.choices=makeChoices(cur);
   if(autoplay!==false) setTimeout(function(){ speak(thaiOf(cur)); },150);
 }
@@ -995,7 +1010,7 @@ function setMode(m){
 /* ---------- mastery readout ---------- */
 function updateMastery(){
   var k=knownIn(pool), html = !storageOK ? 'Saving is off in this browser'
-    : '<span class="m-ico">✦</span>'+k+'/'+pool.length+' known in '+setShort(PREFS.set).replace(/^\S+\s/,'');
+    : '<span class="m-ico">✦</span>'+k+'/'+pool.length+' known in '+setShort(PREFS.set);
   document.querySelectorAll('.mastery-out').forEach(function(el){ el.innerHTML=html; });
   var kn = cur && isKnown(cur.id);
   $('sayBadge').hidden=!kn; $('hearBadge').hidden=!kn;
@@ -1004,8 +1019,8 @@ function updateMastery(){
 /* ---------- settings ---------- */
 function setTheme(t){
   document.documentElement.setAttribute('data-theme',t);
-  $('themeBtn').textContent = t==='dark' ? '◑' : '◐';
-  $('themeBtn').setAttribute('aria-label', t==='dark' ? 'Switch to light theme' : 'Switch to dark theme');
+  $('themeBtn').textContent = t==='dark' ? 'Dark':'Light';
+  $('themeBtn').setAttribute('aria-label', t==='dark' ? 'Theme: dark (tap for light)' : 'Theme: light (tap for dark)');
   try{ localStorage.setItem(KEY_THEME,t); }catch(e){}
 }
 function syncSheet(){
